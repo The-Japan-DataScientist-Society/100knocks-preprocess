@@ -1,0 +1,12 @@
+FROM jupyter/datascience-notebook
+USER root
+ENV DEBCONF_NOWARNINGS yes
+RUN apt-get update
+RUN apt-get install -y libpq-dev
+USER jovyan
+RUN pip install --upgrade pip
+RUN pip install --upgrade setuptools
+RUN pip install --no-cache-dir ipython-sql==0.3.9
+RUN pip install --no-cache-dir psycopg2==2.8.5
+RUN pip install --no-cache-dir imblearn==0.0
+RUN Rscript -e "install.packages(c('DBI', 'RPostgreSQL', 'rsample', 'unbalanced'), dependencies = TRUE, error = TRUE, repos='https://cloud.r-project.org')"
