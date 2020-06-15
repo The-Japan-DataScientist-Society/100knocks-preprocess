@@ -20,9 +20,17 @@ Overview
 - Docker Toolbox(Windows 10 home edition)
 
 ## Install
-- $ git clone [Repository URL]
+- $ git clone [Repository URL] ※
 - $ cd 100knocks-preprocess
 - $ docker-compose up -d --build
+
+※ OSユーザーのホームディレクトリ配下以外にダウンロードする場合、Dockerの共有設定が別途必要となります
+
+※ Windowsでgitを利用する場合、デフォルト設定でのインストールを行うとスクリプトの改行コードを変えられてしまい、データベースを正しく構築できないことがあります
+
+※ 改行を変えないよう設定するか、ZIPをダウンロードして利用してください
+
+※ インストールの説明はdoc配下の説明資料も参照してください
 
 ## Usage
 - Docker Desktopの場合
