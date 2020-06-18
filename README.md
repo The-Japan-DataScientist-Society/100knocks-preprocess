@@ -10,17 +10,20 @@ Overview
 - 個人情報のように見える項目は全てダミーデータを利用
 - 大学、企業など組織でのご利用にあたっては、「データサイエンティスト協会スキル定義委員」の「データサイエンス100本ノック（構造化データ加工編）」を利用していることを明示いただければ自由に利用してOK（これがどんなライセンス形態に当てはまるかは近々整理します）
 
-## Description
+Description
+====
 - Dockerfile(Dockerfile.notebook, Dockerfile.postgres)
 - docker-compose.yml
 - スーパーの架空購買データと架空個人情報(csv)
 - データベースを初期設定するための各種スクリプト
 
-## Requirement
+Requirement
+====
 - Docker(Windows 10 proffesional Edition, macOS)
 - Docker Toolbox(Windows 10 home edition)
 
-## Install
+Install
+====
 - $ git clone [Repository URL] ※
 - $ cd 100knocks-preprocess
 - $ docker-compose up -d --build
@@ -33,18 +36,33 @@ Overview
 
 ※ インストールの説明はdoc配下の説明資料も参照してください
 
-## Usage
+Usage
+====
 - Docker Desktopの場合
 http://localhost:8888
 
 - Docker Toolboxの場合
 http://192.168.99.100:8888
 
-# Document
+Document
+====
 - doc配下にデータサイエンス100本ノック（構造化データ加工編）の説明資料と設問PDF、設問HTMLを配置
 - work配下に設問notebookを配置
 - work/answer配下に解答例notebookを配置
 - work/data配下に使用したデータを配置
+
+Link
+====
+本コンテンツの内容やセットアップ手順について解説いただいているサイト、Dockerについて基本から学べるサイト
+- 【データサイエンスを学ぶあなたへ】100本ノック - 構造化データ処理編 - 最速レビュー動画！【データサイエンティスト協会】#062
+  - https://www.youtube.com/watch?v=fAyj0V2iAc4
+- データサイエンス100本ノック（構造化データ加工編）を試してみた
+  - https://qrunch.net/@hanar/entries/kSZfFS1MXK8H7U7x
+- Macでデータサイエンス100本ノックを動かす方法
+  - https://qiita.com/karaage0703/items/1b18b1f4ab65d35afb5f
+- さくらのナレッジ
+  - https://knowledge.sakura.ad.jp/13265/
+
 
 ## Author
 The Data Scientist Society
