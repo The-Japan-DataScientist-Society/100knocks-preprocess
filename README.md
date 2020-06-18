@@ -18,17 +18,23 @@ Overview
  - './doc': ドキュメント(オリジナルと同じ)
 
 ## Usage: Google Colab
- 1. こちらをクリック：https://github.com/noguhiro2002/100knocks-preprocess_ForColab-AzureNotebook/blob/master/preprocess_knock_Python_Colab.ipynb
+ 1. こちらをクリック：
+   - 演習: https://github.com/noguhiro2002/100knocks-preprocess_ForColab-AzureNotebook/blob/master/preprocess_knock_Python_Colab.ipynb
+
+   - 解答編: https://github.com/noguhiro2002/100knocks-preprocess_ForColab-AzureNotebook/blob/master/answer/ans_preprocess_knock_Python_Colab.ipynb
+
  2. ipynbファイルプレビューの上部にある「Open in Colab」をクリック。
- 3. もしくは、Google Colabの画面上部のファイル -> ノートブックを開く -> 「GitHub」タブを選択 -> 「GitHub URLを入力するか、組織またはユーザーで検索します」に「noguhiro2002/100knocks-preprocess_ForColab-AzureNotebook」と入力し検索 -> 出てきたリストから「preprocess_knock_Python_Colab.ipynb」を開く。解答編は「answer/ans_preprocess_knock_Python_Colab.ipynb」を開く
+ 3. もしくは、Google Colabの画面上部のファイル -> ノートブックを開く -> 「GitHub」タブを選択 -> 「GitHub URLを入力するか、組織またはユーザーで検索します」に「noguhiro2002/100knocks-preprocess_ForColab-AzureNotebook」と入力し検索 -> 出てきたリストから「preprocess_knock_Python_Colab.ipynb」を開く。解答編は「answer/ans_preprocess_knock_Python_Colab.ipynb」を開く。
  4. 100本ノックをお楽しみください。
 
  
 ## Usage: Azure Notebooks
- 1. Azure Notebooksに接続後、プロジェクトに入ります。なければ、適当なプロジェクトを作成し、入ります。
+ 1. Azure Notebooksに接続後、プロジェクトに入ります。なければ、適当なプロジェクトを作成してください。
  2. 「Upload」より、「From URL」を選択します。
  3. File Urlに「https://raw.githubusercontent.com/noguhiro2002/100knocks-preprocess_ForColab-AzureNotebook/master/preprocess_knock_Python_Azure.ipynb 」を入力し、「I trust the contents of this file」にチェックマークを入れ、「Done」をクリック。
- 4. 100本ノックをお楽しみください。
+ 4. なお解答編は、「https://raw.githubusercontent.com/noguhiro2002/100knocks-preprocess_ForColab-AzureNotebook/master/answer/ans_preprocess_knock_Python_Azure.ipynb 」を入力。
+ 5. 自動的にファイルがインポートされ、jupyter notebookが実行されます。
+ 6. 100本ノックをお楽しみください。
 
 
 ## Original
