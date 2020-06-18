@@ -46,3 +46,6 @@ https://github.com/The-Japan-DataScientist-Society/100knocks-preprocess
 
 ## Arranged the original and author of this repository
 noguhiro2002
+
+# 謝辞＆あとがき
+データサイエンス協会様が作られた素晴らしい教育コンテンツを、より良く多くの方に使っていただきたい思いで作成しました。この場をお借りしてデータサイエンス協会様に感謝申し上げます。すべてソースコードの権利はデータサイエンス協会様にあります。多くの方がGoogle Colab,およびAzure Notebooksを用いて、気軽にスキルを向上していただければ幸いです。私のコンテンツに問題点がございましたらご連絡ください。
