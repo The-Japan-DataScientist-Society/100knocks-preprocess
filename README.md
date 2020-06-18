@@ -31,6 +31,7 @@ Install
 ※ OSユーザーのホームディレクトリ配下以外にダウンロードする場合、Dockerの共有設定が別途必要となります
 
 ※ Windowsでgitを利用する場合、デフォルト設定でのインストールを行うとスクリプトの改行コードを変えられてしまい、データベースを正しく構築できないことがあります
+- https://github.com/The-Japan-DataScientist-Society/100knocks-preprocess/issues/1#issue-640590032
 
 ※ 改行を変えないよう設定するか、ZIPをダウンロードして利用してください
 
