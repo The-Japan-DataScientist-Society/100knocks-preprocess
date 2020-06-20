@@ -38,7 +38,7 @@ Overview
 
 
 ## Original
-一般社団法人データサイエンス協会
+一般社団法人データサイエンティスト協会
 The Data Scientist Society
 
 The-Japan-DataScientist-Society/100knocks-preprocess
