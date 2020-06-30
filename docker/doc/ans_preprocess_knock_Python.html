@@ -20165,7 +20165,8 @@ Name: amount, dtype: float64</pre>
 <div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">,</span> <span class="n">df_customer</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;customer_id&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例1</span>
+<span class="n">df_tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">,</span> <span class="n">df_customer</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;customer_id&quot;</span><span class="p">)</span>
 <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;era&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
 <span class="n">df_sales_summary</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">df_tmp</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">&#39;era&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;gender_cd&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;amount&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 <span class="n">df_sales_summary</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;era&#39;</span><span class="p">,</span> <span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">]</span>
@@ -20286,6 +20287,133 @@ Name: amount, dtype: float64</pre>
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例2</span>
+<span class="n">df_tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">,</span> <span class="n">df_customer</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;customer_id&quot;</span><span class="p">)</span>
+<span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;era&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>  <span class="o">*</span> <span class="mi">10</span>
+<span class="n">df_sales_summary</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">df_tmp</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">&#39;era&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;gender_cd&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;amount&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df_sales_summary</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;era&#39;</span><span class="p">,</span> <span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">]</span>
+<span class="n">df_sales_summary</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[48]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>era</th>
+      <th>male</th>
+      <th>female</th>
+      <th>unknown</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>10</td>
+      <td>1591.0</td>
+      <td>149836.0</td>
+      <td>4317.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>20</td>
+      <td>72940.0</td>
+      <td>1363724.0</td>
+      <td>44328.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>30</td>
+      <td>177322.0</td>
+      <td>693047.0</td>
+      <td>50441.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>40</td>
+      <td>19355.0</td>
+      <td>9320791.0</td>
+      <td>483512.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>50</td>
+      <td>54320.0</td>
+      <td>6685192.0</td>
+      <td>342923.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>60</td>
+      <td>272469.0</td>
+      <td>987741.0</td>
+      <td>71418.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>70</td>
+      <td>13435.0</td>
+      <td>29764.0</td>
+      <td>2427.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>80</td>
+      <td>46360.0</td>
+      <td>262923.0</td>
+      <td>5111.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>90</td>
+      <td>NaN</td>
+      <td>6260.0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -20298,7 +20426,7 @@ Name: amount, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_sales_summary</span> <span class="o">=</span> <span class="n">df_sales_summary</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;era&#39;</span><span class="p">)</span><span class="o">.</span> \
@@ -20314,7 +20442,7 @@ Name: amount, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_sales_summary</span>
@@ -20330,7 +20458,7 @@ Name: amount, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[49]:</div>
+    <div class="prompt output_prompt">Out[50]:</div>
 
 
 
@@ -20532,7 +20660,7 @@ Name: amount, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_customer</span><span class="p">[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">],</span>
@@ -20550,7 +20678,7 @@ Name: amount, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[50]:</div>
+    <div class="prompt output_prompt">Out[51]:</div>
 
 
 
@@ -20651,7 +20779,7 @@ Name: amount, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_customer</span><span class="p">[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">],</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_customer</span><span class="p">[</span><span class="s1">&#39;application_date&#39;</span><span class="p">])],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -20667,7 +20795,7 @@ Name: amount, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[51]:</div>
+    <div class="prompt output_prompt">Out[52]:</div>
 
 
 
@@ -20768,7 +20896,7 @@ Name: amount, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_receipt</span><span class="p">[[</span><span class="s1">&#39;receipt_no&#39;</span><span class="p">,</span> <span class="s1">&#39;receipt_sub_no&#39;</span><span class="p">]],</span>
@@ -20785,7 +20913,7 @@ Name: amount, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[52]:</div>
+    <div class="prompt output_prompt">Out[53]:</div>
 
 
 
@@ -20897,7 +21025,7 @@ Name: amount, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_receipt</span><span class="p">[[</span><span class="s1">&#39;receipt_no&#39;</span><span class="p">,</span> <span class="s1">&#39;receipt_sub_no&#39;</span><span class="p">]],</span>
@@ -20914,7 +21042,7 @@ Name: amount, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[53]:</div>
+    <div class="prompt output_prompt">Out[54]:</div>
 
 
 
@@ -21026,7 +21154,7 @@ Name: amount, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="prompt input_prompt">In&nbsp;[55]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_receipt</span><span class="p">[[</span><span class="s1">&#39;receipt_no&#39;</span><span class="p">,</span> <span class="s1">&#39;receipt_sub_no&#39;</span><span class="p">]],</span>
@@ -21043,7 +21171,7 @@ Name: amount, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[54]:</div>
+    <div class="prompt output_prompt">Out[55]:</div>
 
 
 
@@ -21155,7 +21283,7 @@ Name: amount, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[56]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># dt.monthでも月を取得できるが、ここでは0埋め２桁で取り出すためstrftimeを利用している</span>
@@ -21173,7 +21301,7 @@ Name: amount, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[55]:</div>
+    <div class="prompt output_prompt">Out[56]:</div>
 
 
 
@@ -21285,7 +21413,7 @@ Name: amount, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="prompt input_prompt">In&nbsp;[57]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># dt.dayでも日を取得できるが、ここでは0埋め２桁で取り出すためstrftimeを利用している</span>
@@ -21303,7 +21431,7 @@ Name: amount, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[56]:</div>
+    <div class="prompt output_prompt">Out[57]:</div>
 
 
 
@@ -21415,10 +21543,11 @@ Name: amount, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In&nbsp;[58]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_sales_amount</span> <span class="o">=</span> <span class="n">df_receipt</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;not customer_id.str.startswith(&quot;Z&quot;)&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例1</span>
+<span class="n">df_sales_amount</span> <span class="o">=</span> <span class="n">df_receipt</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;not customer_id.str.startswith(&quot;Z&quot;)&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
 <span class="n">df_sales_amount</span> <span class="o">=</span> <span class="n">df_sales_amount</span><span class="p">[[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="s1">&#39;amount&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;customer_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 <span class="n">df_sales_amount</span><span class="p">[</span><span class="s1">&#39;sales_flg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_sales_amount</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">2000</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
 <span class="n">df_sales_amount</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -21434,7 +21563,129 @@ Name: amount, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[57]:</div>
+    <div class="prompt output_prompt">Out[58]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customer_id</th>
+      <th>amount</th>
+      <th>sales_flg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CS001113000004</td>
+      <td>1298</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CS001114000005</td>
+      <td>626</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CS001115000010</td>
+      <td>3044</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CS001205000004</td>
+      <td>1988</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CS001205000006</td>
+      <td>3337</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CS001211000025</td>
+      <td>456</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>CS001212000027</td>
+      <td>448</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>CS001212000031</td>
+      <td>296</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>CS001212000046</td>
+      <td>228</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>CS001212000070</td>
+      <td>456</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例2（np.whereの活用）</span>
+<span class="n">df_sales_amount</span> <span class="o">=</span> <span class="n">df_receipt</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;not customer_id.str.startswith(&quot;Z&quot;)&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+<span class="n">df_sales_amount</span> <span class="o">=</span> <span class="n">df_sales_amount</span><span class="p">[[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="s1">&#39;amount&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;customer_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df_sales_amount</span><span class="p">[</span><span class="s1">&#39;sales_flg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df_sales_amount</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">df_sales_amount</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[59]:</div>
 
 
 
@@ -21546,10 +21797,11 @@ Name: amount, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_customer</span><span class="p">[[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="s1">&#39;postal_cd&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例1</span>
+<span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_customer</span><span class="p">[[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="s1">&#39;postal_cd&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;postal_flg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;postal_cd&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="mi">100</span> <span class="o">&lt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="mi">209</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
 
 <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_tmp</span><span class="p">,</span> <span class="n">df_receipt</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;customer_id&#39;</span><span class="p">)</span><span class="o">.</span> \
@@ -21566,7 +21818,80 @@ Name: amount, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[58]:</div>
+    <div class="prompt output_prompt">Out[60]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customer_id</th>
+    </tr>
+    <tr>
+      <th>postal_flg</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3906</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4400</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例2（np.where、betweenの活用）</span>
+<span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_customer</span><span class="p">[[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="s1">&#39;postal_cd&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;postal_flg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;postal_cd&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+                                <span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">209</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_tmp</span><span class="p">,</span> <span class="n">df_receipt</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;customer_id&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;postal_flg&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;customer_id&#39;</span><span class="p">:</span><span class="s1">&#39;nunique&#39;</span><span class="p">})</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[61]:</div>
 
 
 
@@ -21628,7 +21953,7 @@ Name: amount, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_customer</span><span class="p">[[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="s1">&#39;address&#39;</span><span class="p">]],</span> <span class="n">df_customer</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="s1">&#39;埼玉県&#39;</span><span class="p">:</span> <span class="s1">&#39;11&#39;</span><span class="p">,</span>
@@ -21647,7 +21972,7 @@ Name: amount, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[59]:</div>
+    <div class="prompt output_prompt">Out[62]:</div>
 
 
 
@@ -21765,7 +22090,7 @@ Name: amount, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例1</span>
@@ -21798,7 +22123,7 @@ Name: amount, dtype: float64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[60]:</div>
+    <div class="prompt output_prompt">Out[63]:</div>
 
 
 
@@ -21900,7 +22225,7 @@ Name: amount, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 確認用</span>
@@ -21936,7 +22261,7 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例2</span>
@@ -22048,7 +22373,7 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="prompt input_prompt">In&nbsp;[66]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例1</span>
@@ -22069,7 +22394,7 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[63]:</div>
+    <div class="prompt output_prompt">Out[66]:</div>
 
 
 
@@ -22171,7 +22496,7 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例2</span>
@@ -22189,7 +22514,7 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[64]:</div>
+    <div class="prompt output_prompt">Out[67]:</div>
 
 
 
@@ -22301,7 +22626,7 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_customer_era</span><span class="p">[</span><span class="s1">&#39;era_gender&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_customer</span><span class="p">[</span><span class="s1">&#39;gender_cd&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df_customer_era</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;str&#39;</span><span class="p">)</span>
@@ -22318,7 +22643,7 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[65]:</div>
+    <div class="prompt output_prompt">Out[68]:</div>
 
 
 
@@ -22441,7 +22766,7 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="prompt input_prompt">In&nbsp;[69]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df_customer</span><span class="p">[[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="s1">&#39;gender_cd&#39;</span><span class="p">]],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gender_cd&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -22457,7 +22782,7 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[66]:</div>
+    <div class="prompt output_prompt">Out[69]:</div>
 
 
 
@@ -22580,7 +22905,7 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="prompt input_prompt">In&nbsp;[70]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># skleanのpreprocessing.scaleを利用するため、標本標準偏差で計算されている</span>
@@ -22600,7 +22925,131 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[67]:</div>
+    <div class="prompt output_prompt">Out[70]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customer_id</th>
+      <th>amount</th>
+      <th>amount_ss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CS001113000004</td>
+      <td>1298</td>
+      <td>-0.459378</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CS001114000005</td>
+      <td>626</td>
+      <td>-0.706390</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CS001115000010</td>
+      <td>3044</td>
+      <td>0.182413</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CS001205000004</td>
+      <td>1988</td>
+      <td>-0.205749</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CS001205000006</td>
+      <td>3337</td>
+      <td>0.290114</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CS001211000025</td>
+      <td>456</td>
+      <td>-0.768879</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>CS001212000027</td>
+      <td>448</td>
+      <td>-0.771819</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>CS001212000031</td>
+      <td>296</td>
+      <td>-0.827691</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>CS001212000046</td>
+      <td>228</td>
+      <td>-0.852686</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>CS001212000070</td>
+      <td>456</td>
+      <td>-0.768879</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例2（fitを行うことで、別のデータでも同じの平均・標準偏差で標準化を行える）</span>
+<span class="n">df_sales_amount</span> <span class="o">=</span> <span class="n">df_receipt</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;not customer_id.str.startswith(&quot;Z&quot;)&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;customer_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;amount&#39;</span><span class="p">:</span><span class="s1">&#39;sum&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_sales_amount</span><span class="p">[[</span><span class="s1">&#39;amount&#39;</span><span class="p">]])</span>
+<span class="n">df_sales_amount</span><span class="p">[</span><span class="s1">&#39;amount_ss&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df_sales_amount</span><span class="p">[[</span><span class="s1">&#39;amount&#39;</span><span class="p">]])</span>
+<span class="n">df_sales_amount</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[71]:</div>
 
 
 
@@ -22712,10 +23161,10 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="prompt input_prompt">In&nbsp;[72]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># skleanのpreprocessing.scaleを利用するため、標本標準偏差で計算されている</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例1</span>
 <span class="n">df_sales_amount</span> <span class="o">=</span> <span class="n">df_receipt</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;not customer_id.str.startswith(&quot;Z&quot;)&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span><span class="o">.</span> \
     <span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;customer_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;amount&#39;</span><span class="p">:</span><span class="s1">&#39;sum&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 <span class="n">df_sales_amount</span><span class="p">[</span><span class="s1">&#39;amount_mm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">minmax_scale</span><span class="p">(</span><span class="n">df_sales_amount</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">])</span>
@@ -22732,7 +23181,131 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[68]:</div>
+    <div class="prompt output_prompt">Out[72]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customer_id</th>
+      <th>amount</th>
+      <th>amount_mm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CS001113000004</td>
+      <td>1298</td>
+      <td>0.053354</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CS001114000005</td>
+      <td>626</td>
+      <td>0.024157</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CS001115000010</td>
+      <td>3044</td>
+      <td>0.129214</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CS001205000004</td>
+      <td>1988</td>
+      <td>0.083333</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CS001205000006</td>
+      <td>3337</td>
+      <td>0.141945</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CS001211000025</td>
+      <td>456</td>
+      <td>0.016771</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>CS001212000027</td>
+      <td>448</td>
+      <td>0.016423</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>CS001212000031</td>
+      <td>296</td>
+      <td>0.009819</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>CS001212000046</td>
+      <td>228</td>
+      <td>0.006865</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>CS001212000070</td>
+      <td>456</td>
+      <td>0.016771</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例2（fitを行うことで、別のデータでも同じの平均・標準偏差で標準化を行える）</span>
+<span class="n">df_sales_amount</span> <span class="o">=</span> <span class="n">df_receipt</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;not customer_id.str.startswith(&quot;Z&quot;)&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span><span class="o">.</span> \
+    <span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;customer_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;amount&#39;</span><span class="p">:</span><span class="s1">&#39;sum&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_sales_amount</span><span class="p">[[</span><span class="s1">&#39;amount&#39;</span><span class="p">]])</span>
+<span class="n">df_sales_amount</span><span class="p">[</span><span class="s1">&#39;amount_mm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df_sales_amount</span><span class="p">[[</span><span class="s1">&#39;amount&#39;</span><span class="p">]])</span>
+<span class="n">df_sales_amount</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[73]:</div>
 
 
 
@@ -22844,7 +23417,7 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[69]:</div>
+<div class="prompt input_prompt">In&nbsp;[74]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># skleanのpreprocessing.scaleを利用するため、標本標準偏差で計算されている</span>
@@ -22864,7 +23437,7 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[69]:</div>
+    <div class="prompt output_prompt">Out[74]:</div>
 
 
 
@@ -22976,11 +23549,10 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="prompt input_prompt">In&nbsp;[75]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># skleanのpreprocessing.scaleを利用するため、標本標準偏差で計算されている</span>
-<span class="n">df_sales_amount</span> <span class="o">=</span> <span class="n">df_receipt</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;not customer_id.str.startswith(&quot;Z&quot;)&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span><span class="o">.</span> \
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_sales_amount</span> <span class="o">=</span> <span class="n">df_receipt</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;not customer_id.str.startswith(&quot;Z&quot;)&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span><span class="o">.</span> \
     <span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;customer_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;amount&#39;</span><span class="p">:</span><span class="s1">&#39;sum&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 <span class="n">df_sales_amount</span><span class="p">[</span><span class="s1">&#39;amount_loge&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df_sales_amount</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">df_sales_amount</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -22996,7 +23568,7 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[70]:</div>
+    <div class="prompt output_prompt">Out[75]:</div>
 
 
 
@@ -23108,7 +23680,7 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="prompt input_prompt">In&nbsp;[76]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_product</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -23126,7 +23698,7 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[71]:</div>
+    <div class="prompt output_prompt">Out[76]:</div>
 
 
 
@@ -23283,7 +23855,7 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="prompt input_prompt">In&nbsp;[77]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_product</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -23301,7 +23873,7 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[72]:</div>
+    <div class="prompt output_prompt">Out[77]:</div>
 
 
 
@@ -23328,10 +23900,11 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="prompt input_prompt">In&nbsp;[78]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># math.floorはNaNでエラーとなるが、numpy.floorはエラーとならない</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例1</span>
+<span class="c1"># math.floorはNaNでエラーとなるが、numpy.floorはエラーとならない</span>
 <span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_product</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_price&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;unit_cost&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mf">0.7</span><span class="p">))</span>
 <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_profit_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_price&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;unit_cost&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_price&#39;</span><span class="p">]</span>
@@ -23348,7 +23921,184 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[73]:</div>
+    <div class="prompt output_prompt">Out[78]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>product_cd</th>
+      <th>category_major_cd</th>
+      <th>category_medium_cd</th>
+      <th>category_small_cd</th>
+      <th>unit_price</th>
+      <th>unit_cost</th>
+      <th>new_price</th>
+      <th>new_profit_rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>P040101001</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>198.0</td>
+      <td>149.0</td>
+      <td>212.0</td>
+      <td>0.297170</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>P040101002</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>218.0</td>
+      <td>164.0</td>
+      <td>234.0</td>
+      <td>0.299145</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>P040101003</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>230.0</td>
+      <td>173.0</td>
+      <td>247.0</td>
+      <td>0.299595</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>P040101004</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>248.0</td>
+      <td>186.0</td>
+      <td>265.0</td>
+      <td>0.298113</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>P040101005</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>268.0</td>
+      <td>201.0</td>
+      <td>287.0</td>
+      <td>0.299652</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>P040101006</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>298.0</td>
+      <td>224.0</td>
+      <td>320.0</td>
+      <td>0.300000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>P040101007</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>338.0</td>
+      <td>254.0</td>
+      <td>362.0</td>
+      <td>0.298343</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>P040101008</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>420.0</td>
+      <td>315.0</td>
+      <td>450.0</td>
+      <td>0.300000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>P040101009</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>498.0</td>
+      <td>374.0</td>
+      <td>534.0</td>
+      <td>0.299625</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>P040101010</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>580.0</td>
+      <td>435.0</td>
+      <td>621.0</td>
+      <td>0.299517</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例2</span>
+<span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_product</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_price&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;unit_cost&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mf">0.7</span><span class="p">)</span>
+<span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_profit_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_price&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;unit_cost&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_price&#39;</span><span class="p">]</span>
+<span class="n">df_tmp</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[79]:</div>
 
 
 
@@ -23515,10 +24265,11 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="prompt input_prompt">In&nbsp;[80]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 組み込みのroundはNaNでエラーとなるが、numpy.roundはエラーとならない</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例1</span>
+<span class="c1"># 組み込みのroundはNaNでエラーとなるが、numpy.roundはエラーとならない</span>
 <span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_product</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_price&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;unit_cost&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mf">0.7</span><span class="p">))</span>
 <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_profit_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_price&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;unit_cost&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_price&#39;</span><span class="p">]</span>
@@ -23535,7 +24286,184 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[74]:</div>
+    <div class="prompt output_prompt">Out[80]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>product_cd</th>
+      <th>category_major_cd</th>
+      <th>category_medium_cd</th>
+      <th>category_small_cd</th>
+      <th>unit_price</th>
+      <th>unit_cost</th>
+      <th>new_price</th>
+      <th>new_profit_rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>P040101001</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>198.0</td>
+      <td>149.0</td>
+      <td>213.0</td>
+      <td>0.300469</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>P040101002</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>218.0</td>
+      <td>164.0</td>
+      <td>234.0</td>
+      <td>0.299145</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>P040101003</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>230.0</td>
+      <td>173.0</td>
+      <td>247.0</td>
+      <td>0.299595</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>P040101004</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>248.0</td>
+      <td>186.0</td>
+      <td>266.0</td>
+      <td>0.300752</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>P040101005</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>268.0</td>
+      <td>201.0</td>
+      <td>287.0</td>
+      <td>0.299652</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>P040101006</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>298.0</td>
+      <td>224.0</td>
+      <td>320.0</td>
+      <td>0.300000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>P040101007</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>338.0</td>
+      <td>254.0</td>
+      <td>363.0</td>
+      <td>0.300275</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>P040101008</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>420.0</td>
+      <td>315.0</td>
+      <td>450.0</td>
+      <td>0.300000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>P040101009</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>498.0</td>
+      <td>374.0</td>
+      <td>534.0</td>
+      <td>0.299625</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>P040101010</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>580.0</td>
+      <td>435.0</td>
+      <td>621.0</td>
+      <td>0.299517</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[81]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例2</span>
+<span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_product</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_price&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;unit_cost&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mf">0.7</span><span class="p">)</span>
+<span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_profit_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_price&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;unit_cost&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_price&#39;</span><span class="p">]</span>
+<span class="n">df_tmp</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[81]:</div>
 
 
 
@@ -23702,10 +24630,11 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="prompt input_prompt">In&nbsp;[82]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># math.ceilはNaNでエラーとなるが、numpy.ceilはエラーとならない</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例1</span>
+<span class="c1"># math.ceilはNaNでエラーとなるが、numpy.ceilはエラーとならない</span>
 <span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_product</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_price&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;unit_cost&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mf">0.7</span><span class="p">))</span>
 <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_profit_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_price&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;unit_cost&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_price&#39;</span><span class="p">]</span>
@@ -23722,7 +24651,184 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[75]:</div>
+    <div class="prompt output_prompt">Out[82]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>product_cd</th>
+      <th>category_major_cd</th>
+      <th>category_medium_cd</th>
+      <th>category_small_cd</th>
+      <th>unit_price</th>
+      <th>unit_cost</th>
+      <th>new_price</th>
+      <th>new_profit_rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>P040101001</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>198.0</td>
+      <td>149.0</td>
+      <td>213.0</td>
+      <td>0.300469</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>P040101002</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>218.0</td>
+      <td>164.0</td>
+      <td>235.0</td>
+      <td>0.302128</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>P040101003</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>230.0</td>
+      <td>173.0</td>
+      <td>248.0</td>
+      <td>0.302419</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>P040101004</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>248.0</td>
+      <td>186.0</td>
+      <td>266.0</td>
+      <td>0.300752</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>P040101005</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>268.0</td>
+      <td>201.0</td>
+      <td>288.0</td>
+      <td>0.302083</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>P040101006</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>298.0</td>
+      <td>224.0</td>
+      <td>320.0</td>
+      <td>0.300000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>P040101007</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>338.0</td>
+      <td>254.0</td>
+      <td>363.0</td>
+      <td>0.300275</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>P040101008</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>420.0</td>
+      <td>315.0</td>
+      <td>451.0</td>
+      <td>0.301552</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>P040101009</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>498.0</td>
+      <td>374.0</td>
+      <td>535.0</td>
+      <td>0.300935</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>P040101010</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>580.0</td>
+      <td>435.0</td>
+      <td>622.0</td>
+      <td>0.300643</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例2</span>
+<span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_product</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_price&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;unit_cost&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mf">0.7</span><span class="p">)</span>
+<span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_profit_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_price&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;unit_cost&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;new_price&#39;</span><span class="p">]</span>
+<span class="n">df_tmp</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[83]:</div>
 
 
 
@@ -23889,10 +24995,11 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="prompt input_prompt">In&nbsp;[84]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># math.floorはNaNでエラーとなるが、numpy.floorはエラーとならない</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例1</span>
+<span class="c1"># math.floorはNaNでエラーとなるが、numpy.floorはエラーとならない</span>
 <span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_product</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;price_tax&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;unit_price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="mf">1.1</span><span class="p">))</span>
 <span class="n">df_tmp</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -23908,7 +25015,173 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[76]:</div>
+    <div class="prompt output_prompt">Out[84]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>product_cd</th>
+      <th>category_major_cd</th>
+      <th>category_medium_cd</th>
+      <th>category_small_cd</th>
+      <th>unit_price</th>
+      <th>unit_cost</th>
+      <th>price_tax</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>P040101001</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>198.0</td>
+      <td>149.0</td>
+      <td>217.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>P040101002</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>218.0</td>
+      <td>164.0</td>
+      <td>239.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>P040101003</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>230.0</td>
+      <td>173.0</td>
+      <td>253.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>P040101004</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>248.0</td>
+      <td>186.0</td>
+      <td>272.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>P040101005</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>268.0</td>
+      <td>201.0</td>
+      <td>294.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>P040101006</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>298.0</td>
+      <td>224.0</td>
+      <td>327.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>P040101007</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>338.0</td>
+      <td>254.0</td>
+      <td>371.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>P040101008</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>420.0</td>
+      <td>315.0</td>
+      <td>462.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>P040101009</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>498.0</td>
+      <td>374.0</td>
+      <td>547.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>P040101010</td>
+      <td>04</td>
+      <td>0401</td>
+      <td>040101</td>
+      <td>580.0</td>
+      <td>435.0</td>
+      <td>638.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[85]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例2</span>
+<span class="c1"># math.floorはNaNでエラーとなるが、numpy.floorはエラーとならない</span>
+<span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_product</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;price_tax&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;unit_price&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1.1</span><span class="p">)</span>
+<span class="n">df_tmp</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[85]:</div>
 
 
 
@@ -24064,7 +25337,7 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="prompt input_prompt">In&nbsp;[86]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例1</span>
@@ -24089,7 +25362,7 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[77]:</div>
+    <div class="prompt output_prompt">Out[86]:</div>
 
 
 
@@ -24202,7 +25475,7 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="prompt input_prompt">In&nbsp;[87]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例2</span>
@@ -24223,7 +25496,7 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[78]:</div>
+    <div class="prompt output_prompt">Out[87]:</div>
 
 
 
@@ -24401,7 +25674,7 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="prompt input_prompt">In&nbsp;[88]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">[[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="s1">&#39;sales_ymd&#39;</span><span class="p">]],</span> <span class="n">df_customer</span><span class="p">[[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="s1">&#39;application_date&#39;</span><span class="p">]],</span>
@@ -24425,7 +25698,7 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[79]:</div>
+    <div class="prompt output_prompt">Out[88]:</div>
 
 
 
@@ -24548,7 +25821,7 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="prompt input_prompt">In&nbsp;[89]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">[[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="s1">&#39;sales_ymd&#39;</span><span class="p">]],</span> <span class="n">df_customer</span><span class="p">[[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="s1">&#39;application_date&#39;</span><span class="p">]],</span>
@@ -24574,7 +25847,7 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[80]:</div>
+    <div class="prompt output_prompt">Out[89]:</div>
 
 
 
@@ -24697,11 +25970,13 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[81]:</div>
+<div class="prompt input_prompt">In&nbsp;[90]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">[[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="s1">&#39;sales_ymd&#39;</span><span class="p">]],</span> <span class="n">df_customer</span><span class="p">[[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="s1">&#39;application_date&#39;</span><span class="p">]],</span>
                  <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;customer_id&#39;</span><span class="p">)</span>
+
+<span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_tmp</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
 
 <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;sales_ymd&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;sales_ymd&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;str&#39;</span><span class="p">))</span>
 <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;application_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;application_date&#39;</span><span class="p">])</span>
@@ -24721,7 +25996,7 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[81]:</div>
+    <div class="prompt output_prompt">Out[90]:</div>
 
 
 
@@ -24773,32 +26048,11 @@ pct75: 3651.0
       <td>2</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>CS006214000001</td>
-      <td>2017-06-08</td>
-      <td>2015-02-01</td>
-      <td>2</td>
-    </tr>
-    <tr>
       <th>4</th>
       <td>CS006214000001</td>
       <td>2018-10-28</td>
       <td>2015-02-01</td>
       <td>3</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>CS006214000001</td>
-      <td>2018-10-28</td>
-      <td>2015-02-01</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>CS006214000001</td>
-      <td>2017-05-09</td>
-      <td>2015-02-01</td>
-      <td>2</td>
     </tr>
     <tr>
       <th>7</th>
@@ -24820,6 +26074,27 @@ pct75: 3651.0
       <td>2017-07-05</td>
       <td>2015-02-01</td>
       <td>2</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>CS006214000001</td>
+      <td>2018-11-10</td>
+      <td>2015-02-01</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>CS006214000001</td>
+      <td>2019-04-10</td>
+      <td>2015-02-01</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>CS006214000001</td>
+      <td>2019-06-01</td>
+      <td>2015-02-01</td>
+      <td>4</td>
     </tr>
   </tbody>
 </table>
@@ -24844,7 +26119,7 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="prompt input_prompt">In&nbsp;[91]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">[[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="s1">&#39;sales_ymd&#39;</span><span class="p">]],</span> <span class="n">df_customer</span><span class="p">[[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="s1">&#39;application_date&#39;</span><span class="p">]],</span>
@@ -24869,7 +26144,7 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[82]:</div>
+    <div class="prompt output_prompt">Out[91]:</div>
 
 
 
@@ -24992,7 +26267,7 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="prompt input_prompt">In&nbsp;[92]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_receipt</span><span class="p">[[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="s1">&#39;sales_ymd&#39;</span><span class="p">]]</span>
@@ -25013,7 +26288,7 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[83]:</div>
+    <div class="prompt output_prompt">Out[92]:</div>
 
 
 
@@ -25136,7 +26411,7 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[84]:</div>
+<div class="prompt input_prompt">In&nbsp;[93]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_customer</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -25152,7 +26427,7 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[84]:</div>
+    <div class="prompt output_prompt">Out[93]:</div>
 
 
 
@@ -25191,153 +26466,153 @@ pct75: 3651.0
   </thead>
   <tbody>
     <tr>
-      <th>19452</th>
-      <td>CS004713000129</td>
-      <td>川原 友以乃</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1942-07-03</td>
-      <td>76</td>
-      <td>165-0033</td>
-      <td>東京都中野区若宮**********</td>
-      <td>S13004</td>
-      <td>20161228</td>
+      <th>11816</th>
+      <td>CS024702000027</td>
+      <td>杉本 翔太</td>
+      <td>0</td>
+      <td>男性</td>
+      <td>1941-05-31</td>
+      <td>77</td>
+      <td>214-0014</td>
+      <td>神奈川県川崎市多摩区登戸**********</td>
+      <td>S14024</td>
+      <td>20150308</td>
       <td>0-00000000-0</td>
       <td>[60.0, inf)</td>
     </tr>
     <tr>
-      <th>455</th>
-      <td>CS037513000041</td>
-      <td>松田 エリカ</td>
+      <th>18587</th>
+      <td>CS030615000147</td>
+      <td>黒谷 瞳</td>
       <td>1</td>
       <td>女性</td>
-      <td>1965-11-12</td>
-      <td>53</td>
-      <td>136-0075</td>
-      <td>東京都江東区新砂**********</td>
-      <td>S13037</td>
+      <td>1949-04-03</td>
+      <td>69</td>
+      <td>272-0023</td>
+      <td>千葉県市川市南八幡**********</td>
+      <td>S12030</td>
+      <td>20161110</td>
+      <td>3-20100705-4</td>
+      <td>[60.0, inf)</td>
+    </tr>
+    <tr>
+      <th>3000</th>
+      <td>CS024415000049</td>
+      <td>前田 結子</td>
+      <td>1</td>
+      <td>女性</td>
+      <td>1969-07-05</td>
+      <td>49</td>
+      <td>214-0035</td>
+      <td>神奈川県川崎市多摩区長沢**********</td>
+      <td>S14024</td>
+      <td>20150223</td>
+      <td>F-20100923-F</td>
+      <td>[40.0, 50.0)</td>
+    </tr>
+    <tr>
+      <th>18853</th>
+      <td>CS010405000010</td>
+      <td>松山 照生</td>
+      <td>0</td>
+      <td>男性</td>
+      <td>1969-03-28</td>
+      <td>50</td>
+      <td>222-0026</td>
+      <td>神奈川県横浜市港北区篠原町**********</td>
+      <td>S14010</td>
       <td>20150623</td>
       <td>0-00000000-0</td>
       <td>[50.0, 60.0)</td>
     </tr>
     <tr>
-      <th>16084</th>
-      <td>CS032415000002</td>
-      <td>島崎 菜々美</td>
+      <th>4416</th>
+      <td>CS015213000022</td>
+      <td>田辺 みゆき</td>
       <td>1</td>
       <td>女性</td>
-      <td>1970-11-07</td>
-      <td>48</td>
-      <td>144-0055</td>
-      <td>東京都大田区仲六郷**********</td>
-      <td>S13032</td>
-      <td>20150802</td>
-      <td>E-20101021-F</td>
+      <td>1995-08-04</td>
+      <td>23</td>
+      <td>135-0016</td>
+      <td>東京都江東区東陽**********</td>
+      <td>S13015</td>
+      <td>20150118</td>
+      <td>3-20100919-3</td>
+      <td>[20.0, 30.0)</td>
+    </tr>
+    <tr>
+      <th>5344</th>
+      <td>CS020602000015</td>
+      <td>石倉 光博</td>
+      <td>0</td>
+      <td>男性</td>
+      <td>1954-04-26</td>
+      <td>64</td>
+      <td>174-0055</td>
+      <td>東京都板橋区泉町**********</td>
+      <td>S13020</td>
+      <td>20150509</td>
+      <td>0-00000000-0</td>
+      <td>[60.0, inf)</td>
+    </tr>
+    <tr>
+      <th>163</th>
+      <td>CS004413000678</td>
+      <td>杉原 まひる</td>
+      <td>1</td>
+      <td>女性</td>
+      <td>1978-01-06</td>
+      <td>41</td>
+      <td>165-0032</td>
+      <td>東京都中野区鷺宮**********</td>
+      <td>S13004</td>
+      <td>20161223</td>
+      <td>0-00000000-0</td>
       <td>[40.0, 50.0)</td>
     </tr>
     <tr>
-      <th>13802</th>
-      <td>CS004513000443</td>
-      <td>高倉 千夏</td>
+      <th>14660</th>
+      <td>CS021414000044</td>
+      <td>小柳 愛梨</td>
       <td>1</td>
       <td>女性</td>
-      <td>1963-01-26</td>
-      <td>56</td>
-      <td>166-0001</td>
-      <td>東京都杉並区阿佐谷北**********</td>
-      <td>S13004</td>
-      <td>20160418</td>
-      <td>0-00000000-0</td>
+      <td>1975-08-05</td>
+      <td>43</td>
+      <td>259-1143</td>
+      <td>神奈川県伊勢原市下糟屋**********</td>
+      <td>S14021</td>
+      <td>20150418</td>
+      <td>7-20090918-9</td>
+      <td>[40.0, 50.0)</td>
+    </tr>
+    <tr>
+      <th>4464</th>
+      <td>CS002504000026</td>
+      <td>小菅 染五郎</td>
+      <td>9</td>
+      <td>不明</td>
+      <td>1966-11-13</td>
+      <td>52</td>
+      <td>185-0012</td>
+      <td>東京都国分寺市本町**********</td>
+      <td>S13002</td>
+      <td>20160203</td>
+      <td>1-20081202-1</td>
       <td>[50.0, 60.0)</td>
     </tr>
     <tr>
-      <th>20138</th>
-      <td>CS032412000039</td>
-      <td>岩沢 さやか</td>
+      <th>690</th>
+      <td>CS020412000151</td>
+      <td>皆川 勇</td>
       <td>1</td>
       <td>女性</td>
-      <td>1976-06-05</td>
-      <td>42</td>
-      <td>210-0808</td>
-      <td>神奈川県川崎市川崎区旭町**********</td>
-      <td>S13032</td>
-      <td>20150728</td>
-      <td>0-00000000-0</td>
-      <td>[40.0, 50.0)</td>
-    </tr>
-    <tr>
-      <th>14032</th>
-      <td>CS035412000053</td>
-      <td>大森 杏</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1976-04-24</td>
-      <td>42</td>
-      <td>154-0016</td>
-      <td>東京都世田谷区弦巻**********</td>
-      <td>S13035</td>
-      <td>20150530</td>
-      <td>4-20081027-4</td>
-      <td>[40.0, 50.0)</td>
-    </tr>
-    <tr>
-      <th>21629</th>
-      <td>CS030615000127</td>
-      <td>安斎 明日</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1956-07-25</td>
-      <td>62</td>
-      <td>272-0023</td>
-      <td>千葉県市川市南八幡**********</td>
-      <td>S12030</td>
-      <td>20150226</td>
-      <td>3-20100104-4</td>
-      <td>[60.0, inf)</td>
-    </tr>
-    <tr>
-      <th>8142</th>
-      <td>CS027714000006</td>
-      <td>福岡 翔子</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1940-03-22</td>
-      <td>79</td>
-      <td>251-0052</td>
-      <td>神奈川県藤沢市藤沢**********</td>
-      <td>S14027</td>
-      <td>20150320</td>
-      <td>0-00000000-0</td>
-      <td>[60.0, inf)</td>
-    </tr>
-    <tr>
-      <th>10681</th>
-      <td>CS002803000007</td>
-      <td>大路 光博</td>
-      <td>0</td>
-      <td>男性</td>
-      <td>1933-06-09</td>
-      <td>85</td>
-      <td>187-0021</td>
-      <td>東京都小平市上水南町**********</td>
-      <td>S13002</td>
-      <td>20160405</td>
-      <td>0-00000000-0</td>
-      <td>[60.0, inf)</td>
-    </tr>
-    <tr>
-      <th>13244</th>
-      <td>CS009414000069</td>
-      <td>神野 エリカ</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1971-02-19</td>
-      <td>48</td>
-      <td>158-0097</td>
-      <td>東京都世田谷区用賀**********</td>
-      <td>S13009</td>
-      <td>20160213</td>
-      <td>D-20100401-D</td>
+      <td>1969-08-16</td>
+      <td>49</td>
+      <td>173-0004</td>
+      <td>東京都板橋区板橋**********</td>
+      <td>S13020</td>
+      <td>20150302</td>
+      <td>4-20090217-7</td>
       <td>[40.0, 50.0)</td>
     </tr>
   </tbody>
@@ -25363,7 +26638,7 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[85]:</div>
+<div class="prompt input_prompt">In&nbsp;[94]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># sklearn.model_selection.train_test_splitを使用した例</span>
@@ -25381,7 +26656,7 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[85]:</div>
+    <div class="prompt output_prompt">Out[94]:</div>
 
 
 
@@ -25437,7 +26712,7 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[86]:</div>
+<div class="prompt input_prompt">In&nbsp;[95]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -25453,7 +26728,7 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[86]:</div>
+    <div class="prompt output_prompt">Out[95]:</div>
 
 
 
@@ -25492,19 +26767,124 @@ pct75: 3651.0
   </thead>
   <tbody>
     <tr>
-      <th>3370</th>
-      <td>CS029414000083</td>
-      <td>奥村 そら</td>
+      <th>19344</th>
+      <td>CS024613000007</td>
+      <td>仲村 由宇</td>
       <td>1</td>
       <td>女性</td>
-      <td>1976-07-19</td>
-      <td>42</td>
-      <td>279-0041</td>
-      <td>千葉県浦安市堀江**********</td>
-      <td>S12029</td>
-      <td>20150727</td>
-      <td>B-20100505-B</td>
+      <td>1958-03-19</td>
+      <td>61</td>
+      <td>214-0036</td>
+      <td>神奈川県川崎市多摩区南生田**********</td>
+      <td>S14024</td>
+      <td>20150224</td>
+      <td>0-00000000-0</td>
+      <td>[60.0, inf)</td>
+    </tr>
+    <tr>
+      <th>9721</th>
+      <td>CS030412000195</td>
+      <td>多田 まひる</td>
+      <td>1</td>
+      <td>女性</td>
+      <td>1971-08-23</td>
+      <td>47</td>
+      <td>273-0026</td>
+      <td>千葉県船橋市山野町**********</td>
+      <td>S12030</td>
+      <td>20150301</td>
+      <td>0-00000000-0</td>
       <td>[40.0, 50.0)</td>
+    </tr>
+    <tr>
+      <th>12412</th>
+      <td>CS026413000255</td>
+      <td>金沢 璃子</td>
+      <td>1</td>
+      <td>女性</td>
+      <td>1971-03-07</td>
+      <td>48</td>
+      <td>251-0043</td>
+      <td>神奈川県藤沢市辻堂元町**********</td>
+      <td>S14026</td>
+      <td>20150601</td>
+      <td>0-00000000-0</td>
+      <td>[40.0, 50.0)</td>
+    </tr>
+    <tr>
+      <th>897</th>
+      <td>CS027312000084</td>
+      <td>原 優</td>
+      <td>1</td>
+      <td>女性</td>
+      <td>1982-06-23</td>
+      <td>36</td>
+      <td>251-0052</td>
+      <td>神奈川県藤沢市藤沢**********</td>
+      <td>S14027</td>
+      <td>20150112</td>
+      <td>0-00000000-0</td>
+      <td>[30.0, 40.0)</td>
+    </tr>
+    <tr>
+      <th>20806</th>
+      <td>CS018311000029</td>
+      <td>板倉 花</td>
+      <td>1</td>
+      <td>女性</td>
+      <td>1984-09-27</td>
+      <td>34</td>
+      <td>204-0012</td>
+      <td>東京都清瀬市中清戸**********</td>
+      <td>S13018</td>
+      <td>20150505</td>
+      <td>0-00000000-0</td>
+      <td>[30.0, 40.0)</td>
+    </tr>
+    <tr>
+      <th>1039</th>
+      <td>CS026415000123</td>
+      <td>浅野 由宇</td>
+      <td>1</td>
+      <td>女性</td>
+      <td>1972-08-10</td>
+      <td>46</td>
+      <td>253-0022</td>
+      <td>神奈川県茅ヶ崎市松浪**********</td>
+      <td>S14026</td>
+      <td>20150303</td>
+      <td>D-20100417-D</td>
+      <td>[40.0, 50.0)</td>
+    </tr>
+    <tr>
+      <th>19387</th>
+      <td>CS009513000059</td>
+      <td>深谷 沙知絵</td>
+      <td>1</td>
+      <td>女性</td>
+      <td>1964-08-30</td>
+      <td>54</td>
+      <td>158-0093</td>
+      <td>東京都世田谷区上野毛**********</td>
+      <td>S13009</td>
+      <td>20150225</td>
+      <td>8-20100328-8</td>
+      <td>[50.0, 60.0)</td>
+    </tr>
+    <tr>
+      <th>13170</th>
+      <td>CS025615000095</td>
+      <td>松永 杏</td>
+      <td>1</td>
+      <td>女性</td>
+      <td>1953-01-13</td>
+      <td>66</td>
+      <td>242-0015</td>
+      <td>神奈川県大和市下和田**********</td>
+      <td>S14025</td>
+      <td>20151017</td>
+      <td>8-20081104-5</td>
+      <td>[60.0, inf)</td>
     </tr>
     <tr>
       <th>9522</th>
@@ -25522,124 +26902,19 @@ pct75: 3651.0
       <td>[60.0, inf)</td>
     </tr>
     <tr>
-      <th>16062</th>
-      <td>CS019514000087</td>
-      <td>平塚 美智子</td>
+      <th>8220</th>
+      <td>CS014515000229</td>
+      <td>松田 美佐子</td>
       <td>1</td>
       <td>女性</td>
-      <td>1967-06-06</td>
-      <td>51</td>
-      <td>176-0004</td>
-      <td>東京都練馬区小竹町**********</td>
-      <td>S13019</td>
-      <td>20150814</td>
-      <td>5-20100307-6</td>
+      <td>1965-11-28</td>
+      <td>53</td>
+      <td>263-0016</td>
+      <td>千葉県千葉市稲毛区天台**********</td>
+      <td>S12014</td>
+      <td>20161212</td>
+      <td>B-20100702-9</td>
       <td>[50.0, 60.0)</td>
-    </tr>
-    <tr>
-      <th>10967</th>
-      <td>CS038411000013</td>
-      <td>原 あや子</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1970-02-15</td>
-      <td>49</td>
-      <td>134-0085</td>
-      <td>東京都江戸川区南葛西**********</td>
-      <td>S13038</td>
-      <td>20150525</td>
-      <td>9-20100306-A</td>
-      <td>[40.0, 50.0)</td>
-    </tr>
-    <tr>
-      <th>11306</th>
-      <td>CS048612000011</td>
-      <td>菊地 那奈</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1948-12-24</td>
-      <td>70</td>
-      <td>224-0007</td>
-      <td>神奈川県横浜市都筑区荏田南**********</td>
-      <td>S14048</td>
-      <td>20180215</td>
-      <td>0-00000000-0</td>
-      <td>[60.0, inf)</td>
-    </tr>
-    <tr>
-      <th>7338</th>
-      <td>CS004514000045</td>
-      <td>大久保 朝香</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1964-02-02</td>
-      <td>55</td>
-      <td>165-0033</td>
-      <td>東京都中野区若宮**********</td>
-      <td>S13004</td>
-      <td>20150520</td>
-      <td>6-20100510-1</td>
-      <td>[50.0, 60.0)</td>
-    </tr>
-    <tr>
-      <th>16505</th>
-      <td>CS029415000162</td>
-      <td>富岡 エリカ</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1976-02-28</td>
-      <td>43</td>
-      <td>279-0004</td>
-      <td>千葉県浦安市猫実**********</td>
-      <td>S12029</td>
-      <td>20151230</td>
-      <td>D-20100526-F</td>
-      <td>[40.0, 50.0)</td>
-    </tr>
-    <tr>
-      <th>12610</th>
-      <td>CS001511000162</td>
-      <td>井川 咲</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1959-06-09</td>
-      <td>59</td>
-      <td>212-0054</td>
-      <td>神奈川県川崎市幸区小倉**********</td>
-      <td>S13001</td>
-      <td>20170829</td>
-      <td>0-00000000-0</td>
-      <td>[50.0, 60.0)</td>
-    </tr>
-    <tr>
-      <th>71</th>
-      <td>CS001515000096</td>
-      <td>水野 陽子</td>
-      <td>9</td>
-      <td>不明</td>
-      <td>1960-11-29</td>
-      <td>58</td>
-      <td>144-0053</td>
-      <td>東京都大田区蒲田本町**********</td>
-      <td>S13001</td>
-      <td>20150614</td>
-      <td>A-20100724-7</td>
-      <td>[50.0, 60.0)</td>
-    </tr>
-    <tr>
-      <th>6487</th>
-      <td>CS023314000089</td>
-      <td>北沢 佳乃</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1986-11-30</td>
-      <td>32</td>
-      <td>212-0016</td>
-      <td>神奈川県川崎市幸区南幸町**********</td>
-      <td>S14023</td>
-      <td>20180923</td>
-      <td>0-00000000-0</td>
-      <td>[30.0, 40.0)</td>
     </tr>
   </tbody>
 </table>
@@ -25664,7 +26939,7 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[87]:</div>
+<div class="prompt input_prompt">In&nbsp;[96]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># skleanのpreprocessing.scaleを利用するため、標本標準偏差で計算されている</span>
@@ -25684,7 +26959,7 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[87]:</div>
+    <div class="prompt output_prompt">Out[96]:</div>
 
 
 
@@ -25796,7 +27071,7 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[88]:</div>
+<div class="prompt input_prompt">In&nbsp;[97]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># skleanのpreprocessing.scaleを利用するため、標本標準偏差で計算されている</span>
@@ -25821,7 +27096,7 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[88]:</div>
+    <div class="prompt output_prompt">Out[97]:</div>
 
 
 
@@ -25922,7 +27197,7 @@ pct75: 3651.0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[89]:</div>
+<div class="prompt input_prompt">In&nbsp;[98]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_product</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -25938,7 +27213,7 @@ pct75: 3651.0
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[89]:</div>
+    <div class="prompt output_prompt">Out[98]:</div>
 
 
 
@@ -25971,7 +27246,7 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[90]:</div>
+<div class="prompt input_prompt">In&nbsp;[99]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_product_1</span> <span class="o">=</span> <span class="n">df_product</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -26016,7 +27291,7 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[91]:</div>
+<div class="prompt input_prompt">In&nbsp;[100]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_product_2</span> <span class="o">=</span> <span class="n">df_product</span><span class="o">.</span><span class="n">fillna</span><span class="p">({</span><span class="s1">&#39;unit_price&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">df_product</span><span class="p">[</span><span class="s1">&#39;unit_price&#39;</span><span class="p">])),</span> 
@@ -26034,7 +27309,7 @@ dtype: int64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[91]:</div>
+    <div class="prompt output_prompt">Out[100]:</div>
 
 
 
@@ -26067,7 +27342,7 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[92]:</div>
+<div class="prompt input_prompt">In&nbsp;[101]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_product_3</span> <span class="o">=</span> <span class="n">df_product</span><span class="o">.</span><span class="n">fillna</span><span class="p">({</span><span class="s1">&#39;unit_price&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmedian</span><span class="p">(</span><span class="n">df_product</span><span class="p">[</span><span class="s1">&#39;unit_price&#39;</span><span class="p">])),</span> 
@@ -26085,7 +27360,7 @@ dtype: int64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[92]:</div>
+    <div class="prompt output_prompt">Out[101]:</div>
 
 
 
@@ -26118,10 +27393,11 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[93]:</div>
+<div class="prompt input_prompt">In&nbsp;[102]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_product</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;category_small_cd&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;unit_price&#39;</span><span class="p">:</span><span class="s1">&#39;median&#39;</span><span class="p">,</span> <span class="s1">&#39;unit_cost&#39;</span><span class="p">:</span><span class="s1">&#39;median&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例1</span>
+<span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_product</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;category_small_cd&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;unit_price&#39;</span><span class="p">:</span><span class="s1">&#39;median&#39;</span><span class="p">,</span> <span class="s1">&#39;unit_cost&#39;</span><span class="p">:</span><span class="s1">&#39;median&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 <span class="n">df_tmp</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;category_small_cd&#39;</span><span class="p">,</span> <span class="s1">&#39;median_price&#39;</span><span class="p">,</span> <span class="s1">&#39;median_cost&#39;</span><span class="p">]</span>
 
 <span class="n">df_product_4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_product</span><span class="p">,</span> <span class="n">df_tmp</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;category_small_cd&#39;</span><span class="p">)</span>
@@ -26144,7 +27420,7 @@ dtype: int64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[93]:</div>
+    <div class="prompt output_prompt">Out[102]:</div>
 
 
 
@@ -26167,6 +27443,113 @@ dtype: int64</pre>
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[103]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例2（maskの活用）</span>
+<span class="n">df_tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_product</span>
+          <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;category_small_cd&#39;</span><span class="p">)</span>
+          <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">median_price</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;unit_price&#39;</span><span class="p">,</span> <span class="s1">&#39;median&#39;</span><span class="p">),</span> 
+               <span class="n">median_cost</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;unit_cost&#39;</span><span class="p">,</span> <span class="s1">&#39;median&#39;</span><span class="p">))</span>
+          <span class="o">.</span><span class="n">reset_index</span><span class="p">())</span>
+
+<span class="n">df_product_4</span> <span class="o">=</span> <span class="n">df_product</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_tmp</span><span class="p">,</span> 
+                                <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> 
+                                <span class="n">on</span><span class="o">=</span><span class="s1">&#39;category_small_cd&#39;</span><span class="p">)</span>
+
+<span class="n">df_product_4</span><span class="p">[</span><span class="s1">&#39;unit_price&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_product_4</span><span class="p">[</span><span class="s1">&#39;unit_price&#39;</span><span class="p">]</span>
+                              <span class="o">.</span><span class="n">mask</span><span class="p">(</span><span class="n">df_product_4</span><span class="p">[</span><span class="s1">&#39;unit_price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">(),</span> 
+                                    <span class="n">df_product_4</span><span class="p">[</span><span class="s1">&#39;median_price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">()))</span>
+<span class="n">df_product_4</span><span class="p">[</span><span class="s1">&#39;unit_cost&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_product_4</span><span class="p">[</span><span class="s1">&#39;unit_cost&#39;</span><span class="p">]</span>
+                              <span class="o">.</span><span class="n">mask</span><span class="p">(</span><span class="n">df_product_4</span><span class="p">[</span><span class="s1">&#39;unit_cost&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">(),</span> 
+                                    <span class="n">df_product_4</span><span class="p">[</span><span class="s1">&#39;median_cost&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">()))</span>
+
+<span class="n">df_product_4</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[103]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>product_cd            0
+category_major_cd     0
+category_medium_cd    0
+category_small_cd     0
+unit_price            0
+unit_cost             0
+median_price          0
+median_cost           0
+dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[104]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例3（fillna、transformの活用）</span>
+<span class="n">df_product_4</span> <span class="o">=</span> <span class="n">df_product</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;unit_price&#39;</span><span class="p">,</span> <span class="s1">&#39;unit_cost&#39;</span><span class="p">]:</span> 
+    <span class="n">df_product_4</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_product_4</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+                       <span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df_product_4</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;category_small_cd&#39;</span><span class="p">)[</span><span class="n">x</span><span class="p">]</span>
+                               <span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">&#39;median&#39;</span><span class="p">)</span>
+                               <span class="o">.</span><span class="n">round</span><span class="p">()))</span>
+
+<span class="n">df_product_4</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[104]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>product_cd            0
+category_major_cd     0
+category_medium_cd    0
+category_small_cd     0
+unit_price            0
+unit_cost             0
+dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -26179,7 +27562,7 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[94]:</div>
+<div class="prompt input_prompt">In&nbsp;[105]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp_1</span> <span class="o">=</span> <span class="n">df_receipt</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;20190101 &lt;= sales_ymd &lt;= 20191231&#39;</span><span class="p">)</span>
@@ -26190,7 +27573,11 @@ dtype: int64</pre>
     <span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;customer_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 
 <span class="n">df_tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_tmp_1</span><span class="p">,</span> <span class="n">df_tmp_2</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;customer_id&#39;</span><span class="p">)</span>
+<span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;amount_2019&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;amount_2019&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
 <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;amount_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;amount_2019&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span>
+<span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;amount_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;amount_rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -26200,7 +27587,7 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[95]:</div>
+<div class="prompt input_prompt">In&nbsp;[106]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;amount_rate &gt; 0&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -26216,7 +27603,7 @@ dtype: int64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[95]:</div>
+    <div class="prompt output_prompt">Out[106]:</div>
 
 
 
@@ -26329,10 +27716,10 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[96]:</div>
+<div class="prompt input_prompt">In&nbsp;[107]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_product_4</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -26345,20 +27732,16 @@ dtype: int64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[96]:</div>
+    <div class="prompt output_prompt">Out[107]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>product_cd            0
-category_major_cd     0
-category_medium_cd    0
-category_small_cd     0
-unit_price            0
-unit_cost             0
-median_price          0
-median_cost           0
+<pre>customer_id    0
+amount_2019    0
+amount         0
+amount_rate    0
 dtype: int64</pre>
 </div>
 
@@ -26380,7 +27763,7 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[97]:</div>
+<div class="prompt input_prompt">In&nbsp;[108]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_customer_1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_customer</span><span class="p">[[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="s1">&#39;postal_cd&#39;</span><span class="p">]],</span>
@@ -26404,7 +27787,7 @@ dtype: int64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[97]:</div>
+    <div class="prompt output_prompt">Out[108]:</div>
 
 
 
@@ -26530,10 +27913,11 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[98]:</div>
+<div class="prompt input_prompt">In&nbsp;[109]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">calc_distance</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例1</span>
+<span class="k">def</span> <span class="nf">calc_distance</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
     <span class="n">distance</span> <span class="o">=</span> <span class="mi">6371</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">y1</span><span class="p">))</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">y2</span><span class="p">))</span> 
                        <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">y1</span><span class="p">))</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">y2</span><span class="p">))</span> 
                             <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">x2</span><span class="p">)))</span>
@@ -26557,7 +27941,156 @@ $$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[98]:</div>
+    <div class="prompt output_prompt">Out[109]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customer_id</th>
+      <th>address_x</th>
+      <th>address_y</th>
+      <th>distance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CS021313000114</td>
+      <td>神奈川県伊勢原市粟窪**********</td>
+      <td>神奈川県伊勢原市伊勢原四丁目</td>
+      <td>1.394409</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CS021313000025</td>
+      <td>神奈川県伊勢原市伊勢原**********</td>
+      <td>神奈川県伊勢原市伊勢原四丁目</td>
+      <td>0.474282</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CS021411000096</td>
+      <td>神奈川県伊勢原市高森**********</td>
+      <td>神奈川県伊勢原市伊勢原四丁目</td>
+      <td>2.480155</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CS021415000150</td>
+      <td>神奈川県伊勢原市上粕屋**********</td>
+      <td>神奈川県伊勢原市伊勢原四丁目</td>
+      <td>2.734723</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CS021313000046</td>
+      <td>神奈川県伊勢原市池端**********</td>
+      <td>神奈川県伊勢原市伊勢原四丁目</td>
+      <td>1.111911</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CS021103000002</td>
+      <td>神奈川県伊勢原市西富岡**********</td>
+      <td>神奈川県伊勢原市伊勢原四丁目</td>
+      <td>2.384941</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>CS021214000028</td>
+      <td>神奈川県伊勢原市桜台**********</td>
+      <td>神奈川県伊勢原市伊勢原四丁目</td>
+      <td>1.399344</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>CS021512000095</td>
+      <td>神奈川県伊勢原市沼目**********</td>
+      <td>神奈川県伊勢原市伊勢原四丁目</td>
+      <td>1.993991</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>CS021613000002</td>
+      <td>神奈川県伊勢原市桜台**********</td>
+      <td>神奈川県伊勢原市伊勢原四丁目</td>
+      <td>1.399344</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>CS021412000147</td>
+      <td>神奈川県伊勢原市三ノ宮**********</td>
+      <td>神奈川県伊勢原市伊勢原四丁目</td>
+      <td>3.507680</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[110]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例2</span>
+<span class="k">def</span> <span class="nf">calc_distance_numpy</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+    <span class="n">x1_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+    <span class="n">x2_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span>
+    <span class="n">y1_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span>
+    <span class="n">y2_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">y2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">6371</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">y1_r</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">y2_r</span><span class="p">)</span> 
+                            <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">y1_r</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">y2_r</span><span class="p">)</span> 
+                            <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x1_r</span> <span class="o">-</span> <span class="n">x2_r</span><span class="p">))</span>
+
+<span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_customer_1</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_store</span><span class="p">,</span> 
+                             <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> 
+                             <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;application_store_cd&#39;</span><span class="p">,</span> 
+                             <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;store_cd&#39;</span><span class="p">)</span>    
+
+<span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span> <span class="o">=</span>   <span class="n">calc_distance_numpy</span><span class="p">(</span><span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;m_longitude&#39;</span><span class="p">],</span> 
+                                           <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;m_latitude&#39;</span><span class="p">],</span>
+                                           <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">],</span> 
+                                           <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">])</span>
+
+<span class="n">df_tmp</span><span class="p">[[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="s1">&#39;address_x&#39;</span><span class="p">,</span> <span class="s1">&#39;address_y&#39;</span><span class="p">,</span> <span class="s1">&#39;distance&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[110]:</div>
 
 
 
@@ -26680,7 +28213,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[99]:</div>
+<div class="prompt input_prompt">In&nbsp;[111]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_receipt</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;customer_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;amount&#39;</span><span class="p">:</span><span class="nb">sum</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
@@ -26730,7 +28263,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[100]:</div>
+<div class="prompt input_prompt">In&nbsp;[112]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_customer_n</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_customer</span><span class="p">,</span> <span class="n">df_customer_u</span><span class="p">[[</span><span class="s1">&#39;customer_name&#39;</span><span class="p">,</span> <span class="s1">&#39;postal_cd&#39;</span><span class="p">,</span> <span class="s1">&#39;customer_id&#39;</span><span class="p">]],</span>
@@ -26775,7 +28308,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[101]:</div>
+<div class="prompt input_prompt">In&nbsp;[113]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">del</span> <span class="n">df_customer_1</span>
@@ -26799,7 +28332,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[102]:</div>
+<div class="prompt input_prompt">In&nbsp;[114]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_customer</span><span class="p">,</span> <span class="n">df_receipt</span><span class="p">[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;customer_id&#39;</span><span class="p">)</span>
@@ -26844,7 +28377,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[103]:</div>
+<div class="prompt input_prompt">In&nbsp;[115]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_receipt</span><span class="p">[[</span><span class="s1">&#39;sales_ymd&#39;</span><span class="p">,</span> <span class="s1">&#39;amount&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -26869,7 +28402,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[104]:</div>
+<div class="prompt input_prompt">In&nbsp;[116]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_train_1</span>
@@ -26885,7 +28418,7 @@ $$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[104]:</div>
+    <div class="prompt output_prompt">Out[116]:</div>
 
 
 
@@ -26986,7 +28519,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[105]:</div>
+<div class="prompt input_prompt">In&nbsp;[117]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_test_1</span>
@@ -27002,7 +28535,7 @@ $$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[105]:</div>
+    <div class="prompt output_prompt">Out[117]:</div>
 
 
 
@@ -27083,10 +28616,11 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[106]:</div>
+<div class="prompt input_prompt">In&nbsp;[118]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#unbalancedのubUnderを使った例</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例1</span>
+<span class="c1">#unbalancedのubUnderを使った例</span>
 <span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_receipt</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;customer_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;amount&#39;</span><span class="p">:</span><span class="s1">&#39;sum&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 <span class="n">df_tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_customer</span><span class="p">,</span> <span class="n">df_tmp</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;customer_id&#39;</span><span class="p">)</span>
 <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;buy_flg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span><span class="p">)</span>
@@ -27130,6 +28664,64 @@ $$
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[119]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例2</span>
+<span class="c1">#unbalancedのubUnderを使った例</span>
+<span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_customer</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_receipt</span>
+                           <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;customer_id&#39;</span><span class="p">)[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+                           <span class="o">.</span><span class="n">reset_index</span><span class="p">(),</span> 
+                           <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> 
+                           <span class="n">on</span><span class="o">=</span><span class="s1">&#39;customer_id&#39;</span><span class="p">)</span>
+<span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;buy_flg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;サンプリング前のbuy_flgの件数&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;buy_flg&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">positive_count</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_tmp</span><span class="p">[</span><span class="s1">&#39;buy_flg&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="n">rs</span> <span class="o">=</span> <span class="n">RandomUnderSampler</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">71</span><span class="p">)</span>
+
+<span class="n">df_sample</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">fit_sample</span><span class="p">(</span><span class="n">df_tmp</span><span class="p">,</span> <span class="n">df_tmp</span><span class="o">.</span><span class="n">buy_flg</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;サンプリング後のbuy_flgの件数&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_sample</span><span class="p">[</span><span class="s1">&#39;buy_flg&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>サンプリング前のbuy_flgの件数
+0    13665
+1     8306
+Name: buy_flg, dtype: int64 
+
+サンプリング後のbuy_flgの件数
+1    8306
+0    8306
+Name: buy_flg, dtype: int64
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -27142,7 +28734,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[107]:</div>
+<div class="prompt input_prompt">In&nbsp;[120]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_gender</span> <span class="o">=</span> <span class="n">df_customer</span><span class="p">[[</span><span class="s1">&#39;gender_cd&#39;</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
@@ -27166,7 +28758,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[108]:</div>
+<div class="prompt input_prompt">In&nbsp;[121]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_product_full</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_product</span><span class="p">,</span> <span class="n">df_category</span><span class="p">[[</span><span class="s1">&#39;category_small_cd&#39;</span><span class="p">,</span> 
@@ -27198,10 +28790,27 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[109]:</div>
+<div class="prompt input_prompt">In&nbsp;[122]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_product_full</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;../data/P_df_product_full_UTF-8_header.csv&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例1</span>
+<span class="n">df_product_full</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;../data/P_df_product_full_UTF-8_header.csv&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[123]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># コード例2（BOM付きでExcelの文字化けを防ぐ）</span>
+<span class="n">df_product_full</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;../data/P_df_product_full_UTF-8_header.csv&#39;</span><span class="p">,</span> 
+                       <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf_8_sig&#39;</span><span class="p">,</span> 
+                       <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -27226,7 +28835,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[110]:</div>
+<div class="prompt input_prompt">In&nbsp;[124]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_product_full</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;../data/P_df_product_full_CP932_header.csv&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;CP932&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -27254,7 +28863,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[111]:</div>
+<div class="prompt input_prompt">In&nbsp;[125]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_product_full</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;../data/P_df_product_full_UTF-8_noh.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span> <span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -27282,7 +28891,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[112]:</div>
+<div class="prompt input_prompt">In&nbsp;[126]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/P_df_product_full_UTF-8_header.csv&#39;</span><span class="p">)</span>
@@ -27299,7 +28908,7 @@ $$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[112]:</div>
+    <div class="prompt output_prompt">Out[126]:</div>
 
 
 
@@ -27482,7 +29091,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[113]:</div>
+<div class="prompt input_prompt">In&nbsp;[127]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/P_df_product_full_UTF-8_noh.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
@@ -27499,7 +29108,7 @@ $$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[113]:</div>
+    <div class="prompt output_prompt">Out[127]:</div>
 
 
 
@@ -27682,7 +29291,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[114]:</div>
+<div class="prompt input_prompt">In&nbsp;[128]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_product_full</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;../data/P_df_product_full_UTF-8_header.tsv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -27710,7 +29319,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[115]:</div>
+<div class="prompt input_prompt">In&nbsp;[129]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s1">&#39;../data/P_df_product_full_UTF-8_header.tsv&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
@@ -27727,7 +29336,7 @@ $$
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[115]:</div>
+    <div class="prompt output_prompt">Out[129]:</div>
 
 
 
