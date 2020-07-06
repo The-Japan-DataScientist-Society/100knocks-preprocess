@@ -63,7 +63,8 @@ Link
   - https://qiita.com/karaage0703/items/1b18b1f4ab65d35afb5f
 - さくらのナレッジ
   - https://knowledge.sakura.ad.jp/13265/
-
+- データサイエンス100本ノックを、Google ColabとAzure Notebooksで気軽に行いたい！
+  - https://qiita.com/noguhiro2002/items/de49db61b69c3dbc9282
 
 ## Author
 The Data Scientist Society
