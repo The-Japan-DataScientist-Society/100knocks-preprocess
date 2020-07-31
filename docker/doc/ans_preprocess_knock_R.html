@@ -13107,7 +13107,7 @@ div#notebook {
 <span class="nf">require</span><span class="p">(</span><span class="s">&#39;caret&#39;</span><span class="p">)</span>
 <span class="nf">require</span><span class="p">(</span><span class="s">&#39;lubridate&#39;</span><span class="p">)</span>
 <span class="nf">require</span><span class="p">(</span><span class="s">&#39;rsample&#39;</span><span class="p">)</span>
-<span class="nf">require</span><span class="p">(</span><span class="s">&#39;unbalanced&#39;</span><span class="p">)</span>
+<span class="nf">require</span><span class="p">(</span><span class="s">&#39;recipes&#39;</span><span class="p">)</span>
 
 <span class="n">host</span> <span class="o">&lt;-</span> <span class="s">&#39;db&#39;</span>
 <span class="n">port</span> <span class="o">&lt;-</span> <span class="nf">Sys.getenv</span><span class="p">()[</span><span class="s">&quot;PG_PORT&quot;</span><span class="p">]</span>
@@ -13174,38 +13174,28 @@ Loading required package: lubridate
 Attaching package: ‘lubridate’
 
 
-The following object is masked from ‘package:base’:
+The following objects are masked from ‘package:base’:
 
-    date
+    date, intersect, setdiff, union
 
 
 Loading required package: rsample
 
-Loading required package: unbalanced
-
-Loading required package: mlr
-
-Loading required package: ParamHelpers
-
-&#39;mlr&#39; is in maintenance mode since July 2019. Future development
-efforts will go into its successor &#39;mlr3&#39; (&lt;https://mlr3.mlr-org.com&gt;).
+Loading required package: recipes
 
 
-Attaching package: ‘mlr’
+Attaching package: ‘recipes’
 
 
-The following object is masked from ‘package:caret’:
+The following object is masked from ‘package:stringr’:
 
-    train
+    fixed
 
 
-Loading required package: foreach
+The following object is masked from ‘package:stats’:
 
-Loading required package: doParallel
+    step
 
-Loading required package: iterators
-
-Loading required package: parallel
 
 </pre>
 </div>
@@ -14159,7 +14149,7 @@ Loading required package: parallel
 <div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="n">df_store</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;[0-9]{3}-[0-9]{3}-[0-9]&quot;</span><span class="p">,</span> <span class="n">tel_no</span><span class="p">))</span>
+<div class=" highlight hl-r"><pre><span></span><span class="n">df_store</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^[0-9]{3}-[0-9]{3}-[0-9]{4}$&quot;</span><span class="p">,</span> <span class="n">tel_no</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -14589,7 +14579,7 @@ Loading required package: parallel
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">store_cd</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">summarise</span><span class="p">(</span><span class="n">amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span>
-              <span class="n">quantity</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">quantity</span><span class="p">))</span>
+              <span class="n">quantity</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">quantity</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14694,7 +14684,7 @@ Loading required package: parallel
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">max_ymd</span><span class="o">=</span><span class="nf">max</span><span class="p">(</span><span class="n">sales_ymd</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">max_ymd</span><span class="o">=</span><span class="nf">max</span><span class="p">(</span><span class="n">sales_ymd</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
 </pre></div>
 
@@ -14758,7 +14748,7 @@ Loading required package: parallel
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">min_ymd</span><span class="o">=</span><span class="nf">min</span><span class="p">(</span><span class="n">sales_ymd</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">min_ymd</span><span class="o">=</span><span class="nf">min</span><span class="p">(</span><span class="n">sales_ymd</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
 </pre></div>
 
@@ -14823,7 +14813,7 @@ Loading required package: parallel
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">summarise</span><span class="p">(</span><span class="n">max_ymd</span><span class="o">=</span><span class="nf">max</span><span class="p">(</span><span class="n">sales_ymd</span><span class="p">)</span>
-             <span class="p">,</span><span class="n">min_ymd</span><span class="o">=</span><span class="nf">min</span><span class="p">(</span><span class="n">sales_ymd</span><span class="p">))</span> <span class="o">%&gt;%</span>
+             <span class="p">,</span><span class="n">min_ymd</span><span class="o">=</span><span class="nf">min</span><span class="p">(</span><span class="n">sales_ymd</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">filter</span><span class="p">(</span><span class="n">max_ymd</span> <span class="o">!=</span> <span class="n">min_ymd</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
 </pre></div>
@@ -14888,7 +14878,7 @@ Loading required package: parallel
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">store_cd</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">mean_amount</span><span class="o">=</span><span class="nf">mean</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">mean_amount</span><span class="o">=</span><span class="nf">mean</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">arrange</span><span class="p">(</span><span class="nf">desc</span><span class="p">(</span><span class="n">mean_amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)</span>
 </pre></div>
@@ -14948,7 +14938,7 @@ Loading required package: parallel
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">store_cd</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">median_amount</span><span class="o">=</span><span class="nf">median</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">median_amount</span><span class="o">=</span><span class="nf">median</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">arrange</span><span class="p">(</span><span class="nf">desc</span><span class="p">(</span><span class="n">median_amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)</span>
 </pre></div>
@@ -15123,7 +15113,7 @@ Loading required package: parallel
 
 <span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">store_cd</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">var_amount</span><span class="o">=</span><span class="nf">var_sample</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">var_amount</span><span class="o">=</span><span class="nf">var_sample</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">arrange</span><span class="p">(</span><span class="nf">desc</span><span class="p">(</span><span class="n">var_amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)</span>
 </pre></div>
@@ -15187,7 +15177,7 @@ Loading required package: parallel
 <span class="nf">head</span><span class="p">(</span>
     <span class="n">df_receipt</span> <span class="o">%&gt;%</span>
         <span class="nf">group_by</span><span class="p">(</span><span class="n">store_cd</span><span class="p">)</span> <span class="o">%&gt;%</span>
-        <span class="nf">summarise</span><span class="p">(</span><span class="n">std_amount</span><span class="o">=</span><span class="nf">std_sample</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
+        <span class="nf">summarise</span><span class="p">(</span><span class="n">std_amount</span><span class="o">=</span><span class="nf">std_sample</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
         <span class="nf">arrange</span><span class="p">(</span><span class="nf">desc</span><span class="p">(</span><span class="n">std_amount</span><span class="p">))</span>
     <span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="m">5</span>
 <span class="p">)</span>
@@ -15304,7 +15294,7 @@ Loading required package: parallel
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">store_cd</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">mean_amount</span><span class="o">=</span><span class="nf">mean</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">mean_amount</span><span class="o">=</span><span class="nf">mean</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">filter</span><span class="p">(</span><span class="n">mean_amount</span> <span class="o">&gt;=</span> <span class="m">330</span><span class="p">)</span>
 </pre></div>
 
@@ -15372,7 +15362,7 @@ Loading required package: parallel
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_mean</span> <span class="o">&lt;-</span> <span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^Z&quot;</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">summarise</span><span class="p">(</span><span class="n">mean_amount</span><span class="o">=</span><span class="nf">mean</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">))</span>
 <span class="n">df_mean</span><span class="o">$</span><span class="n">mean_amount</span>
 </pre></div>
@@ -15419,7 +15409,7 @@ Loading required package: parallel
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_sum</span> <span class="o">&lt;-</span> <span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^Z&quot;</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span>
 <span class="n">df_mean</span> <span class="o">&lt;-</span> <span class="n">df_sum</span> <span class="o">%&gt;%</span>
     <span class="nf">summarise</span><span class="p">(</span><span class="n">mean_amount</span><span class="o">=</span><span class="nf">mean</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">))</span>
 <span class="n">df_sum</span> <span class="o">%&gt;%</span>
@@ -15548,8 +15538,8 @@ Loading required package: parallel
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">inner_join</span><span class="p">(</span><span class="n">df_product</span><span class="p">,</span>
-           <span class="n">df_category</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;category_major_cd&#39;</span><span class="p">,</span> <span class="s">&#39;category_medium_cd&#39;</span><span class="p">,</span><span class="s">&#39;category_small_cd&#39;</span><span class="p">,</span><span class="s">&#39;category_small_name&#39;</span><span class="p">)],</span>
-           <span class="n">by</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#39;category_major_cd&#39;</span><span class="p">,</span> <span class="s">&#39;category_medium_cd&#39;</span><span class="p">,</span><span class="s">&#39;category_small_cd&#39;</span><span class="p">))</span> <span class="o">%&gt;%</span>
+           <span class="n">df_category</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;category_small_cd&#39;</span><span class="p">,</span><span class="s">&#39;category_small_name&#39;</span><span class="p">)],</span>
+           <span class="n">by</span> <span class="o">=</span> <span class="s">&#39;category_small_cd&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
 </pre></div>
 
@@ -15614,7 +15604,7 @@ Loading required package: parallel
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_sum</span> <span class="o">&lt;-</span> <span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^Z&quot;</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span>
 
 <span class="n">df_target</span> <span class="o">&lt;-</span> <span class="n">df_customer</span> <span class="o">%&gt;%</span>
     <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^Z&quot;</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">gender_cd</span> <span class="o">==</span> <span class="s">&#39;1&#39;</span><span class="p">)</span>
@@ -15685,14 +15675,14 @@ Loading required package: parallel
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_sum</span> <span class="o">&lt;-</span> <span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^Z&quot;</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">arrange</span><span class="p">(</span><span class="nf">desc</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">)</span>
 
 <span class="n">df_cnt</span> <span class="o">&lt;-</span> <span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^Z&quot;</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">come_days</span><span class="o">=</span><span class="nf">n_distinct</span><span class="p">(</span><span class="n">sales_ymd</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">come_days</span><span class="o">=</span><span class="nf">n_distinct</span><span class="p">(</span><span class="n">sales_ymd</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">arrange</span><span class="p">(</span><span class="nf">desc</span><span class="p">(</span><span class="n">come_days</span><span class="p">),</span> <span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">)</span>
 
@@ -15829,7 +15819,7 @@ Loading required package: parallel
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">sales_ymd</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">mutate</span><span class="p">(</span><span class="n">lag_ymd</span> <span class="o">=</span> <span class="nf">lag</span><span class="p">(</span><span class="n">sales_ymd</span><span class="p">),</span> <span class="n">lag_amount</span> <span class="o">=</span> <span class="nf">lag</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">),</span> <span class="n">diff_amount</span> <span class="o">=</span> <span class="n">sum_amount</span> <span class="o">-</span> <span class="n">lag_amount</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
 </pre></div>
@@ -15895,7 +15885,7 @@ Loading required package: parallel
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># コード例1:縦持ちケース</span>
 <span class="n">df_sum</span> <span class="o">&lt;-</span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">sales_ymd</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span>
 
 <span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">){</span>
     <span class="nf">if </span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="m">1</span><span class="p">){</span>
@@ -15965,7 +15955,7 @@ Loading required package: parallel
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># コード例2:横持ちケース</span>
 <span class="n">df_sum</span> <span class="o">&lt;-</span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">sales_ymd</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span>
 
 <span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">){</span>
     <span class="nf">if </span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="m">1</span><span class="p">){</span>
@@ -16065,7 +16055,7 @@ Loading required package: parallel
     <span class="nf">mutate</span><span class="p">(</span><span class="n">era</span> <span class="o">=</span> <span class="nf">trunc</span><span class="p">(</span><span class="n">age</span> <span class="o">/</span> <span class="m">10</span><span class="p">)</span> <span class="o">*</span> <span class="m">10</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">inner_join</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s">&quot;customer_id&quot;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">gender_cd</span><span class="p">,</span> <span class="n">era</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">spread</span><span class="p">(</span><span class="n">gender_cd</span><span class="p">,</span> <span class="n">sum_amount</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="m">0</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">rename</span><span class="p">(</span><span class="n">male</span><span class="o">=</span><span class="s">&#39;0&#39;</span><span class="p">,</span> <span class="n">female</span><span class="o">=</span><span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="n">unknown</span><span class="o">=</span><span class="s">&#39;9&#39;</span><span class="p">)</span>
 
@@ -16662,7 +16652,7 @@ Loading required package: parallel
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^Z&quot;</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">mutate</span><span class="p">(</span><span class="n">bit_amount</span> <span class="o">=</span> <span class="nf">ifelse</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">&lt;=</span> <span class="m">2000</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>　<span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
 </pre></div>
@@ -16729,7 +16719,7 @@ Loading required package: parallel
     <span class="nf">mutate</span><span class="p">(</span><span class="n">postal_bit</span> <span class="o">=</span> <span class="nf">ifelse</span><span class="p">(</span><span class="m">100</span> <span class="o">&lt;=</span> <span class="nf">as.integer</span><span class="p">(</span><span class="nf">str_sub</span><span class="p">(</span><span class="n">postal_cd</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="m">3</span><span class="p">))</span> <span class="o">&amp;</span> 
                                    <span class="nf">as.integer</span><span class="p">(</span><span class="nf">str_sub</span><span class="p">(</span><span class="n">postal_cd</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="m">3</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="m">209</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">postal_bit</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">customer_cnt</span> <span class="o">=</span> <span class="nf">n_distinct</span><span class="p">(</span><span class="n">customer_id</span><span class="p">))</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">customer_cnt</span> <span class="o">=</span> <span class="nf">n_distinct</span><span class="p">(</span><span class="n">customer_id</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -16858,7 +16848,7 @@ Loading required package: parallel
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">mutate</span><span class="p">(</span><span class="n">amount_cat</span> <span class="o">=</span> <span class="nf">case_when</span><span class="p">(</span>
         <span class="n">sum_amount</span> <span class="o">&lt;</span> <span class="nf">quantile</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">)[</span><span class="m">2</span><span class="p">]</span>  <span class="o">~</span> <span class="s">&quot;1&quot;</span><span class="p">,</span>
         <span class="n">sum_amount</span> <span class="o">&lt;</span> <span class="nf">quantile</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">)[</span><span class="m">3</span><span class="p">]</span>  <span class="o">~</span> <span class="s">&quot;2&quot;</span><span class="p">,</span>
@@ -17128,7 +17118,7 @@ Loading required package: parallel
 <span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^Z&quot;</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">mutate</span><span class="p">(</span><span class="n">normalized_amount</span> <span class="o">=</span> <span class="nf">scale</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">,</span> <span class="n">center</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
 </pre></div>
@@ -17194,7 +17184,7 @@ Loading required package: parallel
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^Z&quot;</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">mutate</span><span class="p">(</span><span class="n">normalized_amount</span> <span class="o">=</span> <span class="nf">scale</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">,</span> <span class="n">center</span> <span class="o">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">),</span> <span class="n">scale</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">)</span> <span class="o">-</span> <span class="nf">min</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">)))</span> <span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
 </pre></div>
@@ -17260,7 +17250,7 @@ Loading required package: parallel
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^Z&quot;</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">mutate</span><span class="p">(</span><span class="n">log_amount</span> <span class="o">=</span> <span class="nf">log</span><span class="p">((</span><span class="n">sum_amount</span> <span class="o">+</span> <span class="m">1</span><span class="p">),</span><span class="m">10</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
 </pre></div>
@@ -17326,7 +17316,7 @@ Loading required package: parallel
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^Z&quot;</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">mutate</span><span class="p">(</span><span class="n">log_amount</span> <span class="o">=</span> <span class="nf">log</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">+</span> <span class="m">1</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
 </pre></div>
@@ -17762,10 +17752,10 @@ Loading required package: parallel
 <div class=" highlight hl-r"><pre><span></span><span class="nf">inner_join</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">,</span> <span class="n">df_product</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;product_cd&quot;</span><span class="p">,</span><span class="s">&quot;category_major_cd&quot;</span><span class="p">)],</span> <span class="n">by</span><span class="o">=</span><span class="s">&quot;product_cd&quot;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">filter</span><span class="p">(</span><span class="n">category_major_cd</span> <span class="o">==</span> <span class="s">&quot;07&quot;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">amount_07</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">amount_07</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">inner_join</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s">&quot;customer_id&quot;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">amount_07</span><span class="o">=</span><span class="nf">max</span><span class="p">(</span><span class="n">amount_07</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">amount_07</span><span class="o">=</span><span class="nf">max</span><span class="p">(</span><span class="n">amount_07</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">mutate</span><span class="p">(</span><span class="n">rate_07</span> <span class="o">=</span> <span class="n">amount_07</span> <span class="o">/</span> <span class="n">sum_amount</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
 </pre></div>
@@ -17913,7 +17903,7 @@ Loading required package: parallel
 
 
 <div class="output_html rendered_html output_subarea ">
-29.0301369863014
+29.0102669404517
 </div>
 
 </div>
@@ -18261,16 +18251,16 @@ Loading required package: parallel
 	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;date&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><th scope=row>1</th><td>CS029312000089</td><td>末永 恵梨香</td><td>1</td><td>女性</td><td>1986-09-06</td><td>32</td><td>134-0087</td><td>東京都江戸川区清新町**********        </td><td>S12029</td><td>20150422</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>2</th><td>CS003611000004</td><td>河野 幸子  </td><td>1</td><td>女性</td><td>1952-06-06</td><td>66</td><td>214-0008</td><td>神奈川県川崎市多摩区菅北浦**********  </td><td>S13003</td><td>20150927</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>3</th><td>CS001411000119</td><td>長野 真奈美</td><td>1</td><td>女性</td><td>1976-05-19</td><td>42</td><td>210-0025</td><td>神奈川県川崎市川崎区下並木**********  </td><td>S13001</td><td>20170116</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>4</th><td>CS022413000054</td><td>金沢 那奈  </td><td>1</td><td>女性</td><td>1971-10-06</td><td>47</td><td>249-0002</td><td>神奈川県逗子市山の根**********        </td><td>S14022</td><td>20151031</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>5</th><td>CS034512000182</td><td>松田 路子  </td><td>1</td><td>女性</td><td>1965-08-18</td><td>53</td><td>216-0031</td><td>神奈川県川崎市宮前区神木本町**********</td><td>S14034</td><td>20180511</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>6</th><td>CS006512000218</td><td>森山 路子  </td><td>1</td><td>女性</td><td>1966-01-06</td><td>53</td><td>224-0026</td><td>神奈川県横浜市都筑区南山田町**********</td><td>S14006</td><td>20180716</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>7</th><td>CS039212000005</td><td>篠崎 奈月  </td><td>1</td><td>女性</td><td>1992-04-13</td><td>26</td><td>156-0045</td><td>東京都世田谷区桜上水**********        </td><td>S13039</td><td>20150326</td><td>9-20100509-6</td></tr>
-	<tr><th scope=row>8</th><td>CS020415000318</td><td>宇多田 璃子</td><td>1</td><td>女性</td><td>1969-08-30</td><td>49</td><td>174-0053</td><td>東京都板橋区清水町**********          </td><td>S13020</td><td>20180904</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>9</th><td>CS001313000087</td><td>相原 桃子  </td><td>1</td><td>女性</td><td>1983-03-15</td><td>36</td><td>144-0035</td><td>東京都大田区南蒲田**********          </td><td>S13001</td><td>20150626</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>10</th><td>CS002413000641</td><td>菊地 結子  </td><td>1</td><td>女性</td><td>1976-10-26</td><td>42</td><td>185-0022</td><td>東京都国分寺市東元町**********        </td><td>S13002</td><td>20170810</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>1</th><td>CS024315000048</td><td>会田 恭子  </td><td>1</td><td>女性</td><td>1982-05-28</td><td>36</td><td>214-0035</td><td>神奈川県川崎市多摩区長沢**********  </td><td>S14024</td><td>20150509</td><td>7-20080423-6</td></tr>
+	<tr><th scope=row>2</th><td>CS006515000072</td><td>河原 結衣  </td><td>1</td><td>女性</td><td>1964-10-30</td><td>54</td><td>224-0057</td><td>神奈川県横浜市都筑区川和町**********</td><td>S14006</td><td>20151107</td><td>C-20100710-E</td></tr>
+	<tr><th scope=row>3</th><td>CS027412000100</td><td>大谷 窈    </td><td>1</td><td>女性</td><td>1976-01-29</td><td>43</td><td>251-0042</td><td>神奈川県藤沢市辻堂新町**********    </td><td>S14027</td><td>20150322</td><td>4-20080915-5</td></tr>
+	<tr><th scope=row>4</th><td>CS003615000190</td><td>長田 エリカ</td><td>1</td><td>女性</td><td>1950-08-08</td><td>68</td><td>182-0023</td><td>東京都調布市染地**********          </td><td>S13003</td><td>20160315</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>5</th><td>CS027502000041</td><td>長井 誠一  </td><td>0</td><td>男性</td><td>1959-05-27</td><td>59</td><td>251-0045</td><td>神奈川県藤沢市辻堂東海岸**********  </td><td>S14027</td><td>20150511</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>6</th><td>CS004512000013</td><td>羽田 璃奈子</td><td>1</td><td>女性</td><td>1960-04-28</td><td>58</td><td>166-0001</td><td>東京都杉並区阿佐谷北**********      </td><td>S13004</td><td>20150205</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>7</th><td>CS004111000005</td><td>野田 瞳    </td><td>1</td><td>女性</td><td>2006-04-07</td><td>12</td><td>161-0031</td><td>東京都新宿区西落合**********        </td><td>S13004</td><td>20151025</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>8</th><td>CS022511000034</td><td>田原 ひろ子</td><td>1</td><td>女性</td><td>1964-06-09</td><td>54</td><td>240-0112</td><td>神奈川県三浦郡葉山町堀内**********  </td><td>S14022</td><td>20150216</td><td>3-20090615-3</td></tr>
+	<tr><th scope=row>9</th><td>CS022613000098</td><td>丹羽 倫子  </td><td>1</td><td>女性</td><td>1951-04-11</td><td>67</td><td>249-0003</td><td>神奈川県逗子市池子**********        </td><td>S14022</td><td>20150829</td><td>6-20100705-3</td></tr>
+	<tr><th scope=row>10</th><td>CS040112000007</td><td>篠崎 めぐみ</td><td>1</td><td>女性</td><td>2004-05-12</td><td>14</td><td>194-0014</td><td>東京都町田市高ヶ坂**********        </td><td>S14040</td><td>20151109</td><td>0-00000000-0</td></tr>
 </tbody>
 </table>
 
@@ -18301,7 +18291,7 @@ Loading required package: parallel
 <span class="n">df_customer</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">gender_cd</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">sample_frac</span><span class="p">(</span><span class="m">0.1</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">customer_num</span> <span class="o">=</span> <span class="nf">n</span><span class="p">())</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">customer_num</span> <span class="o">=</span> <span class="nf">n</span><span class="p">(),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -18358,7 +18348,7 @@ Loading required package: parallel
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^Z&quot;</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">filter</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">-</span> <span class="nf">mean</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">))</span> <span class="o">/</span> <span class="nf">sd</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="m">3</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
 </pre></div>
@@ -18425,7 +18415,7 @@ Loading required package: parallel
 <span class="n">df_tmp</span> <span class="o">&lt;-</span> <span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^Z&quot;</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span>
 
 <span class="nf">quantile</span><span class="p">(</span><span class="n">df_tmp</span><span class="o">$</span><span class="n">sum_amount</span><span class="p">)</span>
 </pre></div>
@@ -18501,7 +18491,7 @@ Loading required package: parallel
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^Z&quot;</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">))</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">filter</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">&lt;</span> <span class="nf">quantile</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">)[</span><span class="m">2</span><span class="p">]</span> <span class="o">-</span> <span class="m">1.5</span> <span class="o">*</span> <span class="p">(</span><span class="nf">quantile</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">)[</span><span class="m">4</span><span class="p">]</span> <span class="o">-</span> <span class="nf">quantile</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">)[</span><span class="m">2</span><span class="p">])</span> <span class="o">|</span>
            <span class="n">sum_amount</span> <span class="o">&gt;</span> <span class="nf">quantile</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">)[</span><span class="m">4</span><span class="p">]</span> <span class="o">+</span> <span class="m">1.5</span> <span class="o">*</span> <span class="p">(</span><span class="nf">quantile</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">)[</span><span class="m">4</span><span class="p">]</span> <span class="o">-</span> <span class="nf">quantile</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">)[</span><span class="m">2</span><span class="p">]))</span> <span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
@@ -18779,7 +18769,8 @@ Loading required package: parallel
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_product_4</span> <span class="o">&lt;-</span> <span class="n">df_product</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">category_small_cd</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">price_median</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="nf">median</span><span class="p">(</span><span class="n">unit_price</span><span class="p">,</span> <span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)),</span> <span class="n">cost_median</span><span class="o">=</span><span class="nf">round</span><span class="p">(</span><span class="nf">median</span><span class="p">(</span><span class="n">unit_cost</span><span class="p">,</span> <span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">price_median</span> <span class="o">=</span> <span class="nf">round</span><span class="p">(</span><span class="nf">median</span><span class="p">(</span><span class="n">unit_price</span><span class="p">,</span> <span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)),</span> 
+              <span class="n">cost_median</span><span class="o">=</span><span class="nf">round</span><span class="p">(</span><span class="nf">median</span><span class="p">(</span><span class="n">unit_cost</span><span class="p">,</span> <span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">inner_join</span><span class="p">(</span><span class="n">df_product</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s">&quot;category_small_cd&quot;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">mutate</span><span class="p">(</span><span class="n">unit_price</span> <span class="o">=</span> <span class="nf">ifelse</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">unit_price</span><span class="p">),</span> <span class="n">price_median</span><span class="p">,</span> <span class="n">unit_price</span><span class="p">),</span>
            <span class="n">unit_cost</span> <span class="o">=</span> <span class="nf">ifelse</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">unit_cost</span><span class="p">),</span> <span class="n">cost_median</span><span class="p">,</span> <span class="n">unit_cost</span><span class="p">))</span>
@@ -18880,11 +18871,11 @@ Loading required package: parallel
 
 <span class="n">df_amount_all</span> <span class="o">&lt;-</span><span class="nf">left_join</span><span class="p">(</span><span class="n">df_customer</span><span class="p">,</span> <span class="n">df_receipt</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s">&quot;customer_id&quot;</span><span class="p">)</span> <span class="o">%&gt;%</span>
                     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-                    <span class="nf">summarise</span><span class="p">(</span><span class="n">amount_all</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span>
+                    <span class="nf">summarise</span><span class="p">(</span><span class="n">amount_all</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span>
 
 <span class="n">df_amount_2019</span> <span class="o">&lt;-</span><span class="nf">left_join</span><span class="p">(</span><span class="n">df_customer</span><span class="p">,</span> <span class="n">df_receipt_2019</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s">&quot;customer_id&quot;</span><span class="p">)</span> <span class="o">%&gt;%</span>
                     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-                    <span class="nf">summarise</span><span class="p">(</span><span class="n">amount_2019</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
+                    <span class="nf">summarise</span><span class="p">(</span><span class="n">amount_2019</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
                     <span class="nf">inner_join</span><span class="p">(</span><span class="n">df_amount_all</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s">&quot;customer_id&quot;</span><span class="p">)</span> <span class="o">%&gt;%</span>
                     <span class="nf">replace_na</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">amount_2019</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">amount_all</span> <span class="o">=</span> <span class="m">0</span><span class="p">))</span> <span class="o">%&gt;%</span>
                     <span class="nf">mutate</span><span class="p">(</span><span class="n">amount_rate</span> <span class="o">=</span> <span class="nf">ifelse</span><span class="p">(</span><span class="n">amount_all</span> <span class="o">==</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">amount_2019</span> <span class="o">/</span> <span class="n">amount_all</span><span class="p">))</span>
@@ -18993,7 +18984,7 @@ Loading required package: parallel
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_customer_1</span> <span class="o">&lt;-</span> <span class="nf">inner_join</span><span class="p">(</span><span class="n">df_customer</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;customer_id&quot;</span><span class="p">,</span> <span class="s">&quot;postal_cd&quot;</span><span class="p">)],</span> 
            <span class="n">df_geocode</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;postal_cd&quot;</span><span class="p">,</span> <span class="s">&quot;longitude&quot;</span> <span class="p">,</span><span class="s">&quot;latitude&quot;</span><span class="p">)],</span> <span class="n">by</span><span class="o">=</span><span class="s">&quot;postal_cd&quot;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">m_longiture</span><span class="o">=</span><span class="nf">mean</span><span class="p">(</span><span class="n">longitude</span><span class="p">),</span><span class="n">m_latitude</span><span class="o">=</span><span class="nf">mean</span><span class="p">(</span><span class="n">latitude</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">m_longiture</span><span class="o">=</span><span class="nf">mean</span><span class="p">(</span><span class="n">longitude</span><span class="p">),</span><span class="n">m_latitude</span><span class="o">=</span><span class="nf">mean</span><span class="p">(</span><span class="n">latitude</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">inner_join</span><span class="p">(</span><span class="n">df_customer</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s">&quot;customer_id&quot;</span><span class="p">)</span>
 
 <span class="nf">head</span><span class="p">(</span><span class="n">df_customer_1</span><span class="p">,</span> <span class="m">5</span><span class="p">)</span>
@@ -19136,7 +19127,7 @@ $$
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_sales_amount</span> <span class="o">&lt;-</span> <span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span>
 
 <span class="n">df_customer_u</span> <span class="o">&lt;-</span> <span class="nf">left_join</span><span class="p">(</span><span class="n">df_customer</span><span class="p">,</span> <span class="n">df_sales_amount</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s">&quot;customer_id&quot;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">arrange</span><span class="p">(</span><span class="nf">desc</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">),</span> <span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
@@ -19238,7 +19229,7 @@ $$
 <div class=" highlight hl-r"><pre><span></span><span class="c1">#rsampleのinitial_splitを使った例</span>
 <span class="n">df_sales_amount</span> <span class="o">&lt;-</span> <span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span>
 
 <span class="n">df_customer_s</span> <span class="o">&lt;-</span> <span class="nf">inner_join</span><span class="p">(</span><span class="n">df_customer</span><span class="p">,</span> <span class="n">df_sales_amount</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s">&quot;customer_id&quot;</span><span class="p">)</span>
 
@@ -19294,7 +19285,7 @@ $$
 <div class=" highlight hl-r"><pre><span></span><span class="c1">#caretのcreateTimeSlicesを使った例</span>
 <span class="n">df_ts_amount</span> <span class="o">&lt;-</span> <span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="nf">substr</span><span class="p">(</span><span class="nf">as.character</span><span class="p">(</span><span class="n">sales_ymd</span><span class="p">),</span> <span class="m">1</span><span class="p">,</span> <span class="m">6</span><span class="p">))</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span>
 <span class="nf">colnames</span><span class="p">(</span><span class="n">df_ts_amount</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;sales_ym&quot;</span><span class="p">,</span><span class="s">&quot;sales_amount&quot;</span><span class="p">)</span>
 
 <span class="n">timeSlice</span> <span class="o">&lt;-</span> <span class="nf">createTimeSlices</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="nf">nrow</span><span class="p">(</span><span class="n">df_ts_amount</span><span class="p">),</span> <span class="n">initialWindow</span> <span class="o">=</span> <span class="m">12</span><span class="p">,</span> <span class="n">horizon</span> <span class="o">=</span> <span class="m">6</span><span class="p">,</span> <span class="n">skip</span> <span class="o">=</span> <span class="m">5</span><span class="p">,</span> <span class="n">fixedWindow</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
@@ -19328,22 +19319,75 @@ $$
 <div class="prompt input_prompt">In&nbsp;[99]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1">#unbalancedのubUnderを使った例</span>
+<div class=" highlight hl-r"><pre><span></span><span class="c1">#recipesパッケージを使った例</span>
+<span class="c1">#themis::step_downsample()を使うようワーニングが出るが、なるべくインストールパッケージを少なくするためrecipeのstep_downsample()を使用</span>
 <span class="n">df_sales_amount</span> <span class="o">&lt;-</span> <span class="n">df_receipt</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span>
     
 <span class="n">df_tmp</span> <span class="o">&lt;-</span> <span class="nf">left_join</span><span class="p">(</span><span class="n">df_customer</span><span class="p">,</span> <span class="n">df_sales_amount</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s">&quot;customer_id&quot;</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">replace_na</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="m">0</span><span class="p">))</span> <span class="o">%&gt;%</span>
-    <span class="nf">mutate</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">ifelse</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">&gt;</span> <span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+    <span class="nf">mutate</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">factor</span><span class="p">(</span><span class="nf">ifelse</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">&gt;</span> <span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">)))</span>
 
-<span class="n">data_under</span><span class="o">&lt;-</span><span class="nf">ubUnder</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">df_tmp</span><span class="p">[,</span><span class="nf">colnames</span><span class="p">(</span><span class="n">df_tmp</span><span class="p">)</span> <span class="o">!=</span> <span class="s">&quot;sum_amount&quot;</span><span class="p">],</span> <span class="n">Y</span><span class="o">=</span> <span class="n">df_tmp</span><span class="o">$</span><span class="n">sum_amount</span><span class="p">,</span> <span class="n">perc</span> <span class="o">=</span> <span class="m">50</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s">&quot;percPos&quot;</span><span class="p">)</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">71</span><span class="p">)</span>
 
-<span class="n">df_down_sampling</span> <span class="o">&lt;-</span> <span class="nf">cbind</span><span class="p">(</span><span class="n">data_under</span><span class="o">$</span><span class="n">X</span><span class="p">,</span> <span class="n">data_under</span><span class="o">$</span><span class="n">Y</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">rename</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="s">&#39;data_under$Y&#39;</span><span class="p">)</span>
+<span class="n">df_down_train</span> <span class="o">&lt;-</span> <span class="n">df_tmp</span> <span class="o">%&gt;%</span> 
+  <span class="nf">recipe</span><span class="p">(</span><span class="o">~</span> <span class="n">.</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="nf">step_downsample</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="nf">prep</span><span class="p">()</span> <span class="o">%&gt;%</span> 
+  <span class="nf">juice</span><span class="p">()</span>
+
+<span class="n">df_down_train</span> <span class="o">%&gt;%</span>
+    <span class="nf">group_by</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">)</span> <span class="o">%&gt;%</span>
+    <span class="nf">summarise</span><span class="p">(</span><span class="n">cnt</span> <span class="o">=</span> <span class="nf">n</span><span class="p">(),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Warning message:
+“`step_downsample()` is deprecated as of recipes 0.1.13.
+Please use `themis::step_downsample()` instead.
+<span class="ansi-black-intense-fg">This warning is displayed once every 8 hours.</span>
+<span class="ansi-black-intense-fg">Call `lifecycle::last_warnings()` to see where this warning was generated.</span>”
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<caption>A tibble: 2 × 2</caption>
+<thead>
+	<tr><th scope=col>sum_amount</th><th scope=col>cnt</th></tr>
+	<tr><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>0</td><td>8306</td></tr>
+	<tr><td>1</td><td>8306</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -19353,7 +19397,7 @@ $$
 <div class="prompt input_prompt">In&nbsp;[100]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="n">df_down_sampling</span><span class="p">,</span> <span class="m">10</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="n">df_down_train</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -19372,22 +19416,15 @@ $$
 
 <div class="output_html rendered_html output_subarea ">
 <table>
-<caption>A data.frame: 10 × 12</caption>
+<caption>A tibble: 3 × 12</caption>
 <thead>
-	<tr><th></th><th scope=col>customer_id</th><th scope=col>customer_name</th><th scope=col>gender_cd</th><th scope=col>gender</th><th scope=col>birth_day</th><th scope=col>age</th><th scope=col>postal_cd</th><th scope=col>address</th><th scope=col>application_store_cd</th><th scope=col>application_date</th><th scope=col>status_cd</th><th scope=col>sum_amount</th></tr>
-	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;date&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+	<tr><th scope=col>customer_id</th><th scope=col>customer_name</th><th scope=col>gender_cd</th><th scope=col>gender</th><th scope=col>birth_day</th><th scope=col>age</th><th scope=col>postal_cd</th><th scope=col>address</th><th scope=col>application_store_cd</th><th scope=col>application_date</th><th scope=col>status_cd</th><th scope=col>sum_amount</th></tr>
+	<tr><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;date&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;fct&gt;</th><th scope=col>&lt;fct&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><th scope=row>1</th><td>CS021313000114</td><td>大野 あや子  </td><td>1</td><td>女性</td><td>1981-04-29</td><td>37</td><td>259-1113</td><td>神奈川県伊勢原市粟窪**********    </td><td>S14021</td><td>20150905</td><td>0-00000000-0</td><td>0</td></tr>
-	<tr><th scope=row>2</th><td>CS037613000071</td><td>六角 雅彦    </td><td>9</td><td>不明</td><td>1952-04-01</td><td>66</td><td>136-0076</td><td>東京都江東区南砂**********        </td><td>S13037</td><td>20150414</td><td>0-00000000-0</td><td>0</td></tr>
-	<tr><th scope=row>3</th><td>CS031415000172</td><td>宇多田 貴美子</td><td>1</td><td>女性</td><td>1976-10-04</td><td>42</td><td>151-0053</td><td>東京都渋谷区代々木**********      </td><td>S13031</td><td>20150529</td><td>D-20100325-C</td><td>1</td></tr>
-	<tr><th scope=row>4</th><td>CS028811000001</td><td>堀井 かおり  </td><td>1</td><td>女性</td><td>1933-03-27</td><td>86</td><td>245-0016</td><td>神奈川県横浜市泉区和泉町**********</td><td>S14028</td><td>20160115</td><td>0-00000000-0</td><td>0</td></tr>
-	<tr><th scope=row>5</th><td>CS001215000145</td><td>田崎 美紀    </td><td>1</td><td>女性</td><td>1995-03-29</td><td>24</td><td>144-0055</td><td>東京都大田区仲六郷**********      </td><td>S13001</td><td>20170605</td><td>6-20090929-2</td><td>1</td></tr>
-	<tr><th scope=row>6</th><td>CS020401000016</td><td>宮下 達士    </td><td>0</td><td>男性</td><td>1974-09-15</td><td>44</td><td>174-0065</td><td>東京都板橋区若木**********        </td><td>S13020</td><td>20150225</td><td>0-00000000-0</td><td>0</td></tr>
-	<tr><th scope=row>7</th><td>CS015414000103</td><td>奥野 陽子    </td><td>1</td><td>女性</td><td>1977-08-09</td><td>41</td><td>136-0073</td><td>東京都江東区北砂**********        </td><td>S13015</td><td>20150722</td><td>B-20100609-B</td><td>1</td></tr>
-	<tr><th scope=row>8</th><td>CS029403000008</td><td>釈 人志      </td><td>0</td><td>男性</td><td>1973-08-17</td><td>45</td><td>279-0003</td><td>千葉県浦安市海楽**********        </td><td>S12029</td><td>20150515</td><td>0-00000000-0</td><td>0</td></tr>
-	<tr><th scope=row>10</th><td>CS033513000180</td><td>安斎 遥      </td><td>1</td><td>女性</td><td>1962-07-11</td><td>56</td><td>241-0823</td><td>神奈川県横浜市旭区善部町**********</td><td>S14033</td><td>20150728</td><td>6-20080506-5</td><td>1</td></tr>
-	<tr><th scope=row>12</th><td>CS035614000014</td><td>板倉 菜々美  </td><td>1</td><td>女性</td><td>1954-07-16</td><td>64</td><td>154-0015</td><td>東京都世田谷区桜新町**********    </td><td>S13035</td><td>20150804</td><td>0-00000000-0</td><td>0</td></tr>
+	<tr><td>CS018311000038</td><td>尾崎 倫子  </td><td>1</td><td>女性</td><td>1985-11-04</td><td>33</td><td>359-0035</td><td>埼玉県所沢市西新井町**********</td><td>S13018</td><td>20150921</td><td>0-00000000-0</td><td>0</td></tr>
+	<tr><td>CS009513000243</td><td>芦田 莉央  </td><td>1</td><td>女性</td><td>1966-04-30</td><td>52</td><td>158-0093</td><td>東京都世田谷区上野毛**********</td><td>S13009</td><td>20180221</td><td>0-00000000-0</td><td>0</td></tr>
+	<tr><td>CS029503000054</td><td>日下部 哲平</td><td>0</td><td>男性</td><td>1965-07-10</td><td>53</td><td>279-0012</td><td>千葉県浦安市入船**********    </td><td>S12029</td><td>20160518</td><td>0-00000000-0</td><td>0</td></tr>
 </tbody>
 </table>
 
@@ -19395,6 +19432,33 @@ $$
 
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[101]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># #unbalancedのubUnderを使った例（unbalamncedの依存関係にあるxmlパッケージがR3.6.3でインストールできなくなっているためコメントアウト中※2020.07.29時点）</span>
+<span class="c1"># #unbalancedも良く利用されるのでコードは残しておく</span>
+
+<span class="c1"># df_sales_amount &lt;- df_receipt %&gt;%</span>
+<span class="c1">#     group_by(customer_id) %&gt;%</span>
+<span class="c1">#     summarise(sum_amount = sum(amount))</span>
+    
+<span class="c1"># df_tmp &lt;- left_join(df_customer, df_sales_amount, by=&quot;customer_id&quot;) %&gt;%</span>
+<span class="c1">#     replace_na(list(sum_amount = 0)) %&gt;%</span>
+<span class="c1">#     mutate(sum_amount = ifelse(sum_amount &gt; 0, 1, 0))</span>
+
+<span class="c1"># data_under&lt;-ubUnder(X=df_tmp[,colnames(df_tmp) != &quot;sum_amount&quot;], Y= df_tmp$sum_amount, perc = 50, method = &quot;percPos&quot;)</span>
+
+<span class="c1"># df_down_sampling &lt;- cbind(data_under$X, data_under$Y) %&gt;%</span>
+<span class="c1">#     rename(sum_amount = &#39;data_under$Y&#39;)</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 
@@ -19411,7 +19475,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[101]:</div>
+<div class="prompt input_prompt">In&nbsp;[102]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_gender</span> <span class="o">=</span> <span class="nf">unique</span><span class="p">(</span><span class="n">df_customer</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;gender_cd&quot;</span><span class="p">,</span> <span class="s">&quot;gender&quot;</span><span class="p">)])</span>
@@ -19435,7 +19499,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[102]:</div>
+<div class="prompt input_prompt">In&nbsp;[103]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_product_full</span> <span class="o">&lt;-</span> <span class="nf">inner_join</span><span class="p">(</span><span class="n">df_product</span><span class="p">,</span> <span class="n">df_category</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;category_small_cd&quot;</span><span class="p">,</span> 
@@ -19466,7 +19530,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[103]:</div>
+<div class="prompt input_prompt">In&nbsp;[104]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">write.csv</span><span class="p">(</span><span class="n">df_product_full</span><span class="p">,</span> <span class="s">&quot;../data/R_df_product_full_UTF-8_header.csv&quot;</span><span class="p">,</span> <span class="n">fileEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>
@@ -19494,7 +19558,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[104]:</div>
+<div class="prompt input_prompt">In&nbsp;[105]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">write.csv</span><span class="p">(</span><span class="n">df_product_full</span><span class="p">,</span> <span class="s">&quot;../data/R_df_product_full_CP932_header.csv&quot;</span><span class="p">,</span> <span class="n">fileEncoding</span><span class="o">=</span><span class="s">&quot;CP932&quot;</span><span class="p">)</span>
@@ -19523,7 +19587,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[105]:</div>
+<div class="prompt input_prompt">In&nbsp;[106]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">write.table</span><span class="p">(</span><span class="n">df_product_full</span><span class="p">,</span> <span class="s">&quot;../data/R_df_product_full_UTF-8_noh.csv&quot;</span><span class="p">,</span> <span class="n">col.names</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&quot;,&quot;</span><span class="p">,</span> <span class="n">fileEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>
@@ -19551,7 +19615,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[106]:</div>
+<div class="prompt input_prompt">In&nbsp;[107]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_product_tmp</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/R_df_product_full_UTF-8_header.csv&#39;</span><span class="p">,</span> <span class="n">fileEncoding</span> <span class="o">=</span> <span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>
@@ -19618,7 +19682,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[107]:</div>
+<div class="prompt input_prompt">In&nbsp;[108]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_product_tmp</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/R_df_product_full_UTF-8_noh.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">fileEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>
@@ -19685,7 +19749,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[108]:</div>
+<div class="prompt input_prompt">In&nbsp;[109]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">write.table</span><span class="p">(</span><span class="n">df_product_full</span><span class="p">,</span> <span class="s">&quot;../data/R_df_product_full_UTF-8_head.tsv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">,</span> <span class="n">fileEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>
@@ -19713,7 +19777,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[109]:</div>
+<div class="prompt input_prompt">In&nbsp;[110]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_product_tmp</span> <span class="o">&lt;-</span> <span class="nf">read.table</span><span class="p">(</span><span class="s">&quot;../data/R_df_product_full_UTF-8_head.tsv&quot;</span><span class="p">,</span> <span class="n">fileEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>

@@ -14932,7 +14932,7 @@ select &#39;このように実行できます&#39; as sample
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-076:  顧客テーブル（customer）から性別（gender_cd）の割合に基づきランダムに10%のデータを層化抽出データし、性別ごとに件数を集計せよ。</p>
+<blockquote><p>S-076:  顧客テーブル（customer）から性別（gender_cd）の割合に基づきランダムに10%のデータを層化抽出データし、性別ごとに件数を集計せよ。</p>
 </blockquote>
 
 </div>
@@ -14955,7 +14955,7 @@ select &#39;このように実行できます&#39; as sample
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-077: レシート明細テーブル（receipt）の売上金額（amount）を顧客単位に合計し、合計した売上金額の外れ値を抽出せよ。ただし、顧客IDが"Z"から始まるのものは非会員を表すため、除外して計算すること。なお、ここでは外れ値を平均から3σ以上離れたものとする。結果は10件表示させれば良い。</p>
+<blockquote><p>S-077: レシート明細テーブル（receipt）の売上金額（amount）を顧客単位に合計し、合計した売上金額の外れ値を抽出せよ。ただし、顧客IDが"Z"から始まるのものは非会員を表すため、除外して計算すること。なお、ここでは外れ値を平均から3σ以上離れたものとする。結果は10件表示させれば良い。</p>
 </blockquote>
 
 </div>
@@ -14978,7 +14978,7 @@ select &#39;このように実行できます&#39; as sample
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-078: レシート明細テーブル（receipt）の売上金額（amount）を顧客単位に合計し、合計した売上金額の外れ値を抽出せよ。ただし、顧客IDが"Z"から始まるのものは非会員を表すため、除外して計算すること。なお、ここでは外れ値を第一四分位と第三四分位の差であるIQRを用いて、「第一四分位数-1.5×IQR」よりも下回るもの、または「第三四分位数+1.5×IQR」を超えるものとする。結果は10件表示させれば良い。</p>
+<blockquote><p>S-078: レシート明細テーブル（receipt）の売上金額（amount）を顧客単位に合計し、合計した売上金額の外れ値を抽出せよ。ただし、顧客IDが"Z"から始まるのものは非会員を表すため、除外して計算すること。なお、ここでは外れ値を第一四分位と第三四分位の差であるIQRを用いて、「第一四分位数-1.5×IQR」よりも下回るもの、または「第三四分位数+1.5×IQR」を超えるものとする。結果は10件表示させれば良い。</p>
 </blockquote>
 
 </div>
@@ -15001,7 +15001,7 @@ select &#39;このように実行できます&#39; as sample
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-079: 商品テーブル（product）の各項目に対し、欠損数を確認せよ。</p>
+<blockquote><p>S-079: 商品テーブル（product）の各項目に対し、欠損数を確認せよ。</p>
 </blockquote>
 
 </div>
@@ -15024,7 +15024,7 @@ select &#39;このように実行できます&#39; as sample
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-080: 商品テーブル（product）のいずれかの項目に欠損が発生しているレコードを全て削除した新たなproduct_1を作成せよ。なお、削除前後の件数を表示させ、前設問で確認した件数だけ減少していることも確認すること。</p>
+<blockquote><p>S-080: 商品テーブル（product）のいずれかの項目に欠損が発生しているレコードを全て削除した新たなproduct_1を作成せよ。なお、削除前後の件数を表示させ、前設問で確認した件数だけ減少していることも確認すること。</p>
 </blockquote>
 
 </div>
@@ -15047,7 +15047,7 @@ select &#39;このように実行できます&#39; as sample
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-081: 単価（unit_price）と原価（unit_cost）の欠損値について、それぞれの平均値で補完した新たなproduct_2を作成せよ。なお、平均値について1円未満は四捨五入とする。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
+<blockquote><p>S-081: 単価（unit_price）と原価（unit_cost）の欠損値について、それぞれの平均値で補完した新たなproduct_2を作成せよ。なお、平均値について1円未満は四捨五入とする。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
 </blockquote>
 
 </div>
@@ -15070,7 +15070,7 @@ select &#39;このように実行できます&#39; as sample
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-082:  単価（unit_price）と原価（unit_cost）の欠損値について、それぞれの中央値で補完した新たなproduct_3を作成せよ。なお、中央値について1円未満は四捨五入とする。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
+<blockquote><p>S-082:  単価（unit_price）と原価（unit_cost）の欠損値について、それぞれの中央値で補完した新たなproduct_3を作成せよ。なお、中央値について1円未満は四捨五入とする。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
 </blockquote>
 
 </div>
@@ -15093,7 +15093,7 @@ select &#39;このように実行できます&#39; as sample
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-083: 単価（unit_price）と原価（unit_cost）の欠損値について、各商品の小区分（category_small_cd）ごとに算出した中央値で補完した新たなproduct_4を作成せよ。なお、中央値について1円未満は四捨五入とする。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
+<blockquote><p>S-083: 単価（unit_price）と原価（unit_cost）の欠損値について、各商品の小区分（category_small_cd）ごとに算出した中央値で補完した新たなproduct_4を作成せよ。なお、中央値について1円未満は四捨五入とする。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
 </blockquote>
 
 </div>
@@ -15116,7 +15116,7 @@ select &#39;このように実行できます&#39; as sample
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-084: 顧客テーブル（customer）の全顧客に対し、全期間の売上金額に占める2019年売上金額の割合を計算せよ。ただし、販売実績のない場合は0として扱うこと。そして計算した割合が0超のものを抽出せよ。 結果は10件表示させれば良い。</p>
+<blockquote><p>S-084: 顧客テーブル（customer）の全顧客に対し、全期間の売上金額に占める2019年売上金額の割合を計算せよ。ただし、販売実績のない場合は0として扱うこと。そして計算した割合が0超のものを抽出せよ。 結果は10件表示させれば良い。</p>
 </blockquote>
 
 </div>
@@ -15139,7 +15139,7 @@ select &#39;このように実行できます&#39; as sample
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-085: 顧客テーブル（customer）の全顧客に対し、郵便番号（postal_cd）を用いて経度緯度変換用テーブル（geocode）を紐付け、新たなcustomer_1を作成せよ。ただし、複数紐づく場合は経度（longitude）、緯度（latitude）それぞれ平均を算出すること。</p>
+<blockquote><p>S-085: 顧客テーブル（customer）の全顧客に対し、郵便番号（postal_cd）を用いて経度緯度変換用テーブル（geocode）を紐付け、新たなcustomer_1を作成せよ。ただし、複数紐づく場合は経度（longitude）、緯度（latitude）それぞれ平均を算出すること。</p>
 </blockquote>
 
 </div>
@@ -15162,7 +15162,7 @@ select &#39;このように実行できます&#39; as sample
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-086: 前設問で作成した緯度経度つき顧客テーブル（customer_1）に対し、申込み店舗コード（application_store_cd）をキーに店舗テーブル（store）と結合せよ。そして申込み店舗の緯度（latitude）・経度情報（longitude)と顧客の緯度・経度を用いて距離（km）を求め、顧客ID（customer_id）、顧客住所（address）、店舗住所（address）とともに表示せよ。計算式は簡易式で良いものとするが、その他精度の高い方式を利用したライブラリを利用してもかまわない。結果は10件表示すれば良い。</p>
+<blockquote><p>S-086: 前設問で作成した緯度経度つき顧客テーブル（customer_1）に対し、申込み店舗コード（application_store_cd）をキーに店舗テーブル（store）と結合せよ。そして申込み店舗の緯度（latitude）・経度情報（longitude)と顧客の緯度・経度を用いて距離（km）を求め、顧客ID（customer_id）、顧客住所（address）、店舗住所（address）とともに表示せよ。計算式は簡易式で良いものとするが、その他精度の高い方式を利用したライブラリを利用してもかまわない。結果は10件表示すれば良い。</p>
 </blockquote>
 
 </div>
@@ -15197,7 +15197,7 @@ $$
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-087: 顧客テーブル（customer）では、異なる店舗での申込みなどにより同一顧客が複数登録されている。名前（customer_name）と郵便番号（postal_cd）が同じ顧客は同一顧客とみなし、1顧客1レコードとなるように名寄せした名寄顧客テーブル（customer_u）を作成せよ。ただし、同一顧客に対しては売上金額合計が最も高いものを残すものとし、売上金額合計が同一もしくは売上実績の無い顧客については顧客ID（customer_id）の番号が小さいものを残すこととする。</p>
+<blockquote><p>S-087: 顧客テーブル（customer）では、異なる店舗での申込みなどにより同一顧客が複数登録されている。名前（customer_name）と郵便番号（postal_cd）が同じ顧客は同一顧客とみなし、1顧客1レコードとなるように名寄せした名寄顧客テーブル（customer_u）を作成せよ。ただし、同一顧客に対しては売上金額合計が最も高いものを残すものとし、売上金額合計が同一もしくは売上実績の無い顧客については顧客ID（customer_id）の番号が小さいものを残すこととする。</p>
 </blockquote>
 
 </div>
@@ -15220,7 +15220,7 @@ $$
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-088: 前設問で作成したデータを元に、顧客テーブルに統合名寄IDを付与したテーブル（customer_n）を作成せよ。ただし、統合名寄IDは以下の仕様で付与するものとする。</p>
+<blockquote><p>S-088: 前設問で作成したデータを元に、顧客テーブルに統合名寄IDを付与したテーブル（customer_n）を作成せよ。ただし、統合名寄IDは以下の仕様で付与するものとする。</p>
 <ul>
 <li>重複していない顧客：顧客ID（customer_id）を設定</li>
 <li>重複している顧客：前設問で抽出したレコードの顧客IDを設定</li>
@@ -15247,7 +15247,7 @@ $$
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-089: 売上実績のある顧客に対し、予測モデル構築のため学習用データとテスト用データに分割したい。それぞれ8:2の割合でランダムに分割し、テーブルを作成せよ。</p>
+<blockquote><p>S-089: 売上実績のある顧客に対し、予測モデル構築のため学習用データとテスト用データに分割したい。それぞれ8:2の割合でランダムに分割し、テーブルを作成せよ。</p>
 </blockquote>
 
 </div>
@@ -15293,7 +15293,7 @@ $$
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-091: 顧客テーブル（customer）の各顧客に対し、売上実績のある顧客数と売上実績のない顧客数が1:1となるようにアンダーサンプリングで抽出せよ。</p>
+<blockquote><p>S-091: 顧客テーブル（customer）の各顧客に対し、売上実績のある顧客数と売上実績のない顧客数が1:1となるようにアンダーサンプリングで抽出せよ。</p>
 </blockquote>
 
 </div>
@@ -15316,7 +15316,7 @@ $$
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-092: 顧客テーブル（customer）では、性別に関する情報が非正規化の状態で保持されている。これを第三正規化せよ。</p>
+<blockquote><p>S-092: 顧客テーブル（customer）では、性別に関する情報が非正規化の状態で保持されている。これを第三正規化せよ。</p>
 </blockquote>
 
 </div>
@@ -15339,7 +15339,7 @@ $$
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-093: 商品テーブル（product）では各カテゴリのコード値だけを保有し、カテゴリ名は保有していない。カテゴリテーブル（category）と組み合わせて非正規化し、カテゴリ名を保有した新たな商品テーブルを作成せよ。</p>
+<blockquote><p>S-093: 商品テーブル（product）では各カテゴリのコード値だけを保有し、カテゴリ名は保有していない。カテゴリテーブル（category）と組み合わせて非正規化し、カテゴリ名を保有した新たな商品テーブルを作成せよ。</p>
 </blockquote>
 
 </div>
@@ -15362,7 +15362,7 @@ $$
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-094: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは'/tmp/data'を指定することでJupyterの/'work/data'と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
+<blockquote><p>S-094: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは'/tmp/data'を指定することでJupyterの/'work/data'と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
 <ul>
 <li>ファイル形式はCSV（カンマ区切り）</li>
 <li>ヘッダ有り</li>
@@ -15390,7 +15390,7 @@ $$
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-095: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは'/tmp/data'を指定することでJupyterの/'work/data'と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
+<blockquote><p>S-095: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは'/tmp/data'を指定することでJupyterの/'work/data'と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
 <ul>
 <li>ファイル形式はCSV（カンマ区切り）</li>
 <li>ヘッダ有り</li>
@@ -15418,7 +15418,7 @@ $$
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-096: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは'/tmp/data'を指定することでJupyterの/'work/data'と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
+<blockquote><p>S-096: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは'/tmp/data'を指定することでJupyterの/'work/data'と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
 <ul>
 <li>ファイル形式はCSV（カンマ区切り）</li>
 <li>ヘッダ無し</li>
@@ -15446,7 +15446,7 @@ $$
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-097: 先に作成した以下形式のファイルを読み込み、テーブルを作成せよ。また、先頭3件を表示させ、正しくとりまれていることを確認せよ。</p>
+<blockquote><p>S-097: 先に作成した以下形式のファイルを読み込み、テーブルを作成せよ。また、先頭3件を表示させ、正しくとりまれていることを確認せよ。</p>
 <ul>
 <li>ファイル形式はCSV（カンマ区切り）</li>
 <li>ヘッダ有り</li>
@@ -15474,7 +15474,7 @@ $$
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-098: 先に作成した以下形式のファイルを読み込み、テーブルを作成せよ。また、先頭3件を表示させ、正しくとりまれていることを確認せよ。</p>
+<blockquote><p>S-098: 先に作成した以下形式のファイルを読み込み、テーブルを作成せよ。また、先頭3件を表示させ、正しくとりまれていることを確認せよ。</p>
 <ul>
 <li>ファイル形式はCSV（カンマ区切り）</li>
 <li>ヘッダ無し</li>
@@ -15502,7 +15502,7 @@ $$
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-099: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは'/tmp/data'を指定することでJupyterの/'work/data'と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
+<blockquote><p>S-099: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは'/tmp/data'を指定することでJupyterの/'work/data'と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
 <ul>
 <li>ファイル形式はTSV（タブ区切り）</li>
 <li>ヘッダ有り</li>
@@ -15530,7 +15530,7 @@ $$
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-100: 先に作成した以下形式のファイルを読み込み、テーブルを作成せよ。また、先頭10件を表示させ、正しくとりまれていることを確認せよ。</p>
+<blockquote><p>S-100: 先に作成した以下形式のファイルを読み込み、テーブルを作成せよ。また、先頭10件を表示させ、正しくとりまれていることを確認せよ。</p>
 <ul>
 <li>ファイル形式はTSV（タブ区切り）</li>
 <li>ヘッダ有り</li>

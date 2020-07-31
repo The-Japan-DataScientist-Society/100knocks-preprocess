@@ -15546,7 +15546,7 @@ SELECT * FROM customer WHERE status_cd ~ &#39;^[A-F].*[1-9]$&#39; LIMIT 10
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 
-SELECT * FROM store WHERE tel_no ~ &#39;[0-9]{3}-[0-9]{3}-[0-9]{4}&#39;
+SELECT * FROM store WHERE tel_no ~ &#39;^[0-9]{3}-[0-9]{3}-[0-9]{4}$&#39;
 </pre></div>
 
     </div>
@@ -18604,9 +18604,7 @@ LIMIT 10
 SELECT p.*, c.category_small_name
 FROM product p
 JOIN category c
-on p.category_major_cd = c.category_major_cd
-    and p.category_medium_cd = c.category_medium_cd
-    and p.category_small_cd = c.category_small_cd
+on p.category_small_cd = c.category_small_cd
 LIMIT 10
 </pre></div>
 
@@ -23782,6 +23780,7 @@ LIMIT 10
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+-- コード例１（シンプルにやるなら）
 SELECT * FROM customer WHERE RANDOM() &lt;= 0.01
 LIMIT 10
 </pre></div>
@@ -23828,134 +23827,346 @@ LIMIT 10
         <th>status_cd</th>
     </tr>
     <tr>
-        <td>CS017412000200</td>
-        <td>川野 さとみ</td>
+        <td>CS037512000005</td>
+        <td>福士 夏希</td>
         <td>1</td>
         <td>女性</td>
-        <td>1970-11-30</td>
-        <td>48</td>
-        <td>166-0004</td>
-        <td>東京都杉並区阿佐谷南**********</td>
-        <td>S13017</td>
-        <td>20160302</td>
+        <td>1959-12-17</td>
+        <td>59</td>
+        <td>135-0048</td>
+        <td>東京都江東区門前仲町**********</td>
+        <td>S13037</td>
+        <td>20150402</td>
         <td>0-00000000-0</td>
     </tr>
     <tr>
-        <td>CS011512000070</td>
-        <td>野上 恵子</td>
+        <td>CS038314000092</td>
+        <td>藤木 みゆき</td>
         <td>1</td>
         <td>女性</td>
-        <td>1961-09-01</td>
-        <td>57</td>
-        <td>211-0037</td>
-        <td>神奈川県川崎市中原区井田三舞町**********</td>
-        <td>S14011</td>
-        <td>20150404</td>
+        <td>1983-12-11</td>
+        <td>35</td>
+        <td>134-0085</td>
+        <td>東京都江戸川区南葛西**********</td>
+        <td>S13038</td>
+        <td>20150402</td>
+        <td>5-20100917-4</td>
+    </tr>
+    <tr>
+        <td>CS018711000004</td>
+        <td>吉原 美佳</td>
+        <td>1</td>
+        <td>女性</td>
+        <td>1942-05-11</td>
+        <td>76</td>
+        <td>204-0011</td>
+        <td>東京都清瀬市下清戸**********</td>
+        <td>S13018</td>
+        <td>20150223</td>
         <td>0-00000000-0</td>
     </tr>
     <tr>
-        <td>CS011515000108</td>
-        <td>久野 幸子</td>
+        <td>CS001514000191</td>
+        <td>高倉 礼子</td>
         <td>1</td>
         <td>女性</td>
-        <td>1965-04-11</td>
+        <td>1965-11-04</td>
         <td>53</td>
-        <td>223-0064</td>
-        <td>神奈川県横浜市港北区下田町**********</td>
+        <td>144-0046</td>
+        <td>東京都大田区東六郷**********</td>
+        <td>S13001</td>
+        <td>20160628</td>
+        <td>A-20100731-1</td>
+    </tr>
+    <tr>
+        <td>CS014513000005</td>
+        <td>浦野 恭子</td>
+        <td>1</td>
+        <td>女性</td>
+        <td>1961-08-06</td>
+        <td>57</td>
+        <td>263-0016</td>
+        <td>千葉県千葉市稲毛区天台**********</td>
+        <td>S12014</td>
+        <td>20150328</td>
+        <td>3-20080901-3</td>
+    </tr>
+    <tr>
+        <td>CS011415000001</td>
+        <td>内野 幸子</td>
+        <td>1</td>
+        <td>女性</td>
+        <td>1971-08-28</td>
+        <td>47</td>
+        <td>223-0062</td>
+        <td>神奈川県横浜市港北区日吉本町**********</td>
         <td>S14011</td>
-        <td>20150315</td>
-        <td>C-20100828-C</td>
+        <td>20150502</td>
+        <td>D-20100317-C</td>
     </tr>
     <tr>
-        <td>CS019712000008</td>
-        <td>梅本 ヒカル</td>
+        <td>CS011713000065</td>
+        <td>田口 一代</td>
         <td>1</td>
         <td>女性</td>
-        <td>1945-04-14</td>
-        <td>73</td>
-        <td>173-0037</td>
-        <td>東京都板橋区小茂根**********</td>
-        <td>S13019</td>
-        <td>20150613</td>
+        <td>1939-03-22</td>
+        <td>80</td>
+        <td>223-0065</td>
+        <td>神奈川県横浜市港北区高田東**********</td>
+        <td>S14011</td>
+        <td>20160205</td>
         <td>0-00000000-0</td>
     </tr>
     <tr>
-        <td>CS033312000136</td>
-        <td>大後 しほり</td>
+        <td>CS038414000106</td>
+        <td>鶴田 陽子</td>
         <td>1</td>
         <td>女性</td>
-        <td>1986-12-14</td>
-        <td>32</td>
-        <td>245-0002</td>
-        <td>神奈川県横浜市泉区緑園**********</td>
-        <td>S14033</td>
-        <td>20180319</td>
-        <td>0-00000000-0</td>
+        <td>1970-11-12</td>
+        <td>48</td>
+        <td>279-0041</td>
+        <td>千葉県浦安市堀江**********</td>
+        <td>S13038</td>
+        <td>20150130</td>
+        <td>D-20100727-E</td>
     </tr>
     <tr>
-        <td>CS015412000103</td>
-        <td>河原 エリカ</td>
+        <td>CS011415000190</td>
+        <td>松田 早紀</td>
         <td>1</td>
         <td>女性</td>
-        <td>1974-10-04</td>
+        <td>1975-02-05</td>
         <td>44</td>
-        <td>135-0061</td>
-        <td>東京都江東区豊洲**********</td>
-        <td>S13015</td>
-        <td>20150301</td>
-        <td>1-20080120-3</td>
+        <td>223-0058</td>
+        <td>神奈川県横浜市港北区新吉田東**********</td>
+        <td>S14011</td>
+        <td>20150704</td>
+        <td>F-20100522-D</td>
     </tr>
     <tr>
-        <td>CS003603000047</td>
-        <td>真田 明慶</td>
+        <td>CS037603000041</td>
+        <td>田代 公顕</td>
         <td>0</td>
         <td>男性</td>
-        <td>1950-03-16</td>
-        <td>69</td>
-        <td>182-0007</td>
-        <td>東京都調布市菊野台**********</td>
-        <td>S13003</td>
-        <td>20160916</td>
+        <td>1954-06-28</td>
+        <td>64</td>
+        <td>136-0072</td>
+        <td>東京都江東区大島**********</td>
+        <td>S13037</td>
+        <td>20150204</td>
+        <td>0-00000000-0</td>
+    </tr>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+-- コード例２（丁寧にやるなら）
+WITH customer_tmp AS(
+    SELECT
+        *
+        ,ROW_NUMBER() OVER() as row
+        ,COUNT(*) OVER() as count
+    FROM customer
+    ORDER BY random()
+)
+SELECT 
+    customer_id
+    ,customer_name
+    ,gender_cd
+    ,gender
+    ,birth_day
+    ,age
+    ,postal_cd
+    ,address
+    ,application_store_cd
+    ,application_date
+    ,status_cd
+FROM customer_tmp
+WHERE row &lt; count * 0.01
+LIMIT 10
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre> * postgresql://padawan:***@db:5432/dsdojo_db
+10 rows affected.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[80]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<table>
+    <tr>
+        <th>customer_id</th>
+        <th>customer_name</th>
+        <th>gender_cd</th>
+        <th>gender</th>
+        <th>birth_day</th>
+        <th>age</th>
+        <th>postal_cd</th>
+        <th>address</th>
+        <th>application_store_cd</th>
+        <th>application_date</th>
+        <th>status_cd</th>
+    </tr>
+    <tr>
+        <td>CS013504000012</td>
+        <td>津田 法嗣</td>
+        <td>0</td>
+        <td>男性</td>
+        <td>1967-11-06</td>
+        <td>51</td>
+        <td>275-0022</td>
+        <td>千葉県習志野市香澄**********</td>
+        <td>S12013</td>
+        <td>20150328</td>
         <td>0-00000000-0</td>
     </tr>
     <tr>
-        <td>CS001312000294</td>
-        <td>藤木 真奈美</td>
+        <td>CS027412000206</td>
+        <td>浦野 りえ</td>
         <td>1</td>
         <td>女性</td>
-        <td>1983-01-24</td>
-        <td>36</td>
-        <td>212-0016</td>
-        <td>神奈川県川崎市幸区南幸町**********</td>
-        <td>S13001</td>
-        <td>20170516</td>
+        <td>1973-12-01</td>
+        <td>45</td>
+        <td>251-0000</td>
+        <td>神奈川県藤沢市**********</td>
+        <td>S14027</td>
+        <td>20180621</td>
         <td>0-00000000-0</td>
     </tr>
     <tr>
-        <td>CS023615000093</td>
-        <td>長田 美幸</td>
+        <td>CS004413000678</td>
+        <td>杉原 まひる</td>
         <td>1</td>
         <td>女性</td>
-        <td>1955-12-17</td>
-        <td>63</td>
-        <td>212-0011</td>
-        <td>神奈川県川崎市幸区幸町**********</td>
-        <td>S14023</td>
-        <td>20150808</td>
-        <td>4-20101004-6</td>
+        <td>1978-01-06</td>
+        <td>41</td>
+        <td>165-0032</td>
+        <td>東京都中野区鷺宮**********</td>
+        <td>S13004</td>
+        <td>20161223</td>
+        <td>0-00000000-0</td>
     </tr>
     <tr>
-        <td>CS038315000087</td>
-        <td>野田 美嘉</td>
+        <td>CS013615000053</td>
+        <td>西脇 季衣</td>
         <td>1</td>
         <td>女性</td>
-        <td>1987-05-14</td>
-        <td>31</td>
-        <td>134-0084</td>
-        <td>東京都江戸川区東葛西**********</td>
-        <td>S13038</td>
-        <td>20150415</td>
-        <td>6-20081018-4</td>
+        <td>1953-10-18</td>
+        <td>65</td>
+        <td>261-0026</td>
+        <td>千葉県千葉市美浜区幕張西**********</td>
+        <td>S12013</td>
+        <td>20150128</td>
+        <td>B-20100329-6</td>
+    </tr>
+    <tr>
+        <td>CS019415000117</td>
+        <td>宮脇 芽以</td>
+        <td>1</td>
+        <td>女性</td>
+        <td>1974-07-10</td>
+        <td>44</td>
+        <td>173-0036</td>
+        <td>東京都板橋区向原**********</td>
+        <td>S13019</td>
+        <td>20141114</td>
+        <td>C-20100720-D</td>
+    </tr>
+    <tr>
+        <td>CS035415000029</td>
+        <td>寺沢 真希</td>
+        <td>9</td>
+        <td>不明</td>
+        <td>1977-09-27</td>
+        <td>41</td>
+        <td>158-0096</td>
+        <td>東京都世田谷区玉川台**********</td>
+        <td>S13035</td>
+        <td>20141220</td>
+        <td>F-20101029-F</td>
+    </tr>
+    <tr>
+        <td>CS046615000013</td>
+        <td>河野 花</td>
+        <td>1</td>
+        <td>女性</td>
+        <td>1953-04-06</td>
+        <td>65</td>
+        <td>224-0026</td>
+        <td>神奈川県横浜市都筑区南山田町**********</td>
+        <td>S14046</td>
+        <td>20181207</td>
+        <td>0-00000000-0</td>
+    </tr>
+    <tr>
+        <td>CS029415000023</td>
+        <td>梅田 里穂</td>
+        <td>1</td>
+        <td>女性</td>
+        <td>1976-01-17</td>
+        <td>43</td>
+        <td>279-0043</td>
+        <td>千葉県浦安市富士見**********</td>
+        <td>S12029</td>
+        <td>20150610</td>
+        <td>D-20100918-E</td>
+    </tr>
+    <tr>
+        <td>CS029403000008</td>
+        <td>釈 人志</td>
+        <td>0</td>
+        <td>男性</td>
+        <td>1973-08-17</td>
+        <td>45</td>
+        <td>279-0003</td>
+        <td>千葉県浦安市海楽**********</td>
+        <td>S12029</td>
+        <td>20150515</td>
+        <td>0-00000000-0</td>
+    </tr>
+    <tr>
+        <td>CS015804000004</td>
+        <td>松谷 米蔵</td>
+        <td>0</td>
+        <td>男性</td>
+        <td>1931-05-02</td>
+        <td>87</td>
+        <td>136-0073</td>
+        <td>東京都江東区北砂**********</td>
+        <td>S13015</td>
+        <td>20150607</td>
+        <td>0-00000000-0</td>
     </tr>
 </table>
 </div>
@@ -23970,7 +24181,7 @@ LIMIT 10
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-076:  顧客テーブル（customer）から性別（gender_cd）の割合に基づきランダムに10%のデータを層化抽出データし、性別ごとに件数を集計せよ。</p>
+<blockquote><p>S-076:  顧客テーブル（customer）から性別（gender_cd）の割合に基づきランダムに10%のデータを層化抽出データし、性別ごとに件数を集計せよ。</p>
 </blockquote>
 
 </div>
@@ -23978,7 +24189,7 @@ LIMIT 10
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="prompt input_prompt">In&nbsp;[81]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -24028,7 +24239,7 @@ GROUP BY g_cd
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[80]:</div>
+    <div class="prompt output_prompt">Out[81]:</div>
 
 
 
@@ -24063,7 +24274,7 @@ GROUP BY g_cd
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-077: レシート明細テーブル（receipt）の売上金額（amount）を顧客単位に合計し、合計した売上金額の外れ値を抽出せよ。ただし、顧客IDが"Z"から始まるのものは非会員を表すため、除外して計算すること。なお、ここでは外れ値を平均から3σ以上離れたものとする。結果は10件表示させれば良い。</p>
+<blockquote><p>S-077: レシート明細テーブル（receipt）の売上金額（amount）を顧客単位に合計し、合計した売上金額の外れ値を抽出せよ。ただし、顧客IDが"Z"から始まるのものは非会員を表すため、除外して計算すること。なお、ここでは外れ値を平均から3σ以上離れたものとする。結果は10件表示させれば良い。</p>
 </blockquote>
 
 </div>
@@ -24071,7 +24282,7 @@ GROUP BY g_cd
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[81]:</div>
+<div class="prompt input_prompt">In&nbsp;[82]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -24113,7 +24324,7 @@ LIMIT 10
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[81]:</div>
+    <div class="prompt output_prompt">Out[82]:</div>
 
 
 
@@ -24176,7 +24387,7 @@ LIMIT 10
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-078: レシート明細テーブル（receipt）の売上金額（amount）を顧客単位に合計し、合計した売上金額の外れ値を抽出せよ。ただし、顧客IDが"Z"から始まるのものは非会員を表すため、除外して計算すること。なお、ここでは外れ値を第一四分位と第三四分位の差であるIQRを用いて、「第一四分位数-1.5×IQR」よりも下回るもの、または「第三四分位数+1.5×IQR」を超えるものとする。結果は10件表示させれば良い。</p>
+<blockquote><p>S-078: レシート明細テーブル（receipt）の売上金額（amount）を顧客単位に合計し、合計した売上金額の外れ値を抽出せよ。ただし、顧客IDが"Z"から始まるのものは非会員を表すため、除外して計算すること。なお、ここでは外れ値を第一四分位と第三四分位の差であるIQRを用いて、「第一四分位数-1.5×IQR」よりも下回るもの、または「第三四分位数+1.5×IQR」を超えるものとする。結果は10件表示させれば良い。</p>
 </blockquote>
 
 </div>
@@ -24184,7 +24395,7 @@ LIMIT 10
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="prompt input_prompt">In&nbsp;[83]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -24228,7 +24439,7 @@ LIMIT 10
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[82]:</div>
+    <div class="prompt output_prompt">Out[83]:</div>
 
 
 
@@ -24291,7 +24502,7 @@ LIMIT 10
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-079: 商品テーブル（product）の各項目に対し、欠損数を確認せよ。</p>
+<blockquote><p>S-079: 商品テーブル（product）の各項目に対し、欠損数を確認せよ。</p>
 </blockquote>
 
 </div>
@@ -24299,7 +24510,7 @@ LIMIT 10
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="prompt input_prompt">In&nbsp;[84]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -24337,7 +24548,7 @@ FROM product LIMIT 10
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[83]:</div>
+    <div class="prompt output_prompt">Out[84]:</div>
 
 
 
@@ -24372,7 +24583,7 @@ FROM product LIMIT 10
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-080: 商品テーブル（product）のいずれかの項目に欠損が発生しているレコードを全て削除した新たなproduct_1を作成せよ。なお、削除前後の件数を表示させ、前設問で確認した件数だけ減少していることも確認すること。</p>
+<blockquote><p>S-080: 商品テーブル（product）のいずれかの項目に欠損が発生しているレコードを全て削除した新たなproduct_1を作成せよ。なお、削除前後の件数を表示させ、前設問で確認した件数だけ減少していることも確認すること。</p>
 </blockquote>
 
 </div>
@@ -24380,7 +24591,7 @@ FROM product LIMIT 10
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[84]:</div>
+<div class="prompt input_prompt">In&nbsp;[85]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -24410,7 +24621,7 @@ SELECT COUNT(1) FROM product;
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[84]:</div>
+    <div class="prompt output_prompt">Out[85]:</div>
 
 
 
@@ -24433,7 +24644,7 @@ SELECT COUNT(1) FROM product;
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[85]:</div>
+<div class="prompt input_prompt">In&nbsp;[86]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -24470,7 +24681,7 @@ Done.
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[85]:</div>
+    <div class="prompt output_prompt">Out[86]:</div>
 
 
 
@@ -24495,7 +24706,7 @@ Done.
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-081: 単価（unit_price）と原価（unit_cost）の欠損値について、それぞれの平均値で補完した新たなproduct_2を作成せよ。なお、平均値について1円未満は四捨五入とする。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
+<blockquote><p>S-081: 単価（unit_price）と原価（unit_cost）の欠損値について、それぞれの平均値で補完した新たなproduct_2を作成せよ。なお、平均値について1円未満は四捨五入とする。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
 </blockquote>
 
 </div>
@@ -24503,7 +24714,7 @@ Done.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[86]:</div>
+<div class="prompt input_prompt">In&nbsp;[87]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -24552,7 +24763,7 @@ Done.
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[86]:</div>
+    <div class="prompt output_prompt">Out[87]:</div>
 
 
 
@@ -24569,7 +24780,7 @@ Done.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[87]:</div>
+<div class="prompt input_prompt">In&nbsp;[88]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -24603,7 +24814,7 @@ FROM product_2 LIMIT 10
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[87]:</div>
+    <div class="prompt output_prompt">Out[88]:</div>
 
 
 
@@ -24630,7 +24841,7 @@ FROM product_2 LIMIT 10
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-082:  単価（unit_price）と原価（unit_cost）の欠損値について、それぞれの中央値で補完した新たなproduct_3を作成せよ。なお、中央値について1円未満は四捨五入とする。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
+<blockquote><p>S-082:  単価（unit_price）と原価（unit_cost）の欠損値について、それぞれの中央値で補完した新たなproduct_3を作成せよ。なお、中央値について1円未満は四捨五入とする。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
 </blockquote>
 
 </div>
@@ -24638,7 +24849,7 @@ FROM product_2 LIMIT 10
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[88]:</div>
+<div class="prompt input_prompt">In&nbsp;[89]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -24686,7 +24897,7 @@ Done.
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[88]:</div>
+    <div class="prompt output_prompt">Out[89]:</div>
 
 
 
@@ -24703,7 +24914,7 @@ Done.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[89]:</div>
+<div class="prompt input_prompt">In&nbsp;[90]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -24736,7 +24947,7 @@ FROM product_3 LIMIT 10
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[89]:</div>
+    <div class="prompt output_prompt">Out[90]:</div>
 
 
 
@@ -24763,7 +24974,7 @@ FROM product_3 LIMIT 10
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-083: 単価（unit_price）と原価（unit_cost）の欠損値について、各商品の小区分（category_small_cd）ごとに算出した中央値で補完した新たなproduct_4を作成せよ。なお、中央値について1円未満は四捨五入とする。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
+<blockquote><p>S-083: 単価（unit_price）と原価（unit_cost）の欠損値について、各商品の小区分（category_small_cd）ごとに算出した中央値で補完した新たなproduct_4を作成せよ。なお、中央値について1円未満は四捨五入とする。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
 </blockquote>
 
 </div>
@@ -24771,7 +24982,7 @@ FROM product_3 LIMIT 10
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[90]:</div>
+<div class="prompt input_prompt">In&nbsp;[91]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -24823,7 +25034,7 @@ Done.
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[90]:</div>
+    <div class="prompt output_prompt">Out[91]:</div>
 
 
 
@@ -24840,7 +25051,7 @@ Done.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[91]:</div>
+<div class="prompt input_prompt">In&nbsp;[92]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -24873,7 +25084,7 @@ FROM product_4 LIMIT 10
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[91]:</div>
+    <div class="prompt output_prompt">Out[92]:</div>
 
 
 
@@ -24900,7 +25111,7 @@ FROM product_4 LIMIT 10
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-084: 顧客テーブル（customer）の全顧客に対し、全期間の売上金額に占める2019年売上金額の割合を計算せよ。ただし、販売実績のない場合は0として扱うこと。そして計算した割合が0超のものを抽出せよ。 結果は10件表示させれば良い。</p>
+<blockquote><p>S-084: 顧客テーブル（customer）の全顧客に対し、全期間の売上金額に占める2019年売上金額の割合を計算せよ。ただし、販売実績のない場合は0として扱うこと。そして計算した割合が0超のものを抽出せよ。 結果は10件表示させれば良い。</p>
 </blockquote>
 
 </div>
@@ -24908,7 +25119,7 @@ FROM product_4 LIMIT 10
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[92]:</div>
+<div class="prompt input_prompt">In&nbsp;[93]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -24971,7 +25182,7 @@ LIMIT 10
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[92]:</div>
+    <div class="prompt output_prompt">Out[93]:</div>
 
 
 
@@ -25056,7 +25267,7 @@ LIMIT 10
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-085: 顧客テーブル（customer）の全顧客に対し、郵便番号（postal_cd）を用いて経度緯度変換用テーブル（geocode）を紐付け、新たなcustomer_1を作成せよ。ただし、複数紐づく場合は経度（longitude）、緯度（latitude）それぞれ平均を算出すること。</p>
+<blockquote><p>S-085: 顧客テーブル（customer）の全顧客に対し、郵便番号（postal_cd）を用いて経度緯度変換用テーブル（geocode）を紐付け、新たなcustomer_1を作成せよ。ただし、複数紐づく場合は経度（longitude）、緯度（latitude）それぞれ平均を算出すること。</p>
 </blockquote>
 
 </div>
@@ -25064,7 +25275,7 @@ LIMIT 10
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[93]:</div>
+<div class="prompt input_prompt">In&nbsp;[94]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -25115,7 +25326,7 @@ Done.
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[93]:</div>
+    <div class="prompt output_prompt">Out[94]:</div>
 
 
 
@@ -25132,7 +25343,7 @@ Done.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[94]:</div>
+<div class="prompt input_prompt">In&nbsp;[95]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -25162,7 +25373,7 @@ SELECT * FROM customer_1 LIMIT 3
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[94]:</div>
+    <div class="prompt output_prompt">Out[95]:</div>
 
 
 
@@ -25241,7 +25452,7 @@ SELECT * FROM customer_1 LIMIT 3
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-086: 前設問で作成した緯度経度つき顧客テーブル（customer_1）に対し、申込み店舗コード（application_store_cd）をキーに店舗テーブル（store）と結合せよ。そして申込み店舗の緯度（latitude）・経度情報（longitude)と顧客の緯度・経度を用いて距離（km）を求め、顧客ID（customer_id）、顧客住所（address）、店舗住所（address）とともに表示せよ。計算式は簡易式で良いものとするが、その他精度の高い方式を利用したライブラリを利用してもかまわない。結果は10件表示すれば良い。</p>
+<blockquote><p>S-086: 前設問で作成した緯度経度つき顧客テーブル（customer_1）に対し、申込み店舗コード（application_store_cd）をキーに店舗テーブル（store）と結合せよ。そして申込み店舗の緯度（latitude）・経度情報（longitude)と顧客の緯度・経度を用いて距離（km）を求め、顧客ID（customer_id）、顧客住所（address）、店舗住所（address）とともに表示せよ。計算式は簡易式で良いものとするが、その他精度の高い方式を利用したライブラリを利用してもかまわない。結果は10件表示すれば良い。</p>
 </blockquote>
 
 </div>
@@ -25261,7 +25472,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[95]:</div>
+<div class="prompt input_prompt">In&nbsp;[96]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -25306,7 +25517,7 @@ limit 10
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[95]:</div>
+    <div class="prompt output_prompt">Out[96]:</div>
 
 
 
@@ -25391,7 +25602,7 @@ limit 10
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-087: 顧客テーブル（customer）では、異なる店舗での申込みなどにより同一顧客が複数登録されている。名前（customer_name）と郵便番号（postal_cd）が同じ顧客は同一顧客とみなし、1顧客1レコードとなるように名寄せした名寄顧客テーブル（customer_u）を作成せよ。ただし、同一顧客に対しては売上金額合計が最も高いものを残すものとし、売上金額合計が同一もしくは売上実績の無い顧客については顧客ID（customer_id）の番号が小さいものを残すこととする。</p>
+<blockquote><p>S-087: 顧客テーブル（customer）では、異なる店舗での申込みなどにより同一顧客が複数登録されている。名前（customer_name）と郵便番号（postal_cd）が同じ顧客は同一顧客とみなし、1顧客1レコードとなるように名寄せした名寄顧客テーブル（customer_u）を作成せよ。ただし、同一顧客に対しては売上金額合計が最も高いものを残すものとし、売上金額合計が同一もしくは売上実績の無い顧客については顧客ID（customer_id）の番号が小さいものを残すこととする。</p>
 </blockquote>
 
 </div>
@@ -25399,7 +25610,7 @@ limit 10
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[96]:</div>
+<div class="prompt input_prompt">In&nbsp;[97]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -25461,7 +25672,7 @@ Done.
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[96]:</div>
+    <div class="prompt output_prompt">Out[97]:</div>
 
 
 
@@ -25478,7 +25689,7 @@ Done.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[97]:</div>
+<div class="prompt input_prompt">In&nbsp;[98]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -25509,7 +25720,7 @@ CROSS JOIN (SELECT count(1) as cnt_u FROM customer_u) customer_u
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[97]:</div>
+    <div class="prompt output_prompt">Out[98]:</div>
 
 
 
@@ -25538,7 +25749,7 @@ CROSS JOIN (SELECT count(1) as cnt_u FROM customer_u) customer_u
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-088: 前設問で作成したデータを元に、顧客テーブルに統合名寄IDを付与したテーブル（customer_n）を作成せよ。ただし、統合名寄IDは以下の仕様で付与するものとする。</p>
+<blockquote><p>S-088: 前設問で作成したデータを元に、顧客テーブルに統合名寄IDを付与したテーブル（customer_n）を作成せよ。ただし、統合名寄IDは以下の仕様で付与するものとする。</p>
 <ul>
 <li>重複していない顧客：顧客ID（customer_id）を設定</li>
 <li>重複している顧客：前設問で抽出したレコードの顧客IDを設定</li>
@@ -25550,7 +25761,7 @@ CROSS JOIN (SELECT count(1) as cnt_u FROM customer_u) customer_u
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[98]:</div>
+<div class="prompt input_prompt">In&nbsp;[99]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -25592,7 +25803,7 @@ Done.
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[98]:</div>
+    <div class="prompt output_prompt">Out[99]:</div>
 
 
 
@@ -25609,7 +25820,7 @@ Done.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[99]:</div>
+<div class="prompt input_prompt">In&nbsp;[100]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -25639,7 +25850,7 @@ WHERE customer_id != integration_id
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[99]:</div>
+    <div class="prompt output_prompt">Out[100]:</div>
 
 
 
@@ -25664,7 +25875,7 @@ WHERE customer_id != integration_id
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-089: 売上実績のある顧客に対し、予測モデル構築のため学習用データとテスト用データに分割したい。それぞれ8:2の割合でランダムに分割し、テーブルを作成せよ。</p>
+<blockquote><p>S-089: 売上実績のある顧客に対し、予測モデル構築のため学習用データとテスト用データに分割したい。それぞれ8:2の割合でランダムに分割し、テーブルを作成せよ。</p>
 </blockquote>
 
 </div>
@@ -25672,28 +25883,35 @@ WHERE customer_id != integration_id
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[100]:</div>
+<div class="prompt input_prompt">In&nbsp;[101]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 
-DROP TABLE IF EXISTS customer_test ;
-CREATE TABLE customer_test AS (
-    WITH sales_amoiunt AS (
-        SELECT customer_id, sum(amount) AS sum_amount
-        FROM receipt
-        GROUP BY customer_id
-    )
-    SELECT c.*
-    FROM customer c
-    JOIN sales_amoiunt USING(customer_id)
-    WHERE RANDOM() &lt; 0.2
+SELECT SETSEED(0.1);
+
+CREATE TEMP TABLE IF NOT EXISTS sales_record_customer_id AS (
+    SELECT customer_id ,ROW_NUMBER()OVER(ORDER BY RANDOM()) AS row
+    FROM customer
+    LEFT JOIN receipt USING(customer_id)
+    GROUP BY customer_id
+    HAVING SUM(amount) IS NOT NULL 
 );
 
-DROP TABLE IF EXISTS customer_train ;
-CREATE TABLE customer_train AS (
-    (SELECT * FROM customer) EXCEPT (SELECT * FROM customer_test)
-)
+DROP TABLE IF EXISTS customer_train;
+CREATE TABLE customer_train AS
+SELECT customer.*
+FROM sales_record_customer_id
+LEFT JOIN customer USING(customer_id)
+WHERE sales_record_customer_id.row &lt; (SELECT COUNT(0) FROM sales_record_customer_id) *0.8
+;
+
+DROP TABLE IF EXISTS customer_test;
+CREATE TABLE customer_test AS
+SELECT customer.* FROM sales_record_customer_id LEFT JOIN customer USING(customer_id)
+EXCEPT
+SELECT * from customer_train
+;
 </pre></div>
 
     </div>
@@ -25711,17 +25929,19 @@ CREATE TABLE customer_train AS (
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre> * postgresql://padawan:***@db:5432/dsdojo_db
+1 rows affected.
+8306 rows affected.
 Done.
-1677 rows affected.
+6644 rows affected.
 Done.
-20294 rows affected.
+1662 rows affected.
 </pre>
 </div>
 </div>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[100]:</div>
+    <div class="prompt output_prompt">Out[101]:</div>
 
 
 
@@ -25748,7 +25968,7 @@ Done.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[101]:</div>
+<div class="prompt input_prompt">In&nbsp;[102]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -25829,7 +26049,7 @@ Done.
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[101]:</div>
+    <div class="prompt output_prompt">Out[102]:</div>
 
 
 
@@ -25846,7 +26066,7 @@ Done.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[102]:</div>
+<div class="prompt input_prompt">In&nbsp;[103]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
@@ -25875,7 +26095,7 @@ SELECT * FROM series_data_1
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[102]:</div>
+    <div class="prompt output_prompt">Out[103]:</div>
 
 
 
@@ -25989,7 +26209,7 @@ SELECT * FROM series_data_1
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-091: 顧客テーブル（customer）の各顧客に対し、売上実績のある顧客数と売上実績のない顧客数が1:1となるようにアンダーサンプリングで抽出せよ。</p>
+<blockquote><p>S-091: 顧客テーブル（customer）の各顧客に対し、売上実績のある顧客数と売上実績のない顧客数が1:1となるようにアンダーサンプリングで抽出せよ。</p>
 </blockquote>
 
 </div>
@@ -25997,100 +26217,57 @@ SELECT * FROM series_data_1
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[103]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-
-DROP TABLE IF EXISTS customer_sample;
-CREATE TABLE customer_sample AS(
-    WITH sales_customer AS (
-        SELECT c.*, CASE WHEN SUM(COALESCE(r.amount,0)) &gt; 0 THEN 1 ELSE 0 END AS sales_flg
-        FROM customer c
-        LEFT JOIN receipt r
-        ON c.customer_id = r.customer_id
-        GROUP BY c.customer_id
-    ),
-    sales_flg_cnt AS (
-        SELECT (SUM(sales_flg) * 1.0) / (COUNT(1) - SUM(sales_flg)) as buy_ratio FROM sales_customer
-    ),
-    flg_1_ramdom AS(
-        SELECT 
-            customer_id,
-            random() as rnd,
-            buy_ratio
-        FROM
-            customer c
-        JOIN
-            sales_customer s
-        USING(customer_id)
-        CROSS JOIN
-            sales_flg_cnt
-        WHERE sales_flg = 0
-    )
-    (SELECT
-            s.*
-     FROM sales_customer s
-     JOIN
-         flg_1_ramdom r
-     USING(customer_id)
-     WHERE rnd &lt;= buy_ratio)
-    UNION
-    (SELECT
-            s.*
-     FROM sales_customer s
-     WHERE sales_flg = 1)    
-)
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre> * postgresql://padawan:***@db:5432/dsdojo_db
-Done.
-16610 rows affected.
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[103]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 <div class="prompt input_prompt">In&nbsp;[104]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
--- 確認（RANDOM関数をつかっているため、多少のズレは乗じる）
-SELECT sales_flg, COUNT(1)
-FROM customer_sample
-GROUP BY sales_flg
+
+SELECT SETSEED(0.1);
+
+WITH pre_table_1 AS(
+    SELECT
+        c.*
+        ,COALESCE(r.amount,0) AS r_amount
+    FROM
+        customer c
+    LEFT JOIN
+        receipt r
+    ON
+        c.customer_id=r.customer_id
+)
+,pre_table_2 AS(
+    SELECT
+        customer_id
+        ,CASE WHEN SUM(r_amount)&gt;0 THEN 1 ELSE 0 END  AS is_buy_flag
+        ,CASE WHEN SUM(r_amount)=0 THEN 1 ELSE 0 END  AS is_not_buy_flag
+    FROM
+        pre_table_1
+    GROUP BY
+        customer_id
+)
+,pre_table_3 AS(
+    SELECT
+        *
+        ,ROW_NUMBER() OVER(PARTITION BY is_buy_flag ORDER BY RANDOM())
+    FROM
+        pre_table_2
+    CROSS JOIN
+        (SELECT SUM(is_buy_flag) AS buying FROM pre_table_2) AS t1
+    CROSS JOIN
+        (SELECT SUM(is_not_buy_flag) AS not_buying FROM pre_table_2) AS t2
+)
+,pre_table_4 AS(
+    SELECT
+        *
+    FROM
+        pre_table_3
+    WHERE
+        row_number&lt;=buying
+        AND
+        row_number&lt;=not_buying
+)
+
+SELECT COUNT(*) FROM pre_table_4 GROUP BY is_buy_flag;
 </pre></div>
 
     </div>
@@ -26108,6 +26285,7 @@ GROUP BY sales_flg
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre> * postgresql://padawan:***@db:5432/dsdojo_db
+1 rows affected.
 2 rows affected.
 </pre>
 </div>
@@ -26122,15 +26300,12 @@ GROUP BY sales_flg
 <div class="output_html rendered_html output_subarea output_execute_result">
 <table>
     <tr>
-        <th>sales_flg</th>
         <th>count</th>
     </tr>
     <tr>
-        <td>0</td>
-        <td>8304</td>
+        <td>8306</td>
     </tr>
     <tr>
-        <td>1</td>
         <td>8306</td>
     </tr>
 </table>
@@ -26146,7 +26321,7 @@ GROUP BY sales_flg
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-092: 顧客テーブル（customer）では、性別に関する情報が非正規化の状態で保持されている。これを第三正規化せよ。</p>
+<blockquote><p>S-092: 顧客テーブル（customer）では、性別に関する情報が非正規化の状態で保持されている。これを第三正規化せよ。</p>
 </blockquote>
 
 </div>
@@ -26289,7 +26464,7 @@ SELECT * FROM gender_std
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-093: 商品テーブル（product）では各カテゴリのコード値だけを保有し、カテゴリ名は保有していない。カテゴリテーブル（category）と組み合わせて非正規化し、カテゴリ名を保有した新たな商品テーブルを作成せよ。</p>
+<blockquote><p>S-093: 商品テーブル（product）では各カテゴリのコード値だけを保有し、カテゴリ名は保有していない。カテゴリテーブル（category）と組み合わせて非正規化し、カテゴリ名を保有した新たな商品テーブルを作成せよ。</p>
 </blockquote>
 
 </div>
@@ -26530,7 +26705,7 @@ SELECT * FROM product_full LIMIT 10
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-094: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは'/tmp/data'を指定することでJupyterの/'work/data'と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
+<blockquote><p>S-094: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは'/tmp/data'を指定することでJupyterの/'work/data'と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
 <ul>
 <li>ファイル形式はCSV（カンマ区切り）</li>
 <li>ヘッダ有り</li>
@@ -26591,7 +26766,7 @@ COPY product_full TO &#39;/tmp/data/S_product_full_UTF-8_header.csv&#39; WITH CS
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-095: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは'/tmp/data'を指定することでJupyterの/'work/data'と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
+<blockquote><p>S-095: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは'/tmp/data'を指定することでJupyterの/'work/data'と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
 <ul>
 <li>ファイル形式はCSV（カンマ区切り）</li>
 <li>ヘッダ有り</li>
@@ -26652,7 +26827,7 @@ COPY product_full TO &#39;/tmp/data/S_product_full_SJIS_header.csv&#39; WITH CSV
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-096: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは'/tmp/data'を指定することでJupyterの/'work/data'と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
+<blockquote><p>S-096: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは'/tmp/data'を指定することでJupyterの/'work/data'と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
 <ul>
 <li>ファイル形式はCSV（カンマ区切り）</li>
 <li>ヘッダ無し</li>
@@ -26713,7 +26888,7 @@ COPY product_full TO &#39;/tmp/data/S_product_full_UTF-8_noh.csv&#39; WITH CSV e
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-097: 先に作成した以下形式のファイルを読み込み、テーブルを作成せよ。また、先頭3件を表示させ、正しくとりまれていることを確認せよ。</p>
+<blockquote><p>S-097: 先に作成した以下形式のファイルを読み込み、テーブルを作成せよ。また、先頭3件を表示させ、正しくとりまれていることを確認せよ。</p>
 <ul>
 <li>ファイル形式はCSV（カンマ区切り）</li>
 <li>ヘッダ有り</li>
@@ -26923,7 +27098,7 @@ SELECT * FROM product_full LIMIT 3
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-098: 先に作成した以下形式のファイルを読み込み、テーブルを作成せよ。また、先頭3件を表示させ、正しくとりまれていることを確認せよ。</p>
+<blockquote><p>S-098: 先に作成した以下形式のファイルを読み込み、テーブルを作成せよ。また、先頭3件を表示させ、正しくとりまれていることを確認せよ。</p>
 <ul>
 <li>ファイル形式はCSV（カンマ区切り）</li>
 <li>ヘッダ無し</li>
@@ -27132,7 +27307,7 @@ SELECT * FROM product_full LIMIT 3
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-099: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは'/tmp/data'を指定することでJupyterの/'work/data'と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
+<blockquote><p>S-099: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは'/tmp/data'を指定することでJupyterの/'work/data'と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
 <ul>
 <li>ファイル形式はTSV（タブ区切り）</li>
 <li>ヘッダ有り</li>
@@ -27193,7 +27368,7 @@ COPY product_full TO &#39;/tmp/data/S_product_full_UTF-8_header.tsv&#39; WITH CS
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr>
-<blockquote><p>SQL-100: 先に作成した以下形式のファイルを読み込み、テーブルを作成せよ。また、先頭10件を表示させ、正しくとりまれていることを確認せよ。</p>
+<blockquote><p>S-100: 先に作成した以下形式のファイルを読み込み、テーブルを作成せよ。また、先頭10件を表示させ、正しくとりまれていることを確認せよ。</p>
 <ul>
 <li>ファイル形式はTSV（タブ区切り）</li>
 <li>ヘッダ有り</li>
