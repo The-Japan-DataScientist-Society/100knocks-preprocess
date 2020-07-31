@@ -15643,7 +15643,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_store</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;tel_no.str.contains(&#39;[0-9]</span><span class="si">{3}</span><span class="s2">-[0-9]</span><span class="si">{3}</span><span class="s2">-[0-9]</span><span class="si">{4}</span><span class="s2">&#39;, regex=True)&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_store</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;tel_no.str.contains(&#39;^[0-9]</span><span class="si">{3}</span><span class="s2">-[0-9]</span><span class="si">{3}</span><span class="s2">-[0-9]</span><span class="si">{4}</span><span class="s2">$&#39;, regex=True)&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -18346,6 +18346,20 @@ div#notebook {
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>TIPS:</p>
+<p>PandasとNumpyでddofのデフォルト値が異なることに注意しましょう</p>
+
+<pre><code>Pandas：
+DataFrame.std(self, axis=None, skipna=None, level=None, ddof=1, numeric_only=None, **kwargs)
+Numpy:
+numpy.std(a, axis=None, dtype=None, out=None, ddof=0, keepdims=)</code></pre>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[32]:</div>
@@ -19061,8 +19075,8 @@ Name: amount, dtype: float64</pre>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_product</span>
-         <span class="p">,</span> <span class="n">df_category</span><span class="p">[[</span><span class="s1">&#39;category_major_cd&#39;</span><span class="p">,</span> <span class="s1">&#39;category_medium_cd&#39;</span><span class="p">,</span><span class="s1">&#39;category_small_cd&#39;</span><span class="p">,</span><span class="s1">&#39;category_small_name&#39;</span><span class="p">]]</span>
-         <span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;category_major_cd&#39;</span><span class="p">,</span> <span class="s1">&#39;category_medium_cd&#39;</span><span class="p">,</span><span class="s1">&#39;category_small_cd&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+         <span class="p">,</span> <span class="n">df_category</span><span class="p">[[</span><span class="s1">&#39;category_small_cd&#39;</span><span class="p">,</span><span class="s1">&#39;category_small_name&#39;</span><span class="p">]]</span>
+         <span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;category_small_cd&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -22903,6 +22917,17 @@ pct75: 3651.0
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>TIPS:</p>
+<ul>
+<li>query()の引数engineで'python'か'numexpr'かを選択でき、デフォルトはインストールされていればnumexprが、無ければpythonが使われます。さらに、文字列メソッドはengine='python'でないとquery()メソッドで使えません。</li>
+</ul>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[70]:</div>
@@ -26466,154 +26491,154 @@ pct75: 3651.0
   </thead>
   <tbody>
     <tr>
-      <th>10797</th>
-      <td>CS005413000329</td>
-      <td>岸部 麻由子</td>
+      <th>14482</th>
+      <td>CS019711000006</td>
+      <td>志村 まさみ</td>
       <td>1</td>
       <td>女性</td>
-      <td>1973-06-07</td>
-      <td>45</td>
-      <td>167-0033</td>
-      <td>東京都杉並区清水**********</td>
-      <td>S13005</td>
-      <td>20170709</td>
-      <td>5-20090621-1</td>
-      <td>[40.0, 50.0)</td>
-    </tr>
-    <tr>
-      <th>6035</th>
-      <td>CS010715000051</td>
-      <td>菅谷 明日</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1945-02-19</td>
-      <td>74</td>
-      <td>221-0001</td>
-      <td>神奈川県横浜市神奈川区西寺尾**********</td>
-      <td>S14010</td>
-      <td>20160207</td>
+      <td>1943-01-13</td>
+      <td>76</td>
+      <td>173-0014</td>
+      <td>東京都板橋区大山東町**********</td>
+      <td>S13019</td>
+      <td>20150415</td>
       <td>0-00000000-0</td>
       <td>[60.0, inf)</td>
     </tr>
     <tr>
-      <th>8683</th>
-      <td>CS011512000120</td>
-      <td>吉井 美紀</td>
+      <th>13764</th>
+      <td>CS029713000017</td>
+      <td>金田 由美子</td>
       <td>1</td>
       <td>女性</td>
-      <td>1960-07-03</td>
-      <td>58</td>
-      <td>211-0012</td>
-      <td>神奈川県川崎市中原区中丸子**********</td>
-      <td>S14011</td>
-      <td>20150121</td>
+      <td>1947-06-29</td>
+      <td>71</td>
+      <td>279-0026</td>
+      <td>千葉県浦安市弁天**********</td>
+      <td>S12029</td>
+      <td>20151207</td>
+      <td>0-00000000-0</td>
+      <td>[60.0, inf)</td>
+    </tr>
+    <tr>
+      <th>12608</th>
+      <td>CS003513000125</td>
+      <td>石田 奈々</td>
+      <td>1</td>
+      <td>女性</td>
+      <td>1959-10-02</td>
+      <td>59</td>
+      <td>201-0003</td>
+      <td>東京都狛江市和泉本町**********</td>
+      <td>S13003</td>
+      <td>20160107</td>
       <td>0-00000000-0</td>
       <td>[50.0, 60.0)</td>
     </tr>
     <tr>
-      <th>2973</th>
-      <td>CS029415000133</td>
-      <td>柳原 沙知絵</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1977-08-14</td>
-      <td>41</td>
-      <td>279-0043</td>
-      <td>千葉県浦安市富士見**********</td>
-      <td>S12029</td>
-      <td>20150715</td>
-      <td>E-20091027-C</td>
-      <td>[40.0, 50.0)</td>
-    </tr>
-    <tr>
-      <th>9451</th>
-      <td>CS029512000006</td>
-      <td>岡本 奈央</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1965-10-26</td>
-      <td>53</td>
-      <td>279-0043</td>
-      <td>千葉県浦安市富士見**********</td>
-      <td>S12029</td>
-      <td>20150910</td>
-      <td>2-20091221-5</td>
-      <td>[50.0, 60.0)</td>
-    </tr>
-    <tr>
-      <th>17419</th>
-      <td>CS009404000017</td>
-      <td>茂木 徹</td>
+      <th>16892</th>
+      <td>CS033202000008</td>
+      <td>梅本 栄一</td>
       <td>0</td>
       <td>男性</td>
-      <td>1973-06-01</td>
-      <td>45</td>
-      <td>158-0096</td>
-      <td>東京都世田谷区玉川台**********</td>
-      <td>S13009</td>
-      <td>20150222</td>
+      <td>1994-05-30</td>
+      <td>24</td>
+      <td>245-0051</td>
+      <td>神奈川県横浜市戸塚区名瀬町**********</td>
+      <td>S14033</td>
+      <td>20150920</td>
       <td>0-00000000-0</td>
-      <td>[40.0, 50.0)</td>
+      <td>[20.0, 30.0)</td>
     </tr>
     <tr>
-      <th>12878</th>
-      <td>CS001614000147</td>
-      <td>梶原 咲</td>
+      <th>2406</th>
+      <td>CS003512000363</td>
+      <td>水田 千夏</td>
       <td>1</td>
       <td>女性</td>
-      <td>1955-12-31</td>
-      <td>63</td>
-      <td>144-0054</td>
-      <td>東京都大田区新蒲田**********</td>
+      <td>1960-05-11</td>
+      <td>58</td>
+      <td>214-0014</td>
+      <td>神奈川県川崎市多摩区登戸**********</td>
+      <td>S13003</td>
+      <td>20160831</td>
+      <td>3-20100503-2</td>
+      <td>[50.0, 60.0)</td>
+    </tr>
+    <tr>
+      <th>3910</th>
+      <td>CS003813000015</td>
+      <td>諏訪 みあ</td>
+      <td>1</td>
+      <td>女性</td>
+      <td>1933-08-29</td>
+      <td>85</td>
+      <td>201-0004</td>
+      <td>東京都狛江市岩戸北**********</td>
+      <td>S13003</td>
+      <td>20150514</td>
+      <td>0-00000000-0</td>
+      <td>[60.0, inf)</td>
+    </tr>
+    <tr>
+      <th>18949</th>
+      <td>CS001714000112</td>
+      <td>上原 小百合</td>
+      <td>1</td>
+      <td>女性</td>
+      <td>1943-04-29</td>
+      <td>75</td>
+      <td>144-0052</td>
+      <td>東京都大田区蒲田**********</td>
       <td>S13001</td>
-      <td>20180112</td>
+      <td>20161015</td>
       <td>0-00000000-0</td>
       <td>[60.0, inf)</td>
     </tr>
     <tr>
-      <th>21256</th>
-      <td>CS005712000084</td>
-      <td>武藤 沙知絵</td>
+      <th>2359</th>
+      <td>CS013413000151</td>
+      <td>田辺 紗季</td>
       <td>1</td>
       <td>女性</td>
-      <td>1939-02-18</td>
-      <td>80</td>
-      <td>177-0033</td>
-      <td>東京都練馬区高野台**********</td>
-      <td>S13005</td>
-      <td>20170720</td>
+      <td>1974-04-10</td>
+      <td>44</td>
+      <td>275-0022</td>
+      <td>千葉県習志野市香澄**********</td>
+      <td>S12013</td>
+      <td>20160207</td>
+      <td>0-00000000-0</td>
+      <td>[40.0, 50.0)</td>
+    </tr>
+    <tr>
+      <th>11781</th>
+      <td>CS008712000012</td>
+      <td>上村 幸子</td>
+      <td>1</td>
+      <td>女性</td>
+      <td>1942-04-13</td>
+      <td>76</td>
+      <td>213-0002</td>
+      <td>神奈川県川崎市高津区二子**********</td>
+      <td>S13008</td>
+      <td>20150613</td>
       <td>0-00000000-0</td>
       <td>[60.0, inf)</td>
     </tr>
     <tr>
-      <th>10976</th>
-      <td>CS039414000019</td>
-      <td>大塚 陽子</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1969-07-15</td>
-      <td>49</td>
-      <td>168-0081</td>
-      <td>東京都杉並区宮前**********</td>
-      <td>S13039</td>
-      <td>20151120</td>
-      <td>D-20100504-D</td>
-      <td>[40.0, 50.0)</td>
-    </tr>
-    <tr>
-      <th>3286</th>
-      <td>CS006414000037</td>
-      <td>大河内 季衣</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1970-09-15</td>
-      <td>48</td>
-      <td>224-0006</td>
-      <td>神奈川県横浜市都筑区荏田東**********</td>
-      <td>S14006</td>
-      <td>20150612</td>
-      <td>E-20100817-F</td>
-      <td>[40.0, 50.0)</td>
+      <th>17880</th>
+      <td>CS038303000016</td>
+      <td>宮原 まさし</td>
+      <td>0</td>
+      <td>男性</td>
+      <td>1981-03-13</td>
+      <td>38</td>
+      <td>134-0084</td>
+      <td>東京都江戸川区東葛西**********</td>
+      <td>S13038</td>
+      <td>20150416</td>
+      <td>0-00000000-0</td>
+      <td>[30.0, 40.0)</td>
     </tr>
   </tbody>
 </table>
@@ -26767,153 +26792,153 @@ pct75: 3651.0
   </thead>
   <tbody>
     <tr>
-      <th>6848</th>
-      <td>CS030614000040</td>
-      <td>板垣 美帆</td>
+      <th>17818</th>
+      <td>CS005611000030</td>
+      <td>内藤 ひろ子</td>
       <td>1</td>
       <td>女性</td>
-      <td>1954-02-05</td>
-      <td>65</td>
-      <td>272-0026</td>
-      <td>千葉県市川市東大和田**********</td>
-      <td>S12030</td>
-      <td>20150509</td>
+      <td>1957-04-03</td>
+      <td>61</td>
+      <td>177-0045</td>
+      <td>東京都練馬区石神井台**********</td>
+      <td>S13005</td>
+      <td>20150107</td>
       <td>0-00000000-0</td>
       <td>[60.0, inf)</td>
     </tr>
     <tr>
-      <th>17851</th>
-      <td>CS003613000255</td>
-      <td>田村 瞬</td>
+      <th>10026</th>
+      <td>CS035413000090</td>
+      <td>大後 華子</td>
       <td>1</td>
       <td>女性</td>
-      <td>1956-04-30</td>
-      <td>62</td>
-      <td>201-0012</td>
-      <td>東京都狛江市中和泉**********</td>
-      <td>S13003</td>
-      <td>20170123</td>
-      <td>0-00000000-0</td>
-      <td>[60.0, inf)</td>
-    </tr>
-    <tr>
-      <th>13958</th>
-      <td>CS002414000170</td>
-      <td>野沢 ヒカル</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1976-02-01</td>
+      <td>1975-06-26</td>
       <td>43</td>
-      <td>185-0022</td>
-      <td>東京都国分寺市東元町**********</td>
-      <td>S13002</td>
-      <td>20160218</td>
-      <td>5-20100609-8</td>
+      <td>158-0081</td>
+      <td>東京都世田谷区深沢**********</td>
+      <td>S13035</td>
+      <td>20150227</td>
+      <td>4-20091018-4</td>
       <td>[40.0, 50.0)</td>
     </tr>
     <tr>
-      <th>9448</th>
-      <td>CS005514000089</td>
-      <td>宮地 恵望子</td>
+      <th>13399</th>
+      <td>CS001313000402</td>
+      <td>荻原 みき</td>
       <td>1</td>
       <td>女性</td>
-      <td>1961-03-23</td>
-      <td>58</td>
-      <td>165-0031</td>
-      <td>東京都中野区上鷺宮**********</td>
-      <td>S13005</td>
-      <td>20150807</td>
+      <td>1986-09-28</td>
+      <td>32</td>
+      <td>144-0045</td>
+      <td>東京都大田区南六郷**********</td>
+      <td>S13001</td>
+      <td>20170222</td>
       <td>0-00000000-0</td>
-      <td>[50.0, 60.0)</td>
-    </tr>
-    <tr>
-      <th>11796</th>
-      <td>CS009314000060</td>
-      <td>長沢 沙知絵</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1979-11-21</td>
-      <td>39</td>
-      <td>158-0097</td>
-      <td>東京都世田谷区用賀**********</td>
-      <td>S13009</td>
-      <td>20150918</td>
-      <td>3-20080221-1</td>
       <td>[30.0, 40.0)</td>
     </tr>
     <tr>
-      <th>14481</th>
-      <td>CS030613000125</td>
-      <td>大久保 瞬</td>
+      <th>6900</th>
+      <td>CS001412000230</td>
+      <td>須藤 めぐみ</td>
       <td>1</td>
       <td>女性</td>
-      <td>1954-02-03</td>
-      <td>65</td>
-      <td>272-0021</td>
-      <td>千葉県市川市八幡**********</td>
-      <td>S12030</td>
-      <td>20150408</td>
-      <td>2-20091228-4</td>
-      <td>[60.0, inf)</td>
-    </tr>
-    <tr>
-      <th>12831</th>
-      <td>CS025712000045</td>
-      <td>伴 ひろ子</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1946-01-14</td>
-      <td>73</td>
-      <td>242-0015</td>
-      <td>神奈川県大和市下和田**********</td>
-      <td>S14025</td>
-      <td>20150627</td>
-      <td>0-00000000-0</td>
-      <td>[60.0, inf)</td>
-    </tr>
-    <tr>
-      <th>2234</th>
-      <td>CS009513000012</td>
-      <td>大村 まさみ</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1966-12-29</td>
-      <td>52</td>
-      <td>154-0016</td>
-      <td>東京都世田谷区弦巻**********</td>
-      <td>S13009</td>
-      <td>20150225</td>
-      <td>A-20100719-C</td>
-      <td>[50.0, 60.0)</td>
-    </tr>
-    <tr>
-      <th>16864</th>
-      <td>CS001403000036</td>
-      <td>伊東 六郎</td>
-      <td>0</td>
-      <td>男性</td>
-      <td>1972-07-15</td>
-      <td>46</td>
-      <td>144-0054</td>
-      <td>東京都大田区新蒲田**********</td>
+      <td>1969-07-07</td>
+      <td>49</td>
+      <td>210-0864</td>
+      <td>神奈川県川崎市川崎区池上町**********</td>
       <td>S13001</td>
-      <td>20150112</td>
+      <td>20151208</td>
       <td>0-00000000-0</td>
       <td>[40.0, 50.0)</td>
     </tr>
     <tr>
-      <th>7897</th>
-      <td>CS029414000110</td>
-      <td>石倉 瞳</td>
+      <th>2844</th>
+      <td>CS010515000129</td>
+      <td>神戸 美嘉</td>
       <td>1</td>
       <td>女性</td>
-      <td>1970-09-22</td>
+      <td>1963-09-10</td>
+      <td>55</td>
+      <td>222-0026</td>
+      <td>神奈川県横浜市港北区篠原町**********</td>
+      <td>S14010</td>
+      <td>20150206</td>
+      <td>F-20100807-F</td>
+      <td>[50.0, 60.0)</td>
+    </tr>
+    <tr>
+      <th>7951</th>
+      <td>CS019302000011</td>
+      <td>堀 六郎</td>
+      <td>0</td>
+      <td>男性</td>
+      <td>1980-05-08</td>
+      <td>38</td>
+      <td>173-0015</td>
+      <td>東京都板橋区栄町**********</td>
+      <td>S13019</td>
+      <td>20151219</td>
+      <td>0-00000000-0</td>
+      <td>[30.0, 40.0)</td>
+    </tr>
+    <tr>
+      <th>21173</th>
+      <td>CS008515000005</td>
+      <td>益田 愛</td>
+      <td>1</td>
+      <td>女性</td>
+      <td>1959-03-22</td>
+      <td>60</td>
+      <td>157-0066</td>
+      <td>東京都世田谷区成城**********</td>
+      <td>S13008</td>
+      <td>20150216</td>
+      <td>A-20100419-C</td>
+      <td>[60.0, inf)</td>
+    </tr>
+    <tr>
+      <th>1307</th>
+      <td>CS004503000037</td>
+      <td>木内 哲平</td>
+      <td>0</td>
+      <td>男性</td>
+      <td>1959-06-20</td>
+      <td>59</td>
+      <td>165-0031</td>
+      <td>東京都中野区上鷺宮**********</td>
+      <td>S13004</td>
+      <td>20150707</td>
+      <td>0-00000000-0</td>
+      <td>[50.0, 60.0)</td>
+    </tr>
+    <tr>
+      <th>20398</th>
+      <td>CS012502000016</td>
+      <td>山西 兼</td>
+      <td>0</td>
+      <td>男性</td>
+      <td>1966-07-30</td>
+      <td>52</td>
+      <td>231-0855</td>
+      <td>神奈川県横浜市中区寺久保**********</td>
+      <td>S14012</td>
+      <td>20151015</td>
+      <td>0-00000000-0</td>
+      <td>[50.0, 60.0)</td>
+    </tr>
+    <tr>
+      <th>17406</th>
+      <td>CS038411000023</td>
+      <td>堀口 夏希</td>
+      <td>1</td>
+      <td>女性</td>
+      <td>1971-03-06</td>
       <td>48</td>
-      <td>279-0003</td>
-      <td>千葉県浦安市海楽**********</td>
-      <td>S12029</td>
-      <td>20150926</td>
-      <td>C-20100513-D</td>
+      <td>134-0085</td>
+      <td>東京都江戸川区南葛西**********</td>
+      <td>S13038</td>
+      <td>20160118</td>
+      <td>0-00000000-0</td>
       <td>[40.0, 50.0)</td>
     </tr>
   </tbody>
