@@ -14996,7 +14996,109 @@ The following object is masked from ‘package:stats’:
 <div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="n">table_product</span> <span class="o">&lt;-</span><span class="nf">table</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">df_receipt</span><span class="o">$</span><span class="n">store_cd</span><span class="p">),</span> <span class="n">df_receipt</span><span class="o">$</span><span class="n">product_cd</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># コード例1</span>
+<span class="n">df_receipt</span> <span class="o">%&gt;%</span>
+  <span class="nf">group_by</span><span class="p">(</span><span class="n">store_cd</span><span class="p">,</span> <span class="n">product_cd</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="nf">summarise</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="nf">n</span><span class="p">(),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop_last&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="nf">filter</span><span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="n">n</span> <span class="o">%&gt;%</span> <span class="nf">max</span><span class="p">())</span> <span class="o">%&gt;%</span>
+  <span class="nf">ungroup</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<caption>A tibble: 55 × 3</caption>
+<thead>
+	<tr><th scope=col>store_cd</th><th scope=col>product_cd</th><th scope=col>n</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>S12007</td><td>P060303001</td><td> 72</td></tr>
+	<tr><td>S12013</td><td>P060303001</td><td>107</td></tr>
+	<tr><td>S12014</td><td>P060303001</td><td> 65</td></tr>
+	<tr><td>S12029</td><td>P060303001</td><td> 92</td></tr>
+	<tr><td>S12030</td><td>P060303001</td><td>115</td></tr>
+	<tr><td>S13001</td><td>P060303001</td><td> 67</td></tr>
+	<tr><td>S13002</td><td>P060303001</td><td> 78</td></tr>
+	<tr><td>S13003</td><td>P071401001</td><td> 65</td></tr>
+	<tr><td>S13004</td><td>P060303001</td><td> 88</td></tr>
+	<tr><td>S13005</td><td>P040503001</td><td> 36</td></tr>
+	<tr><td>S13008</td><td>P060303001</td><td> 77</td></tr>
+	<tr><td>S13009</td><td>P060303001</td><td> 64</td></tr>
+	<tr><td>S13015</td><td>P071401001</td><td> 34</td></tr>
+	<tr><td>S13016</td><td>P071102001</td><td> 32</td></tr>
+	<tr><td>S13017</td><td>P060101002</td><td> 31</td></tr>
+	<tr><td>S13018</td><td>P071401001</td><td> 47</td></tr>
+	<tr><td>S13019</td><td>P071401001</td><td> 70</td></tr>
+	<tr><td>S13020</td><td>P071401001</td><td> 79</td></tr>
+	<tr><td>S13031</td><td>P060303001</td><td>115</td></tr>
+	<tr><td>S13032</td><td>P060303001</td><td> 85</td></tr>
+	<tr><td>S13035</td><td>P040503001</td><td> 39</td></tr>
+	<tr><td>S13037</td><td>P060303001</td><td> 88</td></tr>
+	<tr><td>S13038</td><td>P060303001</td><td> 41</td></tr>
+	<tr><td>S13039</td><td>P071401001</td><td> 36</td></tr>
+	<tr><td>S13041</td><td>P071401001</td><td> 70</td></tr>
+	<tr><td>S13043</td><td>P060303001</td><td> 56</td></tr>
+	<tr><td>S13044</td><td>P060303001</td><td> 96</td></tr>
+	<tr><td>S13051</td><td>P050102001</td><td>  5</td></tr>
+	<tr><td>S13051</td><td>P071003001</td><td>  5</td></tr>
+	<tr><td>S13051</td><td>P080804001</td><td>  5</td></tr>
+	<tr><td>S13052</td><td>P050101001</td><td>  4</td></tr>
+	<tr><td>S14006</td><td>P060303001</td><td> 70</td></tr>
+	<tr><td>S14010</td><td>P060303001</td><td> 68</td></tr>
+	<tr><td>S14011</td><td>P060101001</td><td> 51</td></tr>
+	<tr><td>S14012</td><td>P060303001</td><td>142</td></tr>
+	<tr><td>S14021</td><td>P060101001</td><td> 30</td></tr>
+	<tr><td>S14022</td><td>P060303001</td><td> 71</td></tr>
+	<tr><td>S14023</td><td>P071401001</td><td> 70</td></tr>
+	<tr><td>S14024</td><td>P060303001</td><td> 96</td></tr>
+	<tr><td>S14025</td><td>P060303001</td><td> 46</td></tr>
+	<tr><td>S14026</td><td>P071401001</td><td> 40</td></tr>
+	<tr><td>S14027</td><td>P060303001</td><td>152</td></tr>
+	<tr><td>S14028</td><td>P060303001</td><td>140</td></tr>
+	<tr><td>S14033</td><td>P071401001</td><td> 68</td></tr>
+	<tr><td>S14034</td><td>P060303001</td><td> 71</td></tr>
+	<tr><td>S14036</td><td>P040503001</td><td> 19</td></tr>
+	<tr><td>S14036</td><td>P060101001</td><td> 19</td></tr>
+	<tr><td>S14040</td><td>P060303001</td><td> 80</td></tr>
+	<tr><td>S14042</td><td>P050101001</td><td> 34</td></tr>
+	<tr><td>S14045</td><td>P060303001</td><td> 33</td></tr>
+	<tr><td>S14046</td><td>P060303001</td><td> 71</td></tr>
+	<tr><td>S14047</td><td>P060303001</td><td> 36</td></tr>
+	<tr><td>S14048</td><td>P050101001</td><td> 17</td></tr>
+	<tr><td>S14049</td><td>P060303001</td><td> 55</td></tr>
+	<tr><td>S14050</td><td>P060303001</td><td>  9</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># コード例2：whtch.max()を使ってこんな感じも（最頻値複数発生時、どれか一つに絞られる）</span>
+<span class="n">table_product</span> <span class="o">&lt;-</span><span class="nf">table</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">df_receipt</span><span class="o">$</span><span class="n">store_cd</span><span class="p">),</span> <span class="n">df_receipt</span><span class="o">$</span><span class="n">product_cd</span><span class="p">)</span>
 
 <span class="n">store</span> <span class="o">&lt;-</span> <span class="nf">names</span><span class="p">(</span><span class="n">table_product</span><span class="p">[,</span><span class="m">1</span><span class="p">])</span>
 
@@ -15105,7 +15207,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">var_sample</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">){</span> <span class="nf">var</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="m">-1</span><span class="p">)</span><span class="o">/</span><span class="nf">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">}</span>
@@ -15168,7 +15270,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">var_sample</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">){</span> <span class="nf">var</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="m">-1</span><span class="p">)</span><span class="o">/</span><span class="nf">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">}</span>
@@ -15233,7 +15335,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
@@ -15289,7 +15391,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
@@ -15356,7 +15458,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_mean</span> <span class="o">&lt;-</span> <span class="n">df_receipt</span> <span class="o">%&gt;%</span>
@@ -15403,7 +15505,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_sum</span> <span class="o">&lt;-</span> <span class="n">df_receipt</span> <span class="o">%&gt;%</span>
@@ -15472,7 +15574,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">inner_join</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">,</span> <span class="n">df_store</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;store_cd&#39;</span><span class="p">,</span> <span class="s">&#39;store_name&#39;</span><span class="p">)],</span> <span class="n">by</span> <span class="o">=</span> <span class="s">&#39;store_cd&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
@@ -15534,7 +15636,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">inner_join</span><span class="p">(</span><span class="n">df_product</span><span class="p">,</span>
@@ -15598,7 +15700,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_sum</span> <span class="o">&lt;-</span> <span class="n">df_receipt</span> <span class="o">%&gt;%</span>
@@ -15669,7 +15771,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_sum</span> <span class="o">&lt;-</span> <span class="n">df_receipt</span> <span class="o">%&gt;%</span>
@@ -15768,7 +15870,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_store_tmp</span> <span class="o">&lt;-</span> <span class="n">df_store</span>
@@ -15814,7 +15916,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
@@ -15879,7 +15981,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># コード例1:縦持ちケース</span>
@@ -15949,7 +16051,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># コード例2:横持ちケース</span>
@@ -16048,7 +16150,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_sales_summary</span> <span class="o">&lt;-</span> <span class="n">df_customer</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;customer_id&quot;</span><span class="p">,</span> <span class="s">&quot;gender_cd&quot;</span><span class="p">,</span> <span class="s">&quot;birth_day&quot;</span> <span class="p">,</span> <span class="s">&quot;age&quot;</span><span class="p">)]</span> <span class="o">%&gt;%</span>
@@ -16116,7 +16218,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">gather</span><span class="p">(</span><span class="n">df_sales_summary</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="n">gender_cd</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">sum_amount</span><span class="p">,</span> <span class="n">male</span><span class="p">,</span> <span class="n">female</span><span class="p">,</span> <span class="n">unknown</span><span class="p">)</span> <span class="o">%&gt;%</span>
@@ -16199,7 +16301,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_tmp</span> <span class="o">&lt;-</span> <span class="nf">cbind</span><span class="p">(</span><span class="n">df_customer</span><span class="p">[</span><span class="s">&#39;customer_id&#39;</span><span class="p">],</span> <span class="nf">strftime</span><span class="p">(</span><span class="n">df_customer</span><span class="o">$</span><span class="n">birth_day</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&quot;%Y%m%d&quot;</span><span class="p">))</span>
@@ -16262,7 +16364,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_tmp</span> <span class="o">&lt;-</span> <span class="nf">cbind</span><span class="p">(</span><span class="n">df_customer</span><span class="p">[</span><span class="s">&quot;customer_id&quot;</span><span class="p">],</span> 
@@ -16326,7 +16428,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_tmp</span> <span class="o">&lt;-</span> <span class="nf">cbind</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;receipt_no&#39;</span><span class="p">,</span> <span class="s">&#39;receipt_sub_no&#39;</span><span class="p">)],</span> 
@@ -16390,7 +16492,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_tmp</span> <span class="o">&lt;-</span> <span class="nf">cbind</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;receipt_no&#39;</span><span class="p">,</span> <span class="s">&#39;receipt_sub_no&#39;</span><span class="p">)],</span> 
@@ -16454,7 +16556,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_tmp</span> <span class="o">&lt;-</span> <span class="nf">cbind</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;receipt_no&#39;</span><span class="p">,</span> <span class="s">&#39;receipt_sub_no&#39;</span><span class="p">)],</span> 
@@ -16518,7 +16620,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_tmp</span> <span class="o">&lt;-</span> <span class="nf">cbind</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;receipt_no&#39;</span><span class="p">,</span> <span class="s">&#39;receipt_sub_no&#39;</span><span class="p">)],</span> 
@@ -16582,7 +16684,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_tmp</span> <span class="o">&lt;-</span> <span class="nf">cbind</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;receipt_no&#39;</span><span class="p">,</span> <span class="s">&#39;receipt_sub_no&#39;</span><span class="p">)],</span> 
@@ -16646,7 +16748,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="prompt input_prompt">In&nbsp;[55]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
@@ -16712,7 +16814,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[56]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">inner_join</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">,</span> <span class="n">df_customer</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="s">&quot;customer_id&quot;</span><span class="p">)</span> <span class="o">%&gt;%</span>
@@ -16769,7 +16871,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="prompt input_prompt">In&nbsp;[57]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_customer</span> <span class="o">%&gt;%</span>
@@ -16843,7 +16945,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In&nbsp;[58]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
@@ -16913,7 +17015,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_customer</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;customer_id&quot;</span><span class="p">,</span> <span class="s">&quot;birth_day&quot;</span><span class="p">,</span><span class="s">&quot;age&quot;</span><span class="p">)]</span> <span class="o">%&gt;%</span>
@@ -16980,7 +17082,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># 性別コード１桁と年代コード２桁を連結した性年代コードを生成する</span>
@@ -17048,7 +17150,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">dummy_gender_model</span> <span class="o">&lt;-</span> <span class="nf">dummyVars</span><span class="p">(</span><span class="o">~</span><span class="n">gender_cd</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">df_customer</span><span class="p">,</span> <span class="n">fullRank</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
@@ -17111,7 +17213,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Rのscaleを使用しているため不偏標準偏差で標準化される</span>
@@ -17178,7 +17280,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
@@ -17244,7 +17346,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
@@ -17310,7 +17412,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
@@ -17376,7 +17478,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="prompt input_prompt">In&nbsp;[66]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_product</span> <span class="o">%&gt;%</span>
@@ -17439,7 +17541,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_product</span> <span class="o">%&gt;%</span>
@@ -17493,7 +17595,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_product</span> <span class="o">%&gt;%</span>
@@ -17557,7 +17659,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="prompt input_prompt">In&nbsp;[69]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_product</span> <span class="o">%&gt;%</span>
@@ -17621,7 +17723,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[69]:</div>
+<div class="prompt input_prompt">In&nbsp;[70]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_product</span> <span class="o">%&gt;%</span>
@@ -17685,7 +17787,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="prompt input_prompt">In&nbsp;[71]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="nf">cbind</span><span class="p">(</span><span class="n">df_product</span><span class="p">[</span><span class="s">&#39;product_cd&#39;</span><span class="p">],</span><span class="nf">trunc</span><span class="p">(</span><span class="n">df_product</span><span class="p">[</span><span class="s">&#39;unit_price&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="m">1.1</span><span class="p">)),</span><span class="m">10</span><span class="p">)</span>
@@ -17746,7 +17848,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="prompt input_prompt">In&nbsp;[72]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">inner_join</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">,</span> <span class="n">df_product</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;product_cd&quot;</span><span class="p">,</span><span class="s">&quot;category_major_cd&quot;</span><span class="p">)],</span> <span class="n">by</span><span class="o">=</span><span class="s">&quot;product_cd&quot;</span><span class="p">)</span> <span class="o">%&gt;%</span>
@@ -17815,7 +17917,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="prompt input_prompt">In&nbsp;[73]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">inner_join</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;customer_id&quot;</span><span class="p">,</span> <span class="s">&quot;sales_ymd&quot;</span><span class="p">)],</span> 
@@ -17882,7 +17984,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="prompt input_prompt">In&nbsp;[74]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="p">(</span><span class="nf">time_length</span><span class="p">(</span><span class="nf">strptime</span><span class="p">(</span><span class="s">&#39;20171122&#39;</span><span class="p">,</span> <span class="s">&#39;%Y%m%d&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="nf">strptime</span><span class="p">(</span><span class="s">&#39;20150623&#39;</span><span class="p">,</span> <span class="s">&#39;%Y%m%d&#39;</span><span class="p">),</span> <span class="s">&quot;month&quot;</span><span class="p">))</span>
@@ -17914,7 +18016,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="prompt input_prompt">In&nbsp;[75]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">time_length</span><span class="p">(</span><span class="nf">interval</span><span class="p">(</span><span class="nf">strptime</span><span class="p">(</span><span class="s">&#39;20150623&#39;</span><span class="p">,</span> <span class="s">&#39;%Y%m%d&#39;</span><span class="p">),</span> <span class="nf">strptime</span><span class="p">(</span><span class="s">&#39;20171122&#39;</span><span class="p">,</span> <span class="s">&#39;%Y%m%d&#39;</span><span class="p">)),</span> <span class="s">&quot;month&quot;</span><span class="p">)</span>
@@ -17946,7 +18048,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="prompt input_prompt">In&nbsp;[76]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">inner_join</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;customer_id&quot;</span><span class="p">,</span> <span class="s">&quot;sales_ymd&quot;</span><span class="p">)],</span> 
@@ -18017,7 +18119,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="prompt input_prompt">In&nbsp;[77]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">inner_join</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;customer_id&quot;</span><span class="p">,</span> <span class="s">&quot;sales_ymd&quot;</span><span class="p">)],</span> 
@@ -18088,7 +18190,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="prompt input_prompt">In&nbsp;[78]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">inner_join</span><span class="p">(</span><span class="n">df_receipt</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;customer_id&quot;</span><span class="p">,</span> <span class="s">&quot;sales_ymd&quot;</span><span class="p">)],</span> 
@@ -18155,7 +18257,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="prompt input_prompt">In&nbsp;[79]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;customer_id&quot;</span><span class="p">,</span> <span class="s">&quot;sales_ymd&quot;</span><span class="p">)]</span> <span class="o">%&gt;%</span>
@@ -18223,7 +18325,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="prompt input_prompt">In&nbsp;[80]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="nf">sample_frac</span><span class="p">(</span><span class="n">tbl</span> <span class="o">=</span> <span class="n">df_customer</span><span class="p">,</span> <span class="m">0.01</span><span class="p">),</span><span class="m">10</span><span class="p">)</span>
@@ -18251,16 +18353,16 @@ The following object is masked from ‘package:stats’:
 	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;date&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><th scope=row>1</th><td>CS024315000048</td><td>会田 恭子  </td><td>1</td><td>女性</td><td>1982-05-28</td><td>36</td><td>214-0035</td><td>神奈川県川崎市多摩区長沢**********  </td><td>S14024</td><td>20150509</td><td>7-20080423-6</td></tr>
-	<tr><th scope=row>2</th><td>CS006515000072</td><td>河原 結衣  </td><td>1</td><td>女性</td><td>1964-10-30</td><td>54</td><td>224-0057</td><td>神奈川県横浜市都筑区川和町**********</td><td>S14006</td><td>20151107</td><td>C-20100710-E</td></tr>
-	<tr><th scope=row>3</th><td>CS027412000100</td><td>大谷 窈    </td><td>1</td><td>女性</td><td>1976-01-29</td><td>43</td><td>251-0042</td><td>神奈川県藤沢市辻堂新町**********    </td><td>S14027</td><td>20150322</td><td>4-20080915-5</td></tr>
-	<tr><th scope=row>4</th><td>CS003615000190</td><td>長田 エリカ</td><td>1</td><td>女性</td><td>1950-08-08</td><td>68</td><td>182-0023</td><td>東京都調布市染地**********          </td><td>S13003</td><td>20160315</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>5</th><td>CS027502000041</td><td>長井 誠一  </td><td>0</td><td>男性</td><td>1959-05-27</td><td>59</td><td>251-0045</td><td>神奈川県藤沢市辻堂東海岸**********  </td><td>S14027</td><td>20150511</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>6</th><td>CS004512000013</td><td>羽田 璃奈子</td><td>1</td><td>女性</td><td>1960-04-28</td><td>58</td><td>166-0001</td><td>東京都杉並区阿佐谷北**********      </td><td>S13004</td><td>20150205</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>7</th><td>CS004111000005</td><td>野田 瞳    </td><td>1</td><td>女性</td><td>2006-04-07</td><td>12</td><td>161-0031</td><td>東京都新宿区西落合**********        </td><td>S13004</td><td>20151025</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>8</th><td>CS022511000034</td><td>田原 ひろ子</td><td>1</td><td>女性</td><td>1964-06-09</td><td>54</td><td>240-0112</td><td>神奈川県三浦郡葉山町堀内**********  </td><td>S14022</td><td>20150216</td><td>3-20090615-3</td></tr>
-	<tr><th scope=row>9</th><td>CS022613000098</td><td>丹羽 倫子  </td><td>1</td><td>女性</td><td>1951-04-11</td><td>67</td><td>249-0003</td><td>神奈川県逗子市池子**********        </td><td>S14022</td><td>20150829</td><td>6-20100705-3</td></tr>
-	<tr><th scope=row>10</th><td>CS040112000007</td><td>篠崎 めぐみ</td><td>1</td><td>女性</td><td>2004-05-12</td><td>14</td><td>194-0014</td><td>東京都町田市高ヶ坂**********        </td><td>S14040</td><td>20151109</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>1</th><td>CS015212000028</td><td>吹越 恵麻</td><td>1</td><td>女性</td><td>1992-11-18</td><td>26</td><td>104-0053</td><td>東京都中央区晴海**********          </td><td>S13015</td><td>20150513</td><td>C-20091115-9</td></tr>
+	<tr><th scope=row>2</th><td>CS040415000217</td><td>奈良 法子</td><td>1</td><td>女性</td><td>1974-04-18</td><td>44</td><td>226-0026</td><td>神奈川県横浜市緑区長津田町**********</td><td>S14040</td><td>20141004</td><td>C-20100413-C</td></tr>
+	<tr><th scope=row>3</th><td>CS037615000020</td><td>野田 愛  </td><td>1</td><td>女性</td><td>1949-07-30</td><td>69</td><td>135-0002</td><td>東京都江東区住吉**********          </td><td>S13037</td><td>20151023</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>4</th><td>CS004312000354</td><td>尾崎 美帆</td><td>1</td><td>女性</td><td>1981-09-25</td><td>37</td><td>179-0075</td><td>東京都練馬区高松**********          </td><td>S13004</td><td>20161222</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>5</th><td>CS038503000012</td><td>青木 長利</td><td>0</td><td>男性</td><td>1961-08-31</td><td>57</td><td>279-0041</td><td>千葉県浦安市堀江**********          </td><td>S13038</td><td>20150125</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>6</th><td>CS022603000018</td><td>戸田 徹  </td><td>0</td><td>男性</td><td>1953-11-27</td><td>65</td><td>249-0006</td><td>神奈川県逗子市逗子**********        </td><td>S14022</td><td>20150127</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>7</th><td>CS004415000698</td><td>三輪 早紀</td><td>1</td><td>女性</td><td>1972-01-04</td><td>47</td><td>165-0033</td><td>東京都中野区若宮**********          </td><td>S13004</td><td>20171221</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>8</th><td>CS008414000008</td><td>関口 那奈</td><td>1</td><td>女性</td><td>1971-08-30</td><td>47</td><td>157-0072</td><td>東京都世田谷区祖師谷**********      </td><td>S13008</td><td>20150514</td><td>C-20100129-C</td></tr>
+	<tr><th scope=row>9</th><td>CS004501000012</td><td>日高 一輝</td><td>0</td><td>男性</td><td>1967-07-30</td><td>51</td><td>179-0075</td><td>東京都練馬区高松**********          </td><td>S13004</td><td>20150703</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>10</th><td>CS008402000039</td><td>横井 勇介</td><td>0</td><td>男性</td><td>1975-01-26</td><td>44</td><td>201-0016</td><td>東京都狛江市駒井町**********        </td><td>S13008</td><td>20150619</td><td>0-00000000-0</td></tr>
 </tbody>
 </table>
 
@@ -18284,7 +18386,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="prompt input_prompt">In&nbsp;[81]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">71</span><span class="p">)</span>
@@ -18342,7 +18444,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[81]:</div>
+<div class="prompt input_prompt">In&nbsp;[82]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
@@ -18408,7 +18510,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="prompt input_prompt">In&nbsp;[83]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># 確認用コード</span>
@@ -18452,7 +18554,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="prompt input_prompt">In&nbsp;[84]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># 確認用コード</span>
@@ -18485,7 +18587,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[84]:</div>
+<div class="prompt input_prompt">In&nbsp;[85]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt</span> <span class="o">%&gt;%</span>
@@ -18552,7 +18654,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[85]:</div>
+<div class="prompt input_prompt">In&nbsp;[86]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">sapply</span><span class="p">(</span><span class="n">df_product</span><span class="p">,</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="nf">sum</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
@@ -18600,7 +18702,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[86]:</div>
+<div class="prompt input_prompt">In&nbsp;[87]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">nrow</span><span class="p">(</span><span class="n">df_product</span><span class="p">)</span>
@@ -18656,7 +18758,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[87]:</div>
+<div class="prompt input_prompt">In&nbsp;[88]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">price_mean</span> <span class="o">&lt;-</span> <span class="nf">round</span><span class="p">(</span><span class="nf">mean</span><span class="p">(</span><span class="n">df_product</span><span class="o">$</span><span class="n">unit_price</span><span class="p">,</span> <span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span>
@@ -18710,7 +18812,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[88]:</div>
+<div class="prompt input_prompt">In&nbsp;[89]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">price_median</span> <span class="o">&lt;-</span> <span class="nf">round</span><span class="p">(</span><span class="nf">median</span><span class="p">(</span><span class="n">df_product</span><span class="o">$</span><span class="n">unit_price</span><span class="p">,</span> <span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span>
@@ -18764,7 +18866,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[89]:</div>
+<div class="prompt input_prompt">In&nbsp;[90]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_product_4</span> <span class="o">&lt;-</span> <span class="n">df_product</span> <span class="o">%&gt;%</span>
@@ -18810,7 +18912,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[90]:</div>
+<div class="prompt input_prompt">In&nbsp;[91]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_product_4</span> <span class="o">%&gt;%</span>
@@ -18863,7 +18965,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[91]:</div>
+<div class="prompt input_prompt">In&nbsp;[92]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_receipt_2019</span> <span class="o">&lt;-</span> <span class="n">df_receipt</span> <span class="o">%&gt;%</span>
@@ -18930,7 +19032,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[92]:</div>
+<div class="prompt input_prompt">In&nbsp;[93]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">sapply</span><span class="p">(</span><span class="n">df_amount_2019</span><span class="p">,</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="nf">sum</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
@@ -18978,7 +19080,7 @@ The following object is masked from ‘package:stats’:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[93]:</div>
+<div class="prompt input_prompt">In&nbsp;[94]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_customer_1</span> <span class="o">&lt;-</span> <span class="nf">inner_join</span><span class="p">(</span><span class="n">df_customer</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;customer_id&quot;</span><span class="p">,</span> <span class="s">&quot;postal_cd&quot;</span><span class="p">)],</span> 
@@ -19052,7 +19154,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[94]:</div>
+<div class="prompt input_prompt">In&nbsp;[95]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">calc_distance</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span> <span class="p">{</span>
@@ -19122,7 +19224,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[95]:</div>
+<div class="prompt input_prompt">In&nbsp;[96]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_sales_amount</span> <span class="o">&lt;-</span> <span class="n">df_receipt</span> <span class="o">%&gt;%</span>
@@ -19177,7 +19279,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[96]:</div>
+<div class="prompt input_prompt">In&nbsp;[97]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_customer_n</span> <span class="o">=</span> <span class="nf">inner_join</span><span class="p">(</span><span class="n">df_customer</span><span class="p">,</span> <span class="n">df_customer_u</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;customer_id&quot;</span><span class="p">,</span> <span class="s">&quot;customer_name&quot;</span><span class="p">,</span> <span class="s">&quot;postal_cd&quot;</span><span class="p">)],</span>
@@ -19223,7 +19325,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[97]:</div>
+<div class="prompt input_prompt">In&nbsp;[98]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1">#rsampleのinitial_splitを使った例</span>
@@ -19279,7 +19381,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[98]:</div>
+<div class="prompt input_prompt">In&nbsp;[99]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1">#caretのcreateTimeSlicesを使った例</span>
@@ -19316,7 +19418,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[99]:</div>
+<div class="prompt input_prompt">In&nbsp;[100]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1">#recipesパッケージを使った例</span>
@@ -19394,7 +19496,7 @@ Please use `themis::step_downsample()` instead.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[100]:</div>
+<div class="prompt input_prompt">In&nbsp;[101]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">head</span><span class="p">(</span><span class="n">df_down_train</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
@@ -19438,7 +19540,7 @@ Please use `themis::step_downsample()` instead.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[101]:</div>
+<div class="prompt input_prompt">In&nbsp;[102]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># #unbalancedのubUnderを使った例（unbalamncedの依存関係にあるxmlパッケージがR3.6.3でインストールできなくなっているためコメントアウト中※2020.07.29時点）</span>
@@ -19475,7 +19577,7 @@ Please use `themis::step_downsample()` instead.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[102]:</div>
+<div class="prompt input_prompt">In&nbsp;[103]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_gender</span> <span class="o">=</span> <span class="nf">unique</span><span class="p">(</span><span class="n">df_customer</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;gender_cd&quot;</span><span class="p">,</span> <span class="s">&quot;gender&quot;</span><span class="p">)])</span>
@@ -19499,7 +19601,7 @@ Please use `themis::step_downsample()` instead.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[103]:</div>
+<div class="prompt input_prompt">In&nbsp;[104]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_product_full</span> <span class="o">&lt;-</span> <span class="nf">inner_join</span><span class="p">(</span><span class="n">df_product</span><span class="p">,</span> <span class="n">df_category</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;category_small_cd&quot;</span><span class="p">,</span> 
@@ -19530,7 +19632,7 @@ Please use `themis::step_downsample()` instead.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[104]:</div>
+<div class="prompt input_prompt">In&nbsp;[105]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">write.csv</span><span class="p">(</span><span class="n">df_product_full</span><span class="p">,</span> <span class="s">&quot;../data/R_df_product_full_UTF-8_header.csv&quot;</span><span class="p">,</span> <span class="n">fileEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>
@@ -19558,7 +19660,7 @@ Please use `themis::step_downsample()` instead.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[105]:</div>
+<div class="prompt input_prompt">In&nbsp;[106]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">write.csv</span><span class="p">(</span><span class="n">df_product_full</span><span class="p">,</span> <span class="s">&quot;../data/R_df_product_full_CP932_header.csv&quot;</span><span class="p">,</span> <span class="n">fileEncoding</span><span class="o">=</span><span class="s">&quot;CP932&quot;</span><span class="p">)</span>
@@ -19587,7 +19689,7 @@ Please use `themis::step_downsample()` instead.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[106]:</div>
+<div class="prompt input_prompt">In&nbsp;[107]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">write.table</span><span class="p">(</span><span class="n">df_product_full</span><span class="p">,</span> <span class="s">&quot;../data/R_df_product_full_UTF-8_noh.csv&quot;</span><span class="p">,</span> <span class="n">col.names</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&quot;,&quot;</span><span class="p">,</span> <span class="n">fileEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>
@@ -19615,7 +19717,7 @@ Please use `themis::step_downsample()` instead.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[107]:</div>
+<div class="prompt input_prompt">In&nbsp;[108]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_product_tmp</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/R_df_product_full_UTF-8_header.csv&#39;</span><span class="p">,</span> <span class="n">fileEncoding</span> <span class="o">=</span> <span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>
@@ -19682,7 +19784,7 @@ Please use `themis::step_downsample()` instead.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[108]:</div>
+<div class="prompt input_prompt">In&nbsp;[109]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_product_tmp</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/R_df_product_full_UTF-8_noh.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">fileEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>
@@ -19749,7 +19851,7 @@ Please use `themis::step_downsample()` instead.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[109]:</div>
+<div class="prompt input_prompt">In&nbsp;[110]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">write.table</span><span class="p">(</span><span class="n">df_product_full</span><span class="p">,</span> <span class="s">&quot;../data/R_df_product_full_UTF-8_head.tsv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">,</span> <span class="n">fileEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>
@@ -19777,7 +19879,7 @@ Please use `themis::step_downsample()` instead.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[110]:</div>
+<div class="prompt input_prompt">In&nbsp;[111]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="n">df_product_tmp</span> <span class="o">&lt;-</span> <span class="nf">read.table</span><span class="p">(</span><span class="s">&quot;../data/R_df_product_full_UTF-8_head.tsv&quot;</span><span class="p">,</span> <span class="n">fileEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>
