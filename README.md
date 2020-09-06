@@ -73,5 +73,11 @@ Link
 - データサイエンス100本ノックを、Google ColabとAzure Notebooksで気軽に行いたい！
   - https://qiita.com/noguhiro2002/items/de49db61b69c3dbc9282
 
-## Author
+Author
+====
 The Data Scientist Society
+
+LICENSE
+====
+- docker/doc/100knocks_guide.pdfは協会ロゴ等が含まれるため、CC-BY-NDとなります
+- その他ファイルはMITライセンスに従います
