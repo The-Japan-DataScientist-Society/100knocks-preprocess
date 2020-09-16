@@ -1,6 +1,6 @@
 FROM jupyter/datascience-notebook
 USER root
-ENV DEBCONF_NOWARNINGS yeso
+ENV DEBCONF_NOWARNINGS yes
 RUN apt-get update
 RUN apt-get install -y libpq-dev
 USER jovyan
