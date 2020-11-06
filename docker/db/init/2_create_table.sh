@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+
 psql -v ON_ERROR_STOP=1 --username padawan --dbname dsdojo_db <<-EOSQL
     -- customer
     drop table if exists customer;
