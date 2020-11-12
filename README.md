@@ -72,6 +72,8 @@ Link
   - https://knowledge.sakura.ad.jp/13265/
 - データサイエンス100本ノックを、Google ColabとAzure Notebooksで気軽に行いたい！
   - https://qiita.com/noguhiro2002/items/de49db61b69c3dbc9282
+- データサイエンス初学者にむけた、データサイエンス100本ノックを実装する方法（windows10 Home向け）
+  - https://qiita.com/syuki-read/items/714fe66bf5c16b8a7407#comment-394d2f7656bd5b977e11
 
 Author
 ====
