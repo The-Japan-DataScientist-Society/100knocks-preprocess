@@ -1,4 +1,5 @@
-FROM jupyter/datascience-notebook
+FROM jupyter/datascience-notebook:python-3.8.6
+#FROM jupyter/datascience-notebook:d53a302fbcd0
 USER root
 ENV DEBCONF_NOWARNINGS yes
 RUN apt-get update
@@ -9,4 +10,5 @@ RUN pip install --upgrade setuptools
 RUN pip install --no-cache-dir ipython-sql==0.3.9
 RUN pip install --no-cache-dir psycopg2==2.8.5
 RUN pip install --no-cache-dir imblearn==0.0
-RUN Rscript -e "install.packages(c('DBI', 'RPostgreSQL', 'recipes'), dependencies = TRUE, error = TRUE, repos='https://cran.r-project.org')"
+RUN Rscript -e "install.packages(c('DBI', 'RPostgreSQL', 'rsample'), dependencies = TRUE, error = TRUE, repos='https://cran.r-project.org')"
+#RUN Rscript -e "install.packages(c('DBI', 'RPostgreSQL', 'recipes'), dependencies = TRUE, error = TRUE, repos='https://cran.r-project.org')"
