@@ -24,7 +24,7 @@ Requirement
 - Docker Desktop(Windows 10 proffesional Edition, macOS)
 - Docker Toolbox(Windows 10 home edition)
 
-<font colot="red">※Windows 10 home でもWSL2をインストールすることでDocker Desktopが使えるようになりました！</font> 
+<font color="Red"> ※Windows 10 home でもWSL2をインストールすることでDocker Desktopが使えるようになりました！</font> 
 
 Install
 ====
