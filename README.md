@@ -28,9 +28,11 @@ Requirement
 
 Install
 ====
-- $ git clone [Repository URL] ※
-- $ cd 100knocks-preprocess
-- $ docker-compose up -d --build
+```sh
+$ git clone git@github.com:The-Japan-DataScientist-Society/100knocks-preprocess.git
+$ cd 100knocks-preprocess
+$ docker-compose up -d --build
+```
 
 ※ OSユーザーのホームディレクトリ配下以外にダウンロードする場合、Dockerの共有設定が別途必要となります
 
