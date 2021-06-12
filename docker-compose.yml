@@ -2,14 +2,12 @@ version: "3"
 
 services:
   db:
-    build:
-      context: .
-      dockerfile: Dockerfile.postgres
-    image: dss-postgres
+    image: postgres:12.1-alpine
     container_name: dss-postgres
     ports:
       - "5432:5432"
     environment:
+      - LANG=ja_JP.utf8
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres12345
       - PGPASSWORD=postgres12345
