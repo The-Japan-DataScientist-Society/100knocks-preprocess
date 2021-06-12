@@ -14,6 +14,5 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
           COMPOSE_DOCKER_CLI_BUILD: 1
-        working-directory: ./setup
         run: docker-compose build --no-cache
  
