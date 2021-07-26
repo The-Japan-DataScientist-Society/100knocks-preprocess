@@ -5,10 +5,10 @@ ENV DEBCONF_NOWARNINGS yes
 RUN apt-get update
 RUN apt-get install -y libpq-dev
 USER jovyan
-RUN pip install --upgrade pip
-RUN pip install --upgrade setuptools
-RUN pip install --no-cache-dir ipython-sql==0.3.9
-RUN pip install --no-cache-dir psycopg2==2.8.5
-RUN pip install --no-cache-dir imblearn==0.0
+COPY Pipfile .
+COPY Pipfile.lock .
+RUN pip install --upgrade pip pipenv setuptools \
+    && pipenv install --system \
+    && rm Pipfile*
 RUN Rscript -e "install.packages(c('DBI', 'RPostgreSQL', 'rsample'), dependencies = TRUE, error = TRUE, repos='https://cran.r-project.org')"
 #RUN Rscript -e "install.packages(c('DBI', 'RPostgreSQL', 'recipes'), dependencies = TRUE, error = TRUE, repos='https://cran.r-project.org')"
