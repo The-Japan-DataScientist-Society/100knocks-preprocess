@@ -3,11 +3,12 @@ FROM jupyter/datascience-notebook:python-3.8.6
 USER root
 ENV DEBCONF_NOWARNINGS yes
 RUN apt-get update \
-    && apt-get install -y libpq-dev
+    && apt-get install -y --no-install-recommends libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
 USER jovyan
-COPY Pipfile .
-COPY Pipfile.lock .
-RUN pip install --upgrade pip pipenv setuptools \
+COPY Pipfile /
+COPY Pipfile.lock /
+RUN pip install --upgrade --no-cache-dir pip pipenv setuptools \
     && pipenv install --system \
     && rm Pipfile*
 RUN Rscript -e "install.packages(c('DBI', 'RPostgreSQL', 'rsample'), dependencies = TRUE, error = TRUE, repos='https://cran.r-project.org')"
