@@ -4,6 +4,8 @@
 
 <title>preprocess_knock_R</title>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
 
@@ -9127,15 +9129,15 @@ label {
 }
 /* Flexible box model classes */
 /* Taken from Alex Russell http://infrequently.org/2009/08/css-3-progress/ */
-/* This file is a compatability layer.  It allows the usage of flexible box
+/* This file is a compatability layer.  It allows the usage of flexible box 
 model layouts accross multiple browsers, including older browsers.  The newest,
 universal implementation of the flexible box model is used when available (see
-`Modern browsers` comments below).  Browsers that are known to implement this
+`Modern browsers` comments below).  Browsers that are known to implement this 
 new spec completely include:
 
     Firefox 28.0+
     Chrome 29.0+
-    Internet Explorer 11+
+    Internet Explorer 11+ 
     Opera 17.0+
 
 Browsers not listed, including Safari, are supported via the styling under the
@@ -10200,14 +10202,14 @@ ul#new-menu {
   }
 }
 @media print {
-  #texteditor-backdrop #texteditor-container .codemirror-gutter,
-  #texteditor-backdrop #texteditor-container .codemirror-gutters {
+  #texteditor-backdrop #texteditor-container .CodeMirror-gutter,
+  #texteditor-backdrop #texteditor-container .CodeMirror-gutters {
     background-color: #fff;
   }
 }
 @media not print {
-  #texteditor-backdrop #texteditor-container .codemirror-gutter,
-  #texteditor-backdrop #texteditor-container .codemirror-gutters {
+  #texteditor-backdrop #texteditor-container .CodeMirror-gutter,
+  #texteditor-backdrop #texteditor-container .CodeMirror-gutters {
     background-color: #fff;
   }
 }
@@ -10219,7 +10221,7 @@ ul#new-menu {
     box-shadow: 0px 0px 12px 1px rgba(87, 87, 87, 0.2);
   }
 }
-.codemirror-dialog {
+.CodeMirror-dialog {
   background-color: #fff;
 }
 /*!
@@ -10491,12 +10493,12 @@ div.cell.selected.jupyter-soft-selected:before {
 .prompt {
   /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
   min-width: 14ex;
-  /* This padding is tuned to match the padding on the codemirror editor. */
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
   padding: 0.4em;
   margin: 0px;
   font-family: monospace;
   text-align: right;
-  /* This has to match that of the the codemirror class line-height below */
+  /* This has to match that of the the CodeMirror class line-height below */
   line-height: 1.21429em;
   /* Don't highlight prompt number selection */
   -webkit-touch-callout: none;
@@ -10655,11 +10657,11 @@ div.input_area > div.highlight > pre {
  * respect to the rest of the text.  The user should select a better font.
  * See: https://github.com/ipython/ipython/issues/1503
  *
- * .codemirror span {
+ * .CodeMirror span {
  *      vertical-align: bottom;
  * }
  */
-.codemirror {
+.CodeMirror {
   line-height: 1.21429em;
   /* Changed from 1em to our global default */
   font-size: 14px;
@@ -10668,43 +10670,43 @@ div.input_area > div.highlight > pre {
   background: none;
   /* Changed from white to allow our bg to show through */
 }
-.codemirror-scroll {
-  /*  The codemirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
   /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
   overflow-y: hidden;
   overflow-x: auto;
 }
-.codemirror-lines {
+.CodeMirror-lines {
   /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
   /* we have set a different line-height and want this to scale with that. */
-  /* Note that this should set vertical padding only, since codemirror assumes
-       that horizontal padding will be set on codemirror pre */
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
   padding: 0.4em 0;
 }
-.codemirror-linenumber {
+.CodeMirror-linenumber {
   padding: 0 8px 0 4px;
 }
-.codemirror-gutters {
+.CodeMirror-gutters {
   border-bottom-left-radius: 2px;
   border-top-left-radius: 2px;
 }
-.codemirror pre {
+.CodeMirror pre {
   /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
-    use .codemirror-lines for vertical */
+    use .CodeMirror-lines for vertical */
   padding: 0 0.4em;
   border: 0;
   border-radius: 0;
 }
-.codemirror-cursor {
+.CodeMirror-cursor {
   border-left: 1.4px solid black;
 }
 @media screen and (min-width: 2138px) and (max-width: 4319px) {
-  .codemirror-cursor {
+  .CodeMirror-cursor {
     border-left: 2px solid black;
   }
 }
 @media screen and (min-width: 4320px) {
-  .codemirror-cursor {
+  .CodeMirror-cursor {
     border-left: 4px solid black;
   }
 }
@@ -11030,7 +11032,7 @@ div.output_scroll div.output_subarea {
 div.output_text {
   text-align: left;
   color: #000;
-  /* This has to match that of the the codemirror class line-height below */
+  /* This has to match that of the the CodeMirror class line-height below */
   line-height: 1.21429em;
 }
 /* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
@@ -12517,7 +12519,7 @@ div#pager .ui-resizable-handle {
   background: #f7f7f7;
   border-top: 1px solid #cfcfcf;
   border-bottom: 1px solid #cfcfcf;
-  /* This injects handle bars (a short, wide = symbol) for
+  /* This injects handle bars (a short, wide = symbol) for 
         the resize handle. */
 }
 div#pager .ui-resizable-handle::after {
@@ -13031,14 +13033,14 @@ div#notebook {
   div.cell {
     display: block;
     page-break-inside: avoid;
-  }
-  div.output_wrapper {
+  } 
+  div.output_wrapper { 
     display: block;
-    page-break-inside: avoid;
+    page-break-inside: avoid; 
   }
-  div.output {
+  div.output { 
     display: block;
-    page-break-inside: avoid;
+    page-break-inside: avoid; 
   }
 }
 </style>
@@ -13046,7 +13048,28 @@ div#notebook {
 <!-- Custom stylesheet, it must be in the same directory as the html file -->
 <link rel="stylesheet" href="custom.css">
 
-</head>
+<!-- Loading mathjax macro -->
+<!-- Load mathjax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
+    <!-- MathJax configuration -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+    </script>
+    <!-- End of mathjax configuration --></head>
 <body>
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
@@ -15502,33 +15525,9 @@ $$
 </div>
     </div>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-  <!-- Loading mathjax macro -->
-  <!-- Load mathjax -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
-  <!-- MathJax configuration -->
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-            processEscapes: true,
-            processEnvironments: true
-        },
-        // Center justify equations in code and markdown cells. Elsewhere
-        // we use CSS to left justify single line equations in code cells.
-        displayAlign: 'center',
-        "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
-            linebreaks: { automatic: true }
-        }
-    });
-    </script>
-  <!-- End of mathjax configuration -->
 </body>
 
-
+ 
 
 
 </html>

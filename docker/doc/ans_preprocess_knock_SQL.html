@@ -4,6 +4,8 @@
 
 <title>ans_preprocess_knock_SQL</title>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
 
@@ -9127,15 +9129,15 @@ label {
 }
 /* Flexible box model classes */
 /* Taken from Alex Russell http://infrequently.org/2009/08/css-3-progress/ */
-/* This file is a compatability layer.  It allows the usage of flexible box
+/* This file is a compatability layer.  It allows the usage of flexible box 
 model layouts accross multiple browsers, including older browsers.  The newest,
 universal implementation of the flexible box model is used when available (see
-`Modern browsers` comments below).  Browsers that are known to implement this
+`Modern browsers` comments below).  Browsers that are known to implement this 
 new spec completely include:
 
     Firefox 28.0+
     Chrome 29.0+
-    Internet Explorer 11+
+    Internet Explorer 11+ 
     Opera 17.0+
 
 Browsers not listed, including Safari, are supported via the styling under the
@@ -10200,14 +10202,14 @@ ul#new-menu {
   }
 }
 @media print {
-  #texteditor-backdrop #texteditor-container .codemirror-gutter,
-  #texteditor-backdrop #texteditor-container .codemirror-gutters {
+  #texteditor-backdrop #texteditor-container .CodeMirror-gutter,
+  #texteditor-backdrop #texteditor-container .CodeMirror-gutters {
     background-color: #fff;
   }
 }
 @media not print {
-  #texteditor-backdrop #texteditor-container .codemirror-gutter,
-  #texteditor-backdrop #texteditor-container .codemirror-gutters {
+  #texteditor-backdrop #texteditor-container .CodeMirror-gutter,
+  #texteditor-backdrop #texteditor-container .CodeMirror-gutters {
     background-color: #fff;
   }
 }
@@ -10219,7 +10221,7 @@ ul#new-menu {
     box-shadow: 0px 0px 12px 1px rgba(87, 87, 87, 0.2);
   }
 }
-.codemirror-dialog {
+.CodeMirror-dialog {
   background-color: #fff;
 }
 /*!
@@ -10491,12 +10493,12 @@ div.cell.selected.jupyter-soft-selected:before {
 .prompt {
   /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
   min-width: 14ex;
-  /* This padding is tuned to match the padding on the codemirror editor. */
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
   padding: 0.4em;
   margin: 0px;
   font-family: monospace;
   text-align: right;
-  /* This has to match that of the the codemirror class line-height below */
+  /* This has to match that of the the CodeMirror class line-height below */
   line-height: 1.21429em;
   /* Don't highlight prompt number selection */
   -webkit-touch-callout: none;
@@ -10655,11 +10657,11 @@ div.input_area > div.highlight > pre {
  * respect to the rest of the text.  The user should select a better font.
  * See: https://github.com/ipython/ipython/issues/1503
  *
- * .codemirror span {
+ * .CodeMirror span {
  *      vertical-align: bottom;
  * }
  */
-.codemirror {
+.CodeMirror {
   line-height: 1.21429em;
   /* Changed from 1em to our global default */
   font-size: 14px;
@@ -10668,43 +10670,43 @@ div.input_area > div.highlight > pre {
   background: none;
   /* Changed from white to allow our bg to show through */
 }
-.codemirror-scroll {
-  /*  The codemirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
   /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
   overflow-y: hidden;
   overflow-x: auto;
 }
-.codemirror-lines {
+.CodeMirror-lines {
   /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
   /* we have set a different line-height and want this to scale with that. */
-  /* Note that this should set vertical padding only, since codemirror assumes
-       that horizontal padding will be set on codemirror pre */
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
   padding: 0.4em 0;
 }
-.codemirror-linenumber {
+.CodeMirror-linenumber {
   padding: 0 8px 0 4px;
 }
-.codemirror-gutters {
+.CodeMirror-gutters {
   border-bottom-left-radius: 2px;
   border-top-left-radius: 2px;
 }
-.codemirror pre {
+.CodeMirror pre {
   /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
-    use .codemirror-lines for vertical */
+    use .CodeMirror-lines for vertical */
   padding: 0 0.4em;
   border: 0;
   border-radius: 0;
 }
-.codemirror-cursor {
+.CodeMirror-cursor {
   border-left: 1.4px solid black;
 }
 @media screen and (min-width: 2138px) and (max-width: 4319px) {
-  .codemirror-cursor {
+  .CodeMirror-cursor {
     border-left: 2px solid black;
   }
 }
 @media screen and (min-width: 4320px) {
-  .codemirror-cursor {
+  .CodeMirror-cursor {
     border-left: 4px solid black;
   }
 }
@@ -11030,7 +11032,7 @@ div.output_scroll div.output_subarea {
 div.output_text {
   text-align: left;
   color: #000;
-  /* This has to match that of the the codemirror class line-height below */
+  /* This has to match that of the the CodeMirror class line-height below */
   line-height: 1.21429em;
 }
 /* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
@@ -12517,7 +12519,7 @@ div#pager .ui-resizable-handle {
   background: #f7f7f7;
   border-top: 1px solid #cfcfcf;
   border-bottom: 1px solid #cfcfcf;
-  /* This injects handle bars (a short, wide = symbol) for
+  /* This injects handle bars (a short, wide = symbol) for 
         the resize handle. */
 }
 div#pager .ui-resizable-handle::after {
@@ -13031,14 +13033,14 @@ div#notebook {
   div.cell {
     display: block;
     page-break-inside: avoid;
-  }
-  div.output_wrapper {
+  } 
+  div.output_wrapper { 
     display: block;
-    page-break-inside: avoid;
+    page-break-inside: avoid; 
   }
-  div.output {
+  div.output { 
     display: block;
-    page-break-inside: avoid;
+    page-break-inside: avoid; 
   }
 }
 </style>
@@ -13046,7 +13048,28 @@ div#notebook {
 <!-- Custom stylesheet, it must be in the same directory as the html file -->
 <link rel="stylesheet" href="custom.css">
 
-</head>
+<!-- Loading mathjax macro -->
+<!-- Load mathjax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
+    <!-- MathJax configuration -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+    </script>
+    <!-- End of mathjax configuration --></head>
 <body>
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
@@ -16400,7 +16423,7 @@ SELECT * from customer ORDER BY birth_day DESC LIMIT 10
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 
-SELECT customer_id, amount, RANK() OVER(ORDER BY amount DESC) AS ranking
+SELECT customer_id, amount, RANK() OVER(ORDER BY amount DESC) AS ranking 
 FROM receipt
 LIMIT 10
 </pre></div>
@@ -16514,7 +16537,7 @@ LIMIT 10
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 
-SELECT customer_id, amount, ROW_NUMBER() OVER(ORDER BY amount DESC) AS ranking
+SELECT customer_id, amount, ROW_NUMBER() OVER(ORDER BY amount DESC) AS ranking 
 FROM receipt
 LIMIT 10
 </pre></div>
@@ -18186,7 +18209,7 @@ ORDER BY store_cd
 SELECT store_cd, var_samp(amount) as vars_amount
 FROM receipt
 GROUP BY store_cd
-ORDER BY vars_amount desc
+ORDER BY vars_amount desc 
 LIMIT 5
 </pre></div>
 
@@ -19196,7 +19219,7 @@ WITH customer_days AS (
 ),
 customer_amount AS (
     SELECT customer_id, sum(amount) buy_amount
-    FROM receipt
+    FROM receipt 
     WHERE customer_id NOT LIKE &#39;Z%&#39;
     GROUP BY customer_id
     ORDER BY buy_amount DESC LIMIT 20
@@ -19659,7 +19682,7 @@ SELECT a.sales_ymd, b.sales_ymd as lag_ymd,
     a.amount as amount, b.amount as lag_amount
 FROM sales_amount_lag_date a
 JOIN sales_amount_lag_date b
-ON b.sales_ymd &gt;= a.lag_date_3
+ON b.sales_ymd &gt;= a.lag_date_3 
     and b.sales_ymd &lt; a.sales_ymd
 ORDER BY sales_ymd, lag_ymd
 LIMIT 10;
@@ -19780,7 +19803,7 @@ WITH sales_amount_by_date AS (
     GROUP BY sales_ymd
     ORDER BY sales_ymd
 ), sales_amount_with_lag AS(
-SELECT sales_ymd, amount,
+SELECT sales_ymd, amount, 
     LAG(sales_ymd, 1) OVER (ORDER BY sales_ymd) as lag_ymd_1,
     LAG(amount, 1) OVER (ORDER BY sales_ymd) as lag_amount_1,
     LAG(sales_ymd, 2) OVER (ORDER BY sales_ymd) as lag_ymd_2,
@@ -20885,8 +20908,8 @@ FROM receipt LIMIT 10;
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 
-SELECT
-    TO_CHAR(EXTRACT(MONTH FROM TO_TIMESTAMP(sales_epoch)), &#39;FM00&#39;) as sales_month,
+SELECT 
+    TO_CHAR(EXTRACT(MONTH FROM TO_TIMESTAMP(sales_epoch)), &#39;FM00&#39;) as sales_month, 
     receipt_no, receipt_sub_no
 FROM receipt LIMIT 10;
 </pre></div>
@@ -21000,9 +21023,9 @@ FROM receipt LIMIT 10;
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 -- ここにSQLを記載する
-SELECT
+SELECT 
     TO_CHAR(EXTRACT(DAY FROM TO_TIMESTAMP(sales_epoch)), &#39;FM00&#39;) as sales_day,
-    receipt_no, receipt_sub_no
+    receipt_no, receipt_sub_no 
 FROM receipt LIMIT 10;
 </pre></div>
 
@@ -21240,7 +21263,7 @@ WITH cust AS (
         customer_id,
         postal_cd,
         CASE
-            WHEN 100 &lt;= CAST(SUBSTR(postal_cd, 1, 3) AS INTEGER)
+            WHEN 100 &lt;= CAST(SUBSTR(postal_cd, 1, 3) AS INTEGER) 
                     AND CAST(SUBSTR(postal_cd, 1, 3) AS INTEGER) &lt;= 209 THEN 1
             ELSE 0
         END AS postal_flg
@@ -21255,8 +21278,8 @@ rect AS(
     GROUP BY
         customer_id
 )
-SELECT
-    c.postal_flg, count(1)
+SELECT 
+    c.postal_flg, count(1) 
 FROM
     rect r
 JOIN
@@ -21346,7 +21369,7 @@ SELECT
 FROM
     customer
 LIMIT 10
-
+    
 </pre></div>
 
     </div>
@@ -22493,8 +22516,8 @@ LIMIT 10
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 
 SELECT
-    product_cd,
-    unit_price,
+    product_cd, 
+    unit_price, 
     unit_cost,
     unit_price - unit_cost as unit_profit
 FROM
@@ -22690,14 +22713,14 @@ LIMIT 10
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 
 SELECT
-    product_cd,
-    unit_price,
+    product_cd, 
+    unit_price, 
     unit_cost,
     TRUNC(unit_cost / 0.7) as new_price,
     ((TRUNC(unit_cost / 0.7) - unit_cost) / TRUNC(unit_cost / 0.7)) as new_profit
 FROM
     product
-LIMIT 10
+LIMIT 10    
 </pre></div>
 
     </div>
@@ -22832,14 +22855,14 @@ LIMIT 10
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 
 SELECT
-    product_cd,
-    unit_price,
+    product_cd, 
+    unit_price, 
     unit_cost,
     ROUND(unit_cost / 0.7) as new_price,
     ((ROUND(unit_cost / 0.7) - unit_cost) / ROUND(unit_cost / 0.7)) as new_profit
 FROM
     product
-LIMIT 10
+LIMIT 10    
 </pre></div>
 
     </div>
@@ -22974,14 +22997,14 @@ LIMIT 10
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 
 SELECT
-    product_cd,
-    unit_price,
+    product_cd, 
+    unit_price, 
     unit_cost,
     CEIL(unit_cost / 0.7) as new_price,
     ((CEIL(unit_cost / 0.7) - unit_cost) / CEIL(unit_cost / 0.7)) as new_profit
 FROM
     product
-LIMIT 10
+LIMIT 10 
 </pre></div>
 
     </div>
@@ -23251,7 +23274,7 @@ amount_07 AS (
     JOIN
         product p
     ON
-        r.product_cd = p.product_cd
+        r.product_cd = p.product_cd 
         and  p.category_major_cd = &#39;07&#39;
     GROUP BY
         customer_id
@@ -23268,7 +23291,7 @@ JOIN
 ON
     amount_all.customer_id = amount_07.customer_id
 LIMIT 10
-
+    
 </pre></div>
 
     </div>
@@ -23402,7 +23425,7 @@ SELECT
     c.customer_id,
     r.sales_ymd,
     c.application_date,
-    EXTRACT(DAY FROM (TO_TIMESTAMP(CAST(r.sales_ymd AS VARCHAR), &#39;YYYYMMDD&#39;)
+    EXTRACT(DAY FROM (TO_TIMESTAMP(CAST(r.sales_ymd AS VARCHAR), &#39;YYYYMMDD&#39;) 
                       - TO_TIMESTAMP(c.application_date, &#39;YYYYMMDD&#39;))) AS elapsed_days
 FROM
     receit_distinct r
@@ -23692,7 +23715,7 @@ SELECT
     c.customer_id,
     r.sales_ymd,
     c.application_date,
-    EXTRACT(YEAR FROM AGE(TO_TIMESTAMP(CAST(r.sales_ymd AS VARCHAR), &#39;YYYYMMDD&#39;),
+    EXTRACT(YEAR FROM AGE(TO_TIMESTAMP(CAST(r.sales_ymd AS VARCHAR), &#39;YYYYMMDD&#39;), 
                       TO_TIMESTAMP(c.application_date, &#39;YYYYMMDD&#39;))) AS elapsed_years
 FROM
     receit_distinct r
@@ -23834,7 +23857,7 @@ SELECT
     c.customer_id,
     r.sales_ymd,
     c.application_date,
-    EXTRACT(EPOCH FROM TO_TIMESTAMP(CAST(r.sales_ymd AS VARCHAR), &#39;YYYYMMDD&#39;)) -
+    EXTRACT(EPOCH FROM TO_TIMESTAMP(CAST(r.sales_ymd AS VARCHAR), &#39;YYYYMMDD&#39;)) - 
                       EXTRACT(EPOCH FROM TO_TIMESTAMP(c.application_date, &#39;YYYYMMDD&#39;)) AS elapsed_epoch
 FROM
     receit_distinct r
@@ -24294,7 +24317,7 @@ WITH customer_tmp AS(
     FROM customer
     ORDER BY random()
 )
-SELECT
+SELECT 
     customer_id
     ,customer_name
     ,gender_cd
@@ -24523,7 +24546,7 @@ cusotmer_rownum AS(
     SELECT * , ROW_NUMBER() OVER(PARTITION BY g_cd) AS rn FROM cusotmer_random
 )
 SELECT
-    g_cd,
+    g_cd, 
     count(1)
 FROM
     cusotmer_rownum
@@ -24610,7 +24633,7 @@ SELECT customer_id, sum_amount
 FROM sales_amount
 CROSS JOIN (
     SELECT AVG(sum_amount) AS avg_amount, STDDEV_SAMP(sum_amount) AS std_amount
-    FROM sales_amount
+    FROM sales_amount   
 ) stats_amount
 WHERE ABS(sum_amount - avg_amount) / std_amount &gt; 3
 LIMIT 10
@@ -24724,9 +24747,9 @@ FROM sales_amount
 CROSS JOIN (
     SELECT PERCENTILE_CONT(0.25) WITHIN GROUP(ORDER BY sum_amount) as amount_25per,
            PERCENTILE_CONT(0.75) WITHIN GROUP(ORDER BY sum_amount) as amount_75per
-    FROM sales_amount
+    FROM sales_amount   
 ) stats_amount
-WHERE sum_amount &lt; amount_25per - (amount_75per - amount_25per) * 1.5
+WHERE sum_amount &lt; amount_25per - (amount_75per - amount_25per) * 1.5 
     OR amount_75per + (amount_75per - amount_25per) * 1.5 &lt; sum_amount
 LIMIT 10
 </pre></div>
@@ -24829,7 +24852,7 @@ LIMIT 10
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 
-SELECT
+SELECT 
     SUM(CASE WHEN product_cd IS NULL THEN 1 ELSE 0 END) AS product_cd,
     SUM(CASE WHEN category_major_cd IS NULL THEN 1 ELSE 0 END) AS category_major_cd,
     SUM(CASE WHEN category_medium_cd IS NULL THEN 1 ELSE 0 END) AS category_medium_cd,
@@ -24837,7 +24860,7 @@ SELECT
     SUM(CASE WHEN unit_price IS NULL THEN 1 ELSE 0 END) AS unit_price,
     SUM(CASE WHEN unit_cost IS NULL THEN 1 ELSE 0 END) AS unit_cost
 FROM product LIMIT 10
-
+    
 </pre></div>
 
     </div>
@@ -25036,10 +25059,10 @@ Done.
 DROP TABLE IF EXISTS product_2;
 CREATE TABLE product_2 AS (
     SELECT
-        product_cd,
-        category_major_cd,
-        category_medium_cd,
-        category_small_cd,
+        product_cd, 
+        category_major_cd, 
+        category_medium_cd, 
+        category_small_cd, 
         COALESCE(unit_price, unit_avg) as unit_price,
         COALESCE(unit_cost, cost_avg) as unit_cost
     FROM
@@ -25099,11 +25122,11 @@ Done.
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 
-SELECT
+SELECT 
     SUM(CASE WHEN unit_price IS NULL THEN 1 ELSE 0 END) AS unit_price,
     SUM(CASE WHEN unit_cost IS NULL THEN 1 ELSE 0 END) AS unit_cost
 FROM product_2 LIMIT 10
-
+    
 </pre></div>
 
     </div>
@@ -25170,10 +25193,10 @@ FROM product_2 LIMIT 10
 DROP TABLE IF EXISTS product_3;
 CREATE TABLE product_3 AS (
     SELECT
-        product_cd,
-        category_major_cd,
-        category_medium_cd,
-        category_small_cd,
+        product_cd, 
+        category_major_cd, 
+        category_medium_cd, 
+        category_small_cd, 
         COALESCE(unit_price, unit_med) as unit_price,
         COALESCE(unit_cost, cost_med) as unit_cost
     FROM
@@ -25233,7 +25256,7 @@ Done.
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 
-SELECT
+SELECT 
     SUM(CASE WHEN unit_price IS NULL THEN 1 ELSE 0 END) AS unit_price,
     SUM(CASE WHEN unit_cost IS NULL THEN 1 ELSE 0 END) AS unit_cost
 FROM product_3 LIMIT 10
@@ -25304,17 +25327,17 @@ DROP TABLE IF EXISTS product_4;
 CREATE TABLE product_4 AS (
     WITH category_median AS(
         SELECT
-            category_small_cd,
+            category_small_cd, 
             ROUND(PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY unit_price)) AS unit_med,
             ROUND(PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY unit_cost)) AS cost_med
         FROM product
         GROUP BY category_small_cd
     )
     SELECT
-        product_cd,
-        category_major_cd,
-        category_medium_cd,
-        category_small_cd,
+        product_cd, 
+        category_major_cd, 
+        category_medium_cd, 
+        category_small_cd, 
         COALESCE(unit_price, unit_med) as unit_price,
         COALESCE(unit_cost, cost_med) as unit_cost
     FROM
@@ -25370,7 +25393,7 @@ Done.
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 
-SELECT
+SELECT 
     SUM(CASE WHEN unit_price IS NULL THEN 1 ELSE 0 END) AS unit_price,
     SUM(CASE WHEN unit_cost IS NULL THEN 1 ELSE 0 END) AS unit_cost
 FROM product_4 LIMIT 10
@@ -25604,10 +25627,10 @@ CREATE TABLE customer_1 AS (
             AVG(latitude) as m_latitude
         FROM
             geocode
-        GROUP BY
+        GROUP BY 
             postal_cd
     )
-    SELECT
+    SELECT 
         *
     FROM
         customer c
@@ -25795,11 +25818,11 @@ SELECT
     c.address AS customer_address,
     s.address AS store_address,
     (
-        6371 * ACOS(
-            SIN(RADIANS(c.m_latitude)) * SIN(RADIANS(s.latitude)) +
+        6371 * ACOS( 
+            SIN(RADIANS(c.m_latitude)) * SIN(RADIANS(s.latitude)) + 
             COS(RADIANS(c.m_latitude)) * COS(RADIANS(s.latitude)) * COS(RADIANS(c.m_longitude) - RADIANS(s.longitude))
         )
-    ) AS distance
+    ) AS distance 
 FROM
     customer_1 c
 JOIN
@@ -25935,13 +25958,13 @@ CREATE TABLE customer_u AS (
     SELECT
         c.customer_id,
         c.customer_name,
-        c.postal_cd,
+        c.postal_cd, 
         SUM(r.amount) as sum_amount
     FROM
         customer c
 
     LEFT JOIN
-        receipt r
+        receipt r        
     ON c.customer_id = r.customer_id
     GROUP by
         c.customer_id, c.customer_name, c.postal_cd
@@ -26082,10 +26105,10 @@ CROSS JOIN (SELECT count(1) as cnt_u FROM customer_u) customer_u
 
 DROP TABLE IF EXISTS customer_n;
 CREATE TABLE customer_n AS (
-    SELECT
-        c.*,
+    SELECT 
+        c.*, 
         u.customer_id as integration_id
-    FROM
+    FROM 
         customer c
     JOIN
         customer_u u
@@ -26209,7 +26232,7 @@ CREATE TEMP TABLE IF NOT EXISTS sales_record_customer_id AS (
     FROM customer
     LEFT JOIN receipt USING(customer_id)
     GROUP BY customer_id
-    HAVING SUM(amount) IS NOT NULL
+    HAVING SUM(amount) IS NOT NULL 
 );
 
 DROP TABLE IF EXISTS customer_train;
@@ -26292,10 +26315,10 @@ Done.
 DROP TABLE IF EXISTS sales_amount ;
 
 CREATE TABLE sales_amount AS (
-    SELECT
-        SUBSTR(CAST(sales_ymd AS VARCHAR), 1, 6) AS sales_ym,
+    SELECT 
+        SUBSTR(CAST(sales_ymd AS VARCHAR), 1, 6) AS sales_ym, 
         SUM(amount) AS sum_amount,
-        row_number() OVER(PARTITION BY NULL ORDER BY
+        row_number() OVER(PARTITION BY NULL ORDER BY 
                          SUBSTR(CAST(sales_ymd AS VARCHAR), 1, 6)) AS rn
     FROM
         receipt
@@ -27231,7 +27254,7 @@ CREATE TABLE product_full (
         unit_price           INTEGER,
         unit_cost            INTEGER
 );
-
+    
 </pre></div>
 
     </div>
@@ -27896,33 +27919,9 @@ SELECT * FROM product_full LIMIT 3
 </div>
     </div>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-  <!-- Loading mathjax macro -->
-  <!-- Load mathjax -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
-  <!-- MathJax configuration -->
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-            processEscapes: true,
-            processEnvironments: true
-        },
-        // Center justify equations in code and markdown cells. Elsewhere
-        // we use CSS to left justify single line equations in code cells.
-        displayAlign: 'center',
-        "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
-            linebreaks: { automatic: true }
-        }
-    });
-    </script>
-  <!-- End of mathjax configuration -->
 </body>
 
-
+ 
 
 
 </html>
