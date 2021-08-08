@@ -26,5 +26,8 @@
       "4.3.2.大かっこ［］": false
     },
     "spellcheck-tech-word": true
+  },
+  "plugins": {
+    "html": true
   }
 }
