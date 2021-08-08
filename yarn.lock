@@ -2228,9 +2228,10 @@ textlint-rule-footnote-order@^1.0.3:
   resolved "https://registry.yarnpkg.com/textlint-rule-footnote-order/-/textlint-rule-footnote-order-1.0.3.tgz#fc7d586b79f6f70a9cd36de3b8583fedba925f79"
   integrity sha512-HH4AWGi05S88XJ0HTzihOpVPDV+BRpnqt/MXnVcQBHTc6wGxNgVoBWN19o43G3D8m3GYnoUAR8UF/IbAYbKolA==
 
-textlint-rule-general-novel-style-ja@dev-hato/textlint-rule-general-novel-style-ja-markdown:
+textlint-rule-general-novel-style-ja@^1.3.0:
   version "1.3.0"
-  resolved "https://codeload.github.com/dev-hato/textlint-rule-general-novel-style-ja-markdown/tar.gz/ff32d5297fa6162bef3307e4769234181354253b"
+  resolved "https://registry.yarnpkg.com/textlint-rule-general-novel-style-ja/-/textlint-rule-general-novel-style-ja-1.3.0.tgz#76fae3472c2d1e5d268f23be08f1fe29461fe8eb"
+  integrity sha1-dvrjRywtHl0mjyO+CPH+KUYf6Os=
   dependencies:
     kansuji "^1.1.0"
     textlint-rule-helper "^1.1.5"
