@@ -1,0 +1,30 @@
+{
+  "filters": {},
+  "rules": {
+    "@textlint-ja/no-insert-dropping-sa": true,
+    "abbr-within-parentheses": true,
+    "footnote-order": true,
+    "general-novel-style-ja": {
+        // 各段落の先頭に許可する文字 (false: チェックしない)
+        "chars_leading_paragraph": false,
+        // アラビア数字の桁数は2桁まで (false: チェックしない)
+        "max_arabic_numeral_digits": false
+    },
+    "ja-hiragana-fukushi": true,
+    "ja-hiragana-hojodoushi": true,
+    "ja-hiragana-keishikimeishi": true,
+    "ja-unnatural-alphabet": true,
+    "ng-word": true,
+    "no-dead-link": true,
+    "no-mixed-zenkaku-and-hankaku-alphabet": true,
+    "prefer-tari-tari": true,
+    "preset-ja-spacing": true,
+    "preset-ja-technical-writing": true,
+    "preset-jtf-style": {
+      "1.1.3.箇条書き": false,
+      "4.3.1.丸かっこ（）": false,
+      "4.3.2.大かっこ［］": false
+    },
+    "spellcheck-tech-word": true
+  }
+}

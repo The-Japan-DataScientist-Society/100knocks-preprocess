@@ -1,0 +1,234 @@
+name: textlint
+
+# pull_requestで何かあった時に起動する
+on:
+  pull_request:
+
+jobs:
+  # textlintをかけ、結果をPRにコメントとして表示する。
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2.3.0
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: yarn cache
+        uses: actions/cache@v2.1.6
+        with:
+          key: ${{ hashFiles('./.github/workflows/textlint.yml') }}-${{ runner.os }}-${{ matrix.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          restore-keys: |
+            ${{ hashFiles('./.github/workflows/pr-textlint.yml') }}-${{ runner.os }}-${{ matrix.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            ${{ hashFiles('./.github/workflows/pr-textlint.yml') }}-${{ runner.os }}-${{ matrix.node-version }}-yarn-
+      - name: Install dependencies
+        run: |
+          yarn install -D
+      # lintする
+      - name: Lint files
+        id: lint
+        run: |
+          result="$(find . -type f -name "*.md" -not -path "./node_modules/*" -print0 | xargs -0 yarn textlint 2>&1)" || true
+          echo "$result"
+          result="${result//'%'/'%25'}"
+          result="${result//$'\n'/'%0A'}"
+          result="${result//$'\r'/'%0D'}"
+          echo "::set-output name=result::$result"
+          true
+        continue-on-error: true
+      # lint結果をコメントに残す
+      - name: Lint Comment
+        if: ${{ github.event.pull_request.head.repo.full_name == github.repository && steps.lint.outputs.result != '' }}
+        uses: actions/github-script@v4.0.2
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const issues_listComments_params = {
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+             repo: context.repo.repo
+            }
+            console.log("call issues.listComments:")
+            console.log(issues_listComments_params)
+            github.issues.listComments(issues_listComments_params).then(response =>
+              response.data.filter(
+                comment=>comment.user.id==41898282 && comment.body.startsWith('日本語の')
+              ).map(
+                comment=>comment.id
+              ).forEach(
+                comment_id => {
+                  const issues_deleteComment_params = {
+                    comment_id: comment_id,
+                    owner: context.repo.owner,
+                    repo: context.repo.repo
+                  }
+                  console.log("call issues.deleteComment:")
+                  console.log(issues_deleteComment_params)
+                  github.issues.deleteComment(issues_deleteComment_params)
+                }
+              )
+            )
+
+            const result = `${{steps.lint.outputs.result}}`
+            const issues_createComment_params = {
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "日本語のLint結果\n```\n"+result+"\n```"
+            }
+            console.log("call issues.createComment:")
+            console.log(issues_createComment_params)
+            github.issues.createComment(issues_createComment_params)
+      - name: Exit
+        if: ${{ github.event.pull_request.head.repo.full_name != github.repository && steps.lint.outcome == 'failure' }}
+        run: exit 1
+
+  # PRが来たらtextlintをかけてみて、差分があればPRを作って、エラーで落ちるjob
+  format:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2.3.0
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: yarn cache
+        uses: actions/cache@v2.1.6
+        with:
+          key: ${{ hashFiles('./.github/workflows/textlint.yml') }}-${{ runner.os }}-${{ matrix.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          restore-keys: |
+            ${{ hashFiles('./.github/workflows/pr-textlint.yml') }}-${{ runner.os }}-${{ matrix.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            ${{ hashFiles('./.github/workflows/pr-textlint.yml') }}-${{ runner.os }}-${{ matrix.node-version }}-yarn-
+      - name: Install dependencies
+        run: |
+          yarn install -D
+      # textlintでformatする
+      - name: Format files
+        id: format
+        run: |
+          find . -type f -name "*.md" -not -path "./node_modules/*" -print0 | xargs -0 yarn textlint --fix
+        continue-on-error: true
+      # 差分があったときは差分を出力する
+      - name: Show diff
+        id: show_diff
+        run: |
+          echo "::set-output name=diff::$(git diff)"
+      # 差分があったときは、コミットを作りpushする
+      - name: Push
+        if: ${{ steps.show_diff.outputs.diff != '' }}
+        run: |
+          git config user.name "textlint CI"
+          git config user.email "textlint_ci@example.com"
+          git add -u
+          git commit -m "日本語修正"
+          git push -f https://${{github.actor}}:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git HEAD:refs/heads/fix-text-${{github.event.pull_request.head.ref}}
+      # pushしたブランチでPRを作る
+      - name: Create PullRequest
+        uses: actions/github-script@v4.0.2
+        if: ${{ steps.show_diff.outputs.diff != '' }}
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const common_params = {
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            }
+            const pull_params = {
+              head: "The-Japan-DataScientist-Society:fix-text-${{github.event.pull_request.head.ref}}",
+              base: "${{github.event.pull_request.head.ref}}",
+              ...common_params
+            }
+            const pulls_list_params = {
+              state: "open",
+              ...pull_params
+            }
+            console.log("call pulls.list:")
+            console.log(pulls_list_params)
+            github.pulls.list(pulls_list_params).then(list_res => {
+              if (list_res.data.length === 0) {
+                const pulls_create_params = {
+                  title: "日本語が間違ってたので直しました。PRをマージすると反映されます。 #${{github.event.pull_request.number}}",
+                  body: "日本語を修正しました。本PRをマージすると #${{github.event.pull_request.number}} に修正が適用されます。",
+                  ...pull_params
+                }
+                console.log("call pulls.create:")
+                console.log(pulls_create_params)
+                github.pulls.create(pulls_create_params).then(create_res => {
+                  if("${{github.event.pull_request.user.login}}" !== "dependabot[bot]") {
+                    const issues_add_assignees_params = {
+                      issue_number: create_res.data.number,
+                      assignees: ["${{github.event.pull_request.user.login}}"],
+                      ...common_params
+                    }
+                    console.log("call issues.addAssignees:")
+                    console.log(issues_add_assignees_params)
+                    github.issues.addAssignees(issues_add_assignees_params)
+                  }
+                })
+              }
+            })
+      # 既にformat修正のPRがある状態で、手動でformatを修正した場合、format修正のPRを閉じる
+      - name: Close PullRequest
+        uses: actions/github-script@v4.0.2
+        if: ${{ steps.show_diff.outputs.diff == '' }}
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const head_name = "fix-text-${{github.event.pull_request.head.ref}}"
+            const common_params = {
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            }
+            const pulls_list_params = {
+              head: "The-Japan-DataScientist-Society:" + head_name,
+              base: "${{github.event.pull_request.head.ref}}",
+              state: "open",
+              ...common_params
+            }
+            console.log("call pulls.list:")
+            console.log(pulls_list_params)
+            github.pulls.list(pulls_list_params).then(res => {
+              for(const data of res.data){
+                const pulls_update_params = {
+                  pull_number: data.number,
+                  state: "closed",
+                  ...common_params
+                }
+                console.log("call pulls.update:")
+                console.log(pulls_update_params)
+                github.pulls.update(pulls_update_params).then(res2 => {
+                  const git_deleteRef_params = {
+                    ref: "heads/" + head_name,
+                    ...common_params
+                  }
+                  console.log("call git.deleteRef:")
+                  console.log(git_deleteRef_params)
+                  github.git.deleteRef(git_deleteRef_params)
+                })
+              }
+            })
+      - name: Exit
+        if: ${{ steps.show_diff.outputs.diff != '' }}
+        run: exit 1
