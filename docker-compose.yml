@@ -4,7 +4,7 @@ services:
   db:
     build:
       context: .
-      dockerfile: Dockerfile.postgres
+      dockerfile: dockerfiles/postgres/Dockerfile
     image: dss-postgres
     container_name: dss-postgres
     ports:
@@ -22,7 +22,7 @@ services:
   notebook:
     build:
       context: .
-      dockerfile: Dockerfile.notebook
+      dockerfile: dockerfiles/notebook/Dockerfile
     image: dss-notebook
     container_name: dss-notebook
     ports:
