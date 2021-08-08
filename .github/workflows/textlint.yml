@@ -29,8 +29,8 @@ jobs:
           key: ${{ hashFiles('./.github/workflows/textlint.yml') }}-${{ runner.os }}-${{ matrix.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           restore-keys: |
-            ${{ hashFiles('./.github/workflows/pr-textlint.yml') }}-${{ runner.os }}-${{ matrix.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}
-            ${{ hashFiles('./.github/workflows/pr-textlint.yml') }}-${{ runner.os }}-${{ matrix.node-version }}-yarn-
+            ${{ hashFiles('./.github/workflows/textlint.yml') }}-${{ runner.os }}-${{ matrix.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            ${{ hashFiles('./.github/workflows/textlint.yml') }}-${{ runner.os }}-${{ matrix.node-version }}-yarn-
       - name: Install dependencies
         run: |
           yarn install -D
@@ -119,8 +119,8 @@ jobs:
           key: ${{ hashFiles('./.github/workflows/textlint.yml') }}-${{ runner.os }}-${{ matrix.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           restore-keys: |
-            ${{ hashFiles('./.github/workflows/pr-textlint.yml') }}-${{ runner.os }}-${{ matrix.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}
-            ${{ hashFiles('./.github/workflows/pr-textlint.yml') }}-${{ runner.os }}-${{ matrix.node-version }}-yarn-
+            ${{ hashFiles('./.github/workflows/textlint.yml') }}-${{ runner.os }}-${{ matrix.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            ${{ hashFiles('./.github/workflows/textlint.yml') }}-${{ runner.os }}-${{ matrix.node-version }}-yarn-
       - name: Install dependencies
         run: |
           yarn install -D
