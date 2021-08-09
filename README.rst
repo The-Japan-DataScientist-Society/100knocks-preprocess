@@ -14,7 +14,7 @@ Overview
 
 Description
 ====
-- Dockerfile(Dockerfile.notebook, Dockerfile.postgres)
+- Dockerfile(dockerfiles/notebook/Dockerfile, dockerfiles/notebook/Dockerfile)
 - docker-compose.yml
 - スーパーの架空購買データと架空個人情報(csv)
 - データベースを初期設定するための各種スクリプト
