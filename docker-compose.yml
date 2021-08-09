@@ -36,5 +36,5 @@ services:
     links:
       - db
     volumes:
-      - ./docker/work:/home/jovyan/work
+      - ./docker:/home/jovyan
     command: start-notebook.sh --NotebookApp.token=''
