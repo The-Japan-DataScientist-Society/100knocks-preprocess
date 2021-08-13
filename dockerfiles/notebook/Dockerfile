@@ -4,6 +4,7 @@ USER root
 ENV DEBCONF_NOWARNINGS yes
 
 # postgresql 13.x対応を行っている (参考: https://www.postgresql.org/download/linux/ubuntu/ )
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
     && apt-get install -y --no-install-recommends lsb-release=11.1.0ubuntu2 gnupg=2.2.19-3ubuntu2.1 \
     && sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list' \
@@ -12,7 +13,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends libpq-dev=13.4-1.pgdg20.04+1 \
     && apt-get remove -y lsb-release gnupg \
     && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /var/lib/apt/lists/*
 
 USER jovyan
 WORKDIR /home/jovyan
