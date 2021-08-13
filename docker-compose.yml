@@ -38,4 +38,5 @@ services:
     volumes:
       - ./docker/doc:/home/jovyan/doc
       - ./docker/work:/home/jovyan/work
+      - ./docker/script:/home/jovyan/script
     command: start-notebook.sh --NotebookApp.token=''
