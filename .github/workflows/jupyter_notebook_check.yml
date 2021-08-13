@@ -1,4 +1,4 @@
-name: docker_build
+name: Jupyter Notebook check
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  docker_build:
+  jupyter_notebook_check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,3 +18,9 @@ jobs:
           DOCKER_BUILDKIT: 1
           COMPOSE_DOCKER_CLI_BUILD: 1
         run: docker-compose build --no-cache
+      - name: Run jupyter notebooks
+        working-directory: ./docker
+        run:
+          for f in $(find work/ -type f -name "*.ipynb"); do
+            docker exec notebook jupyter nbconvert --to notebook --execute ${f}
+          done
