@@ -20,4 +20,4 @@ jobs:
         run: docker-compose build --no-cache
       - name: Run jupyter notebooks
         working-directory: ./docker
-        run: find work/answer -type f -name "*.ipynb" -print0 | xargs -0 -n 1 docker-compose exec notebook jupyter nbconvert --to notebook --execute
+        run: find work/answer -type f -name "*.ipynb" -print0 | xargs -0 -n 1 docker-compose exec -T notebook jupyter nbconvert --to notebook --execute
