@@ -19,4 +19,5 @@ jobs:
           COMPOSE_DOCKER_CLI_BUILD: 1
         run: docker-compose build --no-cache
       - name: Run jupyter notebooks
-        run: docker-compose exec notebook /bin/sh -c 'find work/answer -type f -name "*.ipynb" | xargs -I @ jupyter nbconvert --to notebook --execute @'
+        working-directory: ./docker
+        run: find work/answer -type f -name "*.ipynb" | xargs -I @ docker-compose exec notebook echo jupyter nbconvert --to notebook --execute @
