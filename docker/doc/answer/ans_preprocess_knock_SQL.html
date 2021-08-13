@@ -14457,7 +14457,8 @@ a.anchor-link {
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 
-<span class="k">SELECT</span> <span class="n">sales_ymd</span> <span class="k">as</span> <span class="n">sales_date</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">,</span> <span class="n">product_cd</span><span class="p">,</span> <span class="n">amount</span> <span class="k">FROM</span> <span class="n">receipt</span> <span class="k">LIMIT</span> <span class="mi">10</span>
+<span class="k">SELECT</span> <span class="n">sales_ymd</span> <span class="k">as</span> <span class="n">sales_date</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">,</span> <span class="n">product_cd</span><span class="p">,</span> <span class="n">amount</span> 
+<span class="k">FROM</span> <span class="n">receipt</span> <span class="k">LIMIT</span> <span class="mi">10</span>
 </pre></div>
 
      </div>
@@ -17516,12 +17517,12 @@ a.anchor-link {
             <td>4</td>
         </tr>
         <tr>
-            <td>ZZ000000000000</td>
+            <td>CS021515000089</td>
             <td>5440</td>
             <td>7</td>
         </tr>
         <tr>
-            <td>CS021515000089</td>
+            <td>ZZ000000000000</td>
             <td>5440</td>
             <td>7</td>
         </tr>
@@ -17531,7 +17532,7 @@ a.anchor-link {
             <td>9</td>
         </tr>
         <tr>
-            <td>CS009415000038</td>
+            <td>CS040415000200</td>
             <td>5280</td>
             <td>9</td>
         </tr>
@@ -17652,7 +17653,7 @@ a.anchor-link {
             <td>9</td>
         </tr>
         <tr>
-            <td>CS009415000038</td>
+            <td>ZZ000000000000</td>
             <td>5280</td>
             <td>10</td>
         </tr>
@@ -18592,7 +18593,9 @@ a.anchor-link {
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 
-<span class="k">SELECT</span> <span class="n">store_cd</span><span class="p">,</span> <span class="n">PERCENTILE_CONT</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="n">WITHIN</span> <span class="k">GROUP</span><span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">amount</span><span class="p">)</span> <span class="k">as</span> <span class="n">amount_50per</span>
+<span class="k">SELECT</span> 
+    <span class="n">store_cd</span><span class="p">,</span> 
+    <span class="n">PERCENTILE_CONT</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="n">WITHIN</span> <span class="k">GROUP</span><span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">amount</span><span class="p">)</span> <span class="k">as</span> <span class="n">amount_50per</span>
 <span class="k">FROM</span> <span class="n">receipt</span>
 <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">store_cd</span>
 <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">amount_50per</span> <span class="k">desc</span>
@@ -18683,6 +18686,7 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="c1">-- コード例1: 分析関数でmodeを計算する</span>
 <span class="k">WITH</span> <span class="n">product_mode</span> <span class="k">AS</span> <span class="p">(</span>
     <span class="k">SELECT</span> <span class="n">store_cd</span><span class="p">,</span><span class="n">product_cd</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">mode_cnt</span><span class="p">,</span>
@@ -20852,6 +20856,7 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="c1">-- コード例1:縦持ちケース</span>
 <span class="k">WITH</span> <span class="n">sales_amount_by_date</span> <span class="k">AS</span> <span class="p">(</span>
     <span class="k">SELECT</span> <span class="n">sales_ymd</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span> <span class="k">as</span> <span class="n">amount</span> <span class="k">FROM</span> <span class="n">receipt</span>
@@ -20993,6 +20998,7 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="c1">-- コード例2:横持ちケース</span>
 <span class="k">WITH</span> <span class="n">sales_amount_by_date</span> <span class="k">AS</span> <span class="p">(</span>
     <span class="k">SELECT</span> <span class="n">sales_ymd</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span> <span class="k">as</span> <span class="n">amount</span> <span class="k">FROM</span> <span class="n">receipt</span>
@@ -21185,6 +21191,7 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="c1">-- SQL向きではないため、やや強引に記載する（カテゴリ数が多いときはとても長いSQLとなってしまう点に注意）</span>
 
 <span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="n">sales_summary</span><span class="p">;</span>
@@ -21382,6 +21389,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="c1">-- SQL向きではないため、やや強引に記載する（カテゴリ数が多いときはとても長いSQLとなってしまう点に注意）</span>
 <span class="k">SELECT</span> <span class="n">era</span><span class="p">,</span> <span class="s1">&#39;00&#39;</span> <span class="k">as</span> <span class="n">gender_cd</span> <span class="p">,</span> <span class="n">male</span> <span class="k">AS</span> <span class="n">amount</span> <span class="k">FROM</span> <span class="n">sales_summary</span>
 <span class="k">UNION</span> <span class="k">ALL</span>
@@ -21699,7 +21707,8 @@ Done.
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 
-<span class="k">SELECT</span> <span class="n">customer_id</span><span class="p">,</span> <span class="n">TO_DATE</span><span class="p">(</span><span class="n">application_date</span><span class="p">,</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="k">from</span> <span class="n">customer</span> <span class="k">LIMIT</span> <span class="mi">10</span><span class="p">;</span>
+<span class="k">SELECT</span> <span class="n">customer_id</span><span class="p">,</span> <span class="n">TO_DATE</span><span class="p">(</span><span class="n">application_date</span><span class="p">,</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> 
+<span class="k">FROM</span> <span class="n">customer</span> <span class="k">LIMIT</span> <span class="mi">10</span><span class="p">;</span>
 </pre></div>
 
      </div>
@@ -21807,7 +21816,12 @@ Done.
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 
-<span class="k">SELECT</span> <span class="n">TO_DATE</span><span class="p">(</span><span class="k">CAST</span><span class="p">(</span><span class="n">sales_ymd</span> <span class="k">AS</span> <span class="nb">VARCHAR</span><span class="p">),</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">),</span> <span class="n">receipt_no</span><span class="p">,</span> <span class="n">receipt_sub_no</span> <span class="k">FROM</span> <span class="n">receipt</span> <span class="k">LIMIT</span> <span class="mi">10</span><span class="p">;</span>
+<span class="k">SELECT</span> 
+    <span class="n">TO_DATE</span><span class="p">(</span><span class="k">CAST</span><span class="p">(</span><span class="n">sales_ymd</span> <span class="k">AS</span> <span class="nb">VARCHAR</span><span class="p">),</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">),</span> 
+    <span class="n">receipt_no</span><span class="p">,</span> 
+    <span class="n">receipt_sub_no</span> 
+<span class="k">FROM</span> <span class="n">receipt</span> 
+<span class="k">LIMIT</span> <span class="mi">10</span><span class="p">;</span>
 </pre></div>
 
      </div>
@@ -21926,7 +21940,11 @@ Done.
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 
-<span class="k">SELECT</span> <span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="n">sales_epoch</span><span class="p">)</span> <span class="k">as</span> <span class="n">sales_date</span><span class="p">,</span> <span class="n">receipt_no</span><span class="p">,</span> <span class="n">receipt_sub_no</span> <span class="k">FROM</span> <span class="n">receipt</span> <span class="k">LIMIT</span> <span class="mi">10</span><span class="p">;</span>
+<span class="k">SELECT</span> 
+    <span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="n">sales_epoch</span><span class="p">)</span> <span class="k">as</span> <span class="n">sales_date</span><span class="p">,</span> 
+    <span class="n">receipt_no</span><span class="p">,</span> <span class="n">receipt_sub_no</span> 
+<span class="k">FROM</span> <span class="n">receipt</span> 
+<span class="k">LIMIT</span> <span class="mi">10</span><span class="p">;</span>
 </pre></div>
 
      </div>
@@ -22045,8 +22063,12 @@ Done.
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 
-<span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="k">EXTRACT</span><span class="p">(</span><span class="k">YEAR</span> <span class="k">FROM</span> <span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="n">sales_epoch</span><span class="p">)),</span><span class="s1">&#39;FM9999&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sales_year</span><span class="p">,</span> <span class="n">receipt_no</span><span class="p">,</span> <span class="n">receipt_sub_no</span>
-<span class="k">FROM</span> <span class="n">receipt</span> <span class="k">LIMIT</span> <span class="mi">10</span><span class="p">;</span>
+<span class="k">SELECT</span> 
+    <span class="n">TO_CHAR</span><span class="p">(</span><span class="k">EXTRACT</span><span class="p">(</span><span class="k">YEAR</span> <span class="k">FROM</span> <span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="n">sales_epoch</span><span class="p">)),</span><span class="s1">&#39;FM9999&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sales_year</span><span class="p">,</span> 
+    <span class="n">receipt_no</span><span class="p">,</span> 
+    <span class="n">receipt_sub_no</span>
+<span class="k">FROM</span> <span class="n">receipt</span> 
+<span class="k">LIMIT</span> <span class="mi">10</span><span class="p">;</span>
 </pre></div>
 
      </div>
@@ -22166,7 +22188,9 @@ Done.
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 
 <span class="k">SELECT</span> 
-    <span class="n">TO_CHAR</span><span class="p">(</span><span class="k">EXTRACT</span><span class="p">(</span><span class="k">MONTH</span> <span class="k">FROM</span> <span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="n">sales_epoch</span><span class="p">)),</span> <span class="s1">&#39;FM00&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sales_month</span><span class="p">,</span> 
+    <span class="n">TO_CHAR</span><span class="p">(</span><span class="k">EXTRACT</span><span class="p">(</span>
+        <span class="k">MONTH</span> <span class="k">FROM</span> <span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="n">sales_epoch</span><span class="p">)</span>
+    <span class="p">),</span> <span class="s1">&#39;FM00&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sales_month</span><span class="p">,</span> 
     <span class="n">receipt_no</span><span class="p">,</span> <span class="n">receipt_sub_no</span>
 <span class="k">FROM</span> <span class="n">receipt</span> <span class="k">LIMIT</span> <span class="mi">10</span><span class="p">;</span>
 </pre></div>
@@ -22286,7 +22310,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-<span class="c1">-- ここにSQLを記載する</span>
+
 <span class="k">SELECT</span> 
     <span class="n">receipt_no</span><span class="p">,</span> <span class="n">receipt_sub_no</span><span class="p">,</span>
     <span class="n">TO_CHAR</span><span class="p">(</span><span class="k">EXTRACT</span><span class="p">(</span><span class="k">DAY</span> <span class="k">FROM</span> <span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="n">sales_epoch</span><span class="p">)),</span> <span class="s1">&#39;FM00&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sales_day</span>
@@ -22408,6 +22432,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">SELECT</span>
     <span class="n">customer_id</span><span class="p">,</span>
     <span class="k">SUM</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span> <span class="k">AS</span> <span class="n">sum_amount</span><span class="p">,</span>
@@ -22536,6 +22561,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">WITH</span> <span class="n">cust</span> <span class="k">AS</span> <span class="p">(</span>
     <span class="k">SELECT</span>
         <span class="n">customer_id</span><span class="p">,</span>
@@ -22640,6 +22666,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="c1">-- SQL向きではないため、やや強引に記載する（カテゴリ数が多いときはとても長いSQLとなってしまう点に注意）</span>
 <span class="k">SELECT</span>
     <span class="n">customer_id</span><span class="p">,</span>
@@ -22777,6 +22804,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">WITH</span> <span class="n">sales_amount</span> <span class="k">AS</span><span class="p">(</span>
     <span class="k">SELECT</span>
         <span class="n">customer_id</span><span class="p">,</span>
@@ -23182,6 +23210,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="c1">-- SQL向きではないため、やや強引に記載する（カテゴリ数が多いときはとても長いSQLとなってしまう点に注意）</span>
 <span class="k">SELECT</span>
     <span class="n">customer_id</span><span class="p">,</span>
@@ -23319,6 +23348,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">WITH</span> <span class="n">sales_amount</span> <span class="k">AS</span><span class="p">(</span>
     <span class="k">SELECT</span>
         <span class="n">customer_id</span><span class="p">,</span>
@@ -23461,6 +23491,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">WITH</span> <span class="n">sales_amount</span> <span class="k">AS</span><span class="p">(</span>
     <span class="k">SELECT</span>
         <span class="n">customer_id</span><span class="p">,</span>
@@ -23482,7 +23513,8 @@ Done.
 <span class="k">SELECT</span>
     <span class="n">customer_id</span><span class="p">,</span>
     <span class="n">sum_amount</span><span class="p">,</span>
-    <span class="p">(</span><span class="n">sum_amount</span> <span class="o">-</span> <span class="n">min_amount</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span> <span class="o">/</span> <span class="p">(</span><span class="n">max_amount</span> <span class="o">-</span>  <span class="n">min_amount</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span> <span class="k">AS</span> <span class="n">scale_amount</span>
+    <span class="p">(</span><span class="n">sum_amount</span> <span class="o">-</span> <span class="n">min_amount</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span> 
+            <span class="o">/</span> <span class="p">(</span><span class="n">max_amount</span> <span class="o">-</span>  <span class="n">min_amount</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span> <span class="k">AS</span> <span class="n">scale_amount</span>
 <span class="k">FROM</span> <span class="n">sales_amount</span>
 <span class="k">CROSS</span> <span class="k">JOIN</span> <span class="n">stats_amount</span>
 <span class="k">LIMIT</span> <span class="mi">10</span>
@@ -24078,7 +24110,8 @@ Done.
     <span class="n">unit_price</span><span class="p">,</span> 
     <span class="n">unit_cost</span><span class="p">,</span>
     <span class="n">TRUNC</span><span class="p">(</span><span class="n">unit_cost</span> <span class="o">/</span> <span class="mi">0</span><span class="p">.</span><span class="mi">7</span><span class="p">)</span> <span class="k">as</span> <span class="n">new_price</span><span class="p">,</span>
-    <span class="p">((</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">unit_cost</span> <span class="o">/</span> <span class="mi">0</span><span class="p">.</span><span class="mi">7</span><span class="p">)</span> <span class="o">-</span> <span class="n">unit_cost</span><span class="p">)</span> <span class="o">/</span> <span class="n">TRUNC</span><span class="p">(</span><span class="n">unit_cost</span> <span class="o">/</span> <span class="mi">0</span><span class="p">.</span><span class="mi">7</span><span class="p">))</span> <span class="k">as</span> <span class="n">new_profit</span>
+    <span class="p">((</span><span class="n">TRUNC</span><span class="p">(</span><span class="n">unit_cost</span> <span class="o">/</span> <span class="mi">0</span><span class="p">.</span><span class="mi">7</span><span class="p">)</span> <span class="o">-</span> <span class="n">unit_cost</span><span class="p">)</span> 
+             <span class="o">/</span> <span class="n">TRUNC</span><span class="p">(</span><span class="n">unit_cost</span> <span class="o">/</span> <span class="mi">0</span><span class="p">.</span><span class="mi">7</span><span class="p">))</span> <span class="k">as</span> <span class="n">new_profit</span>
 <span class="k">FROM</span>
     <span class="n">product</span>
 <span class="k">LIMIT</span> <span class="mi">10</span>
@@ -24227,7 +24260,8 @@ Done.
     <span class="n">unit_price</span><span class="p">,</span> 
     <span class="n">unit_cost</span><span class="p">,</span>
     <span class="n">ROUND</span><span class="p">(</span><span class="n">unit_cost</span> <span class="o">/</span> <span class="mi">0</span><span class="p">.</span><span class="mi">7</span><span class="p">)</span> <span class="k">as</span> <span class="n">new_price</span><span class="p">,</span>
-    <span class="p">((</span><span class="n">ROUND</span><span class="p">(</span><span class="n">unit_cost</span> <span class="o">/</span> <span class="mi">0</span><span class="p">.</span><span class="mi">7</span><span class="p">)</span> <span class="o">-</span> <span class="n">unit_cost</span><span class="p">)</span> <span class="o">/</span> <span class="n">ROUND</span><span class="p">(</span><span class="n">unit_cost</span> <span class="o">/</span> <span class="mi">0</span><span class="p">.</span><span class="mi">7</span><span class="p">))</span> <span class="k">as</span> <span class="n">new_profit</span>
+    <span class="p">((</span><span class="n">ROUND</span><span class="p">(</span><span class="n">unit_cost</span> <span class="o">/</span> <span class="mi">0</span><span class="p">.</span><span class="mi">7</span><span class="p">)</span> <span class="o">-</span> <span class="n">unit_cost</span><span class="p">)</span> 
+             <span class="o">/</span> <span class="n">ROUND</span><span class="p">(</span><span class="n">unit_cost</span> <span class="o">/</span> <span class="mi">0</span><span class="p">.</span><span class="mi">7</span><span class="p">))</span> <span class="k">as</span> <span class="n">new_profit</span>
 <span class="k">FROM</span>
     <span class="n">product</span>
 <span class="k">LIMIT</span> <span class="mi">10</span>
@@ -24724,16 +24758,40 @@ Done.
     </thead>
     <tbody>
         <tr>
+            <td>CS001311000059</td>
+            <td>2302</td>
+            <td>102</td>
+            <td>0.04430929626411815812</td>
+        </tr>
+        <tr>
+            <td>CS011615000061</td>
+            <td>246</td>
+            <td>98</td>
+            <td>0.39837398373983739837</td>
+        </tr>
+        <tr>
+            <td>CS029212000033</td>
+            <td>3604</td>
+            <td>3604</td>
+            <td>1.00000000000000000000</td>
+        </tr>
+        <tr>
+            <td>CS007515000119</td>
+            <td>7157</td>
+            <td>2832</td>
+            <td>0.39569652088864049183</td>
+        </tr>
+        <tr>
+            <td>CS034515000123</td>
+            <td>3699</td>
+            <td>1202</td>
+            <td>0.32495268991619356583</td>
+        </tr>
+        <tr>
             <td>CS026414000014</td>
             <td>6671</td>
             <td>3142</td>
             <td>0.47099385399490331285</td>
-        </tr>
-        <tr>
-            <td>CS010515000082</td>
-            <td>1482</td>
-            <td>553</td>
-            <td>0.37314439946018893387</td>
         </tr>
         <tr>
             <td>CS001615000099</td>
@@ -24742,10 +24800,10 @@ Done.
             <td>0.41406250000000000000</td>
         </tr>
         <tr>
-            <td>CS019315000069</td>
-            <td>1219</td>
-            <td>939</td>
-            <td>0.77030352748154224774</td>
+            <td>CS010515000082</td>
+            <td>1482</td>
+            <td>553</td>
+            <td>0.37314439946018893387</td>
         </tr>
         <tr>
             <td>CS019315000045</td>
@@ -24758,30 +24816,6 @@ Done.
             <td>1322</td>
             <td>210</td>
             <td>0.15885022692889561271</td>
-        </tr>
-        <tr>
-            <td>CS007615000070</td>
-            <td>2975</td>
-            <td>1340</td>
-            <td>0.45042016806722689076</td>
-        </tr>
-        <tr>
-            <td>CS025415000155</td>
-            <td>1038</td>
-            <td>610</td>
-            <td>0.58766859344894026975</td>
-        </tr>
-        <tr>
-            <td>CS016414000063</td>
-            <td>6207</td>
-            <td>3654</td>
-            <td>0.58869018849685838569</td>
-        </tr>
-        <tr>
-            <td>CS038305000002</td>
-            <td>6197</td>
-            <td>3509</td>
-            <td>0.56624172986929159271</td>
         </tr>
     </tbody>
 </table>
@@ -24821,7 +24855,7 @@ Done.
     <span class="n">r</span><span class="p">.</span><span class="n">sales_ymd</span><span class="p">,</span>
     <span class="k">c</span><span class="p">.</span><span class="n">application_date</span><span class="p">,</span>
     <span class="k">EXTRACT</span><span class="p">(</span><span class="k">DAY</span> <span class="k">FROM</span> <span class="p">(</span><span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="k">CAST</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">sales_ymd</span> <span class="k">AS</span> <span class="nb">VARCHAR</span><span class="p">),</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> 
-                      <span class="o">-</span> <span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">application_date</span><span class="p">,</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)))</span> <span class="k">AS</span> <span class="n">elapsed_days</span>
+                <span class="o">-</span> <span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">application_date</span><span class="p">,</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)))</span> <span class="k">AS</span> <span class="n">elapsed_days</span>
 <span class="k">FROM</span>
     <span class="n">receit_distinct</span> <span class="n">r</span>
 <span class="k">JOIN</span>
@@ -24879,12 +24913,6 @@ Done.
             <td>837.0</td>
         </tr>
         <tr>
-            <td>CS008413000003</td>
-            <td>20180524</td>
-            <td>20151228</td>
-            <td>878.0</td>
-        </tr>
-        <tr>
             <td>CS019515000097</td>
             <td>20190630</td>
             <td>20141124</td>
@@ -24932,6 +24960,12 @@ Done.
             <td>20150325</td>
             <td>840.0</td>
         </tr>
+        <tr>
+            <td>CS024615000041</td>
+            <td>20170729</td>
+            <td>20150918</td>
+            <td>680.0</td>
+        </tr>
     </tbody>
 </table>
 </div>
@@ -24971,7 +25005,7 @@ Done.
         <span class="n">r</span><span class="p">.</span><span class="n">sales_ymd</span><span class="p">,</span>
         <span class="k">c</span><span class="p">.</span><span class="n">application_date</span><span class="p">,</span>
         <span class="n">AGE</span><span class="p">(</span><span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="k">CAST</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">sales_ymd</span> <span class="k">AS</span> <span class="nb">VARCHAR</span><span class="p">),</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">),</span>
-                          <span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">application_date</span><span class="p">,</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">))</span> <span class="k">AS</span> <span class="n">time_age</span>
+                    <span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">application_date</span><span class="p">,</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">))</span> <span class="k">AS</span> <span class="n">time_age</span>
     <span class="k">FROM</span>
         <span class="n">receit_distinct</span> <span class="n">r</span>
     <span class="k">JOIN</span>
@@ -24979,8 +25013,11 @@ Done.
     <span class="k">ON</span>
         <span class="n">r</span><span class="p">.</span><span class="n">customer_id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">customer_id</span>
 <span class="p">)</span>
-<span class="k">SELECT</span> <span class="n">customer_id</span><span class="p">,</span> <span class="n">sales_ymd</span><span class="p">,</span> <span class="n">application_date</span><span class="p">,</span>
-    <span class="k">extract</span><span class="p">(</span><span class="k">year</span> <span class="k">from</span> <span class="n">time_age</span><span class="p">)</span> <span class="o">*</span> <span class="mi">12</span> <span class="o">+</span> <span class="k">extract</span><span class="p">(</span><span class="k">month</span> <span class="k">from</span> <span class="n">time_age</span><span class="p">)</span> <span class="k">AS</span> <span class="n">elapsed_months</span>
+<span class="k">SELECT</span>
+    <span class="n">customer_id</span><span class="p">,</span> 
+    <span class="n">sales_ymd</span><span class="p">,</span> <span class="n">application_date</span><span class="p">,</span>
+    <span class="k">extract</span><span class="p">(</span><span class="k">year</span> <span class="k">from</span> <span class="n">time_age</span><span class="p">)</span> <span class="o">*</span> <span class="mi">12</span> 
+        <span class="o">+</span> <span class="k">extract</span><span class="p">(</span><span class="k">month</span> <span class="k">from</span> <span class="n">time_age</span><span class="p">)</span> <span class="k">AS</span> <span class="n">elapsed_months</span>
 <span class="k">FROM</span>
     <span class="n">time_age_tbl</span>
 <span class="k">LIMIT</span> <span class="mi">10</span>
@@ -25034,12 +25071,6 @@ Done.
             <td>27.0</td>
         </tr>
         <tr>
-            <td>CS008413000003</td>
-            <td>20180524</td>
-            <td>20151228</td>
-            <td>28.0</td>
-        </tr>
-        <tr>
             <td>CS019515000097</td>
             <td>20190630</td>
             <td>20141124</td>
@@ -25087,6 +25118,12 @@ Done.
             <td>20150325</td>
             <td>27.0</td>
         </tr>
+        <tr>
+            <td>CS024615000041</td>
+            <td>20170729</td>
+            <td>20150918</td>
+            <td>22.0</td>
+        </tr>
     </tbody>
 </table>
 </div>
@@ -25124,8 +25161,9 @@ Done.
     <span class="k">c</span><span class="p">.</span><span class="n">customer_id</span><span class="p">,</span>
     <span class="n">r</span><span class="p">.</span><span class="n">sales_ymd</span><span class="p">,</span>
     <span class="k">c</span><span class="p">.</span><span class="n">application_date</span><span class="p">,</span>
-    <span class="k">EXTRACT</span><span class="p">(</span><span class="k">YEAR</span> <span class="k">FROM</span> <span class="n">AGE</span><span class="p">(</span><span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="k">CAST</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">sales_ymd</span> <span class="k">AS</span> <span class="nb">VARCHAR</span><span class="p">),</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">),</span> 
-                      <span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">application_date</span><span class="p">,</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)))</span> <span class="k">AS</span> <span class="n">elapsed_years</span>
+    <span class="k">EXTRACT</span><span class="p">(</span><span class="k">YEAR</span> <span class="k">FROM</span> <span class="n">AGE</span><span class="p">(</span>
+        <span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="k">CAST</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">sales_ymd</span> <span class="k">AS</span> <span class="nb">VARCHAR</span><span class="p">),</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">),</span> 
+        <span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">application_date</span><span class="p">,</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)))</span> <span class="k">AS</span> <span class="n">elapsed_years</span>
 <span class="k">FROM</span>
     <span class="n">receit_distinct</span> <span class="n">r</span>
 <span class="k">JOIN</span>
@@ -25183,12 +25221,6 @@ Done.
             <td>2.0</td>
         </tr>
         <tr>
-            <td>CS008413000003</td>
-            <td>20180524</td>
-            <td>20151228</td>
-            <td>2.0</td>
-        </tr>
-        <tr>
             <td>CS019515000097</td>
             <td>20190630</td>
             <td>20141124</td>
@@ -25236,6 +25268,12 @@ Done.
             <td>20150325</td>
             <td>2.0</td>
         </tr>
+        <tr>
+            <td>CS024615000041</td>
+            <td>20170729</td>
+            <td>20150918</td>
+            <td>1.0</td>
+        </tr>
     </tbody>
 </table>
 </div>
@@ -25273,8 +25311,11 @@ Done.
     <span class="k">c</span><span class="p">.</span><span class="n">customer_id</span><span class="p">,</span>
     <span class="n">r</span><span class="p">.</span><span class="n">sales_ymd</span><span class="p">,</span>
     <span class="k">c</span><span class="p">.</span><span class="n">application_date</span><span class="p">,</span>
-    <span class="k">EXTRACT</span><span class="p">(</span><span class="n">EPOCH</span> <span class="k">FROM</span> <span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="k">CAST</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">sales_ymd</span> <span class="k">AS</span> <span class="nb">VARCHAR</span><span class="p">),</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">))</span> <span class="o">-</span> 
-                      <span class="k">EXTRACT</span><span class="p">(</span><span class="n">EPOCH</span> <span class="k">FROM</span> <span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">application_date</span><span class="p">,</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">))</span> <span class="k">AS</span> <span class="n">elapsed_epoch</span>
+    <span class="k">EXTRACT</span><span class="p">(</span>
+        <span class="n">EPOCH</span> <span class="k">FROM</span> <span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="k">CAST</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">sales_ymd</span> <span class="k">AS</span> <span class="nb">VARCHAR</span><span class="p">),</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">))</span> 
+            <span class="o">-</span> <span class="k">EXTRACT</span><span class="p">(</span>
+                <span class="n">EPOCH</span> <span class="k">FROM</span> <span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">application_date</span><span class="p">,</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span>
+              <span class="p">)</span> <span class="k">AS</span> <span class="n">elapsed_epoch</span>
 <span class="k">FROM</span>
     <span class="n">receit_distinct</span> <span class="n">r</span>
 <span class="k">JOIN</span>
@@ -25332,12 +25373,6 @@ Done.
             <td>72316800.0</td>
         </tr>
         <tr>
-            <td>CS008413000003</td>
-            <td>20180524</td>
-            <td>20151228</td>
-            <td>75859200.0</td>
-        </tr>
-        <tr>
             <td>CS019515000097</td>
             <td>20190630</td>
             <td>20141124</td>
@@ -25385,6 +25420,12 @@ Done.
             <td>20150325</td>
             <td>72576000.0</td>
         </tr>
+        <tr>
+            <td>CS024615000041</td>
+            <td>20170729</td>
+            <td>20150918</td>
+            <td>58752000.0</td>
+        </tr>
     </tbody>
 </table>
 </div>
@@ -25410,12 +25451,16 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">SELECT</span>
     <span class="n">customer_id</span><span class="p">,</span>
     <span class="n">TO_DATE</span><span class="p">(</span><span class="k">CAST</span><span class="p">(</span><span class="n">sales_ymd</span> <span class="k">AS</span> <span class="nb">VARCHAR</span><span class="p">),</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">),</span>
-    <span class="k">EXTRACT</span><span class="p">(</span><span class="n">DOW</span> <span class="k">FROM</span> <span class="p">(</span><span class="n">TO_DATE</span><span class="p">(</span><span class="k">CAST</span><span class="p">(</span><span class="n">sales_ymd</span> <span class="k">AS</span> <span class="nb">VARCHAR</span><span class="p">),</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="k">AS</span> <span class="n">elapsed_years</span><span class="p">,</span>
+    <span class="k">EXTRACT</span><span class="p">(</span><span class="n">DOW</span> <span class="k">FROM</span> <span class="p">(</span>
+        <span class="n">TO_DATE</span><span class="p">(</span><span class="k">CAST</span><span class="p">(</span><span class="n">sales_ymd</span> <span class="k">AS</span> <span class="nb">VARCHAR</span><span class="p">),</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="k">AS</span> <span class="n">elapsed_years</span><span class="p">,</span>
     <span class="n">TO_DATE</span><span class="p">(</span><span class="k">CAST</span><span class="p">(</span><span class="n">sales_ymd</span> <span class="k">AS</span> <span class="nb">VARCHAR</span><span class="p">),</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span>
-        <span class="o">-</span> <span class="k">CAST</span><span class="p">(</span><span class="k">EXTRACT</span><span class="p">(</span><span class="n">DOW</span> <span class="k">FROM</span> <span class="p">(</span><span class="n">TO_DATE</span><span class="p">(</span><span class="k">CAST</span><span class="p">(</span><span class="n">sales_ymd</span> <span class="k">AS</span> <span class="nb">VARCHAR</span><span class="p">),</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="k">AS</span> <span class="nb">INTEGER</span><span class="p">)</span> <span class="k">AS</span> <span class="n">monday</span>
+        <span class="o">-</span> <span class="k">CAST</span><span class="p">(</span><span class="k">EXTRACT</span><span class="p">(</span>
+            <span class="n">DOW</span> <span class="k">FROM</span> <span class="p">(</span><span class="n">TO_DATE</span><span class="p">(</span><span class="k">CAST</span><span class="p">(</span><span class="n">sales_ymd</span> <span class="k">AS</span> <span class="nb">VARCHAR</span><span class="p">),</span> <span class="s1">&#39;YYYYMMDD&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+          <span class="p">)</span> <span class="k">AS</span> <span class="nb">INTEGER</span><span class="p">)</span> <span class="k">AS</span> <span class="n">monday</span>
 <span class="k">FROM</span>
     <span class="n">receipt</span>
 <span class="k">LIMIT</span> <span class="mi">10</span>
@@ -25547,6 +25592,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="c1">-- コード例１（シンプルにやるなら）</span>
 <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">customer</span> <span class="k">WHERE</span> <span class="n">RANDOM</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">01</span>
 <span class="k">LIMIT</span> <span class="mi">10</span>
@@ -25601,133 +25647,133 @@ Done.
     </thead>
     <tbody>
         <tr>
-            <td>CS004713000244</td>
-            <td>松井 那奈</td>
-            <td>1</td>
-            <td>女性</td>
-            <td>1940-10-26</td>
-            <td>78</td>
-            <td>176-0024</td>
-            <td>東京都練馬区中村**********</td>
-            <td>S13004</td>
-            <td>20181119</td>
-            <td>0-00000000-0</td>
-        </tr>
-        <tr>
-            <td>CS026514000098</td>
-            <td>平塚 夏希</td>
-            <td>1</td>
-            <td>女性</td>
-            <td>1966-06-09</td>
-            <td>52</td>
-            <td>251-0045</td>
-            <td>神奈川県藤沢市辻堂東海岸**********</td>
-            <td>S14026</td>
-            <td>20150701</td>
-            <td>A-20101010-A</td>
-        </tr>
-        <tr>
-            <td>CS022415000086</td>
-            <td>関 雅彦</td>
-            <td>9</td>
-            <td>不明</td>
-            <td>1976-02-20</td>
-            <td>43</td>
-            <td>249-0001</td>
-            <td>神奈川県逗子市久木**********</td>
-            <td>S14022</td>
-            <td>20151128</td>
-            <td>5-20100514-3</td>
-        </tr>
-        <tr>
-            <td>CS011713000065</td>
-            <td>田口 一代</td>
-            <td>1</td>
-            <td>女性</td>
-            <td>1939-03-22</td>
-            <td>80</td>
-            <td>223-0065</td>
-            <td>神奈川県横浜市港北区高田東**********</td>
-            <td>S14011</td>
-            <td>20160205</td>
-            <td>0-00000000-0</td>
-        </tr>
-        <tr>
-            <td>CS037714000010</td>
-            <td>福士 瞳</td>
-            <td>1</td>
-            <td>女性</td>
-            <td>1944-10-18</td>
-            <td>74</td>
-            <td>135-0015</td>
-            <td>東京都江東区千石**********</td>
-            <td>S13037</td>
-            <td>20150521</td>
-            <td>0-00000000-0</td>
-        </tr>
-        <tr>
-            <td>CS031613000091</td>
-            <td>木下 未華子</td>
-            <td>1</td>
-            <td>女性</td>
-            <td>1954-12-16</td>
+            <td>CS011603000002</td>
+            <td>神山 耕司</td>
+            <td>0</td>
+            <td>男性</td>
+            <td>1955-03-07</td>
             <td>64</td>
-            <td>151-0063</td>
-            <td>東京都渋谷区富ヶ谷**********</td>
-            <td>S13031</td>
-            <td>20160103</td>
+            <td>223-0058</td>
+            <td>神奈川県横浜市港北区新吉田東**********</td>
+            <td>S14011</td>
+            <td>20150503</td>
             <td>0-00000000-0</td>
         </tr>
         <tr>
-            <td>CS039414000052</td>
-            <td>吉井 しほり</td>
+            <td>CS038411000020</td>
+            <td>柳田 真悠子</td>
             <td>1</td>
             <td>女性</td>
-            <td>1972-08-06</td>
-            <td>46</td>
-            <td>167-0051</td>
-            <td>東京都杉並区荻窪**********</td>
-            <td>S13039</td>
-            <td>20150509</td>
-            <td>F-20100814-F</td>
+            <td>1970-12-04</td>
+            <td>48</td>
+            <td>134-0088</td>
+            <td>東京都江戸川区西葛西**********</td>
+            <td>S13038</td>
+            <td>20151103</td>
+            <td>B-20081225-A</td>
         </tr>
         <tr>
-            <td>CS028615000031</td>
-            <td>相原 禄郎</td>
-            <td>9</td>
-            <td>不明</td>
-            <td>1952-04-24</td>
-            <td>66</td>
-            <td>241-0826</td>
-            <td>神奈川県横浜市旭区東希望が丘**********</td>
-            <td>S14028</td>
-            <td>20150714</td>
-            <td>0-00000000-0</td>
-        </tr>
-        <tr>
-            <td>CS020514000098</td>
-            <td>吉川 あさみ</td>
+            <td>CS017513000096</td>
+            <td>上原 遥</td>
             <td>1</td>
             <td>女性</td>
-            <td>1963-07-10</td>
-            <td>55</td>
-            <td>114-0001</td>
-            <td>東京都北区東十条**********</td>
+            <td>1964-12-23</td>
+            <td>54</td>
+            <td>166-0002</td>
+            <td>東京都杉並区高円寺北**********</td>
+            <td>S13017</td>
+            <td>20141102</td>
+            <td>7-20080610-3</td>
+        </tr>
+        <tr>
+            <td>CS020714000010</td>
+            <td>吉村 美紀</td>
+            <td>1</td>
+            <td>女性</td>
+            <td>1945-01-25</td>
+            <td>74</td>
+            <td>174-0053</td>
+            <td>東京都板橋区清水町**********</td>
             <td>S13020</td>
-            <td>20180619</td>
+            <td>20150906</td>
             <td>0-00000000-0</td>
         </tr>
         <tr>
-            <td>CS026412000198</td>
-            <td>溝口 真奈美</td>
+            <td>CS009515000071</td>
+            <td>大山 ひろ子</td>
             <td>1</td>
             <td>女性</td>
-            <td>1974-07-28</td>
-            <td>44</td>
-            <td>253-0001</td>
-            <td>神奈川県茅ヶ崎市赤羽根**********</td>
-            <td>S14026</td>
-            <td>20180322</td>
+            <td>1965-08-30</td>
+            <td>53</td>
+            <td>158-0095</td>
+            <td>東京都世田谷区瀬田**********</td>
+            <td>S13009</td>
+            <td>20150508</td>
+            <td>E-20100724-B</td>
+        </tr>
+        <tr>
+            <td>CS003415000452</td>
+            <td>柴田 昌代</td>
+            <td>1</td>
+            <td>女性</td>
+            <td>1972-05-07</td>
+            <td>46</td>
+            <td>182-0007</td>
+            <td>東京都調布市菊野台**********</td>
+            <td>S13003</td>
+            <td>20160201</td>
+            <td>C-20090326-B</td>
+        </tr>
+        <tr>
+            <td>CS034312000090</td>
+            <td>江崎 景子</td>
+            <td>1</td>
+            <td>女性</td>
+            <td>1987-01-24</td>
+            <td>32</td>
+            <td>213-0005</td>
+            <td>神奈川県川崎市高津区北見方**********</td>
+            <td>S14034</td>
+            <td>20151006</td>
+            <td>0-00000000-0</td>
+        </tr>
+        <tr>
+            <td>CS012714000019</td>
+            <td>奥野 恵麻</td>
+            <td>1</td>
+            <td>女性</td>
+            <td>1945-06-10</td>
+            <td>73</td>
+            <td>231-0806</td>
+            <td>神奈川県横浜市中区本牧町**********</td>
+            <td>S14012</td>
+            <td>20150809</td>
+            <td>0-00000000-0</td>
+        </tr>
+        <tr>
+            <td>CS017412000019</td>
+            <td>菊地 恵麻</td>
+            <td>1</td>
+            <td>女性</td>
+            <td>1969-04-08</td>
+            <td>49</td>
+            <td>167-0032</td>
+            <td>東京都杉並区天沼**********</td>
+            <td>S13017</td>
+            <td>20150205</td>
+            <td>5-20081027-3</td>
+        </tr>
+        <tr>
+            <td>CS001413000286</td>
+            <td>小市 早紀</td>
+            <td>1</td>
+            <td>女性</td>
+            <td>1972-09-22</td>
+            <td>46</td>
+            <td>144-0045</td>
+            <td>東京都大田区南六郷**********</td>
+            <td>S13001</td>
+            <td>20160415</td>
             <td>0-00000000-0</td>
         </tr>
     </tbody>
@@ -25747,6 +25793,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="c1">-- コード例２（丁寧にやるなら）</span>
 <span class="k">WITH</span> <span class="n">customer_tmp</span> <span class="k">AS</span><span class="p">(</span>
     <span class="k">SELECT</span>
@@ -25822,16 +25869,120 @@ Done.
     </thead>
     <tbody>
         <tr>
-            <td>CS002613000047</td>
-            <td>竹村 優</td>
+            <td>CS034312000071</td>
+            <td>望月 奈央</td>
             <td>1</td>
             <td>女性</td>
-            <td>1953-08-30</td>
-            <td>65</td>
-            <td>185-0011</td>
-            <td>東京都国分寺市本多**********</td>
-            <td>S13002</td>
-            <td>20151101</td>
+            <td>1980-09-20</td>
+            <td>38</td>
+            <td>213-0026</td>
+            <td>神奈川県川崎市高津区久末**********</td>
+            <td>S14034</td>
+            <td>20160106</td>
+            <td>0-00000000-0</td>
+        </tr>
+        <tr>
+            <td>CS006313000143</td>
+            <td>福岡 恵梨香</td>
+            <td>1</td>
+            <td>女性</td>
+            <td>1982-04-17</td>
+            <td>36</td>
+            <td>224-0066</td>
+            <td>神奈川県横浜市都筑区見花山**********</td>
+            <td>S14006</td>
+            <td>20150127</td>
+            <td>0-00000000-0</td>
+        </tr>
+        <tr>
+            <td>CS040415000104</td>
+            <td>金井 由美子</td>
+            <td>1</td>
+            <td>女性</td>
+            <td>1971-03-14</td>
+            <td>48</td>
+            <td>226-0026</td>
+            <td>神奈川県横浜市緑区長津田町**********</td>
+            <td>S14040</td>
+            <td>20160306</td>
+            <td>7-20090423-A</td>
+        </tr>
+        <tr>
+            <td>CS031513000220</td>
+            <td>安井 小百合</td>
+            <td>1</td>
+            <td>女性</td>
+            <td>1960-09-02</td>
+            <td>58</td>
+            <td>151-0064</td>
+            <td>東京都渋谷区上原**********</td>
+            <td>S13031</td>
+            <td>20151018</td>
+            <td>0-00000000-0</td>
+        </tr>
+        <tr>
+            <td>CS035313000025</td>
+            <td>戸田 しほり</td>
+            <td>1</td>
+            <td>女性</td>
+            <td>1981-06-04</td>
+            <td>37</td>
+            <td>154-0014</td>
+            <td>東京都世田谷区新町**********</td>
+            <td>S13035</td>
+            <td>20150709</td>
+            <td>0-00000000-0</td>
+        </tr>
+        <tr>
+            <td>CS037413000287</td>
+            <td>岸部 夏希</td>
+            <td>1</td>
+            <td>女性</td>
+            <td>1977-03-12</td>
+            <td>42</td>
+            <td>135-0002</td>
+            <td>東京都江東区住吉**********</td>
+            <td>S13037</td>
+            <td>20180801</td>
+            <td>0-00000000-0</td>
+        </tr>
+        <tr>
+            <td>CS001215000145</td>
+            <td>田崎 美紀</td>
+            <td>1</td>
+            <td>女性</td>
+            <td>1995-03-29</td>
+            <td>24</td>
+            <td>144-0055</td>
+            <td>東京都大田区仲六郷**********</td>
+            <td>S13001</td>
+            <td>20170605</td>
+            <td>6-20090929-2</td>
+        </tr>
+        <tr>
+            <td>CS005314000144</td>
+            <td>安藤 里奈</td>
+            <td>1</td>
+            <td>女性</td>
+            <td>1984-02-11</td>
+            <td>35</td>
+            <td>166-0001</td>
+            <td>東京都杉並区阿佐谷北**********</td>
+            <td>S13005</td>
+            <td>20180109</td>
+            <td>5-20100521-1</td>
+        </tr>
+        <tr>
+            <td>CS011603000002</td>
+            <td>神山 耕司</td>
+            <td>0</td>
+            <td>男性</td>
+            <td>1955-03-07</td>
+            <td>64</td>
+            <td>223-0058</td>
+            <td>神奈川県横浜市港北区新吉田東**********</td>
+            <td>S14011</td>
+            <td>20150503</td>
             <td>0-00000000-0</td>
         </tr>
         <tr>
@@ -25846,110 +25997,6 @@ Done.
             <td>S13009</td>
             <td>20150319</td>
             <td>5-20080322-1</td>
-        </tr>
-        <tr>
-            <td>CS003413000826</td>
-            <td>板倉 陽子</td>
-            <td>1</td>
-            <td>女性</td>
-            <td>1974-02-25</td>
-            <td>45</td>
-            <td>201-0003</td>
-            <td>東京都狛江市和泉本町**********</td>
-            <td>S13003</td>
-            <td>20170316</td>
-            <td>0-00000000-0</td>
-        </tr>
-        <tr>
-            <td>CS025513000135</td>
-            <td>吉村 そら</td>
-            <td>1</td>
-            <td>女性</td>
-            <td>1962-04-27</td>
-            <td>56</td>
-            <td>242-0024</td>
-            <td>神奈川県大和市福田**********</td>
-            <td>S14025</td>
-            <td>20150507</td>
-            <td>6-20091005-6</td>
-        </tr>
-        <tr>
-            <td>CS037302000024</td>
-            <td>窪塚 右京</td>
-            <td>0</td>
-            <td>男性</td>
-            <td>1986-03-23</td>
-            <td>33</td>
-            <td>135-0053</td>
-            <td>東京都江東区辰巳**********</td>
-            <td>S13037</td>
-            <td>20170224</td>
-            <td>0-00000000-0</td>
-        </tr>
-        <tr>
-            <td>CS001514000248</td>
-            <td>亀山 恵子</td>
-            <td>1</td>
-            <td>女性</td>
-            <td>1966-07-17</td>
-            <td>52</td>
-            <td>144-0055</td>
-            <td>東京都大田区仲六郷**********</td>
-            <td>S13001</td>
-            <td>20170814</td>
-            <td>1-20100913-1</td>
-        </tr>
-        <tr>
-            <td>CS013403000056</td>
-            <td>伊藤 米蔵</td>
-            <td>0</td>
-            <td>男性</td>
-            <td>1970-05-24</td>
-            <td>48</td>
-            <td>275-0025</td>
-            <td>千葉県習志野市秋津**********</td>
-            <td>S12013</td>
-            <td>20170219</td>
-            <td>0-00000000-0</td>
-        </tr>
-        <tr>
-            <td>CS035312000007</td>
-            <td>長尾 育子</td>
-            <td>1</td>
-            <td>女性</td>
-            <td>1986-01-25</td>
-            <td>33</td>
-            <td>157-0076</td>
-            <td>東京都世田谷区岡本**********</td>
-            <td>S13035</td>
-            <td>20150721</td>
-            <td>0-00000000-0</td>
-        </tr>
-        <tr>
-            <td>CS015412000111</td>
-            <td>松居 奈月</td>
-            <td>1</td>
-            <td>女性</td>
-            <td>1972-10-04</td>
-            <td>46</td>
-            <td>136-0071</td>
-            <td>東京都江東区亀戸**********</td>
-            <td>S13015</td>
-            <td>20150629</td>
-            <td>0-00000000-0</td>
-        </tr>
-        <tr>
-            <td>CS010613000107</td>
-            <td>安藤 めぐみ</td>
-            <td>1</td>
-            <td>女性</td>
-            <td>1957-09-02</td>
-            <td>61</td>
-            <td>221-0005</td>
-            <td>神奈川県横浜市神奈川区松見町**********</td>
-            <td>S14010</td>
-            <td>20150706</td>
-            <td>0-00000000-0</td>
         </tr>
     </tbody>
 </table>
@@ -25976,13 +26023,15 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="c1">-- カテゴリ数が少ない場合はそれぞれサンプリングしUNIONするほうが簡単だが、カテゴリ数が多いケースを考慮して以下のSQLとした</span>
 <span class="c1">-- RANDOMでORDER BYしているため、大量データを扱う場合は注意が必要</span>
 <span class="k">WITH</span> <span class="n">cusotmer_random</span> <span class="k">AS</span> <span class="p">(</span>
     <span class="k">SELECT</span> <span class="n">customer_id</span><span class="p">,</span> <span class="n">g_cd</span><span class="p">,</span> <span class="n">cnt</span>
     <span class="k">FROM</span> <span class="p">(</span>
         <span class="k">SELECT</span>
-            <span class="n">ARRAY_AGG</span><span class="p">(</span><span class="n">customer</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">RANDOM</span><span class="p">())</span> <span class="k">AS</span> <span class="n">customer_r</span><span class="p">,</span> <span class="n">gender_cd</span> <span class="k">as</span> <span class="n">g_cd</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">cnt</span>
+            <span class="n">ARRAY_AGG</span><span class="p">(</span><span class="n">customer</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">RANDOM</span><span class="p">())</span> <span class="k">AS</span> <span class="n">customer_r</span><span class="p">,</span> 
+            <span class="n">gender_cd</span> <span class="k">as</span> <span class="n">g_cd</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">cnt</span>
         <span class="k">FROM</span>
             <span class="n">customer</span>
         <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">gender_cd</span>
@@ -26076,6 +26125,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">WITH</span> <span class="n">sales_amount</span> <span class="k">AS</span><span class="p">(</span>
 <span class="k">SELECT</span> <span class="n">customer_id</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span> <span class="k">AS</span> <span class="n">sum_amount</span>
     <span class="k">FROM</span> <span class="n">receipt</span>
@@ -26196,6 +26246,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">WITH</span> <span class="n">sales_amount</span> <span class="k">AS</span><span class="p">(</span>
 <span class="k">SELECT</span> <span class="n">customer_id</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span> <span class="k">AS</span> <span class="n">sum_amount</span>
     <span class="k">FROM</span> <span class="n">receipt</span>
@@ -26205,8 +26256,9 @@ Done.
 <span class="k">SELECT</span> <span class="n">customer_id</span><span class="p">,</span> <span class="n">sum_amount</span>
 <span class="k">FROM</span> <span class="n">sales_amount</span>
 <span class="k">CROSS</span> <span class="k">JOIN</span> <span class="p">(</span>
-    <span class="k">SELECT</span> <span class="n">PERCENTILE_CONT</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">25</span><span class="p">)</span> <span class="n">WITHIN</span> <span class="k">GROUP</span><span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">sum_amount</span><span class="p">)</span> <span class="k">as</span> <span class="n">amount_25per</span><span class="p">,</span>
-           <span class="n">PERCENTILE_CONT</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">75</span><span class="p">)</span> <span class="n">WITHIN</span> <span class="k">GROUP</span><span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">sum_amount</span><span class="p">)</span> <span class="k">as</span> <span class="n">amount_75per</span>
+    <span class="k">SELECT</span>
+        <span class="n">PERCENTILE_CONT</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">25</span><span class="p">)</span> <span class="n">WITHIN</span> <span class="k">GROUP</span><span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">sum_amount</span><span class="p">)</span> <span class="k">as</span> <span class="n">amount_25per</span><span class="p">,</span>
+        <span class="n">PERCENTILE_CONT</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">75</span><span class="p">)</span> <span class="n">WITHIN</span> <span class="k">GROUP</span><span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">sum_amount</span><span class="p">)</span> <span class="k">as</span> <span class="n">amount_75per</span>
     <span class="k">FROM</span> <span class="n">sales_amount</span>   
 <span class="p">)</span> <span class="n">stats_amount</span>
 <span class="k">WHERE</span> <span class="n">sum_amount</span> <span class="o">&lt;</span> <span class="n">amount_25per</span> <span class="o">-</span> <span class="p">(</span><span class="n">amount_75per</span> <span class="o">-</span> <span class="n">amount_25per</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span><span class="p">.</span><span class="mi">5</span> 
@@ -26320,12 +26372,24 @@ Done.
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 
 <span class="k">SELECT</span> 
-    <span class="k">SUM</span><span class="p">(</span><span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">product_cd</span> <span class="k">IS</span> <span class="k">NULL</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">ELSE</span> <span class="mi">0</span> <span class="k">END</span><span class="p">)</span> <span class="k">AS</span> <span class="n">product_cd</span><span class="p">,</span>
-    <span class="k">SUM</span><span class="p">(</span><span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">category_major_cd</span> <span class="k">IS</span> <span class="k">NULL</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">ELSE</span> <span class="mi">0</span> <span class="k">END</span><span class="p">)</span> <span class="k">AS</span> <span class="n">category_major_cd</span><span class="p">,</span>
-    <span class="k">SUM</span><span class="p">(</span><span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">category_medium_cd</span> <span class="k">IS</span> <span class="k">NULL</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">ELSE</span> <span class="mi">0</span> <span class="k">END</span><span class="p">)</span> <span class="k">AS</span> <span class="n">category_medium_cd</span><span class="p">,</span>
-    <span class="k">SUM</span><span class="p">(</span><span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">category_small_cd</span> <span class="k">IS</span> <span class="k">NULL</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">ELSE</span> <span class="mi">0</span> <span class="k">END</span><span class="p">)</span> <span class="k">AS</span> <span class="n">category_small_cd</span><span class="p">,</span>
-    <span class="k">SUM</span><span class="p">(</span><span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">unit_price</span> <span class="k">IS</span> <span class="k">NULL</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">ELSE</span> <span class="mi">0</span> <span class="k">END</span><span class="p">)</span> <span class="k">AS</span> <span class="n">unit_price</span><span class="p">,</span>
-    <span class="k">SUM</span><span class="p">(</span><span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">unit_cost</span> <span class="k">IS</span> <span class="k">NULL</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">ELSE</span> <span class="mi">0</span> <span class="k">END</span><span class="p">)</span> <span class="k">AS</span> <span class="n">unit_cost</span>
+    <span class="k">SUM</span><span class="p">(</span>
+        <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">product_cd</span> <span class="k">IS</span> <span class="k">NULL</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">ELSE</span> <span class="mi">0</span> <span class="k">END</span>
+    <span class="p">)</span> <span class="k">AS</span> <span class="n">product_cd</span><span class="p">,</span>
+    <span class="k">SUM</span><span class="p">(</span>
+        <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">category_major_cd</span> <span class="k">IS</span> <span class="k">NULL</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">ELSE</span> <span class="mi">0</span> <span class="k">END</span>
+    <span class="p">)</span> <span class="k">AS</span> <span class="n">category_major_cd</span><span class="p">,</span>
+    <span class="k">SUM</span><span class="p">(</span>
+        <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">category_medium_cd</span> <span class="k">IS</span> <span class="k">NULL</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">ELSE</span> <span class="mi">0</span> <span class="k">END</span>
+    <span class="p">)</span> <span class="k">AS</span> <span class="n">category_medium_cd</span><span class="p">,</span>
+    <span class="k">SUM</span><span class="p">(</span>
+        <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">category_small_cd</span> <span class="k">IS</span> <span class="k">NULL</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">ELSE</span> <span class="mi">0</span> <span class="k">END</span>
+    <span class="p">)</span> <span class="k">AS</span> <span class="n">category_small_cd</span><span class="p">,</span>
+    <span class="k">SUM</span><span class="p">(</span>
+        <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">unit_price</span> <span class="k">IS</span> <span class="k">NULL</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">ELSE</span> <span class="mi">0</span> <span class="k">END</span>
+    <span class="p">)</span> <span class="k">AS</span> <span class="n">unit_price</span><span class="p">,</span>
+    <span class="k">SUM</span><span class="p">(</span>
+        <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">unit_cost</span> <span class="k">IS</span> <span class="k">NULL</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">ELSE</span> <span class="mi">0</span> <span class="k">END</span>
+    <span class="p">)</span> <span class="k">AS</span> <span class="n">unit_cost</span>
 <span class="k">FROM</span> <span class="n">product</span> <span class="k">LIMIT</span> <span class="mi">10</span>
 </pre></div>
 
@@ -26690,6 +26754,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="n">product_3</span><span class="p">;</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">product_3</span> <span class="k">AS</span> <span class="p">(</span>
     <span class="k">SELECT</span>
@@ -26703,8 +26768,12 @@ Done.
         <span class="n">product</span>
     <span class="k">CROSS</span> <span class="k">JOIN</span> <span class="p">(</span>
         <span class="k">SELECT</span>
-            <span class="n">ROUND</span><span class="p">(</span><span class="n">PERCENTILE_CONT</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="n">WITHIN</span> <span class="k">GROUP</span><span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">unit_price</span><span class="p">))</span> <span class="k">AS</span> <span class="n">unit_med</span><span class="p">,</span>
-            <span class="n">ROUND</span><span class="p">(</span><span class="n">PERCENTILE_CONT</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="n">WITHIN</span> <span class="k">GROUP</span><span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">unit_cost</span><span class="p">))</span> <span class="k">AS</span> <span class="n">cost_med</span>
+            <span class="n">ROUND</span><span class="p">(</span>
+                <span class="n">PERCENTILE_CONT</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="n">WITHIN</span> <span class="k">GROUP</span><span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">unit_price</span><span class="p">)</span>
+            <span class="p">)</span> <span class="k">AS</span> <span class="n">unit_med</span><span class="p">,</span>
+            <span class="n">ROUND</span><span class="p">(</span>
+                <span class="n">PERCENTILE_CONT</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="n">WITHIN</span> <span class="k">GROUP</span><span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">unit_cost</span><span class="p">)</span>
+            <span class="p">)</span> <span class="k">AS</span> <span class="n">cost_med</span>
         <span class="k">FROM</span>
             <span class="n">product</span>
     <span class="p">)</span> <span class="n">stats_product</span>
@@ -26835,13 +26904,18 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="n">product_4</span><span class="p">;</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">product_4</span> <span class="k">AS</span> <span class="p">(</span>
     <span class="k">WITH</span> <span class="n">category_median</span> <span class="k">AS</span><span class="p">(</span>
         <span class="k">SELECT</span>
             <span class="n">category_small_cd</span><span class="p">,</span> 
-            <span class="n">ROUND</span><span class="p">(</span><span class="n">PERCENTILE_CONT</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="n">WITHIN</span> <span class="k">GROUP</span><span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">unit_price</span><span class="p">))</span> <span class="k">AS</span> <span class="n">unit_med</span><span class="p">,</span>
-            <span class="n">ROUND</span><span class="p">(</span><span class="n">PERCENTILE_CONT</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="n">WITHIN</span> <span class="k">GROUP</span><span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">unit_cost</span><span class="p">))</span> <span class="k">AS</span> <span class="n">cost_med</span>
+            <span class="n">ROUND</span><span class="p">(</span>
+                <span class="n">PERCENTILE_CONT</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="n">WITHIN</span> <span class="k">GROUP</span><span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">unit_price</span><span class="p">)</span>
+            <span class="p">)</span> <span class="k">AS</span> <span class="n">unit_med</span><span class="p">,</span>
+            <span class="n">ROUND</span><span class="p">(</span>
+                <span class="n">PERCENTILE_CONT</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="n">WITHIN</span> <span class="k">GROUP</span><span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">unit_cost</span><span class="p">)</span>
+            <span class="p">)</span> <span class="k">AS</span> <span class="n">cost_med</span>
         <span class="k">FROM</span> <span class="n">product</span>
         <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">category_small_cd</span>
     <span class="p">)</span>
@@ -26984,6 +27058,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">WITH</span> <span class="n">sales_amount_2019</span> <span class="k">AS</span> <span class="p">(</span>
     <span class="k">SELECT</span>
         <span class="n">customer_id</span><span class="p">,</span>
@@ -27008,7 +27083,10 @@ Done.
     <span class="n">a</span><span class="p">.</span><span class="n">customer_id</span><span class="p">,</span>
     <span class="k">COALESCE</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">sum_amount_2019</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">AS</span> <span class="n">sales_amount_2019</span><span class="p">,</span>
     <span class="k">COALESCE</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">sum_amount_all</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="k">AS</span> <span class="n">sales_amount_all</span><span class="p">,</span>
-    <span class="k">CASE</span> <span class="k">COALESCE</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">sum_amount_all</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="k">WHEN</span> <span class="mi">0</span> <span class="k">THEN</span> <span class="mi">0</span> <span class="k">ELSE</span> <span class="k">COALESCE</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">sum_amount_2019</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span> <span class="o">/</span> <span class="k">c</span><span class="p">.</span><span class="n">sum_amount_all</span> <span class="k">END</span> <span class="k">AS</span> <span class="n">sales_rate</span>
+    <span class="k">CASE</span> <span class="k">COALESCE</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">sum_amount_all</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">WHEN</span> <span class="mi">0</span> <span class="k">THEN</span> <span class="mi">0</span> 
+        <span class="k">ELSE</span> <span class="k">COALESCE</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">sum_amount_2019</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span> <span class="o">/</span> <span class="k">c</span><span class="p">.</span><span class="n">sum_amount_all</span>
+    <span class="k">END</span> <span class="k">AS</span> <span class="n">sales_rate</span>
 <span class="k">FROM</span>
     <span class="n">customer</span> <span class="n">a</span>
 <span class="k">LEFT</span> <span class="k">JOIN</span>
@@ -27017,7 +27095,10 @@ Done.
 <span class="k">LEFT</span> <span class="k">JOIN</span>
     <span class="n">sales_amount_all</span> <span class="k">c</span>
 <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">customer_id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">customer_id</span>
-<span class="k">WHERE</span> <span class="k">CASE</span> <span class="k">COALESCE</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">sum_amount_all</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="k">WHEN</span> <span class="mi">0</span> <span class="k">THEN</span> <span class="mi">0</span> <span class="k">ELSE</span> <span class="k">COALESCE</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">sum_amount_2019</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span> <span class="o">/</span> <span class="k">c</span><span class="p">.</span><span class="n">sum_amount_all</span> <span class="k">END</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<span class="k">WHERE</span> <span class="k">CASE</span> <span class="k">COALESCE</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">sum_amount_all</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> 
+        <span class="k">WHEN</span> <span class="mi">0</span> <span class="k">THEN</span> <span class="mi">0</span> 
+        <span class="k">ELSE</span> <span class="k">COALESCE</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">sum_amount_2019</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span> <span class="o">/</span> <span class="k">c</span><span class="p">.</span><span class="n">sum_amount_all</span> 
+        <span class="k">END</span> <span class="o">&gt;</span> <span class="mi">0</span>
 <span class="k">LIMIT</span> <span class="mi">10</span>
 </pre></div>
 
@@ -27354,14 +27435,18 @@ $$
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">SELECT</span>
     <span class="k">c</span><span class="p">.</span><span class="n">customer_id</span><span class="p">,</span>
     <span class="k">c</span><span class="p">.</span><span class="n">address</span> <span class="k">AS</span> <span class="n">customer_address</span><span class="p">,</span>
     <span class="n">s</span><span class="p">.</span><span class="n">address</span> <span class="k">AS</span> <span class="n">store_address</span><span class="p">,</span>
     <span class="p">(</span>
         <span class="mi">6371</span> <span class="o">*</span> <span class="n">ACOS</span><span class="p">(</span> 
-            <span class="n">SIN</span><span class="p">(</span><span class="n">RADIANS</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">m_latitude</span><span class="p">))</span> <span class="o">*</span> <span class="n">SIN</span><span class="p">(</span><span class="n">RADIANS</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">latitude</span><span class="p">))</span> <span class="o">+</span> 
-            <span class="n">COS</span><span class="p">(</span><span class="n">RADIANS</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">m_latitude</span><span class="p">))</span> <span class="o">*</span> <span class="n">COS</span><span class="p">(</span><span class="n">RADIANS</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">latitude</span><span class="p">))</span> <span class="o">*</span> <span class="n">COS</span><span class="p">(</span><span class="n">RADIANS</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">m_longitude</span><span class="p">)</span> <span class="o">-</span> <span class="n">RADIANS</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">longitude</span><span class="p">))</span>
+                <span class="n">SIN</span><span class="p">(</span><span class="n">RADIANS</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">m_latitude</span><span class="p">))</span> 
+                <span class="o">*</span> <span class="n">SIN</span><span class="p">(</span><span class="n">RADIANS</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">latitude</span><span class="p">))</span>
+                <span class="o">+</span> <span class="n">COS</span><span class="p">(</span><span class="n">RADIANS</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">m_latitude</span><span class="p">))</span> 
+                <span class="o">*</span> <span class="n">COS</span><span class="p">(</span><span class="n">RADIANS</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">latitude</span><span class="p">))</span> 
+                <span class="o">*</span> <span class="n">COS</span><span class="p">(</span><span class="n">RADIANS</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">m_longitude</span><span class="p">)</span> <span class="o">-</span> <span class="n">RADIANS</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">longitude</span><span class="p">))</span>
         <span class="p">)</span>
     <span class="p">)</span> <span class="k">AS</span> <span class="n">distance</span> 
 <span class="k">FROM</span>
@@ -27520,7 +27605,9 @@ $$
     <span class="n">sales_ranking</span> <span class="k">AS</span><span class="p">(</span>
     <span class="k">SELECT</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">ROW_NUMBER</span><span class="p">()</span> <span class="n">OVER</span><span class="p">(</span><span class="n">PARTITION</span> <span class="k">BY</span> <span class="n">customer_name</span><span class="p">,</span> <span class="n">postal_cd</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">sum_amount</span> <span class="k">desc</span><span class="p">,</span> <span class="n">customer_ID</span> <span class="p">)</span> <span class="k">as</span> <span class="n">rank</span>
+        <span class="n">ROW_NUMBER</span><span class="p">()</span> <span class="n">OVER</span><span class="p">(</span>
+            <span class="n">PARTITION</span> <span class="k">BY</span> <span class="n">customer_name</span><span class="p">,</span> <span class="n">postal_cd</span> 
+            <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">sum_amount</span> <span class="k">desc</span><span class="p">,</span> <span class="n">customer_ID</span> <span class="p">)</span> <span class="k">as</span> <span class="n">rank</span>
     <span class="k">FROM</span> <span class="n">sales_amount</span>
     <span class="p">)</span>
     <span class="k">SELECT</span> <span class="k">c</span><span class="p">.</span><span class="o">*</span>
@@ -27583,8 +27670,13 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-<span class="k">SELECT</span> <span class="n">cnt</span><span class="p">,</span> <span class="n">cnt_u</span><span class="p">,</span> <span class="n">cnt</span> <span class="o">-</span> <span class="n">cnt_u</span> <span class="k">AS</span> <span class="n">diff</span> <span class="k">FROM</span>
-<span class="p">(</span><span class="k">SELECT</span> <span class="k">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">cnt</span> <span class="k">FROM</span> <span class="n">customer</span><span class="p">)</span> <span class="n">customer</span>
+
+<span class="k">SELECT</span> 
+    <span class="n">cnt</span><span class="p">,</span> 
+    <span class="n">cnt_u</span><span class="p">,</span> 
+    <span class="n">cnt</span> <span class="o">-</span> <span class="n">cnt_u</span> <span class="k">AS</span> <span class="n">diff</span> 
+<span class="k">FROM</span>
+    <span class="p">(</span><span class="k">SELECT</span> <span class="k">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">cnt</span> <span class="k">FROM</span> <span class="n">customer</span><span class="p">)</span> <span class="n">customer</span>
 <span class="k">CROSS</span> <span class="k">JOIN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">cnt_u</span> <span class="k">FROM</span> <span class="n">customer_u</span><span class="p">)</span> <span class="n">customer_u</span>
 </pre></div>
 
@@ -27812,14 +27904,19 @@ Done.
 <span class="k">SELECT</span> <span class="n">customer</span><span class="p">.</span><span class="o">*</span>
 <span class="k">FROM</span> <span class="n">sales_record_customer_id</span>
 <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">customer</span> <span class="k">USING</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span>
-<span class="k">WHERE</span> <span class="n">sales_record_customer_id</span><span class="p">.</span><span class="k">row</span> <span class="o">&lt;</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">sales_record_customer_id</span><span class="p">)</span> <span class="o">*</span><span class="mi">0</span><span class="p">.</span><span class="mi">8</span>
+<span class="k">WHERE</span> <span class="n">sales_record_customer_id</span><span class="p">.</span><span class="k">row</span> <span class="o">&lt;</span> <span class="p">(</span><span class="k">SELECT</span> 
+                                          <span class="k">COUNT</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> 
+                                      <span class="k">FROM</span> <span class="n">sales_record_customer_id</span><span class="p">)</span> <span class="o">*</span><span class="mi">0</span><span class="p">.</span><span class="mi">8</span>
 <span class="p">;</span>
 
 <span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="n">customer_test</span><span class="p">;</span>
+
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">customer_test</span> <span class="k">AS</span>
-<span class="k">SELECT</span> <span class="n">customer</span><span class="p">.</span><span class="o">*</span> <span class="k">FROM</span> <span class="n">sales_record_customer_id</span> <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">customer</span> <span class="k">USING</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span>
-<span class="k">EXCEPT</span>
-<span class="k">SELECT</span> <span class="o">*</span> <span class="k">from</span> <span class="n">customer_train</span>
+    <span class="k">SELECT</span> <span class="n">customer</span><span class="p">.</span><span class="o">*</span> 
+    <span class="k">FROM</span> <span class="n">sales_record_customer_id</span> 
+    <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">customer</span> <span class="k">USING</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span>
+    <span class="k">EXCEPT</span>
+    <span class="k">SELECT</span> <span class="o">*</span> <span class="k">from</span> <span class="n">customer_train</span>
 <span class="p">;</span>
 </pre></div>
 
@@ -27884,6 +27981,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="c1">-- SQL向きではないため、やや強引に記載する（分割数が多くなる場合はSQLが長くなるため現実的ではない）</span>
 <span class="c1">-- また、秒単位のデータなど時系列が細かく、かつ長期間に渡る場合はデータが膨大となるため注意（そのようなケースではループ処理でモデル学習ができる言語が望ましい）</span>
 <span class="c1">-- 学習データ(0)とテストデータ(1)を区別するフラグを付与する</span>
@@ -27908,17 +28006,26 @@ Done.
         <span class="k">SELECT</span> <span class="n">sales_ym</span><span class="p">,</span> <span class="n">sum_amount</span><span class="p">,</span> <span class="n">LAG</span><span class="p">(</span><span class="n">rn</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">rn</span><span class="p">)</span> <span class="k">AS</span> <span class="n">rn</span>
         <span class="k">FROM</span> <span class="n">sales_amount</span>
     <span class="p">)</span>
-    <span class="k">SELECT</span> <span class="n">sales_ym</span><span class="p">,</span> <span class="n">sum_amount</span><span class="p">,</span> <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">rn</span> <span class="o">&lt;=</span> <span class="mi">12</span> <span class="k">THEN</span> <span class="mi">0</span> <span class="k">WHEN</span> <span class="mi">12</span> <span class="o">&lt;</span> <span class="n">rn</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">END</span> <span class="k">as</span> <span class="n">test_flg</span>
-    <span class="k">FROM</span> <span class="n">lag_amount</span> <span class="k">WHERE</span> <span class="n">rn</span> <span class="o">&lt;=</span> <span class="mi">18</span><span class="p">);</span>
+    <span class="k">SELECT</span> 
+        <span class="n">sales_ym</span><span class="p">,</span> <span class="n">sum_amount</span><span class="p">,</span> 
+        <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">rn</span> <span class="o">&lt;=</span> <span class="mi">12</span> <span class="k">THEN</span> <span class="mi">0</span> <span class="k">WHEN</span> <span class="mi">12</span> <span class="o">&lt;</span> <span class="n">rn</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">END</span> <span class="k">as</span> <span class="n">test_flg</span>
+    <span class="k">FROM</span> <span class="n">lag_amount</span> 
+    <span class="k">WHERE</span> <span class="n">rn</span> <span class="o">&lt;=</span> <span class="mi">18</span><span class="p">);</span>
 
 <span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="n">series_data_2</span> <span class="p">;</span>
 
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">series_data_2</span> <span class="k">AS</span> <span class="p">(</span>
     <span class="k">WITH</span> <span class="n">lag_amount</span> <span class="k">AS</span> <span class="p">(</span>
-        <span class="k">SELECT</span> <span class="n">sales_ym</span><span class="p">,</span> <span class="n">sum_amount</span><span class="p">,</span> <span class="n">LAG</span><span class="p">(</span><span class="n">rn</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">rn</span><span class="p">)</span> <span class="k">AS</span> <span class="n">rn</span>
+        <span class="k">SELECT</span> 
+            <span class="n">sales_ym</span><span class="p">,</span> 
+            <span class="n">sum_amount</span><span class="p">,</span> 
+            <span class="n">LAG</span><span class="p">(</span><span class="n">rn</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">rn</span><span class="p">)</span> <span class="k">AS</span> <span class="n">rn</span>
         <span class="k">FROM</span> <span class="n">sales_amount</span>
     <span class="p">)</span>
-    <span class="k">SELECT</span> <span class="n">sales_ym</span><span class="p">,</span> <span class="n">sum_amount</span><span class="p">,</span> <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">rn</span> <span class="o">&lt;=</span> <span class="mi">12</span> <span class="k">THEN</span> <span class="mi">0</span> <span class="k">WHEN</span> <span class="mi">12</span> <span class="o">&lt;</span> <span class="n">rn</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">END</span> <span class="k">as</span> <span class="n">test_flg</span>
+    <span class="k">SELECT</span>
+        <span class="n">sales_ym</span><span class="p">,</span> 
+        <span class="n">sum_amount</span><span class="p">,</span> 
+        <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">rn</span> <span class="o">&lt;=</span> <span class="mi">12</span> <span class="k">THEN</span> <span class="mi">0</span> <span class="k">WHEN</span> <span class="mi">12</span> <span class="o">&lt;</span> <span class="n">rn</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">END</span> <span class="k">as</span> <span class="n">test_flg</span>
     <span class="k">FROM</span> <span class="n">lag_amount</span> <span class="k">WHERE</span> <span class="n">rn</span> <span class="o">&lt;=</span> <span class="mi">18</span><span class="p">);</span>
 
 <span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="n">series_data_3</span> <span class="p">;</span>
@@ -27928,7 +28035,10 @@ Done.
         <span class="k">SELECT</span> <span class="n">sales_ym</span><span class="p">,</span> <span class="n">sum_amount</span><span class="p">,</span> <span class="n">LAG</span><span class="p">(</span><span class="n">rn</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span> <span class="n">OVER</span> <span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">rn</span><span class="p">)</span> <span class="k">AS</span> <span class="n">rn</span>
         <span class="k">FROM</span> <span class="n">sales_amount</span>
     <span class="p">)</span>
-    <span class="k">SELECT</span> <span class="n">sales_ym</span><span class="p">,</span> <span class="n">sum_amount</span><span class="p">,</span> <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">rn</span> <span class="o">&lt;=</span> <span class="mi">12</span> <span class="k">THEN</span> <span class="mi">0</span> <span class="k">WHEN</span> <span class="mi">12</span> <span class="o">&lt;</span> <span class="n">rn</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">END</span> <span class="k">as</span> <span class="n">test_flg</span>
+    <span class="k">SELECT</span> 
+        <span class="n">sales_ym</span><span class="p">,</span> 
+        <span class="n">sum_amount</span><span class="p">,</span> 
+        <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">rn</span> <span class="o">&lt;=</span> <span class="mi">12</span> <span class="k">THEN</span> <span class="mi">0</span> <span class="k">WHEN</span> <span class="mi">12</span> <span class="o">&lt;</span> <span class="n">rn</span> <span class="k">THEN</span> <span class="mi">1</span> <span class="k">END</span> <span class="k">as</span> <span class="n">test_flg</span>
     <span class="k">FROM</span> <span class="n">lag_amount</span> <span class="k">WHERE</span> <span class="n">rn</span> <span class="o">&lt;=</span> <span class="mi">18</span><span class="p">);</span>
 </pre></div>
 
@@ -27987,6 +28097,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">series_data_1</span>
 </pre></div>
 
@@ -28264,6 +28375,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="n">customer_std</span><span class="p">;</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">customer_std</span> <span class="k">AS</span> <span class="p">(</span>
     <span class="k">SELECT</span>
@@ -28340,6 +28452,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">gender_std</span>
 </pre></div>
 
@@ -28419,6 +28532,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="n">product_full</span><span class="p">;</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">product_full</span> <span class="k">AS</span> <span class="p">(</span>
     <span class="k">SELECT</span>
@@ -28488,6 +28602,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">product_full</span> <span class="k">LIMIT</span> <span class="mi">10</span>
 </pre></div>
 
@@ -28677,7 +28792,9 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-<span class="k">COPY</span> <span class="n">product_full</span> <span class="k">TO</span> <span class="s1">&#39;/tmp/data/S_product_full_UTF-8_header.csv&#39;</span> <span class="k">WITH</span> <span class="n">CSV</span> <span class="n">HEADER</span> <span class="k">encoding</span> <span class="s1">&#39;UTF-8&#39;</span>
+
+<span class="k">COPY</span> <span class="n">product_full</span> <span class="k">TO</span> <span class="s1">&#39;/tmp/data/S_product_full_UTF-8_header.csv&#39;</span> 
+<span class="k">WITH</span> <span class="n">CSV</span> <span class="n">HEADER</span> <span class="k">encoding</span> <span class="s1">&#39;UTF-8&#39;</span>
 </pre></div>
 
      </div>
@@ -28741,7 +28858,9 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-<span class="k">COPY</span> <span class="n">product_full</span> <span class="k">TO</span> <span class="s1">&#39;/tmp/data/S_product_full_SJIS_header.csv&#39;</span> <span class="k">WITH</span> <span class="n">CSV</span> <span class="n">HEADER</span> <span class="k">encoding</span> <span class="s1">&#39;SJIS&#39;</span>
+
+<span class="k">COPY</span> <span class="n">product_full</span> <span class="k">TO</span> <span class="s1">&#39;/tmp/data/S_product_full_SJIS_header.csv&#39;</span> 
+<span class="k">WITH</span> <span class="n">CSV</span> <span class="n">HEADER</span> <span class="k">encoding</span> <span class="s1">&#39;SJIS&#39;</span>
 </pre></div>
 
      </div>
@@ -28805,7 +28924,9 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-<span class="k">COPY</span> <span class="n">product_full</span> <span class="k">TO</span> <span class="s1">&#39;/tmp/data/S_product_full_UTF-8_noh.csv&#39;</span> <span class="k">WITH</span> <span class="n">CSV</span> <span class="k">encoding</span> <span class="s1">&#39;UTF-8&#39;</span>
+
+<span class="k">COPY</span> <span class="n">product_full</span> <span class="k">TO</span> <span class="s1">&#39;/tmp/data/S_product_full_UTF-8_noh.csv&#39;</span> 
+<span class="k">WITH</span> <span class="n">CSV</span> <span class="k">encoding</span> <span class="s1">&#39;UTF-8&#39;</span>
 </pre></div>
 
      </div>
@@ -28869,6 +28990,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="n">product_full</span><span class="p">;</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">product_full</span> <span class="p">(</span>
         <span class="n">product_cd</span>           <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
@@ -28932,7 +29054,9 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-<span class="k">COPY</span> <span class="n">product_full</span> <span class="k">FROM</span> <span class="s1">&#39;/tmp/data/S_product_full_UTF-8_header.csv&#39;</span> <span class="k">WITH</span> <span class="n">CSV</span> <span class="n">HEADER</span> <span class="k">encoding</span> <span class="s1">&#39;UTF-8&#39;</span>
+
+<span class="k">COPY</span> <span class="n">product_full</span> <span class="k">FROM</span> <span class="s1">&#39;/tmp/data/S_product_full_UTF-8_header.csv&#39;</span> 
+<span class="k">WITH</span> <span class="n">CSV</span> <span class="n">HEADER</span> <span class="k">encoding</span> <span class="s1">&#39;UTF-8&#39;</span>
 </pre></div>
 
      </div>
@@ -28983,6 +29107,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">product_full</span> <span class="k">LIMIT</span> <span class="mi">3</span>
 </pre></div>
 
@@ -29095,6 +29220,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="n">product_full</span><span class="p">;</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">product_full</span> <span class="p">(</span>
         <span class="n">product_cd</span>           <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
@@ -29158,7 +29284,9 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-<span class="k">COPY</span> <span class="n">product_full</span> <span class="k">FROM</span> <span class="s1">&#39;/tmp/data/S_product_full_UTF-8_noh.csv&#39;</span> <span class="k">WITH</span> <span class="n">CSV</span> <span class="k">encoding</span> <span class="s1">&#39;UTF-8&#39;</span>
+
+<span class="k">COPY</span> <span class="n">product_full</span> <span class="k">FROM</span> <span class="s1">&#39;/tmp/data/S_product_full_UTF-8_noh.csv&#39;</span> 
+<span class="k">WITH</span> <span class="n">CSV</span> <span class="k">encoding</span> <span class="s1">&#39;UTF-8&#39;</span>
 </pre></div>
 
      </div>
@@ -29209,6 +29337,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">product_full</span> <span class="k">LIMIT</span> <span class="mi">3</span>
 </pre></div>
 
@@ -29321,7 +29450,9 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-<span class="k">COPY</span> <span class="n">product_full</span> <span class="k">TO</span> <span class="s1">&#39;/tmp/data/S_product_full_UTF-8_header.tsv&#39;</span> <span class="k">WITH</span> <span class="n">CSV</span> <span class="n">HEADER</span> <span class="k">DELIMITER</span> <span class="n">E</span><span class="s1">&#39;\t&#39;</span> <span class="k">encoding</span> <span class="s1">&#39;UTF-8&#39;</span>
+
+<span class="k">COPY</span> <span class="n">product_full</span> <span class="k">TO</span> <span class="s1">&#39;/tmp/data/S_product_full_UTF-8_header.tsv&#39;</span> 
+<span class="k">WITH</span> <span class="n">CSV</span> <span class="n">HEADER</span> <span class="k">DELIMITER</span> <span class="n">E</span><span class="s1">&#39;\t&#39;</span> <span class="k">encoding</span> <span class="s1">&#39;UTF-8&#39;</span>
 </pre></div>
 
      </div>
@@ -29385,6 +29516,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="n">product_full</span><span class="p">;</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">product_full</span> <span class="p">(</span>
         <span class="n">product_cd</span>           <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
@@ -29448,7 +29580,9 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
-<span class="k">COPY</span> <span class="n">product_full</span> <span class="k">FROM</span> <span class="s1">&#39;/tmp/data/S_product_full_UTF-8_header.tsv&#39;</span> <span class="k">WITH</span> <span class="n">CSV</span> <span class="n">HEADER</span> <span class="k">DELIMITER</span> <span class="n">E</span><span class="s1">&#39;\t&#39;</span> <span class="k">encoding</span> <span class="s1">&#39;UTF-8&#39;</span>
+
+<span class="k">COPY</span> <span class="n">product_full</span> <span class="k">FROM</span> <span class="s1">&#39;/tmp/data/S_product_full_UTF-8_header.tsv&#39;</span> 
+<span class="k">WITH</span> <span class="n">CSV</span> <span class="n">HEADER</span> <span class="k">DELIMITER</span> <span class="n">E</span><span class="s1">&#39;\t&#39;</span> <span class="k">encoding</span> <span class="s1">&#39;UTF-8&#39;</span>
 </pre></div>
 
      </div>
@@ -29499,6 +29633,7 @@ Done.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
 <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">product_full</span> <span class="k">LIMIT</span> <span class="mi">3</span>
 </pre></div>
 
