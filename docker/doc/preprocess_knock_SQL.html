@@ -13977,7 +13977,7 @@ a.anchor-link {
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB">&#12399;&#12376;&#12417;&#12395;<a class="anchor-link" href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB">&#182;</a></h2><ul>
-<li>データベースはPostgreSQL13です</li>
+<li>データベースはPostgreSQL12です</li>
 <li>初めに以下のセルを実行してください</li>
 <li>セルに %%sql と記載することでSQLを発行することができます</li>
 <li>jupyterからはdescribeコマンドによるテーブル構造の確認ができないため、テーブル構造を確認する場合はlimitを指定したSELECTなどで代用してください</li>
@@ -14852,7 +14852,7 @@ a.anchor-link {
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<blockquote><p>S-035: レシート明細テーブル（receipt）に対し、顧客ID（customer_id）ごとに販売金額（amount）を合計して全顧客の平均を求め、平均以上に買い物をしている顧客を抽出せよ。ただし、顧客IDが"Z"から始まるのものは非会員を表すため、除外して計算すること。なお、データは10件だけ表示させれば良い。</p>
+<blockquote><p>S-035: レシート明細テーブル（receipt）に対し、顧客ID（customer_id）ごとに売上金額（amount）を合計して全顧客の平均を求め、平均以上に買い物をしている顧客を抽出せよ。ただし、顧客IDが"Z"から始まるのものは非会員を表すため、除外して計算すること。なお、データは10件だけ表示させれば良い。</p>
 </blockquote>
 
 </div>
@@ -14918,7 +14918,7 @@ a.anchor-link {
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<blockquote><p>S-038: 顧客テーブル（customer）とレシート明細テーブル（receipt）から、各顧客ごとの売上金額合計を求めよ。ただし、買い物の実績がない顧客については売上金額を0として表示させること。また、顧客は性別コード（gender_cd）が女性（1）であるものを対象とし、非会員（顧客IDが'Z'から始まるもの）は除外すること。なお、結果は10件だけ表示させれば良い。</p>
+<blockquote><p>S-038: 顧客テーブル（customer）とレシート明細テーブル（receipt）から、各顧客ごとの売上金額合計を求めよ。ただし、買い物の実績がない顧客については売上金額を0として表示させること。また、顧客は性別コード（gender_cd）が女性（1）であるものを対象とし、非会員（顧客IDが"Z"から始まるもの）は除外すること。なお、結果は10件だけ表示させれば良い。</p>
 </blockquote>
 
 </div>
@@ -14940,7 +14940,7 @@ a.anchor-link {
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<blockquote><p>S-039: レシート明細テーブル（receipt）から売上日数の多い顧客の上位20件と、売上金額合計の多い顧客の上位20件を抽出し、完全外部結合せよ。ただし、非会員（顧客IDが'Z'から始まるもの）は除外すること。</p>
+<blockquote><p>S-039: レシート明細テーブル（receipt）から売上日数の多い顧客の上位20件と、売上金額合計の多い顧客の上位20件を抽出し、完全外部結合せよ。ただし、非会員（顧客IDが"Z"から始まるもの）は除外すること。</p>
 </blockquote>
 
 </div>
@@ -15051,7 +15051,7 @@ a.anchor-link {
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<blockquote><p>S-044: 前設問で作成した売上サマリテーブル（sales_summary）は性別の売上を横持ちさせたものであった。このテーブルから性別を縦持ちさせ、年代、性別コード、売上金額の3項目に変換せよ。ただし、性別コードは男性を'00'、女性を'01'、不明を'99'とする。</p>
+<blockquote><p>S-044: 前設問で作成した売上サマリテーブル（sales_summary）は性別の売上を横持ちさせたものであった。このテーブルから性別を縦持ちさせ、年代、性別コード、売上金額の3項目に変換せよ。ただし、性別コードは男性を"00"、女性を"01"、不明を"99"とする。</p>
 </blockquote>
 
 </div>
@@ -16171,7 +16171,7 @@ $$
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<blockquote><p>S-094: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは'/tmp/data'を指定することでJupyterの/'work/data'と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
+<blockquote><p>S-094: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは"/tmp/data"を指定することでJupyterの"/work/data"と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
 <ul>
 <li>ファイル形式はCSV（カンマ区切り）</li>
 <li>ヘッダ有り</li>
@@ -16198,7 +16198,7 @@ $$
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<blockquote><p>S-095: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは'/tmp/data'を指定することでJupyterの/'work/data'と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
+<blockquote><p>S-095: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは"/tmp/data"を指定することでJupyterの"/work/data"と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
 <ul>
 <li>ファイル形式はCSV（カンマ区切り）</li>
 <li>ヘッダ有り</li>
@@ -16225,7 +16225,7 @@ $$
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<blockquote><p>S-096: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは'/tmp/data'を指定することでJupyterの/'work/data'と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
+<blockquote><p>S-096: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは"/tmp/data"を指定することでJupyterの"/work/data"と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
 <ul>
 <li>ファイル形式はCSV（カンマ区切り）</li>
 <li>ヘッダ無し</li>
@@ -16306,7 +16306,7 @@ $$
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<blockquote><p>S-099: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは'/tmp/data'を指定することでJupyterの/'work/data'と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
+<blockquote><p>S-099: 先に作成したカテゴリ名付き商品データを以下の仕様でファイル出力せよ。出力先のパスは"/tmp/data"を指定することでJupyterの"/work/data"と共有されるようになっている。なお、COPYコマンドの権限は付与済みである。</p>
 <ul>
 <li>ファイル形式はTSV（タブ区切り）</li>
 <li>ヘッダ有り</li>
