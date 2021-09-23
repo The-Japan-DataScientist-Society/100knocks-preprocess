@@ -30,5 +30,7 @@ jobs:
         run: |
           chmod -R 777 docker/
           for f in $(find docker/work -type f -name "*.ipynb" -not -path "*/.ipynb_checkpoints/*" | sed -e "s:docker/work/::g"); do
+            echo "Run docker/work/${f}"
             docker-compose exec -T notebook bash -c "cd work && jupyter nbconvert --to notebook --debug --NotebookClient.allow_error_names UsageError --execute ${f}"
+            echo
           done
