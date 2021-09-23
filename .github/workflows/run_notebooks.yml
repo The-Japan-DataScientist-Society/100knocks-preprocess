@@ -28,6 +28,7 @@ jobs:
           DOCKER_BUILDKIT: 1
           COMPOSE_DOCKER_CLI_BUILD: 1
         run: |
+          chmod -R 777 docker/
           for f in $(find docker/work -type f -name "*.ipynb" -not -path "*/.ipynb_checkpoints/*" | sed -e "s:docker/work/::g"); do
-            docker-compose exec -T notebook bash -c "cd work && jupyter nbconvert --to notebook --debug --stdout --NotebookClient.allow_error_names UsageError --execute ${f}"
+            docker-compose exec -T notebook bash -c "cd work && jupyter nbconvert --to notebook --debug --NotebookClient.allow_error_names UsageError --execute ${f}"
           done
