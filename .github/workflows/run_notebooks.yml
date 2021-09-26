@@ -31,6 +31,8 @@ jobs:
           chmod -R 777 docker/
           for f in $(find docker/work -type f -name "*.ipynb" -not -path "*/.ipynb_checkpoints/*" | sed -e "s:docker/work/::g"); do
             echo "Run docker/work/${f}"
+
+            # 「UsageError: %%sql is a cell magic, but the cell body is empty. Did you mean the line magic %sql (single %)? 」を許容するため、UsageErrorを許容する設定にしている
             docker-compose exec -T notebook bash -c "cd work && jupyter nbconvert --to notebook --debug --NotebookClient.allow_error_names UsageError --execute ${f}"
             echo
           done
