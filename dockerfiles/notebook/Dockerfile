@@ -24,6 +24,5 @@ COPY Pipfile.lock .
 RUN pip install --no-cache-dir pipenv==2021.5.29 \
     && pipenv install --system \
     && rm Pipfile* \
-    && Rscript -e "install.packages(c('IRkernel', 'DBI', 'RPostgreSQL', 'rsample'), dependencies = TRUE, error = TRUE, repos='https://cran.r-project.org')" \
+    && Rscript -e "install.packages(c('IRkernel', 'DBI', 'RPostgreSQL', 'themis'), dependencies = TRUE, error = TRUE, repos='https://cran.r-project.org')" \
     && Rscript -e "IRkernel::installspec()"
-#RUN Rscript -e "install.packages(c('DBI', 'RPostgreSQL', 'recipes'), dependencies = TRUE, error = TRUE, repos='https://cran.r-project.org')"
