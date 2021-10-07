@@ -3,7 +3,7 @@ FROM jupyter/datascience-notebook:python-3.9.6
 USER root
 ENV DEBCONF_NOWARNINGS yes
 
-# postgresql 13.x対応を行っている (参考: https://www.postgresql.org/download/linux/ubuntu/ )
+# 最新のpostgresqlへの対応を行っている (参考: https://www.postgresql.org/download/linux/ubuntu/ )
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
     && apt-get install -y --no-install-recommends lsb-release gnupg \
