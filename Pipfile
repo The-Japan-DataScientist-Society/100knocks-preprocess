@@ -7,6 +7,9 @@ name = "pypi"
 ipython-sql = "==0.3.9"
 psycopg2 = "==2.8.5"
 imblearn = "==0.0"
+jupyterlab-code-formatter = "==1.4.10"
+black = "==21.9b0"
+isort = "==5.9.3"
 
 [dev-packages]
 

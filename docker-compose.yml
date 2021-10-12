@@ -38,4 +38,5 @@ services:
     volumes:
       - ./docker/doc:/home/jovyan/doc
       - ./docker/work:/home/jovyan/work
+      - ./.jupyter/lab/user-settings/@ryantam626/jupyterlab_code_formatter:/home/jovyan/.jupyter/lab/user-settings/@ryantam626/jupyterlab_code_formatter
     command: start-notebook.sh --NotebookApp.token=''
