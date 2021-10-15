@@ -38,8 +38,8 @@ jobs:
           HEAD_REF: ${{github.event.pull_request.head.ref}}
         if: ${{ github.event.pull_request.head.repo.full_name == github.repository && steps.diff.outputs.result != '' }}
         run: |
-          git config user.name "100knocks-preprocess CI"
-          git config user.email "100knocks-preprocess-ci@example.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -u
           git commit -m "Update libpq-dev"
           git push -f https://${{github.actor}}:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git "HEAD:refs/heads/fix-version-${HEAD_REF}"
