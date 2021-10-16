@@ -19061,7 +19061,7 @@ The following objects are masked from ‘package:recipes’:
     <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^Z&quot;</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">mutate</span><span class="p">(</span><span class="n">log_amount</span> <span class="o">=</span> <span class="nf">log</span><span class="p">((</span><span class="n">sum_amount</span> <span class="o">+</span> <span class="m">1</span><span class="p">),</span><span class="m">10</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">mutate</span><span class="p">(</span><span class="n">log_amount</span> <span class="o">=</span> <span class="nf">log</span><span class="p">((</span><span class="n">sum_amount</span> <span class="o">+</span> <span class="m">0.5</span><span class="p">),</span><span class="m">10</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
 </pre></div>
 
@@ -19090,16 +19090,16 @@ The following objects are masked from ‘package:recipes’:
 	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><td>CS001113000004</td><td>1298</td><td>3.113609</td></tr>
-	<tr><td>CS001114000005</td><td> 626</td><td>2.797268</td></tr>
-	<tr><td>CS001115000010</td><td>3044</td><td>3.483587</td></tr>
-	<tr><td>CS001205000004</td><td>1988</td><td>3.298635</td></tr>
-	<tr><td>CS001205000006</td><td>3337</td><td>3.523486</td></tr>
-	<tr><td>CS001211000025</td><td> 456</td><td>2.659916</td></tr>
-	<tr><td>CS001212000027</td><td> 448</td><td>2.652246</td></tr>
-	<tr><td>CS001212000031</td><td> 296</td><td>2.472756</td></tr>
-	<tr><td>CS001212000046</td><td> 228</td><td>2.359835</td></tr>
-	<tr><td>CS001212000070</td><td> 456</td><td>2.659916</td></tr>
+	<tr><td>CS001113000004</td><td>1298</td><td>3.113442</td></tr>
+	<tr><td>CS001114000005</td><td> 626</td><td>2.796921</td></tr>
+	<tr><td>CS001115000010</td><td>3044</td><td>3.483516</td></tr>
+	<tr><td>CS001205000004</td><td>1988</td><td>3.298526</td></tr>
+	<tr><td>CS001205000006</td><td>3337</td><td>3.523421</td></tr>
+	<tr><td>CS001211000025</td><td> 456</td><td>2.659441</td></tr>
+	<tr><td>CS001212000027</td><td> 448</td><td>2.651762</td></tr>
+	<tr><td>CS001212000031</td><td> 296</td><td>2.472025</td></tr>
+	<tr><td>CS001212000046</td><td> 228</td><td>2.358886</td></tr>
+	<tr><td>CS001212000070</td><td> 456</td><td>2.659441</td></tr>
 </tbody>
 </table>
 
@@ -19129,7 +19129,7 @@ The following objects are masked from ‘package:recipes’:
     <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^Z&quot;</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">mutate</span><span class="p">(</span><span class="n">log_amount</span> <span class="o">=</span> <span class="nf">log</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">+</span> <span class="m">1</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">mutate</span><span class="p">(</span><span class="n">log_amount</span> <span class="o">=</span> <span class="nf">log</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">+</span> <span class="m">0.5</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
 </pre></div>
 
@@ -19158,16 +19158,16 @@ The following objects are masked from ‘package:recipes’:
 	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><td>CS001113000004</td><td>1298</td><td>7.169350</td></tr>
-	<tr><td>CS001114000005</td><td> 626</td><td>6.440947</td></tr>
-	<tr><td>CS001115000010</td><td>3044</td><td>8.021256</td></tr>
-	<tr><td>CS001205000004</td><td>1988</td><td>7.595387</td></tr>
-	<tr><td>CS001205000006</td><td>3337</td><td>8.113127</td></tr>
-	<tr><td>CS001211000025</td><td> 456</td><td>6.124683</td></tr>
-	<tr><td>CS001212000027</td><td> 448</td><td>6.107023</td></tr>
-	<tr><td>CS001212000031</td><td> 296</td><td>5.693732</td></tr>
-	<tr><td>CS001212000046</td><td> 228</td><td>5.433722</td></tr>
-	<tr><td>CS001212000070</td><td> 456</td><td>6.124683</td></tr>
+	<tr><td>CS001113000004</td><td>1298</td><td>7.168965</td></tr>
+	<tr><td>CS001114000005</td><td> 626</td><td>6.440149</td></tr>
+	<tr><td>CS001115000010</td><td>3044</td><td>8.021092</td></tr>
+	<tr><td>CS001205000004</td><td>1988</td><td>7.595136</td></tr>
+	<tr><td>CS001205000006</td><td>3337</td><td>8.112977</td></tr>
+	<tr><td>CS001211000025</td><td> 456</td><td>6.123589</td></tr>
+	<tr><td>CS001212000027</td><td> 448</td><td>6.105909</td></tr>
+	<tr><td>CS001212000031</td><td> 296</td><td>5.692047</td></tr>
+	<tr><td>CS001212000046</td><td> 228</td><td>5.431536</td></tr>
+	<tr><td>CS001212000070</td><td> 456</td><td>6.123589</td></tr>
 </tbody>
 </table>
 
@@ -19370,7 +19370,7 @@ The following objects are masked from ‘package:recipes’:
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<blockquote><p>R-066: 商品データフレーム（df_product）の各商品について、利益率が30%となる新たな単価を求めよ。今回は、1円未満を四捨五入すること（0.5については偶数方向の丸めで良い）。そして結果を10件表示させ、利益率がおよそ30％付近であることを確認せよ。ただし、単価（unit_price）と原価（unit_cost）にはNULLが存在することに注意せよ。</p>
+<blockquote><p>R-066: 商品データフレーム（df_product）の各商品について、利益率が30%となる新たな単価を求めよ。今回は、1円未満を丸めること（四捨五入または偶数への丸めで良い）。そして結果を10件表示させ、利益率がおよそ30％付近であることを確認せよ。ただし、単価（unit_price）と原価（unit_cost）にはNULLが存在することに注意せよ。</p>
 </blockquote>
 
 </div>
@@ -20109,16 +20109,16 @@ The following objects are masked from ‘package:recipes’:
 	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;date&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><th scope=row>1</th><td>CS003312000129</td><td>立石 麻緒  </td><td>9</td><td>不明</td><td>1986-12-05</td><td>32</td><td>201-0005</td><td>東京都狛江市岩戸南**********      </td><td>S13003</td><td>20160518</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>2</th><td>CS023313000027</td><td>早美 まなみ</td><td>1</td><td>女性</td><td>1987-07-18</td><td>31</td><td>212-0016</td><td>神奈川県川崎市幸区南幸町**********</td><td>S14023</td><td>20150306</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>3</th><td>CS044414000004</td><td>芦田 景子  </td><td>1</td><td>女性</td><td>1976-08-12</td><td>42</td><td>144-0056</td><td>東京都大田区西六郷**********      </td><td>S13044</td><td>20160115</td><td>E-20100821-F</td></tr>
-	<tr><th scope=row>4</th><td>CS002612000168</td><td>中林 美智子</td><td>1</td><td>女性</td><td>1956-08-27</td><td>62</td><td>185-0034</td><td>東京都国分寺市光町**********      </td><td>S13002</td><td>20151123</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>5</th><td>CS007502000056</td><td>柳原 俊二  </td><td>0</td><td>男性</td><td>1966-11-13</td><td>52</td><td>276-0028</td><td>千葉県八千代市村上**********      </td><td>S12007</td><td>20180724</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>6</th><td>CS018312000006</td><td>浜本 そら  </td><td>1</td><td>女性</td><td>1980-01-17</td><td>39</td><td>204-0011</td><td>東京都清瀬市下清戸**********      </td><td>S13018</td><td>20150703</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>7</th><td>CS002515000287</td><td>福士 遥    </td><td>1</td><td>女性</td><td>1961-01-23</td><td>58</td><td>185-0021</td><td>東京都国分寺市南町**********      </td><td>S13002</td><td>20161009</td><td>1-20090701-2</td></tr>
-	<tr><th scope=row>8</th><td>CS038513000066</td><td>内藤 知世  </td><td>1</td><td>女性</td><td>1963-01-10</td><td>56</td><td>279-0041</td><td>千葉県浦安市堀江**********        </td><td>S13038</td><td>20160207</td><td>2-20101003-6</td></tr>
-	<tr><th scope=row>9</th><td>CS045314000009</td><td>柳沢 まみ  </td><td>1</td><td>女性</td><td>1947-03-12</td><td>72</td><td>174-0063</td><td>東京都板橋区前野町**********      </td><td>S14045</td><td>20180408</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>10</th><td>CS001414000041</td><td>波多野 花  </td><td>1</td><td>女性</td><td>1974-12-06</td><td>44</td><td>144-0055</td><td>東京都大田区仲六郷**********      </td><td>S13001</td><td>20150710</td><td>3-20100313-7</td></tr>
+	<tr><th scope=row>1</th><td>CS025813000004</td><td>安井 一代  </td><td>9</td><td>不明</td><td>1931-05-09</td><td>87</td><td>242-0024</td><td>神奈川県大和市福田**********        </td><td>S14025</td><td>20150324</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>2</th><td>CS003615000121</td><td>ほしの 由宇</td><td>1</td><td>女性</td><td>1942-05-25</td><td>76</td><td>204-0013</td><td>東京都清瀬市上清戸**********        </td><td>S13003</td><td>20160104</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>3</th><td>CS025312000030</td><td>薬師丸 咲  </td><td>1</td><td>女性</td><td>1984-01-29</td><td>35</td><td>242-0014</td><td>神奈川県大和市上和田**********      </td><td>S14025</td><td>20150716</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>4</th><td>CS040501000004</td><td>西岡 雅彦  </td><td>9</td><td>不明</td><td>1965-08-16</td><td>53</td><td>226-0024</td><td>神奈川県横浜市緑区西八朔町**********</td><td>S14040</td><td>20150224</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>5</th><td>CS018415000121</td><td>水上 怜奈  </td><td>1</td><td>女性</td><td>1976-11-04</td><td>42</td><td>203-0053</td><td>東京都東久留米市本町**********      </td><td>S13018</td><td>20160123</td><td>B-20100611-D</td></tr>
+	<tr><th scope=row>6</th><td>CS005415000275</td><td>紺野 真悠子</td><td>1</td><td>女性</td><td>1975-05-21</td><td>43</td><td>176-0025</td><td>東京都練馬区中村南**********        </td><td>S13005</td><td>20141129</td><td>7-20100121-8</td></tr>
+	<tr><th scope=row>7</th><td>CS034311000043</td><td>榊原 美佐子</td><td>1</td><td>女性</td><td>1987-08-26</td><td>31</td><td>213-0006</td><td>神奈川県川崎市高津区下野毛**********</td><td>S14034</td><td>20170330</td><td>1-20100420-5</td></tr>
+	<tr><th scope=row>8</th><td>CS004612000142</td><td>斉藤 ひろ子</td><td>1</td><td>女性</td><td>1958-01-31</td><td>61</td><td>177-0034</td><td>東京都練馬区富士見台**********      </td><td>S13004</td><td>20160228</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>9</th><td>CS002312000421</td><td>水口 美幸  </td><td>1</td><td>女性</td><td>1984-11-29</td><td>34</td><td>187-0003</td><td>東京都小平市花小金井南町**********  </td><td>S13002</td><td>20170309</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>10</th><td>CS004613000146</td><td>玉木 恵麻  </td><td>1</td><td>女性</td><td>1953-02-01</td><td>66</td><td>165-0032</td><td>東京都中野区鷺宮**********          </td><td>S13004</td><td>20160813</td><td>4-20081202-1</td></tr>
 </tbody>
 </table>
 
@@ -20530,7 +20530,7 @@ The following objects are masked from ‘package:recipes’:
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<blockquote><p>R-081: 単価（unit_price）と原価（unit_cost）の欠損値について、それぞれの平均値で補完した新たなdf_product_2を作成せよ。なお、平均値について1円未満は四捨五入とし、0.5については偶数寄せでかまわない。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
+<blockquote><p>R-081: 単価（unit_price）と原価（unit_cost）の欠損値について、それぞれの平均値で補完した新たなdf_product_2を作成せよ。なお、平均値については1円未満を丸めること（四捨五入または偶数への丸めで良い）。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
 </blockquote>
 
 </div>
@@ -20586,7 +20586,7 @@ The following objects are masked from ‘package:recipes’:
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<blockquote><p>R-082: 単価（unit_price）と原価（unit_cost）の欠損値について、それぞれの中央値で補完した新たなdf_product_3を作成せよ。なお、中央値について1円未満は四捨五入とし、0.5については偶数寄せでかまわない。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
+<blockquote><p>R-082: 単価（unit_price）と原価（unit_cost）の欠損値について、それぞれの中央値で補完した新たなdf_product_3を作成せよ。なお、中央値については1円未満を丸めること（四捨五入または偶数への丸めで良い）。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
 </blockquote>
 
 </div>
@@ -20642,7 +20642,7 @@ The following objects are masked from ‘package:recipes’:
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<blockquote><p>R-083: 単価（unit_price）と原価（unit_cost）の欠損値について、各商品の小区分（category_small_cd）ごとに算出した中央値で補完した新たなdf_product_4を作成せよ。なお、中央値について1円未満は四捨五入とし、0.5については偶数寄せでかまわない。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
+<blockquote><p>R-083: 単価（unit_price）と原価（unit_cost）の欠損値について、各商品の小区分（category_small_cd）ごとに算出した中央値で補完した新たなdf_product_4を作成せよ。なお、中央値については1円未満を丸めること（四捨五入または偶数への丸めで良い）。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
 </blockquote>
 
 </div>
