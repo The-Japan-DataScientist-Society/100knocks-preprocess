@@ -111,7 +111,7 @@ RUN set -x && \
 
 WORKDIR "${HOME}"
 
-FROM datascience-notebook AS dss-notebook
+FROM datascience-notebook
 #TODO: jupyter/datascience-notebookがARM64対応したら以下をベースにする
 #FROM jupyter/datascience-notebook:python-3.9.6
 #FROM jupyter/datascience-notebook:d53a302fbcd0
