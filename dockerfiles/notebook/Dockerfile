@@ -1,5 +1,10 @@
-# https://github.com/jupyter/docker-stacks/blob/1be67b97cc695c0a480ef80c26094c0699d963b9/datascience-notebook/Dockerfile からJuliaのパッケージインストールを抜いたもの
-FROM jupyter/scipy-notebook:python-3.9.6
+# https://github.com/jupyter/docker-stacks/blob/1be67b97cc695c0a480ef80c26094c0699d963b9/datascience-notebook/Dockerfile を一部コメントアウト・改変
+ARG OWNER=jupyter
+ARG BASE_CONTAINER=$OWNER/scipy-notebook
+#FROM $BASE_CONTAINER
+FROM $BASE_CONTAINER:python-3.9.6
+
+#LABEL maintainer="Jupyter Project <jupyter@googlegroups.com>"
 
 # Fix DL4006
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -91,10 +96,22 @@ RUN set -x && \
             fix-permissions "/home/${NB_USER}"; \
     fi;
 
+# Add Julia packages.
+# Install IJulia as jovyan and then move the kernelspec out
+# to the system share location. Avoids problems with runtime UID change not
+# taking effect properly on the .local folder in the jovyan home dir.
+#RUN julia -e 'import Pkg; Pkg.update()' && \
+#    julia -e 'import Pkg; Pkg.add("HDF5")' && \
+#    julia -e 'using Pkg; pkg"add IJulia"; pkg"precompile"' && \
+#    # move kernelspec out of home \
+#    mv "${HOME}/.local/share/jupyter/kernels/julia"* "${CONDA_DIR}/share/jupyter/kernels/" && \
+#    chmod -R go+rx "${CONDA_DIR}/share/jupyter" && \
+#    rm -rf "${HOME}/.local" && \
+#    fix-permissions "${JULIA_PKGDIR}" "${CONDA_DIR}/share/jupyter"
+
 WORKDIR "${HOME}"
 
 # ここから100本ノックオリジナル実装
-
 USER root
 ENV DEBCONF_NOWARNINGS yes
 
