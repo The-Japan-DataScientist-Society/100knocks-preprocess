@@ -1,10 +1,11 @@
 # https://github.com/jupyter/docker-stacks/blob/1be67b97cc695c0a480ef80c26094c0699d963b9/datascience-notebook/Dockerfile を一部コメントアウト・改変
+# TODO: jupyter/datascience-notebookがARM64対応したらそれをベースにする
 ARG OWNER=jupyter
 ARG BASE_CONTAINER=$OWNER/scipy-notebook
 #FROM $BASE_CONTAINER
-FROM $BASE_CONTAINER:python-3.9.6 AS datascience-notebook
+FROM $BASE_CONTAINER:python-3.9.6
 
-LABEL maintainer="Jupyter Project <jupyter@googlegroups.com>"
+#LABEL maintainer="Jupyter Project <jupyter@googlegroups.com>"
 
 # Fix DL4006
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -111,10 +112,7 @@ RUN set -x && \
 
 WORKDIR "${HOME}"
 
-FROM datascience-notebook
-#TODO: jupyter/datascience-notebookがARM64対応したら以下をベースにする
-#FROM jupyter/datascience-notebook:python-3.9.6
-#FROM jupyter/datascience-notebook:d53a302fbcd0
+# ここから100本ノックオリジナル実装
 USER root
 ENV DEBCONF_NOWARNINGS yes
 
