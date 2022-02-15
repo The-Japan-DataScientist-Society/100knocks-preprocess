@@ -1,2 +1,2 @@
-FROM postgres:14.2-alpine
+FROM postgres:14.2-bullseye
 ENV LANG ja_JP.utf8
