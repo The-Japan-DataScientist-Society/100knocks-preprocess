@@ -19061,7 +19061,7 @@ The following objects are masked from ‘package:recipes’:
     <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^Z&quot;</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">mutate</span><span class="p">(</span><span class="n">log_amount</span> <span class="o">=</span> <span class="nf">log</span><span class="p">((</span><span class="n">sum_amount</span> <span class="o">+</span> <span class="m">1</span><span class="p">),</span><span class="m">10</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">mutate</span><span class="p">(</span><span class="n">log_amount</span> <span class="o">=</span> <span class="nf">log</span><span class="p">((</span><span class="n">sum_amount</span> <span class="o">+</span> <span class="m">0.5</span><span class="p">),</span><span class="m">10</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
 </pre></div>
 
@@ -19090,16 +19090,16 @@ The following objects are masked from ‘package:recipes’:
 	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><td>CS001113000004</td><td>1298</td><td>3.113609</td></tr>
-	<tr><td>CS001114000005</td><td> 626</td><td>2.797268</td></tr>
-	<tr><td>CS001115000010</td><td>3044</td><td>3.483587</td></tr>
-	<tr><td>CS001205000004</td><td>1988</td><td>3.298635</td></tr>
-	<tr><td>CS001205000006</td><td>3337</td><td>3.523486</td></tr>
-	<tr><td>CS001211000025</td><td> 456</td><td>2.659916</td></tr>
-	<tr><td>CS001212000027</td><td> 448</td><td>2.652246</td></tr>
-	<tr><td>CS001212000031</td><td> 296</td><td>2.472756</td></tr>
-	<tr><td>CS001212000046</td><td> 228</td><td>2.359835</td></tr>
-	<tr><td>CS001212000070</td><td> 456</td><td>2.659916</td></tr>
+	<tr><td>CS001113000004</td><td>1298</td><td>3.113442</td></tr>
+	<tr><td>CS001114000005</td><td> 626</td><td>2.796921</td></tr>
+	<tr><td>CS001115000010</td><td>3044</td><td>3.483516</td></tr>
+	<tr><td>CS001205000004</td><td>1988</td><td>3.298526</td></tr>
+	<tr><td>CS001205000006</td><td>3337</td><td>3.523421</td></tr>
+	<tr><td>CS001211000025</td><td> 456</td><td>2.659441</td></tr>
+	<tr><td>CS001212000027</td><td> 448</td><td>2.651762</td></tr>
+	<tr><td>CS001212000031</td><td> 296</td><td>2.472025</td></tr>
+	<tr><td>CS001212000046</td><td> 228</td><td>2.358886</td></tr>
+	<tr><td>CS001212000070</td><td> 456</td><td>2.659441</td></tr>
 </tbody>
 </table>
 
@@ -19129,7 +19129,7 @@ The following objects are masked from ‘package:recipes’:
     <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;^Z&quot;</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">group_by</span><span class="p">(</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span>
-    <span class="nf">mutate</span><span class="p">(</span><span class="n">log_amount</span> <span class="o">=</span> <span class="nf">log</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">+</span> <span class="m">1</span><span class="p">))</span> <span class="o">%&gt;%</span>
+    <span class="nf">mutate</span><span class="p">(</span><span class="n">log_amount</span> <span class="o">=</span> <span class="nf">log</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">+</span> <span class="m">0.5</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span>
 </pre></div>
 
@@ -19158,16 +19158,16 @@ The following objects are masked from ‘package:recipes’:
 	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><td>CS001113000004</td><td>1298</td><td>7.169350</td></tr>
-	<tr><td>CS001114000005</td><td> 626</td><td>6.440947</td></tr>
-	<tr><td>CS001115000010</td><td>3044</td><td>8.021256</td></tr>
-	<tr><td>CS001205000004</td><td>1988</td><td>7.595387</td></tr>
-	<tr><td>CS001205000006</td><td>3337</td><td>8.113127</td></tr>
-	<tr><td>CS001211000025</td><td> 456</td><td>6.124683</td></tr>
-	<tr><td>CS001212000027</td><td> 448</td><td>6.107023</td></tr>
-	<tr><td>CS001212000031</td><td> 296</td><td>5.693732</td></tr>
-	<tr><td>CS001212000046</td><td> 228</td><td>5.433722</td></tr>
-	<tr><td>CS001212000070</td><td> 456</td><td>6.124683</td></tr>
+	<tr><td>CS001113000004</td><td>1298</td><td>7.168965</td></tr>
+	<tr><td>CS001114000005</td><td> 626</td><td>6.440149</td></tr>
+	<tr><td>CS001115000010</td><td>3044</td><td>8.021092</td></tr>
+	<tr><td>CS001205000004</td><td>1988</td><td>7.595136</td></tr>
+	<tr><td>CS001205000006</td><td>3337</td><td>8.112977</td></tr>
+	<tr><td>CS001211000025</td><td> 456</td><td>6.123589</td></tr>
+	<tr><td>CS001212000027</td><td> 448</td><td>6.105909</td></tr>
+	<tr><td>CS001212000031</td><td> 296</td><td>5.692047</td></tr>
+	<tr><td>CS001212000046</td><td> 228</td><td>5.431536</td></tr>
+	<tr><td>CS001212000070</td><td> 456</td><td>6.123589</td></tr>
 </tbody>
 </table>
 
@@ -19370,7 +19370,7 @@ The following objects are masked from ‘package:recipes’:
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<blockquote><p>R-066: 商品データフレーム（df_product）の各商品について、利益率が30%となる新たな単価を求めよ。今回は、1円未満を四捨五入すること（0.5については偶数方向の丸めで良い）。そして結果を10件表示させ、利益率がおよそ30％付近であることを確認せよ。ただし、単価（unit_price）と原価（unit_cost）にはNULLが存在することに注意せよ。</p>
+<blockquote><p>R-066: 商品データフレーム（df_product）の各商品について、利益率が30%となる新たな単価を求めよ。今回は、1円未満を丸めること（四捨五入または偶数への丸めで良い）。そして結果を10件表示させ、利益率がおよそ30％付近であることを確認せよ。ただし、単価（unit_price）と原価（unit_cost）にはNULLが存在することに注意せよ。</p>
 </blockquote>
 
 </div>
@@ -20109,16 +20109,16 @@ The following objects are masked from ‘package:recipes’:
 	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;date&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><th scope=row>1</th><td>CS003312000129</td><td>立石 麻緒  </td><td>9</td><td>不明</td><td>1986-12-05</td><td>32</td><td>201-0005</td><td>東京都狛江市岩戸南**********      </td><td>S13003</td><td>20160518</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>2</th><td>CS023313000027</td><td>早美 まなみ</td><td>1</td><td>女性</td><td>1987-07-18</td><td>31</td><td>212-0016</td><td>神奈川県川崎市幸区南幸町**********</td><td>S14023</td><td>20150306</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>3</th><td>CS044414000004</td><td>芦田 景子  </td><td>1</td><td>女性</td><td>1976-08-12</td><td>42</td><td>144-0056</td><td>東京都大田区西六郷**********      </td><td>S13044</td><td>20160115</td><td>E-20100821-F</td></tr>
-	<tr><th scope=row>4</th><td>CS002612000168</td><td>中林 美智子</td><td>1</td><td>女性</td><td>1956-08-27</td><td>62</td><td>185-0034</td><td>東京都国分寺市光町**********      </td><td>S13002</td><td>20151123</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>5</th><td>CS007502000056</td><td>柳原 俊二  </td><td>0</td><td>男性</td><td>1966-11-13</td><td>52</td><td>276-0028</td><td>千葉県八千代市村上**********      </td><td>S12007</td><td>20180724</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>6</th><td>CS018312000006</td><td>浜本 そら  </td><td>1</td><td>女性</td><td>1980-01-17</td><td>39</td><td>204-0011</td><td>東京都清瀬市下清戸**********      </td><td>S13018</td><td>20150703</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>7</th><td>CS002515000287</td><td>福士 遥    </td><td>1</td><td>女性</td><td>1961-01-23</td><td>58</td><td>185-0021</td><td>東京都国分寺市南町**********      </td><td>S13002</td><td>20161009</td><td>1-20090701-2</td></tr>
-	<tr><th scope=row>8</th><td>CS038513000066</td><td>内藤 知世  </td><td>1</td><td>女性</td><td>1963-01-10</td><td>56</td><td>279-0041</td><td>千葉県浦安市堀江**********        </td><td>S13038</td><td>20160207</td><td>2-20101003-6</td></tr>
-	<tr><th scope=row>9</th><td>CS045314000009</td><td>柳沢 まみ  </td><td>1</td><td>女性</td><td>1947-03-12</td><td>72</td><td>174-0063</td><td>東京都板橋区前野町**********      </td><td>S14045</td><td>20180408</td><td>0-00000000-0</td></tr>
-	<tr><th scope=row>10</th><td>CS001414000041</td><td>波多野 花  </td><td>1</td><td>女性</td><td>1974-12-06</td><td>44</td><td>144-0055</td><td>東京都大田区仲六郷**********      </td><td>S13001</td><td>20150710</td><td>3-20100313-7</td></tr>
+	<tr><th scope=row>1</th><td>CS028215000053</td><td>福士 まひる      </td><td>1</td><td>女性</td><td>1990-06-24</td><td>28</td><td>241-0816</td><td>神奈川県横浜市旭区笹野台**********    </td><td>S14028</td><td>20161017</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>2</th><td>CS038413000297</td><td>紺野 恵梨香      </td><td>1</td><td>女性</td><td>1970-10-13</td><td>48</td><td>134-0084</td><td>東京都江戸川区東葛西**********        </td><td>S13038</td><td>20181015</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>3</th><td>CS004315000599</td><td>紺野 結衣        </td><td>1</td><td>女性</td><td>1981-08-01</td><td>37</td><td>176-0023</td><td>東京都練馬区中村北**********          </td><td>S13004</td><td>20170912</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>4</th><td>CS037313000198</td><td>内藤 詩織        </td><td>1</td><td>女性</td><td>1979-09-24</td><td>39</td><td>135-0016</td><td>東京都江東区東陽**********            </td><td>S13037</td><td>20181204</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>5</th><td>CS027415000270</td><td>吉原 めぐみ      </td><td>1</td><td>女性</td><td>1971-08-08</td><td>47</td><td>251-0016</td><td>神奈川県藤沢市弥勒寺**********        </td><td>S14027</td><td>20151116</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>6</th><td>CS001413000577</td><td>川野 由美子      </td><td>1</td><td>女性</td><td>1969-04-04</td><td>49</td><td>144-0055</td><td>東京都大田区仲六郷**********          </td><td>S13001</td><td>20170703</td><td>0-00000000-0</td></tr>
+	<tr><th scope=row>7</th><td>CS037415000100</td><td>影山 薫          </td><td>1</td><td>女性</td><td>1973-11-30</td><td>45</td><td>135-0012</td><td>東京都江東区海辺**********            </td><td>S13037</td><td>20150814</td><td>F-20101020-F</td></tr>
+	<tr><th scope=row>8</th><td>CS022513000146</td><td>板倉 美佐子      </td><td>1</td><td>女性</td><td>1966-08-11</td><td>52</td><td>249-0005</td><td>神奈川県逗子市桜山**********          </td><td>S14022</td><td>20150406</td><td>B-20100215-9</td></tr>
+	<tr><th scope=row>9</th><td>CS011415000076</td><td>本上 あや子      </td><td>1</td><td>女性</td><td>1976-09-28</td><td>42</td><td>223-0062</td><td>神奈川県横浜市港北区日吉本町**********</td><td>S14011</td><td>20150221</td><td>C-20101005-D</td></tr>
+	<tr><th scope=row>10</th><td>CS007315000104</td><td>水野 サンタマリア</td><td>9</td><td>不明</td><td>1985-12-20</td><td>33</td><td>285-0843</td><td>千葉県佐倉市中志津**********          </td><td>S12007</td><td>20150805</td><td>0-00000000-0</td></tr>
 </tbody>
 </table>
 
@@ -20530,7 +20530,7 @@ The following objects are masked from ‘package:recipes’:
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<blockquote><p>R-081: 単価（unit_price）と原価（unit_cost）の欠損値について、それぞれの平均値で補完した新たなdf_product_2を作成せよ。なお、平均値について1円未満は四捨五入とし、0.5については偶数寄せでかまわない。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
+<blockquote><p>R-081: 単価（unit_price）と原価（unit_cost）の欠損値について、それぞれの平均値で補完した新たなdf_product_2を作成せよ。なお、平均値については1円未満を丸めること（四捨五入または偶数への丸めで良い）。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
 </blockquote>
 
 </div>
@@ -20586,7 +20586,7 @@ The following objects are masked from ‘package:recipes’:
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<blockquote><p>R-082: 単価（unit_price）と原価（unit_cost）の欠損値について、それぞれの中央値で補完した新たなdf_product_3を作成せよ。なお、中央値について1円未満は四捨五入とし、0.5については偶数寄せでかまわない。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
+<blockquote><p>R-082: 単価（unit_price）と原価（unit_cost）の欠損値について、それぞれの中央値で補完した新たなdf_product_3を作成せよ。なお、中央値については1円未満を丸めること（四捨五入または偶数への丸めで良い）。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
 </blockquote>
 
 </div>
@@ -20642,7 +20642,7 @@ The following objects are masked from ‘package:recipes’:
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<blockquote><p>R-083: 単価（unit_price）と原価（unit_cost）の欠損値について、各商品の小区分（category_small_cd）ごとに算出した中央値で補完した新たなdf_product_4を作成せよ。なお、中央値について1円未満は四捨五入とし、0.5については偶数寄せでかまわない。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
+<blockquote><p>R-083: 単価（unit_price）と原価（unit_cost）の欠損値について、各商品の小区分（category_small_cd）ごとに算出した中央値で補完した新たなdf_product_4を作成せよ。なお、中央値については1円未満を丸めること（四捨五入または偶数への丸めで良い）。補完実施後、各項目について欠損が生じていないことも確認すること。</p>
 </blockquote>
 
 </div>
@@ -21039,11 +21039,15 @@ $$
     <span class="nf">summarise</span><span class="p">(</span><span class="n">sum_amount</span><span class="o">=</span><span class="nf">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">),</span> <span class="n">.groups</span> <span class="o">=</span> <span class="s">&#39;drop&#39;</span><span class="p">)</span>
 
 <span class="n">df_customer_u</span> <span class="o">&lt;-</span> <span class="nf">left_join</span><span class="p">(</span><span class="n">df_customer</span><span class="p">,</span> <span class="n">df_sales_amount</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s">&quot;customer_id&quot;</span><span class="p">)</span> <span class="o">%&gt;%</span>
+    <span class="nf">mutate</span><span class="p">(</span><span class="n">sum_amount</span> <span class="o">=</span> <span class="nf">ifelse</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">),</span> <span class="m">0</span><span class="p">,</span> <span class="n">sum_amount</span><span class="p">))</span> <span class="o">%&gt;%</span>
     <span class="nf">arrange</span><span class="p">(</span><span class="nf">desc</span><span class="p">(</span><span class="n">sum_amount</span><span class="p">),</span> <span class="n">customer_id</span><span class="p">)</span> <span class="o">%&gt;%</span>
     <span class="nf">distinct</span><span class="p">(</span><span class="n">customer_name</span><span class="p">,</span> <span class="n">postal_cd</span><span class="p">,</span> <span class="n">.keep_all</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span> 
 
 <span class="c1">#減少件数をカウント</span>
-<span class="nf">nrow</span><span class="p">(</span><span class="n">df_customer</span><span class="p">)</span> <span class="o">-</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">df_customer_u</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span>
+    <span class="s">&#39;df_customer:&#39;</span><span class="p">,</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">df_customer</span><span class="p">),</span>
+    <span class="s">&#39;df_customer_u:&#39;</span><span class="p">,</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">df_customer_u</span><span class="p">),</span>
+    <span class="s">&#39;diff:&#39;</span><span class="p">,</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">df_customer</span><span class="p">)</span> <span class="o">-</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">df_customer_u</span><span class="p">)))</span>
 </pre></div>
 
      </div>
@@ -21062,11 +21066,10 @@ $$
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
-30
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[1] &#34;df_customer: 21971 df_customer_u: 21941 diff: 30&#34;
+</pre>
 </div>
-
 </div>
 
 </div>
@@ -21553,6 +21556,7 @@ $$
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">write.csv</span><span class="p">(</span><span class="n">df_product_full</span><span class="p">,</span> <span class="s">&quot;../data/R_df_product_full_UTF-8_header.csv&quot;</span><span class="p">,</span> 
+          <span class="n">row.names</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span>
           <span class="n">fileEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>
 </pre></div>
 
@@ -21581,6 +21585,7 @@ $$
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">write.csv</span><span class="p">(</span><span class="n">df_product_full</span><span class="p">,</span> <span class="s">&quot;../data/R_df_product_full_CP932_header.csv&quot;</span><span class="p">,</span> 
+          <span class="n">row.names</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span>
           <span class="n">fileEncoding</span><span class="o">=</span><span class="s">&quot;CP932&quot;</span><span class="p">)</span>
 </pre></div>
 
@@ -21610,6 +21615,7 @@ $$
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">write.table</span><span class="p">(</span><span class="n">df_product_full</span><span class="p">,</span> <span class="s">&quot;../data/R_df_product_full_UTF-8_noh.csv&quot;</span><span class="p">,</span> 
+            <span class="n">row.names</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span>
             <span class="n">col.names</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&quot;,&quot;</span><span class="p">,</span> <span class="n">fileEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>
 </pre></div>
 
@@ -21622,7 +21628,7 @@ $$
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<blockquote><p>R-097: 先に作成した以下形式のファイルを読み込み、データフレームを作成せよ。また、先頭10件を表示させ、正しくとりまれていることを確認せよ。</p>
+<blockquote><p>R-097: 先に作成した以下形式のファイルを読み込み、データフレームを作成せよ。また、先頭3件を表示させ、正しく取り込まれていることを確認せよ。</p>
 <ul>
 <li>ファイル形式はCSV（カンマ区切り）</li>
 <li>ヘッダ有り</li>
@@ -21637,9 +21643,11 @@ $$
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[111]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="n">df_product_tmp</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/R_df_product_full_UTF-8_header.csv&#39;</span><span class="p">,</span> 
+<div class=" highlight hl-r"><pre><span></span><span class="n">c_class</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span> <span class="s">&quot;character&quot;</span><span class="p">,</span> <span class="s">&quot;character&quot;</span><span class="p">,</span> <span class="s">&quot;character&quot;</span><span class="p">,</span> <span class="kc">NA</span><span class="p">,</span> <span class="kc">NA</span><span class="p">,</span> <span class="kc">NA</span><span class="p">,</span> <span class="kc">NA</span><span class="p">,</span> <span class="kc">NA</span><span class="p">)</span>
+<span class="n">df_product_tmp</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/R_df_product_full_UTF-8_header.csv&#39;</span><span class="p">,</span> 
+                           <span class="n">colClasses</span> <span class="o">=</span> <span class="n">c_class</span><span class="p">,</span>
                            <span class="n">fileEncoding</span> <span class="o">=</span> <span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">df_product_tmp</span><span class="p">,</span> <span class="m">10</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">df_product_tmp</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -21661,22 +21669,15 @@ $$
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
 <table class="dataframe">
-<caption>A data.frame: 10 × 10</caption>
+<caption>A data.frame: 3 × 9</caption>
 <thead>
-	<tr><th></th><th scope=col>X</th><th scope=col>product_cd</th><th scope=col>category_major_cd</th><th scope=col>category_medium_cd</th><th scope=col>category_small_cd</th><th scope=col>unit_price</th><th scope=col>unit_cost</th><th scope=col>category_major_name</th><th scope=col>category_medium_name</th><th scope=col>category_small_name</th></tr>
-	<tr><th></th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
+	<tr><th></th><th scope=col>product_cd</th><th scope=col>category_major_cd</th><th scope=col>category_medium_cd</th><th scope=col>category_small_cd</th><th scope=col>unit_price</th><th scope=col>unit_cost</th><th scope=col>category_major_name</th><th scope=col>category_medium_name</th><th scope=col>category_small_name</th></tr>
+	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><th scope=row>1</th><td> 1</td><td>P040101001</td><td>4</td><td>401</td><td>40101</td><td>198</td><td>149</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>2</th><td> 2</td><td>P040101002</td><td>4</td><td>401</td><td>40101</td><td>218</td><td>164</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>3</th><td> 3</td><td>P040101003</td><td>4</td><td>401</td><td>40101</td><td>230</td><td>173</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>4</th><td> 4</td><td>P040101004</td><td>4</td><td>401</td><td>40101</td><td>248</td><td>186</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>5</th><td> 5</td><td>P040101005</td><td>4</td><td>401</td><td>40101</td><td>268</td><td>201</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>6</th><td> 6</td><td>P040101006</td><td>4</td><td>401</td><td>40101</td><td>298</td><td>224</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>7</th><td> 7</td><td>P040101007</td><td>4</td><td>401</td><td>40101</td><td>338</td><td>254</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>8</th><td> 8</td><td>P040101008</td><td>4</td><td>401</td><td>40101</td><td>420</td><td>315</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>9</th><td> 9</td><td>P040101009</td><td>4</td><td>401</td><td>40101</td><td>498</td><td>374</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>10</th><td>10</td><td>P040101010</td><td>4</td><td>401</td><td>40101</td><td>580</td><td>435</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
+	<tr><th scope=row>1</th><td>P040101001</td><td>04</td><td>0401</td><td>040101</td><td>198</td><td>149</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
+	<tr><th scope=row>2</th><td>P040101002</td><td>04</td><td>0401</td><td>040101</td><td>218</td><td>164</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
+	<tr><th scope=row>3</th><td>P040101003</td><td>04</td><td>0401</td><td>040101</td><td>230</td><td>173</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
 </tbody>
 </table>
 
@@ -21692,7 +21693,7 @@ $$
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<blockquote><p>R-098: 先に作成した以下形式のファイルを読み込み、データフレームを作成せよ。また、先頭10件を表示させ、正しくとりまれていることを確認せよ。</p>
+<blockquote><p>R-098: 先に作成した以下形式のファイルを読み込み、データフレームを作成せよ。また、先頭3件を表示させ、正しく取り込まれていることを確認せよ。</p>
 <ul>
 <li>ファイル形式はCSV（カンマ区切り）</li>
 <li>ヘッダ無し</li>
@@ -21707,9 +21708,11 @@ $$
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[112]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="n">df_product_tmp</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/R_df_product_full_UTF-8_noh.csv&#39;</span><span class="p">,</span> 
+<div class=" highlight hl-r"><pre><span></span><span class="n">c_class</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span> <span class="s">&quot;character&quot;</span><span class="p">,</span> <span class="s">&quot;character&quot;</span><span class="p">,</span> <span class="s">&quot;character&quot;</span><span class="p">,</span> <span class="kc">NA</span><span class="p">,</span> <span class="kc">NA</span><span class="p">,</span> <span class="kc">NA</span><span class="p">,</span> <span class="kc">NA</span><span class="p">,</span> <span class="kc">NA</span><span class="p">)</span>
+<span class="n">df_product_tmp</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;../data/R_df_product_full_UTF-8_noh.csv&#39;</span><span class="p">,</span> 
+                           <span class="n">colClasses</span> <span class="o">=</span> <span class="n">c_class</span><span class="p">,</span>
                            <span class="n">header</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">fileEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">df_product_tmp</span><span class="p">,</span> <span class="m">10</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">df_product_tmp</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -21731,22 +21734,15 @@ $$
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
 <table class="dataframe">
-<caption>A data.frame: 10 × 10</caption>
+<caption>A data.frame: 3 × 9</caption>
 <thead>
-	<tr><th></th><th scope=col>V1</th><th scope=col>V2</th><th scope=col>V3</th><th scope=col>V4</th><th scope=col>V5</th><th scope=col>V6</th><th scope=col>V7</th><th scope=col>V8</th><th scope=col>V9</th><th scope=col>V10</th></tr>
-	<tr><th></th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
+	<tr><th></th><th scope=col>V1</th><th scope=col>V2</th><th scope=col>V3</th><th scope=col>V4</th><th scope=col>V5</th><th scope=col>V6</th><th scope=col>V7</th><th scope=col>V8</th><th scope=col>V9</th></tr>
+	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><th scope=row>1</th><td> 1</td><td>P040101001</td><td>4</td><td>401</td><td>40101</td><td>198</td><td>149</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>2</th><td> 2</td><td>P040101002</td><td>4</td><td>401</td><td>40101</td><td>218</td><td>164</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>3</th><td> 3</td><td>P040101003</td><td>4</td><td>401</td><td>40101</td><td>230</td><td>173</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>4</th><td> 4</td><td>P040101004</td><td>4</td><td>401</td><td>40101</td><td>248</td><td>186</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>5</th><td> 5</td><td>P040101005</td><td>4</td><td>401</td><td>40101</td><td>268</td><td>201</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>6</th><td> 6</td><td>P040101006</td><td>4</td><td>401</td><td>40101</td><td>298</td><td>224</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>7</th><td> 7</td><td>P040101007</td><td>4</td><td>401</td><td>40101</td><td>338</td><td>254</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>8</th><td> 8</td><td>P040101008</td><td>4</td><td>401</td><td>40101</td><td>420</td><td>315</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>9</th><td> 9</td><td>P040101009</td><td>4</td><td>401</td><td>40101</td><td>498</td><td>374</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>10</th><td>10</td><td>P040101010</td><td>4</td><td>401</td><td>40101</td><td>580</td><td>435</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
+	<tr><th scope=row>1</th><td>P040101001</td><td>04</td><td>0401</td><td>040101</td><td>198</td><td>149</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
+	<tr><th scope=row>2</th><td>P040101002</td><td>04</td><td>0401</td><td>040101</td><td>218</td><td>164</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
+	<tr><th scope=row>3</th><td>P040101003</td><td>04</td><td>0401</td><td>040101</td><td>230</td><td>173</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
 </tbody>
 </table>
 
@@ -21790,7 +21786,7 @@ $$
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<blockquote><p>R-100: 先に作成した以下形式のファイルを読み込み、データフレームを作成せよ。また、先頭10件を表示させ、正しくとりまれていることを確認せよ。</p>
+<blockquote><p>R-100: 先に作成した以下形式のファイルを読み込み、データフレームを作成せよ。また、先頭3件を表示させ、正しく取り込まれていることを確認せよ。</p>
 <ul>
 <li>ファイル形式はTSV（タブ区切り）</li>
 <li>ヘッダ有り</li>
@@ -21805,9 +21801,11 @@ $$
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[114]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="n">df_product_tmp</span> <span class="o">&lt;-</span> <span class="nf">read.table</span><span class="p">(</span><span class="s">&quot;../data/R_df_product_full_UTF-8_head.tsv&quot;</span><span class="p">,</span> 
+<div class=" highlight hl-r"><pre><span></span><span class="n">c_class</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span> <span class="s">&quot;character&quot;</span><span class="p">,</span> <span class="s">&quot;character&quot;</span><span class="p">,</span> <span class="s">&quot;character&quot;</span><span class="p">,</span> <span class="kc">NA</span><span class="p">,</span> <span class="kc">NA</span><span class="p">,</span> <span class="kc">NA</span><span class="p">,</span> <span class="kc">NA</span><span class="p">,</span> <span class="kc">NA</span><span class="p">)</span>
+<span class="n">df_product_tmp</span> <span class="o">&lt;-</span> <span class="nf">read.table</span><span class="p">(</span><span class="s">&quot;../data/R_df_product_full_UTF-8_head.tsv&quot;</span><span class="p">,</span> 
+                             <span class="n">colClasses</span> <span class="o">=</span> <span class="n">c_class</span><span class="p">,</span>
                              <span class="n">fileEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">df_product_tmp</span><span class="p">,</span><span class="m">10</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">df_product_tmp</span><span class="p">,</span><span class="m">3</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -21829,22 +21827,15 @@ $$
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
 <table class="dataframe">
-<caption>A data.frame: 10 × 9</caption>
+<caption>A data.frame: 3 × 9</caption>
 <thead>
 	<tr><th></th><th scope=col>product_cd</th><th scope=col>category_major_cd</th><th scope=col>category_medium_cd</th><th scope=col>category_small_cd</th><th scope=col>unit_price</th><th scope=col>unit_cost</th><th scope=col>category_major_name</th><th scope=col>category_medium_name</th><th scope=col>category_small_name</th></tr>
-	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
+	<tr><th></th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th></tr>
 </thead>
 <tbody>
-	<tr><th scope=row>1</th><td>P040101001</td><td>4</td><td>401</td><td>40101</td><td>198</td><td>149</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>2</th><td>P040101002</td><td>4</td><td>401</td><td>40101</td><td>218</td><td>164</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>3</th><td>P040101003</td><td>4</td><td>401</td><td>40101</td><td>230</td><td>173</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>4</th><td>P040101004</td><td>4</td><td>401</td><td>40101</td><td>248</td><td>186</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>5</th><td>P040101005</td><td>4</td><td>401</td><td>40101</td><td>268</td><td>201</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>6</th><td>P040101006</td><td>4</td><td>401</td><td>40101</td><td>298</td><td>224</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>7</th><td>P040101007</td><td>4</td><td>401</td><td>40101</td><td>338</td><td>254</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>8</th><td>P040101008</td><td>4</td><td>401</td><td>40101</td><td>420</td><td>315</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>9</th><td>P040101009</td><td>4</td><td>401</td><td>40101</td><td>498</td><td>374</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
-	<tr><th scope=row>10</th><td>P040101010</td><td>4</td><td>401</td><td>40101</td><td>580</td><td>435</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
+	<tr><th scope=row>1</th><td>P040101001</td><td>04</td><td>0401</td><td>40101</td><td>198</td><td>149</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
+	<tr><th scope=row>2</th><td>P040101002</td><td>04</td><td>0401</td><td>40101</td><td>218</td><td>164</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
+	<tr><th scope=row>3</th><td>P040101003</td><td>04</td><td>0401</td><td>40101</td><td>230</td><td>173</td><td>惣菜</td><td>御飯類</td><td>弁当類</td></tr>
 </tbody>
 </table>
 

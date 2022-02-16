@@ -22,7 +22,7 @@ Description
 Requirement
 ====
 - Docker Desktop(Windows 10 proffesional Edition, macOS)
-   - Apple M1チップ搭載のMacの場合は Docker Desktop 4.0.1 まで
+   - Apple M1チップ搭載のMacの場合は Docker Desktop 4.4.2 以降
 - Docker Toolbox(Windows 10 home edition)
 
 ※Windows 10 home でもWSL2をインストールすることでDocker Desktopが使えるようになりました！
