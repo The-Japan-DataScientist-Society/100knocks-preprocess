@@ -57,9 +57,6 @@ Usage
 - ブラウザで以下のURLにアクセスします
 http://localhost:8888
 
-- Docker Toolboxの場合
-http://192.168.99.100:8888
-
 Document
 ====
 - doc配下にデータサイエンス100本ノック（構造化データ加工編）の説明資料と設問PDF、設問HTML、解答例HTMLを配置
