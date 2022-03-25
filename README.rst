@@ -35,11 +35,12 @@ Requirement
 
 Install
 ====
-```
-git clone git@github.com:The-Japan-DataScientist-Society/100knocks-preprocess.git 
-cd 100knocks-preprocess 
-docker-compose up -d --build
-```
+
+::
+
+ git clone git@github.com:The-Japan-DataScientist-Society/100knocks-preprocess.git
+ cd 100knocks-preprocess 
+ docker-compose up -d --build
 
 ※ macOSでユーザーのホームディレクトリ配下以外にファイル群を配置する場合、Dockerの共有設定が別途必要となります
 
