@@ -14,8 +14,10 @@ Overview
 - 言語によっては向かない設問もあるが、「この言語のときはこう書けば実現できる」という技術習得を目指すことを優先
 - 個人情報のように見える項目は全てダミーデータを利用
 - 大学、企業など組織でのご利用にあたっては、「データサイエンティスト協会スキル定義委員」の「データサイエンス100本ノック（構造化データ加工編）」を利用していることを明示いただければ自由に利用してOK
+- データサイエンス100本ノック(構造化データ加工編)の解説本はこちら
+  - https://www.amazon.co.jp/dp/4802613563
 - データサイエンス100本ノック(構造化データ加工編)の利用に関するご質問等について、個別での対応は受けかねますので予めご了承ください
-- また、データサイエンス100本ノック(構造化データ加工編)の利用により生じるいかなる問題についても、当協会は一切の責任を負いかねますのであらかじめご了承ください。
+- データサイエンス100本ノック(構造化データ加工編)の利用により生じるいかなる問題についても、当協会は一切の責任を負いかねますのであらかじめご了承ください
 
 Description
 ====
@@ -23,24 +25,22 @@ Description
 - docker-compose.yml
 - スーパーの架空購買データと架空個人情報(csv)
 - データベースを初期設定するための各種スクリプト
+- 設問と解答例のノートブックファイルおよびHTMLファイル
 
 Requirement
 ====
-- Docker Desktop(Windows 10 proffesional Edition, macOS)
+- Docker Desktop(Windows 10/11, macOS)
    - Apple M1チップ搭載のMacの場合は Docker Desktop 4.4.2 以降
-- Docker Toolbox(Windows 10 home edition)
-
-※Windows 10 home でもWSL2をインストールすることでDocker Desktopが使えるようになりました！
+※WindowsのHome EditionでもWSL2をインストールすることでDocker Desktopが使えるようになりました！
 
 Install
 ====
 ::
-
   git clone git@github.com:The-Japan-DataScientist-Society/100knocks-preprocess.git
   cd 100knocks-preprocess
   docker-compose up -d --build
 
-※ OSユーザーのホームディレクトリ配下以外にダウンロードする場合、Dockerの共有設定が別途必要となります
+※ macOSでユーザーのホームディレクトリ配下以外にファイル群を配置する場合、Dockerの共有設定が別途必要となります
 
 ※ Windowsでgitを利用する場合、デフォルト設定でのインストールを行うとスクリプトの改行コードを変えられてしまい、データベースを正しく構築できないことがあります
 - https://github.com/The-Japan-DataScientist-Society/100knocks-preprocess/issues/1#issue-640590032
@@ -49,14 +49,11 @@ Install
 
 ※ コンテナは作成されたがデータベースに接続できない、という場合の多くはディレクトリに対するアクセス権限設定の問題となります
 
-※ Docker Toolboxでのコンテナ作成がうまく行かない場合、Gitのbashプロンプトから実行するとうまく作成できたという報告も見られます
-- https://www.youtube.com/watch?v=mh8Z5d0-0PU&feature=em-comments
-
 ※ インストールの説明はdoc配下の説明資料も参照してください
 
 Usage
 ====
-- Docker Desktopの場合
+- ブラウザで以下のURLにアクセスします
 http://localhost:8888
 
 - Docker Toolboxの場合
@@ -64,7 +61,7 @@ http://192.168.99.100:8888
 
 Document
 ====
-- doc配下にデータサイエンス100本ノック（構造化データ加工編）の説明資料と設問PDF、設問HTMLを配置
+- doc配下にデータサイエンス100本ノック（構造化データ加工編）の説明資料と設問PDF、設問HTML、解答例HTMLを配置
 - work配下に設問notebookを配置
 - work/answer配下に解答例notebookを配置
 - work/data配下に使用したデータを配置
