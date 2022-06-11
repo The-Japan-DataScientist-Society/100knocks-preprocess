@@ -5,7 +5,8 @@ USER root
 # mambaでR依存パッケージをインストール
 RUN mamba install --quiet --yes r-themis==0.1.4 r-rpostgresql==0.6_2 \
     && find / -type f -perm /u+s -ignore_readdir_race -exec chmod u-s {} \; \
-    && find / -type f -perm /g+s -ignore_readdir_race -exec chmod g-s {} \;
+    && find / -type f -perm /g+s -ignore_readdir_race -exec chmod g-s {} \; \
+    && rm -rf /tmp/* /var/tmp/*
 
 USER jovyan
 WORKDIR /home/jovyan
