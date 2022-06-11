@@ -6,10 +6,6 @@ on:
       - master
   pull_request:
 
-env:
-  DOCKER_BUILDKIT: 1
-  COMPOSE_DOCKER_CLI_BUILD: 1
-
 jobs:
   dockle:
     runs-on: ubuntu-latest
@@ -25,8 +21,6 @@ jobs:
           )
           curl -L -o dockle.deb "https://github.com/goodwithtech/dockle/releases/download/v${VERSION}/dockle_${VERSION}_Linux-64bit.deb"
           sudo dpkg -i dockle.deb
-      - name: Build docker image
-        run: docker compose build --no-cache
       - name: Run docker containers
         run: docker compose up -d
       - run: |
