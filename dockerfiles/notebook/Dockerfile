@@ -15,4 +15,4 @@ COPY Pipfile.lock .
 
 RUN pip install --no-cache-dir pipenv==2021.5.29 \
     && pipenv install --system \
-    && rm Pipfile*
+    && rm -rf Pipfile* /tmp/*
