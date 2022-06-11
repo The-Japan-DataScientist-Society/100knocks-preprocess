@@ -5,8 +5,7 @@ USER root
 # mambaでR依存パッケージをインストール
 RUN mamba install --quiet --yes r-themis==0.1.4 r-rpostgresql==0.6_2 \
     && find / -type f -perm /u+s -ignore_readdir_race -exec chmod u-s {} \; \
-    && find / -type f -perm /g+s -ignore_readdir_race -exec chmod g-s {} \; \
-    && rm -rf /var/tmp/*
+    && find / -type f -perm /g+s -ignore_readdir_race -exec chmod g-s {} \;
 
 USER jovyan
 WORKDIR /home/jovyan
@@ -15,4 +14,4 @@ COPY Pipfile.lock .
 
 RUN pip install --no-cache-dir pipenv==2021.5.29 \
     && pipenv install --system \
-    && rm -rf Pipfile* /tmp/*
+    && rm -rf Pipfile* /tmp/* /var/tmp/*
