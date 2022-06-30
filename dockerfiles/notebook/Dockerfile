@@ -15,3 +15,5 @@ COPY Pipfile.lock .
 RUN pip install --no-cache-dir pipenv==2021.5.29 \
     && pipenv install --system \
     && rm -rf Pipfile* /tmp/* /var/tmp/*
+
+HEALTHCHECK --interval=5s --retries=20 CMD ["curl", "-s", "-S", "-o", "/dev/null", "http://localhost:8888"]
