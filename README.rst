@@ -52,6 +52,12 @@ Usage
 - ブラウザで以下のURLにアクセスします
 http://localhost:8888
 
+How to contribute
+====
+開発に協力していただける場合は本リポジトリをcloneし、 https://pre-commit.com/ の手順に従って `pre-commit` をインストールしてください。
+
+これにより、 `.pre-commit-config.yaml <.pre-commit-config.yaml>`_ の設定に基づいて、コミット時にクレデンシャルが含まれていないかの検査が行われるようになります。
+
 Document
 ====
 - doc配下にデータサイエンス100本ノック（構造化データ加工編）の説明資料と設問PDF、設問HTML、解答例HTMLを配置
