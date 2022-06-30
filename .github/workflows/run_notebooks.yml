@@ -22,6 +22,6 @@ jobs:
             echo "Run docker/work/${f}"
 
             # 「UsageError: %%sql is a cell magic, but the cell body is empty. Did you mean the line magic %sql (single %)? 」を許容するため、UsageErrorを許容する設定にしている
-            docker-compose exec -T notebook bash -c "cd work && jupyter nbconvert --to notebook --debug --NotebookClient.allow_error_names UsageError --execute ${f}"
+            docker compose exec -T notebook bash -c "cd work && jupyter nbconvert --to notebook --debug --NotebookClient.allow_error_names UsageError --execute ${f}"
             echo
           done
