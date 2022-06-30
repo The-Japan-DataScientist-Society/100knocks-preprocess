@@ -14,7 +14,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Run docker containers
-        run: docker-compose up -d
+        run: docker compose up -d --wait
       - name: Run notebooks
         run: |
           chmod -R 777 docker/
