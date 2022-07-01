@@ -26,7 +26,7 @@ jobs:
         run: docker compose up -d
       - name: Run Dockle
         run: |
-          for image_name in $(docker compose images | awk 'OFS=":" {print $2,$3}' | tail -n +2); do
+          for image_name in $(docker compose images | awk ’{print $2}' | tail -n +2); do
             cmd="dockle --exit-code 1 "
 
             if [[ "${image_name}" =~ "dss-notebook" ]]; then
