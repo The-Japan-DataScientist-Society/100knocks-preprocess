@@ -15,18 +15,14 @@ jobs:
           fetch-depth: 0
       - name: Install Dockle
         run: |
-          VERSION=$(
-            curl --silent "https://api.github.com/repos/goodwithtech/dockle/releases/latest" | \
-            grep '"tag_name":' | \
-            sed -E 's/.*"v([^"]+)".*/\1/' \
-          )
+          VERSION=0.4.4
           curl -L -o dockle.deb "https://github.com/goodwithtech/dockle/releases/download/v${VERSION}/dockle_${VERSION}_Linux-64bit.deb"
           sudo dpkg -i dockle.deb
       - name: Run docker containers
         run: docker compose up -d
       - name: Run Dockle
         run: |
-          for image_name in $(docker compose images | awk 'OFS=":" {print $4}' | tail -n +2); do
+          for image_name in $(docker compose images | awk 'OFS=":" {print $2, $3}' | tail -n +2); do
             cmd="dockle --exit-code 1 --debug "
 
             if [[ "${image_name}" =~ "dss-notebook" ]]; then
