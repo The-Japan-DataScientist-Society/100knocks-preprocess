@@ -27,13 +27,13 @@ jobs:
       - name: Run Dockle
         run: |
           for image_name in $(docker compose images | awk 'OFS=":" {print $2,$3}' | tail -n +2); do
-            cmd="dockle --exit-code 1 "
+            cmd="dockle --exit-code 1 --debug "
 
             if [[ "${image_name}" =~ "dss-notebook" ]]; then
               cmd+="--timeout 600s -ae mdf -af settings.py -af credentials -i DKL-DI-0001 "
             fi
 
-            cmd+="docker://${image_name}"
+            cmd+="${image_name}"
             echo "> ${cmd}"
             eval "${cmd}"
           done
