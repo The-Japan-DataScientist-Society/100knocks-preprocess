@@ -33,7 +33,7 @@ jobs:
               cmd+="--timeout 600s -ae mdf -af settings.py -af credentials -i DKL-DI-0001 "
             fi
 
-            cmd+="${image_name}"
+            cmd+="docker://${image_name}"
             echo "> ${cmd}"
             eval "${cmd}"
           done
