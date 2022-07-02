@@ -22,6 +22,7 @@ jobs:
           )
           curl -L -o dockle.deb "https://github.com/goodwithtech/dockle/releases/download/v${VERSION}/dockle_${VERSION}_Linux-64bit.deb"
           sudo dpkg -i dockle.deb
+      - run: stat /var/run/docker.sock
       - name: Run docker containers
         run: docker compose up -d
       - name: Run Dockle
