@@ -13,22 +13,18 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Install Dockle
+      - name: Run docker containers
+        run: docker compose up -d
+      - name: Run Dockle
         run: |
           VERSION=$(
             curl --silent "https://api.github.com/repos/goodwithtech/dockle/releases/latest" | \
             grep '"tag_name":' | \
             sed -E 's/.*"v([^"]+)".*/\1/' \
           )
-          curl -L -o dockle.deb "https://github.com/goodwithtech/dockle/releases/download/v${VERSION}/dockle_${VERSION}_Linux-64bit.deb"
-          sudo dpkg -i dockle.deb
-      - run: stat /var/run/docker.sock
-      - name: Run docker containers
-        run: docker compose up -d
-      - name: Run Dockle
-        run: |
+
           for image_name in $(docker compose images | awk 'OFS=":" {print $2,$3}' | tail -n +2); do
-            cmd="dockle --exit-code 1 "
+            cmd="docker run --rm -v /var/run/docker.sock:/var/run/docker.sock goodwithtech/dockle:v${VERSION} --exit-code 1 "
 
             if [[ "${image_name}" =~ "dss-notebook" ]]; then
               cmd+="--timeout 600s -ae mdf -af settings.py -af credentials -i DKL-DI-0001 "
