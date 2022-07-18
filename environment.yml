@@ -1,0 +1,17 @@
+name: 100knocks-prep
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.9
+  - ipython
+  - ipykernel
+  - pandas
+  - python-dateutil
+  - psycopg2=2.9.3
+  - sqlalchemy
+  - pip
+  - pip:
+      - ipython-sql==0.3.9
+      - imblearn==0.0
