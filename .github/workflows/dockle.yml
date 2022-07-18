@@ -1,0 +1,43 @@
+name: dockle
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  dockle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Run docker containers
+        run: docker compose up -d
+      - name: Get latest dockle version
+        uses: actions/github-script@v6.1.0
+        id: get_latest_dockle_version
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          result-encoding: string
+          script: |
+            const release = await github.rest.repos.getLatestRelease({
+              owner: 'goodwithtech',
+              repo: 'dockle'
+            });
+            return release.data.tag_name;
+      - name: Run Dockle
+        run: |
+          for image_name in $(docker compose images | awk 'OFS=":" {print $2,$3}' | tail -n +2); do
+            cmd="docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/.dockleignore:/.dockleignore "
+            cmd+="goodwithtech/dockle:${{ steps.get_latest_dockle_version.outputs.result }} --exit-code 1 "
+
+            if [[ "${image_name}" =~ "dss-notebook" ]]; then
+              cmd+="--timeout 600s -ae mdf -af settings.py -af credentials -i DKL-DI-0001 "
+            fi
+
+            cmd+="${image_name}"
+            echo "> ${cmd}"
+            eval "${cmd}"
+          done
