@@ -13,24 +13,30 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Install Dockle
-        run: |
-          VERSION=$(
-            curl --silent "https://api.github.com/repos/goodwithtech/dockle/releases/latest" | \
-            grep '"tag_name":' | \
-            sed -E 's/.*"v([^"]+)".*/\1/' \
-          )
-          curl -L -o dockle.deb "https://github.com/goodwithtech/dockle/releases/download/v${VERSION}/dockle_${VERSION}_Linux-64bit.deb"
-          sudo dpkg -i dockle.deb
       - name: Run docker containers
         run: docker compose up -d
+      - name: Get latest dockle version
+        uses: actions/github-script@v6.1.0
+        id: get_latest_dockle_version
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          result-encoding: string
+          script: |
+            const release = await github.rest.repos.getLatestRelease({
+              owner: 'goodwithtech',
+              repo: 'dockle'
+            });
+            return release.data.tag_name;
       - name: Run Dockle
         run: |
           for image_name in $(docker compose images | awk 'OFS=":" {print $2,$3}' | tail -n +2); do
-            cmd="dockle --exit-code 1 "
+            cmd="docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/.dockleignore:/.dockleignore "
+            cmd+="goodwithtech/dockle:${{ steps.get_latest_dockle_version.outputs.result }} --exit-code 1 "
 
             if [[ "${image_name}" =~ "dss-notebook" ]]; then
               cmd+="--timeout 600s -ae mdf -af settings.py -af credentials -i DKL-DI-0001 "
+            elif [[ "${image_name}" =~ "dss-postgres" ]]; then
+              cmd+="-ak key "
             fi
 
             cmd+="${image_name}"

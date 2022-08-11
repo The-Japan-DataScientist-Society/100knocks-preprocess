@@ -24,9 +24,21 @@ Description
 
 Requirement
 ====
-- Docker Desktop(Windows 10/11, macOS)
-   - Apple M1チップ搭載のMacの場合は Docker Desktop 4.4.2 以降
-※WindowsのHome EditionでもWSL2をインストールすることでDocker Desktopが使えるようになりました！
+
+- Local
+    - Docker Desktop(Windows 10/11, macOS)
+    - Apple M1チップ搭載のMacの場合は Docker Desktop 4.4.2 以降
+    - WindowsのHome EditionでもWSL2をインストールすることでDocker Desktopが使えるようになりました！
+- Cloud Service
+    - `Amazon SageMaker Studio Lab <https://studiolab.sagemaker.aws/>`_ (`使い方 <https://github.com/aws-sagemaker-jp/awesome-studio-lab-jp/blob/main/README_usage.md>`_)
+        - Python演習: |Open in SageMaker Studio Lab Practice| Python解答: |Open in SageMaker Studio Lab Answer|
+
+
+.. |Open in SageMaker Studio Lab Practice| image:: https://studiolab.sagemaker.aws/studiolab.svg
+   :target: https://studiolab.sagemaker.aws/import/github/The-Japan-DataScientist-Society/100knocks-preprocess/blob/master/docker/work/preprocess_knock_Python.ipynb
+
+.. |Open in SageMaker Studio Lab Answer| image:: https://studiolab.sagemaker.aws/studiolab.svg
+   :target: https://studiolab.sagemaker.aws/import/github/The-Japan-DataScientist-Society/100knocks-preprocess/blob/master/docker/work/answer/ans_preprocess_knock_Python.ipynb
 
 Install
 ====

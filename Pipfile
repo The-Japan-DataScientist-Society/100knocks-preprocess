@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 ipython-sql = "==0.3.9"
-psycopg2 = "==2.8.5"
+psycopg2 = "==2.9.3"
 imblearn = "==0.0"
 
 [dev-packages]
