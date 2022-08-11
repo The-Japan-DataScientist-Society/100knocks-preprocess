@@ -35,6 +35,8 @@ jobs:
 
             if [[ "${image_name}" =~ "dss-notebook" ]]; then
               cmd+="--timeout 600s -ae mdf -af settings.py -af credentials -i DKL-DI-0001 "
+            else if [[ "${image_name}" =~ "dss-postgres" ]]; then
+              cmd+="-ak key "
             fi
 
             cmd+="${image_name}"
