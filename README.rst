@@ -4,7 +4,7 @@ Name
 
 Overview
 ====
--  !!! Mac Book M1/M2でmambaによるRのパッケージインストールが異常終了してしまうため、Microsoft社が提供するCRANのスナップショットを利用するよう戻しましたが、たまにMicrosoft社が提供するCRANサーバへのアクセスが不安定になることがあります
+- !!! Mac Book M1/M2でmambaによるRのパッケージインストールが異常終了してしまうため、Microsoft社が提供するCRANのスナップショットを利用するよう戻しましたが、たまにMicrosoft社が提供するCRANサーバへのアクセスが不安定になることがあります
    - Rで100本ノックを実行した際に以下エラーが出る場合は、この理由からコンテナの構築がうまくできていません
    - ERROR: Error in dbConnect(PostgreSQL(), host = host, port = port, dbname = dbname, : could not find function "dbConnect"
    - 数日様子を見ると復旧したりするので、Rでノックを行いたい場合は様子を見てコンテナを再構築してみてください
