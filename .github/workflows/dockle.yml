@@ -34,9 +34,10 @@ jobs:
             cmd+="goodwithtech/dockle:${{ steps.get_latest_dockle_version.outputs.result }} --exit-code 1 "
 
             if [[ "${image_name}" =~ "dss-notebook" ]]; then
-              cmd+="--timeout 600s -ae mdf -af settings.py -af credentials -i DKL-DI-0001 "
+              cmd+="--timeout 600s "
+              #"-ae mdf -af settings.py -af credentials -i DKL-DI-0001 "
             elif [[ "${image_name}" =~ "dss-postgres" ]]; then
-              cmd+="-ak key "
+              #cmd+="-ak key "
             fi
 
             cmd+="${image_name}"
