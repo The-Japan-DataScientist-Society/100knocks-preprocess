@@ -13,7 +13,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends libpq-dev \
     && apt-get remove -y lsb-release gnupg \
     && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /var/lib/apt/lists/* /opt/julia-*/share/julia/stdlib/v*/SuiteSparse/.devcontainer/Dockerfile \
     && find / -type f -perm /u+s -ignore_readdir_race -exec chmod u-s {} \; \
     && find / -type f -perm /g+s -ignore_readdir_race -exec chmod g-s {} \;
 
