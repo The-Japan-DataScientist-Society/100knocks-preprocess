@@ -4,11 +4,11 @@ Name
 
 Overview
 ====
-- !!! Mac Book M1/M2でmambaによるRのパッケージインストールが異常終了してしまうため、Microsoft社が提供するCRANのスナップショットを利用するよう戻しましたが、たまにMicrosoft社が提供するCRANサーバへのアクセスが不安定になることがあります
+- !!! Mac Book M1/M2でmambaによるRのパッケージインストールが異常終了してしまうため、Microsoft社が提供するCRANのスナップショットを利用するよう戻しましたが、Microsoft社が提供するCRANサーバへのアクセスがまれに不安定になることがあります
    - Rで100本ノックを実行した際に以下エラーが出る場合は、この理由からコンテナの構築がうまくできていません
    - ERROR: Error in dbConnect(PostgreSQL(), host = host, port = port, dbname = dbname, : could not find function "dbConnect"
    - 数日様子を見ると復旧したりするので、Rでノックを行いたい場合は様子を見てコンテナを再構築してみてください
-   - SQL、Pythonには影響ありません。
+   - SQL、Pythonには影響ありません
 - データサイエンス100本ノック（構造化データ加工編）を実践するための演習問題とデータ、および環境構築のためのスクリプト一式
 - 演習問題はSQL、Python、Rで共通
 - 言語によっては向かない設問もあるが、「この言語のときはこう書けば実現できる」という技術習得を目指すことを優先
