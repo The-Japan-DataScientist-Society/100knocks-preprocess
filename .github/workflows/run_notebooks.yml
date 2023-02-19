@@ -24,8 +24,8 @@ jobs:
             # 「UsageError: %%sql is a cell magic, but the cell body is empty. Did you mean the line magic %sql (single %)? 」を許容するため、UsageErrorを許容する設定にしている
             docker compose exec -T notebook bash -c "cd work && jupyter nbconvert --to notebook --debug --NotebookClient.allow_error_names UsageError --execute ${f}"
 
-            # 「MetaData.__init__() got an unexpected keyword argument 'bind'」で異常終了させる
-            if grep unexpected "docker/work/${f}"; then
+            # 実行時に「MetaData.__init__() got an unexpected keyword argument 'bind'」が発生していたら異常終了させる
+            if grep unexpected "$(echo "docker/work/${f}" | sed -e 's/\.ipynb/\.nbconvert.ipynb/g')"; then
               exit 1
             fi
 
