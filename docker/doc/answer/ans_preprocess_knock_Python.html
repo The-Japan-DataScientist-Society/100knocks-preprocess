@@ -14651,7 +14651,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
     <span class="n">password</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PG_PASSWORD&#39;</span><span class="p">]</span>
     
     <span class="c1"># pd.read_sql用のコネクタ</span>
-    <span class="n">conn</span> <span class="o">=</span> <span class="n">engine</span><span class="o">=</span><span class="n">create_engine</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;postgresql://</span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">password</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">database</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;postgresql://</span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">password</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">database</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="n">df_customer</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">sql</span><span class="o">=</span><span class="s1">&#39;select * from customer&#39;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
     <span class="n">df_category</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">sql</span><span class="o">=</span><span class="s1">&#39;select * from category&#39;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">conn</span><span class="p">)</span>
@@ -29009,143 +29009,143 @@ pct75: 3651.0
   </thead>
   <tbody>
     <tr>
-      <th>2487</th>
-      <td>CS034614000082</td>
-      <td>寺島 倫子</td>
+      <th>1466</th>
+      <td>CS003315000128</td>
+      <td>小野 美嘉</td>
       <td>1</td>
       <td>女性</td>
-      <td>1952-10-27</td>
-      <td>66</td>
-      <td>216-0034</td>
-      <td>神奈川県川崎市宮前区梶ケ谷**********</td>
-      <td>S14034</td>
-      <td>20150616</td>
-      <td>0-00000000-0</td>
+      <td>1987-04-14</td>
+      <td>31</td>
+      <td>201-0003</td>
+      <td>東京都狛江市和泉本町**********</td>
+      <td>S13003</td>
+      <td>20150405</td>
+      <td>6-20081025-9</td>
     </tr>
     <tr>
-      <th>7810</th>
-      <td>CS029412000119</td>
-      <td>池内 友以乃</td>
+      <th>15335</th>
+      <td>CS013612000125</td>
+      <td>大塚 涼</td>
       <td>1</td>
       <td>女性</td>
-      <td>1977-09-06</td>
-      <td>41</td>
-      <td>279-0043</td>
-      <td>千葉県浦安市富士見**********</td>
-      <td>S12029</td>
-      <td>20150603</td>
-      <td>8-20100516-5</td>
-    </tr>
-    <tr>
-      <th>20410</th>
-      <td>CS032612000071</td>
-      <td>原口 恭子</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1954-03-07</td>
+      <td>1953-12-13</td>
       <td>65</td>
-      <td>210-0851</td>
-      <td>神奈川県川崎市川崎区浜町**********</td>
-      <td>S13032</td>
-      <td>20151113</td>
+      <td>261-0026</td>
+      <td>千葉県千葉市美浜区幕張西**********</td>
+      <td>S12013</td>
+      <td>20170714</td>
       <td>0-00000000-0</td>
     </tr>
     <tr>
-      <th>8728</th>
-      <td>CS004815000019</td>
-      <td>山形 瞳</td>
+      <th>18681</th>
+      <td>CS038411000044</td>
+      <td>宇野 奈月</td>
       <td>1</td>
       <td>女性</td>
-      <td>1936-08-22</td>
-      <td>82</td>
+      <td>1974-03-13</td>
+      <td>45</td>
+      <td>133-0065</td>
+      <td>東京都江戸川区南篠崎町**********</td>
+      <td>S13038</td>
+      <td>20150410</td>
+      <td>1-20100403-4</td>
+    </tr>
+    <tr>
+      <th>10173</th>
+      <td>CS009301000005</td>
+      <td>村井 栄一</td>
+      <td>0</td>
+      <td>男性</td>
+      <td>1986-04-11</td>
+      <td>32</td>
+      <td>152-0035</td>
+      <td>東京都目黒区自由が丘**********</td>
+      <td>S13009</td>
+      <td>20150629</td>
+      <td>0-00000000-0</td>
+    </tr>
+    <tr>
+      <th>14796</th>
+      <td>CS004313000431</td>
+      <td>菊地 ひろ子</td>
+      <td>1</td>
+      <td>女性</td>
+      <td>1985-08-29</td>
+      <td>33</td>
       <td>165-0033</td>
       <td>東京都中野区若宮**********</td>
       <td>S13004</td>
-      <td>20160920</td>
-      <td>B-20090924-B</td>
-    </tr>
-    <tr>
-      <th>6860</th>
-      <td>CS021412000020</td>
-      <td>吹越 ちえみ</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1975-04-18</td>
-      <td>43</td>
-      <td>259-1116</td>
-      <td>神奈川県伊勢原市石田**********</td>
-      <td>S14021</td>
-      <td>20150825</td>
+      <td>20170504</td>
       <td>0-00000000-0</td>
     </tr>
     <tr>
-      <th>15376</th>
-      <td>CS001512000039</td>
-      <td>大原 めぐみ</td>
+      <th>14164</th>
+      <td>CS026613000029</td>
+      <td>荒川 早紀</td>
       <td>1</td>
       <td>女性</td>
-      <td>1964-03-21</td>
-      <td>55</td>
-      <td>210-0806</td>
-      <td>神奈川県川崎市川崎区中島**********</td>
-      <td>S13001</td>
-      <td>20150807</td>
+      <td>1954-01-17</td>
+      <td>65</td>
+      <td>251-0047</td>
+      <td>神奈川県藤沢市辻堂**********</td>
+      <td>S14026</td>
+      <td>20150310</td>
       <td>0-00000000-0</td>
     </tr>
     <tr>
-      <th>15554</th>
-      <td>CS029601000007</td>
-      <td>木村 英嗣</td>
+      <th>20322</th>
+      <td>CS040503000019</td>
+      <td>桑原 染五郎</td>
       <td>0</td>
       <td>男性</td>
-      <td>1951-02-06</td>
-      <td>68</td>
-      <td>134-0003</td>
-      <td>東京都江戸川区春江町**********</td>
-      <td>S12029</td>
-      <td>20141021</td>
-      <td>0-00000000-0</td>
-    </tr>
-    <tr>
-      <th>15182</th>
-      <td>CS002713000121</td>
-      <td>石井 さとみ</td>
-      <td>1</td>
-      <td>女性</td>
-      <td>1946-12-16</td>
-      <td>72</td>
-      <td>185-0014</td>
-      <td>東京都国分寺市東恋ケ窪**********</td>
-      <td>S13002</td>
-      <td>20170205</td>
-      <td>0-00000000-0</td>
-    </tr>
-    <tr>
-      <th>20003</th>
-      <td>CS034714000018</td>
-      <td>三木 ケンイチ</td>
-      <td>9</td>
-      <td>不明</td>
-      <td>1943-11-01</td>
-      <td>75</td>
-      <td>216-0035</td>
-      <td>神奈川県川崎市宮前区馬絹**********</td>
-      <td>S14034</td>
-      <td>20141214</td>
-      <td>0-00000000-0</td>
-    </tr>
-    <tr>
-      <th>14091</th>
-      <td>CS008503000019</td>
-      <td>森永 哲平</td>
-      <td>0</td>
-      <td>男性</td>
-      <td>1965-01-04</td>
+      <td>1964-10-07</td>
       <td>54</td>
-      <td>201-0004</td>
-      <td>東京都狛江市岩戸北**********</td>
-      <td>S13008</td>
-      <td>20150921</td>
+      <td>226-0018</td>
+      <td>神奈川県横浜市緑区長津田みなみ台**********</td>
+      <td>S14040</td>
+      <td>20150417</td>
+      <td>0-00000000-0</td>
+    </tr>
+    <tr>
+      <th>17702</th>
+      <td>CS021815000018</td>
+      <td>大槻 美里</td>
+      <td>1</td>
+      <td>女性</td>
+      <td>1929-07-18</td>
+      <td>89</td>
+      <td>259-1144</td>
+      <td>神奈川県伊勢原市池端**********</td>
+      <td>S14021</td>
+      <td>20150911</td>
+      <td>0-00000000-0</td>
+    </tr>
+    <tr>
+      <th>1195</th>
+      <td>CS001415000894</td>
+      <td>中村 美菜</td>
+      <td>1</td>
+      <td>女性</td>
+      <td>1976-06-20</td>
+      <td>42</td>
+      <td>144-0052</td>
+      <td>東京都大田区蒲田**********</td>
+      <td>S13001</td>
+      <td>20171023</td>
+      <td>0-00000000-0</td>
+    </tr>
+    <tr>
+      <th>21300</th>
+      <td>CS032302000011</td>
+      <td>臼井 育二</td>
+      <td>0</td>
+      <td>男性</td>
+      <td>1986-08-15</td>
+      <td>32</td>
+      <td>210-0025</td>
+      <td>神奈川県川崎市川崎区下並木**********</td>
+      <td>S13032</td>
+      <td>20141103</td>
       <td>0-00000000-0</td>
     </tr>
   </tbody>
