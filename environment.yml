@@ -4,7 +4,7 @@ channels:
   - conda-forge
 
 dependencies:
-  - python=3.9
+  - python=3.10
   - ipython
   - ipykernel
   - pandas
@@ -13,5 +13,5 @@ dependencies:
   - sqlalchemy=1.4.46
   - pip
   - pip:
-      - ipython-sql==0.3.9
+      - jupysql==0.7.2
       - imblearn==0.0
