@@ -8,6 +8,10 @@ jupysql = "==0.7.2"
 psycopg2 = "==2.9.3"
 imblearn = "==0.0"
 sqlalchemy = "==1.4.46"
+numpy = "==1.24.3"
+python-dateutil = "==2.8.2"
+scikit-learn = "==1.2.2"
+pandas = "==1.5.3"
 
 [dev-packages]
 
