@@ -8,6 +8,8 @@ dependencies:
   - ipython
   - ipykernel
   - pandas=1.5.3
+  - numpy=1.24.3
+  - scikit-learn=1.2.2
   - python-dateutil=2.8.2
   - psycopg2=2.9.3
   - sqlalchemy=1.4.46
@@ -15,5 +17,3 @@ dependencies:
   - pip:
       - jupysql==0.7.2
       - imblearn==0.0
-      - numpy==1.24.3
-      - scikit-learn==1.2.2
