@@ -16,8 +16,12 @@ services:
       - POSTGRES_DB=dsdojo_db
       - DATABASE_HOST=localhost
     volumes:
-      - ./docker/db/init:/docker-entrypoint-initdb.d
-      - ./docker/work/data:/tmp/data
+      - type: bind
+        source: ./docker/db/init
+        target: /docker-entrypoint-initdb.d
+      - type: bind
+        source: ./docker/work/data
+        target: /tmp/data
 
   notebook:
     build:
@@ -37,6 +41,10 @@ services:
       db:
         condition: service_healthy
     volumes:
-      - ./docker/doc:/home/jovyan/doc
-      - ./docker/work:/home/jovyan/work
+      - type: bind
+        source: ./docker/doc
+        target: /home/jovyan/doc
+      - type: bind
+        source: ./docker/work
+        target: /home/jovyan/work
     command: start-notebook.sh --NotebookApp.token=''
