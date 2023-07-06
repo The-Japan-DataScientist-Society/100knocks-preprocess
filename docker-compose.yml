@@ -8,7 +8,7 @@ services:
     image: dss-postgres
     container_name: dss-postgres
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres12345
@@ -26,7 +26,7 @@ services:
     image: dss-notebook
     container_name: dss-notebook
     ports:
-      - "8888:8888"
+      - "127.0.0.1:8888:8888"
     environment:
       - PG_PORT=5432
       - PG_USER=padawan
