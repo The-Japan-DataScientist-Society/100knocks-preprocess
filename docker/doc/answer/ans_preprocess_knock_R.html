@@ -17434,7 +17434,7 @@ The following objects are masked from ‘package:recipes’:
 
 <span class="n">df_product_tmp</span><span class="p">[</span><span class="s">&quot;key&quot;</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="m">0</span>
 
-<span class="nf">nrow</span><span class="p">(</span><span class="nf">full_join</span><span class="p">(</span><span class="n">df_store_tmp</span><span class="p">,</span> <span class="n">df_product_tmp</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="s">&quot;key&quot;</span><span class="p">))</span>
+<span class="nf">nrow</span><span class="p">(</span><span class="nf">full_join</span><span class="p">(</span><span class="n">df_store_tmp</span><span class="p">,</span><span class="w"> </span><span class="n">df_product_tmp</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"key"</span><span class="p">,</span><span class="w"> </span><span class="n">relationship</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"many-to-many"</span><span class="p">))</span>
 </pre></div>
 
      </div>
