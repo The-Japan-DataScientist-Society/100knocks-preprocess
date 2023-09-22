@@ -16,7 +16,7 @@ jobs:
       - name: Run docker containers
         run: docker compose up -d
       - name: Get latest dockle version
-        uses: actions/github-script@v6.3.3
+        uses: actions/github-script@v6.4.1
         id: get_latest_dockle_version
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
