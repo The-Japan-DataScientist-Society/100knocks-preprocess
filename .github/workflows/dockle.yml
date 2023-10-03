@@ -32,7 +32,7 @@ jobs:
           docker compose images
           for image_name in $(docker compose images | awk 'OFS=":" {print $2,$4}' | tail -n +2); do
             cmd="docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/.dockleignore:/.dockleignore "
-            cmd+="goodwithtech/dockle:${{ steps.get_latest_dockle_version.outputs.result }} --exit-code 1 --exit-level info "
+            cmd+="goodwithtech/dockle::v0.4.12 --exit-code 1 --exit-level info "
 
             if [[ "${image_name}" =~ "dss-notebook" ]]; then
               cmd+="--timeout 600s -ae mdf -af settings.py -af credentials -i DKL-DI-0001 "
