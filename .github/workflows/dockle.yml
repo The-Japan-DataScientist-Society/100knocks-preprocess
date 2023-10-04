@@ -14,8 +14,8 @@ jobs:
         with:
           fetch-depth: 0
       - run: |
-          apt-get update
-          apt-get install -y docker-compose-plugin==2.21.0
+          sudo apt-get update
+          sudo apt-get install -y docker-compose-plugin==2.21.0
       - name: Run docker containers
         run: docker compose up -d
       - name: Get latest dockle version
