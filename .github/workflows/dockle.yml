@@ -16,6 +16,7 @@ jobs:
       - run: |
           sudo curl -fsSL https://github.com/docker/compose/releases/download/v2.21.0/docker-compose-linux-x86_64 -o /usr/libexec/docker/cli-plugins/docker-compose
           sudo chmod +x /usr/libexec/docker/cli-plugins/docker-compose
+          docker compose version
       - name: Run docker containers
         run: docker compose up -d
       - name: Get latest dockle version
