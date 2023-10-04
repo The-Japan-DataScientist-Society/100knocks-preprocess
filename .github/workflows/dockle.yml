@@ -12,6 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: docker compose build
+      - run: echpo test
       - name: Run dockle (dss-notebook)
         uses: goodwithtech/dockle-action@v0.1.2
         with:
