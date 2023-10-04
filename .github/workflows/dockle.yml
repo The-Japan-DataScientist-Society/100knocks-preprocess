@@ -14,8 +14,8 @@ jobs:
         with:
           fetch-depth: 0
       - run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose-plugin=2.21.0
+          sudo curl -fsSL https://github.com/docker/compose/releases/download/v2.21.0/docker-compose-linux-x86_64 -o /usr/libexec/docker/cli-plugins/docker-compose
+          sudo chmod +x /usr/libexec/docker/cli-plugins/docker-compose
       - name: Run docker containers
         run: docker compose up -d
       - name: Get latest dockle version
