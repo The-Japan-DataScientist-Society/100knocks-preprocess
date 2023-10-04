@@ -16,7 +16,7 @@ jobs:
       - name: Run docker containers
         run: |
           docker compose build
-          docker run --rm dss-notebook:latest /bin/bash
+          docker run --rm dss-notebook:latest /bin/bash -c "echo test"
       - name: Get latest dockle version
         uses: actions/github-script@v6.3.3
         id: get_latest_dockle_version
