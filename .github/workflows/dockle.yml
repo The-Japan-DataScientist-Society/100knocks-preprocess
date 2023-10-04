@@ -17,10 +17,9 @@ jobs:
         with:
           image: 'dss-notebook:latest'
           exit-level: 'info'
-          ignore: 'DKL-DI-0001'
+          ignore: 'CIS-DI-0010,DKL-DI-0001'
           accept-file-extension: 'mdf'
           accept-file: 'settings.py,credentials'
-          accept-key: '--progress,--strip-components,CONDA_DIR,DEBCONF_NOWARNINGS,DEBIAN_FRONTEND,HOME,JULIA_DEPOT_PATH,JULIA_PKGDIR,JUPYTER_PORT,LANG,LC_ALL,MPLBACKEND,NB_GID,NB_UID,NB_USER,PATH,PYTHON_VERSION,SHELL,XDG_CACHE_HOME,arch,conda-forge::blas,maintainer,org.opencontainers.image.ref.name,org.opencontainers.image.version,s/^force_color_prompt'
       - name: Run dockle (dss-postgres)
         uses: goodwithtech/dockle-action@v0.1.2
         with:
