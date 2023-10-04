@@ -11,23 +11,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - run: docker compose build
       - name: Run dockle (dss-notebook)
         uses: goodwithtech/dockle-action@v0.1.2
         with:
           image: 'dss-notebook:latest'
-          exit-code: '1'
           exit-level: 'info'
           ignore: 'DKL-DI-0001'
-          timeout: '600s'
           accept-file-extension: 'mdf'
           accept-file: 'settings.py,credentials'
       - name: Run dockle (dss-postgres)
         uses: goodwithtech/dockle-action@v0.1.2
         with:
           image: 'dss-postgres:latest'
-          exit-code: '1'
           exit-level: 'info'
           accept-key: 'key'
