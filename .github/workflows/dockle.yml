@@ -20,7 +20,7 @@ jobs:
           ignore: 'DKL-DI-0001'
           accept-file-extension: 'mdf'
           accept-file: 'settings.py,credentials'
-          accept-key: 'CONDA_DIR,DEBCONF_NOWARNINGS,DEBIAN_FRONTEND,HOME,JULIA_DEPOT_PATH,JULIA_PKGDIR,JUPYTER_PORT,MPLBACKEND,NB_GID,NB_UID,NB_USER,PATH,PYTHON_VERSION,SHELL,XDG_CACHE_HOME,arch,conda-forge::blas,maintainer,org.opencontainers.image.ref.name,org.opencontainers.image.version,s/^force_color_prompt'
+          accept-key: '--progress,CONDA_DIR,DEBCONF_NOWARNINGS,DEBIAN_FRONTEND,HOME,JULIA_DEPOT_PATH,JULIA_PKGDIR,JUPYTER_PORT,LC_ALL,MPLBACKEND,NB_GID,NB_UID,NB_USER,PATH,PYTHON_VERSION,SHELL,XDG_CACHE_HOME,arch,conda-forge::blas,maintainer,org.opencontainers.image.ref.name,org.opencontainers.image.version,s/^force_color_prompt'
       - name: Run dockle (dss-postgres)
         uses: goodwithtech/dockle-action@v0.1.2
         with:
