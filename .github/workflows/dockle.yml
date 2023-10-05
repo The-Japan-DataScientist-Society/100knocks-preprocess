@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v3
       - run: docker compose build
       - name: Run dockle (dss-notebook)
-        uses: goodwithtech/dockle-action@v0.1.2
+        uses: massongit/dockle-action@massongit-patch-1
         with:
           image: 'dss-notebook:latest'
           exit-level: 'info'
@@ -21,7 +21,7 @@ jobs:
           accept-file-extension: 'mdf'
           accept-file: 'settings.py,credentials'
       - name: Run dockle (dss-postgres)
-        uses: goodwithtech/dockle-action@v0.1.2
+        uses: massongit/dockle-action@massongit-patch-1
         with:
           image: 'dss-postgres:latest'
           exit-level: 'info'
