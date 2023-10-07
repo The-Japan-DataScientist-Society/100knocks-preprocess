@@ -31,8 +31,8 @@ jobs:
         run: |
           for image_name in $(docker compose images | awk 'OFS=":" {print $2,$3}' | tail -n +2); do
             docker save "${image_name}" | gzip > image.tar.gz
-            cmd="docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/.dockleignore:/.dockleignore -v image.tar.gz:image.tar.gz "
-            cmd+="goodwithtech/dockle:${{ steps.get_latest_dockle_version.outputs.result }} --exit-code 1 --exit-level info --input image.tar.gz "
+            cmd="docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/.dockleignore:/.dockleignore -v $(pwd)/image.tar.gz:/image.tar.gz "
+            cmd+="goodwithtech/dockle:${{ steps.get_latest_dockle_version.outputs.result }} --exit-code 1 --exit-level info --input /image.tar.gz "
 
             if [[ "${image_name}" =~ "dss-notebook" ]]; then
               cmd+="--timeout 600s -ae mdf -af settings.py -af credentials -i DKL-DI-0001 "
