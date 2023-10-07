@@ -43,3 +43,5 @@ jobs:
             echo "> ${cmd}"
             eval "${cmd}"
           done
+      - if: always()
+        run: dockerd --log-level=debug
