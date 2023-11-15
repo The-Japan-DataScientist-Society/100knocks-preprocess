@@ -1,4 +1,4 @@
-FROM postgres:15.1-bullseye
+FROM postgres:16.1-bullseye
 
 RUN sed -i -E 's/# (ja_JP.UTF-8)/\1/' /etc/locale.gen \
     && locale-gen \
