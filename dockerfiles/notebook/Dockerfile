@@ -1,4 +1,4 @@
-FROM jupyter/datascience-notebook:python-3.11.5
+FROM quay.io/jupyter/datascience-notebook:python-3.11.9
 #FROM jupyter/datascience-notebook:d53a302fbcd0
 USER root
 ENV DEBCONF_NOWARNINGS yes
@@ -26,6 +26,6 @@ COPY install.R .
 RUN pip install --no-cache-dir pipenv==2021.5.29 \
     && pipenv install --system \
     && Rscript install.R \
-    && rm -rf Pipfile* install.R .cache/R/pkgcache/sysreqs/docker/*/Dockerfile /tmp/* /var/tmp/*
+    && rm -rf Pipfile* install.R .cache/R/pkgcache/sysreqs/docker/*/Dockerfile /tmp/* /var/tmp/* .npm/
 
 HEALTHCHECK --interval=5s --retries=20 CMD ["curl", "-s", "-S", "-o", "/dev/null", "http://localhost:8888"]
