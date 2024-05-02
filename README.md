@@ -25,9 +25,11 @@
   - WindowsのHome EditionでもWSL2をインストールすることでDocker Desktopが使えるようになりました！
 - Cloud Service
   - [Amazon SageMaker Studio Lab](https://studiolab.sagemaker.aws/) ([使い方](https://github.com/aws-sagemaker-jp/awesome-studio-lab-jp/blob/main/README_usage.md))
-    - Python演習: [![Open in SageMaker Studio Lab Practice](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/The-Japan-DataScientist-Society/100knocks-preprocess/blob/master/docker/work/preprocess_knock_Python.ipynb) Python解答: [![Open in SageMaker Studio Lab Answer](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/The-Japan-DataScientist-Society/100knocks-preprocess/blob/master/docker/work/answer/ans_preprocess_knock_Python.ipynb)
+    - Python演習: [![Open in SageMaker Studio Lab Practice](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/The-Japan-DataScientist-Society/100knocks-preprocess/blob/master/docker/work/preprocess_knock_Python.ipynb)
+    - Python解答: [![Open in SageMaker Studio Lab Answer](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/The-Japan-DataScientist-Society/100knocks-preprocess/blob/master/docker/work/answer/ans_preprocess_knock_Python.ipynb)
   - [Colaboratory](https://colab.research.google.com/)
-    - Python演習: [![Open in Colab Practice](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/The-Japan-DataScientist-Society/100knocks-preprocess/blob/master/docker/work/preprocess_knock_Python.ipynb) Python解答: [![Open in Colab Answer](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/The-Japan-DataScientist-Society/100knocks-preprocess/blob/master/docker/work/answer/ans_preprocess_knock_Python.ipynb)
+    - Python演習: [![Open in Colab Practice](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/The-Japan-DataScientist-Society/100knocks-preprocess/blob/master/docker/work/preprocess_knock_Python.ipynb)
+    - Python解答: [![Open in Colab Answer](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/The-Japan-DataScientist-Society/100knocks-preprocess/blob/master/docker/work/answer/ans_preprocess_knock_Python.ipynb)
 
 ## Install
 ```shell
