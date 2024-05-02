@@ -12,8 +12,8 @@
 - データサイエンス100本ノック(構造化データ加工編)の利用により生じるいかなる問題についても、当協会は一切の責任を負いかねますのであらかじめご了承ください
 
 ## Description
-- Dockerfile(dockerfiles/notebook/Dockerfile, dockerfiles/notebook/Dockerfile)
-- docker-compose.yml
+- Dockerfile(`dockerfiles/notebook/Dockerfile`, `dockerfiles/notebook/Dockerfile`)
+- `docker-compose.yml`
 - スーパーの架空購買データと架空個人情報(csv)
 - データベースを初期設定するための各種スクリプト
 - 設問と解答例のノートブックファイルおよびHTMLファイル
@@ -25,9 +25,11 @@
   - WindowsのHome EditionでもWSL2をインストールすることでDocker Desktopが使えるようになりました！
 - Cloud Service
   - [Amazon SageMaker Studio Lab](https://studiolab.sagemaker.aws/) ([使い方](https://github.com/aws-sagemaker-jp/awesome-studio-lab-jp/blob/main/README_usage.md))
-    - Python演習: [![Open in SageMaker Studio Lab Practice](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/The-Japan-DataScientist-Society/100knocks-preprocess/blob/master/docker/work/preprocess_knock_Python.ipynb) Python解答: [![Open in SageMaker Studio Lab Answer](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/The-Japan-DataScientist-Society/100knocks-preprocess/blob/master/docker/work/answer/ans_preprocess_knock_Python.ipynb)
+    - Python演習: [![Open in SageMaker Studio Lab Practice](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/The-Japan-DataScientist-Society/100knocks-preprocess/blob/master/docker/work/preprocess_knock_Python.ipynb)
+    - Python解答: [![Open in SageMaker Studio Lab Answer](https://studiolab.sagemaker.aws/studiolab.svg)](https://studiolab.sagemaker.aws/import/github/The-Japan-DataScientist-Society/100knocks-preprocess/blob/master/docker/work/answer/ans_preprocess_knock_Python.ipynb)
   - [Colaboratory](https://colab.research.google.com/)
-    - Python演習: [![Open in Colab Practice](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/The-Japan-DataScientist-Society/100knocks-preprocess/blob/master/docker/work/preprocess_knock_Python.ipynb) Python解答: [![Open in Colab Answer](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/The-Japan-DataScientist-Society/100knocks-preprocess/blob/master/docker/work/answer/ans_preprocess_knock_Python.ipynb)
+    - Python演習: [![Open in Colab Practice](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/The-Japan-DataScientist-Society/100knocks-preprocess/blob/master/docker/work/preprocess_knock_Python.ipynb)
+    - Python解答: [![Open in Colab Answer](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/The-Japan-DataScientist-Society/100knocks-preprocess/blob/master/docker/work/answer/ans_preprocess_knock_Python.ipynb)
 
 ## Install
 ```shell
@@ -44,7 +46,7 @@ docker compose up -d --build --wait
 
 ※ コンテナは作成されたがデータベースに接続できない、という場合の多くはディレクトリに対するアクセス権限設定の問題となります
 
-※ インストールの説明はdoc配下の説明資料も参照してください
+※ インストールの説明は `doc` 配下の説明資料も参照してください
 
 ## Usage
 - ブラウザで以下のURLにアクセスします
@@ -53,13 +55,13 @@ docker compose up -d --build --wait
 ## How to contribute
 開発に協力していただける場合は本リポジトリをcloneし、 [https://pre-commit.com/](https://pre-commit.com/) の手順に従って `pre-commit` をインストールしてください。
 
-これにより、 [.pre-commit-config.yaml](.pre-commit-config.yaml) の設定に基づいて、コミット時にクレデンシャルが含まれていないかの検査が行われるようになります。
+これにより、 [`.pre-commit-config.yaml`](.pre-commit-config.yaml) の設定に基づいて、コミット時にクレデンシャルが含まれていないかの検査が行われるようになります。
 
 ## Document
-- doc配下にデータサイエンス100本ノック（構造化データ加工編）の説明資料と設問PDF、設問HTML、解答例HTMLを配置
-- work配下に設問notebookを配置
-- work/answer配下に解答例notebookを配置
-- work/data配下に使用したデータを配置
+- `doc` 配下にデータサイエンス100本ノック（構造化データ加工編）の説明資料と設問PDF、設問HTML、解答例HTMLを配置
+- `work` 配下に設問notebookを配置
+- `work/answer` 配下に解答例notebookを配置
+- `work/data` 配下に使用したデータを配置
 
 ## Link
 本コンテンツの内容やセットアップ手順について解説いただいているサイト、Dockerについて基本から学べるサイト
@@ -86,5 +88,5 @@ docker compose up -d --build --wait
 The Data Scientist Society
 
 ## LICENSE
-- docker/doc/100knocks_guide.pdfは協会ロゴ等が含まれるため、CC-BY-NDとなります
+- `docker/doc/100knocks_guide.pdf` は協会ロゴ等が含まれるため、CC-BY-NDとなります
 - その他ファイルはMITライセンスに従います
