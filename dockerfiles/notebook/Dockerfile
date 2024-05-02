@@ -21,10 +21,11 @@ USER jovyan
 WORKDIR /home/jovyan
 COPY Pipfile .
 COPY Pipfile.lock .
+COPY install.R .
 
 RUN pip install --no-cache-dir pipenv==2021.5.29 \
     && pipenv install --system \
-    && Rscript -e 'install.packages(c("DBI", "RPostgreSQL", "themis"), dependencies = TRUE, error = TRUE, repos="https://cran.r-project.org")' \
-    && rm -rf Pipfile* .cache/R/pkgcache/sysreqs/docker/*/Dockerfile /tmp/* /var/tmp/*
+    && Rscript install.R \
+    && rm -rf Pipfile* install.R .cache/R/pkgcache/sysreqs/docker/*/Dockerfile /tmp/* /var/tmp/*
 
 HEALTHCHECK --interval=5s --retries=20 CMD ["curl", "-s", "-S", "-o", "/dev/null", "http://localhost:8888"]
