@@ -38,7 +38,7 @@ docker compose up -d --build --wait
 
 ※ macOSでユーザーのホームディレクトリ配下以外にファイル群を配置する場合、Dockerの共有設定が別途必要となります
 
-※ Windowsでgitを利用する場合、デフォルト設定でのインストールを行うとスクリプトの改行コードを変えられてしまい、データベースを正しく構築できないことがあります https://github.com/The-Japan-DataScientist-Society/100knocks-preprocess/issues/1#issue-640590032
+※ Windowsでgitを利用する場合、デフォルト設定でのインストールを行うとスクリプトの改行コードを変えられてしまい、データベースを正しく構築できないことがあります ([参考](https://github.com/The-Japan-DataScientist-Society/100knocks-preprocess/issues/1#issue-640590032))
 
 ※ 改行を変えないよう設定するか、ZIPをダウンロードして利用してください
 
