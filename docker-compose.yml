@@ -45,4 +45,7 @@ services:
       - type: bind
         source: ./docker/work
         target: /home/jovyan/work
+      - type: bind
+        source: ./docker/.jupyter/jupyter_lab_config.py
+        target: /home/jovyan/.jupyter/jupyter_lab_config.py
     command: start-notebook.sh --NotebookApp.token=''
