@@ -48,7 +48,7 @@ docker compose up -d --build --wait
 
 ## Usage
 - ブラウザで以下のURLにアクセスします
-http://localhost:8888
+  - [http://localhost:8888](http://localhost:8888)
 
 ## How to contribute
 開発に協力していただける場合は本リポジトリをcloneし、 [https://pre-commit.com/](https://pre-commit.com/) の手順に従って `pre-commit` をインストールしてください。
