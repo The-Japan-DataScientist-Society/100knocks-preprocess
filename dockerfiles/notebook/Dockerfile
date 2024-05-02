@@ -26,6 +26,6 @@ COPY install.R .
 RUN pip install --no-cache-dir pipenv==2021.5.29 \
     && pipenv install --system \
     && Rscript install.R \
-    && rm -rf Pipfile* install.R .cache/R/pkgcache/sysreqs/docker/*/Dockerfile /tmp/* /var/tmp/*
+    && rm -rf Pipfile* install.R .cache/R/pkgcache/sysreqs/docker/*/Dockerfile /tmp/* /var/tmp/* .npm/
 
 HEALTHCHECK --interval=5s --retries=20 CMD ["curl", "-s", "-S", "-o", "/dev/null", "http://localhost:8888"]
