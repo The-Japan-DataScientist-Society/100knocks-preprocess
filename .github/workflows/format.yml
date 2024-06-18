@@ -1,0 +1,32 @@
+name: format
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+permissions: { }
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Get Python version
+        id: get_python_version
+        run: echo "version=$(docker compose run --rm notebook python --version | sed -e 's/Python //g')" >> "$GITHUB_OUTPUT"
+      - name: Set up Python
+        uses: actions/setup-python@v5.1.0
+        with:
+          python-version: ${{ steps.get_python_version.outputs.version }}
+          cache: pipenv
+      - run: pipenv install
+      - run: sed -i -e "s/python=.*/python=$(yq -p toml -oy '.requires.python_version' Pipfile)/g" environment.yml
+      - uses: dev-hato/actions-diff-pr-management@v1.1.12
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          branch-name-prefix: fix-format
+          pr-title-prefix: formatを修正しました。
