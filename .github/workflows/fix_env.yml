@@ -1,0 +1,69 @@
+name: fix environment.yml and Pipfile
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - closed
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  fix_env:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        if: github.event_name != 'pull_request' || github.event.action != 'closed'
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Get Python version
+        id: get_python_version
+        if: github.event_name != 'pull_request' || github.event.action != 'closed'
+        run: |
+          docker compose up -d --wait
+          version="$(docker compose exec notebook python --version | sed -e 's/Python //g')"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          # shellcheck disable=SC2001
+          echo "minor_version=$(echo "$version" | sed -e 's/\([0-9]*\.[0-9]*\).*/\1/g')" >> "$GITHUB_OUTPUT"
+      - uses: actions/setup-python@v5.1.0
+        if: github.event_name != 'pull_request' || github.event.action != 'closed'
+        with:
+          python-version: ${{ steps.get_python_version.outputs.version }}
+          cache: pipenv
+      - name: Install
+        if: github.event_name != 'pull_request' || github.event.action != 'closed'
+        run: |
+          pip install "$(grep -oE 'pipenv[^ ]+' dockerfiles/notebook/Dockerfile)"
+          pipenv install
+      - if: github.event_name != 'pull_request' || github.event.action != 'closed'
+        run: sed -i -e "s/python_version = \".*\"/python_version = \"${{ steps.get_python_version.outputs.minor_version }}\"/g" Pipfile
+      - name: Copy packages from Pipfile to environment.yml
+        if: github.event_name != 'pull_request' || github.event.action != 'closed'
+        run: |
+          sed -i -e "s/ python=.*/ python=${{ steps.get_python_version.outputs.minor_version }}/g" environment.yml
+          for package_name in $(yq -p toml -o tsv '.packages | keys' Pipfile)
+          do
+            if ! grep "$package_name" environment.yml
+            then
+              echo "$package_name is not exit in environment.yml." 1>&2
+              exit 1
+            fi
+
+            package="$(pipenv run pip freeze | grep "$package_name==")"
+            sed -i -e "s/ $package_name==[0-9.]*$/ $package/g" environment.yml
+            sed -i -e "s/ $package_name=[0-9.]*$/ ${package//==/=}/g" environment.yml
+          done
+      - uses: dev-hato/actions-diff-pr-management@v1.1.12
+        if: success() || failure()
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          branch-name-prefix: fix-env
+          pr-title-prefix: environment.ymlやPipfile修正
