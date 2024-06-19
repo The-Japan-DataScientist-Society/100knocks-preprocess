@@ -4,15 +4,15 @@ channels:
   - conda-forge
 
 dependencies:
-  - python=3.10
-  - ipython
+  - python=3.11
+  - ipython=8.16.1
   - ipykernel
   - pandas=1.5.3
   - numpy=1.24.3
   - scikit-learn=1.2.2
   - python-dateutil=2.8.2
   - psycopg2=2.9.3
-  - sqlalchemy=1.4.46
+  - SQLAlchemy=1.4.46
   - pip
   - pip:
       - jupysql==0.7.2
