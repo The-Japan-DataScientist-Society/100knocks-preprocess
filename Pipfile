@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 jupysql = "==0.7.2"
 psycopg2 = "==2.9.3"
-imblearn = "==0.0"
+imbalanced-learn = "==0.12.3"
 SQLAlchemy = "==1.4.46"
 pandas = "==1.5.3"
 numpy = "==1.24.3"
