@@ -9,11 +9,11 @@ dependencies:
   - ipykernel
   - pandas=1.5.3
   - numpy=1.24.3
-  - scikit-learn=1.2.2
+  - scikit-learn=1.5.0
   - python-dateutil=2.8.2
   - psycopg2=2.9.3
   - SQLAlchemy=1.4.46
   - pip
   - pip:
       - jupysql==0.7.2
-      - imblearn==0.0
+      - imbalanced-learn==0.12.3
