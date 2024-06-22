@@ -41,7 +41,7 @@ jobs:
       - name: Install
         if: github.event_name != 'pull_request' || github.event.action != 'closed'
         run: |
-          pip install "$(grep -oE 'pipenv[^ ]+' dockerfiles/notebook/Dockerfile)"
+          pip install -r requirements.txt
           pipenv install
       - if: github.event_name != 'pull_request' || github.event.action != 'closed'
         run: sed -i -e "s/python_version = \".*\"/python_version = \"${{ steps.get_python_version.outputs.minor_version }}\"/g" Pipfile
