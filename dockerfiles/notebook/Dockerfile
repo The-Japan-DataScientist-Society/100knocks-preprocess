@@ -19,13 +19,14 @@ RUN apt-get update \
 
 USER jovyan
 WORKDIR /home/jovyan
+COPY requirements.txt .
 COPY Pipfile .
 COPY Pipfile.lock .
 COPY install.R .
 
-RUN pip install --no-cache-dir pipenv==2024.0.1 \
+RUN pip install --no-cache-dir -r requirements.txt \
     && pipenv install --system \
     && Rscript install.R \
-    && rm -rf Pipfile* install.R .cache/R/pkgcache/sysreqs/docker/*/Dockerfile /tmp/* /var/tmp/* .npm/
+    && rm -rf requirements.txt Pipfile* install.R .cache/R/pkgcache/sysreqs/docker/*/Dockerfile /tmp/* /var/tmp/* .npm/
 
 HEALTHCHECK --interval=5s --retries=20 CMD ["curl", "-s", "-S", "-o", "/dev/null", "http://localhost:8888"]
