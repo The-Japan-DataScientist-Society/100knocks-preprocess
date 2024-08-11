@@ -7559,7 +7559,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> sql
@@ -12201,16 +12201,105 @@ Deploy FastAPI apps for free on Ploomber Cloud! Learn more: https://ploomber.io/
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+<span class="k">WITH</span><span class="w"> </span><span class="n">averaged</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">store_cd</span><span class="p">,</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">avg_amount</span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">receipt</span>
+<span class="w">    </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">store_cd</span>
+<span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">averaged</span><span class="p">.</span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">averaged</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">averaged</span><span class="p">.</span><span class="n">avg_amount</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">330</span><span class="p">;</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>*  postgresql://padawan:***@db:5432/dsdojo_db
+13 rows affected.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[16]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>store_cd</th>
+<th>avg_amount</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S13052</td>
+<td>402.8674698795180723</td>
+</tr>
+<tr>
+<td>S13019</td>
+<td>330.2086158755484643</td>
+</tr>
+<tr>
+<td>S13003</td>
+<td>350.9155188246097337</td>
+</tr>
+<tr>
+<td>S14045</td>
+<td>330.0820734341252700</td>
+</tr>
+<tr>
+<td>S13004</td>
+<td>330.9439490445859873</td>
+</tr>
+<tr>
+<td>S13001</td>
+<td>348.4703862660944206</td>
+</tr>
+<tr>
+<td>S14026</td>
+<td>332.3405884723901653</td>
+</tr>
+<tr>
+<td>S14010</td>
+<td>348.7912621359223301</td>
+</tr>
+<tr>
+<td>S13015</td>
+<td>351.1119604316546763</td>
+</tr>
+<tr>
+<td>S12013</td>
+<td>330.1941299790356394</td>
+</tr>
+<tr>
+<td>S14047</td>
+<td>330.0770731707317073</td>
+</tr>
+<tr>
+<td>S14011</td>
+<td>335.7183333333333333</td>
+</tr>
+<tr>
+<td>S13020</td>
+<td>337.8799321170980059</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -12229,16 +12318,55 @@ Deploy FastAPI apps for free on Ploomber Cloud! Learn more: https://ploomber.io/
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+<span class="k">WITH</span><span class="w"> </span><span class="n">customer_avg</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">customer_id</span><span class="p">,</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">receipt</span>
+<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">customer_id</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'Z%'</span>
+<span class="w">    </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">customer_id</span>
+<span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="n">customer_avg</span><span class="p">.</span><span class="k">avg</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">customer_avg</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>*  postgresql://padawan:***@db:5432/dsdojo_db
+1 rows affected.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[27]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>avg</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>322.4465408860097470</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -12252,21 +12380,104 @@ Deploy FastAPI apps for free on Ploomber Cloud! Learn more: https://ploomber.io/
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
 <blockquote>
-<p>S-035: レシート明細データ（receipt）に対し、顧客ID（customer_id）ごとに売上金額（amount）を合計して全顧客の平均を求め、平均以上に買い物をしている顧客を抽出し、10件表示せよ。ただし、顧客IDが"Z"から始まるものは非会員を表すため、除外して計算すること。</p>
+<p>S-035: レシート明細データ（receipt）に対し、顧客ID（customer_id）ごとに売上金額（amount）を合計して全顧客の平均を求め、平均以上に買いをしている顧客を抽出し、10件表示せよ。ただし、顧客IDが"Z"から始まるものは非会員を表すため、除外して計算すること。</p>
 </blockquote>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [45]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+<span class="k">WITH</span><span class="w"> </span><span class="n">customer_avg</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">customer_id</span><span class="p">,</span>
+<span class="w">        </span><span class="c1">-- AVG(amount) AS avg_by_customer,</span>
+<span class="w">        </span><span class="k">AVG</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(</span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">customer_id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">avg_by_customer</span><span class="p">,</span>
+<span class="w">        </span><span class="k">AVG</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">avg_of_whole_customer</span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">receipt</span>
+<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">customer_id</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'Z%'</span>
+<span class="w">    </span><span class="c1">-- GROUP BY customer_id</span>
+<span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">customer_avg</span><span class="p">.</span><span class="n">customer_id</span><span class="p">,</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="n">customer_avg</span><span class="p">.</span><span class="n">avg_by_customer</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">avg</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">customer_avg</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">customer_avg</span><span class="p">.</span><span class="n">avg_by_customer</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">customer_avg</span><span class="p">.</span><span class="n">avg_of_whole_customer</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">customer_avg</span><span class="p">.</span><span class="n">customer_id</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>*  postgresql://padawan:***@db:5432/dsdojo_db
+10 rows affected.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[45]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>avg</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CS001113000004</td>
+<td>649.0000000000000000</td>
+</tr>
+<tr>
+<td>CS001115000010</td>
+<td>507.3333333333333333</td>
+</tr>
+<tr>
+<td>CS001214000009</td>
+<td>334.6428571428571429</td>
+</tr>
+<tr>
+<td>CS001214000017</td>
+<td>344.3333333333333333</td>
+</tr>
+<tr>
+<td>CS001214000052</td>
+<td>469.9166666666666667</td>
+</tr>
+<tr>
+<td>CS001215000040</td>
+<td>349.6000000000000000</td>
+</tr>
+<tr>
+<td>CS001215000097</td>
+<td>1144.0000000000000000</td>
+</tr>
+<tr>
+<td>CS001215000145</td>
+<td>437.5000000000000000</td>
+</tr>
+<tr>
+<td>CS001215000158</td>
+<td>337.2500000000000000</td>
+</tr>
+<tr>
+<td>CS001304000004</td>
+<td>624.0000000000000000</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -12285,16 +12496,178 @@ Deploy FastAPI apps for free on Ploomber Cloud! Learn more: https://ploomber.io/
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [48]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">receipt</span><span class="p">.</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">store</span><span class="p">.</span><span class="n">store_name</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">receipt</span>
+<span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">store</span>
+<span class="w">    </span><span class="k">ON</span><span class="w"> </span><span class="n">receipt</span><span class="p">.</span><span class="n">store_cd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">store</span><span class="p">.</span><span class="n">store_cd</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>*  postgresql://padawan:***@db:5432/dsdojo_db
+10 rows affected.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[48]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>sales_ymd</th>
+<th>sales_epoch</th>
+<th>store_cd</th>
+<th>receipt_no</th>
+<th>receipt_sub_no</th>
+<th>customer_id</th>
+<th>product_cd</th>
+<th>quantity</th>
+<th>amount</th>
+<th>store_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>20181103</td>
+<td>1541203200</td>
+<td>S14006</td>
+<td>112</td>
+<td>1</td>
+<td>CS006214000001</td>
+<td>P070305012</td>
+<td>1</td>
+<td>158</td>
+<td>葛が谷店</td>
+</tr>
+<tr>
+<td>20181118</td>
+<td>1542499200</td>
+<td>S13008</td>
+<td>1132</td>
+<td>2</td>
+<td>CS008415000097</td>
+<td>P070701017</td>
+<td>1</td>
+<td>81</td>
+<td>成城店</td>
+</tr>
+<tr>
+<td>20170712</td>
+<td>1499817600</td>
+<td>S14028</td>
+<td>1102</td>
+<td>1</td>
+<td>CS028414000014</td>
+<td>P060101005</td>
+<td>1</td>
+<td>170</td>
+<td>二ツ橋店</td>
+</tr>
+<tr>
+<td>20190205</td>
+<td>1549324800</td>
+<td>S14042</td>
+<td>1132</td>
+<td>1</td>
+<td>ZZ000000000000</td>
+<td>P050301001</td>
+<td>1</td>
+<td>25</td>
+<td>新山下店</td>
+</tr>
+<tr>
+<td>20180821</td>
+<td>1534809600</td>
+<td>S14025</td>
+<td>1102</td>
+<td>2</td>
+<td>CS025415000050</td>
+<td>P060102007</td>
+<td>1</td>
+<td>90</td>
+<td>大和店</td>
+</tr>
+<tr>
+<td>20190605</td>
+<td>1559692800</td>
+<td>S13003</td>
+<td>1112</td>
+<td>1</td>
+<td>CS003515000195</td>
+<td>P050102002</td>
+<td>1</td>
+<td>138</td>
+<td>狛江店</td>
+</tr>
+<tr>
+<td>20181205</td>
+<td>1543968000</td>
+<td>S14024</td>
+<td>1102</td>
+<td>2</td>
+<td>CS024514000042</td>
+<td>P080101005</td>
+<td>1</td>
+<td>30</td>
+<td>三田店</td>
+</tr>
+<tr>
+<td>20190922</td>
+<td>1569110400</td>
+<td>S14040</td>
+<td>1102</td>
+<td>1</td>
+<td>CS040415000178</td>
+<td>P070501004</td>
+<td>1</td>
+<td>128</td>
+<td>長津田店</td>
+</tr>
+<tr>
+<td>20170504</td>
+<td>1493856000</td>
+<td>S13020</td>
+<td>1112</td>
+<td>2</td>
+<td>ZZ000000000000</td>
+<td>P071302010</td>
+<td>1</td>
+<td>770</td>
+<td>十条仲原店</td>
+</tr>
+<tr>
+<td>20191010</td>
+<td>1570665600</td>
+<td>S14027</td>
+<td>1102</td>
+<td>1</td>
+<td>CS027514000015</td>
+<td>P071101003</td>
+<td>1</td>
+<td>680</td>
+<td>南藤沢店</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -12313,16 +12686,144 @@ Deploy FastAPI apps for free on Ploomber Cloud! Learn more: https://ploomber.io/
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [53]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">product</span><span class="p">.</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">category_small_name</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">product</span>
+<span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">category</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">product</span><span class="p">.</span><span class="n">category_small_cd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">category</span><span class="p">.</span><span class="n">category_small_cd</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>*  postgresql://padawan:***@db:5432/dsdojo_db
+10 rows affected.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[53]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>product_cd</th>
+<th>category_major_cd</th>
+<th>category_medium_cd</th>
+<th>category_small_cd</th>
+<th>unit_price</th>
+<th>unit_cost</th>
+<th>category_small_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P040101001</td>
+<td>04</td>
+<td>0401</td>
+<td>040101</td>
+<td>198</td>
+<td>149</td>
+<td>弁当類</td>
+</tr>
+<tr>
+<td>P040101002</td>
+<td>04</td>
+<td>0401</td>
+<td>040101</td>
+<td>218</td>
+<td>164</td>
+<td>弁当類</td>
+</tr>
+<tr>
+<td>P040101003</td>
+<td>04</td>
+<td>0401</td>
+<td>040101</td>
+<td>230</td>
+<td>173</td>
+<td>弁当類</td>
+</tr>
+<tr>
+<td>P040101004</td>
+<td>04</td>
+<td>0401</td>
+<td>040101</td>
+<td>248</td>
+<td>186</td>
+<td>弁当類</td>
+</tr>
+<tr>
+<td>P040101005</td>
+<td>04</td>
+<td>0401</td>
+<td>040101</td>
+<td>268</td>
+<td>201</td>
+<td>弁当類</td>
+</tr>
+<tr>
+<td>P040101006</td>
+<td>04</td>
+<td>0401</td>
+<td>040101</td>
+<td>298</td>
+<td>224</td>
+<td>弁当類</td>
+</tr>
+<tr>
+<td>P040101007</td>
+<td>04</td>
+<td>0401</td>
+<td>040101</td>
+<td>338</td>
+<td>254</td>
+<td>弁当類</td>
+</tr>
+<tr>
+<td>P040101008</td>
+<td>04</td>
+<td>0401</td>
+<td>040101</td>
+<td>420</td>
+<td>315</td>
+<td>弁当類</td>
+</tr>
+<tr>
+<td>P040101009</td>
+<td>04</td>
+<td>0401</td>
+<td>040101</td>
+<td>498</td>
+<td>374</td>
+<td>弁当類</td>
+</tr>
+<tr>
+<td>P040101010</td>
+<td>04</td>
+<td>0401</td>
+<td>040101</td>
+<td>580</td>
+<td>435</td>
+<td>弁当類</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -12341,16 +12842,92 @@ Deploy FastAPI apps for free on Ploomber Cloud! Learn more: https://ploomber.io/
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [60]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">customer_id</span><span class="p">,</span><span class="w"> </span><span class="n">GREATEST</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">amount</span><span class="p">))</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">avg</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">customer</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">c</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">receipt</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">r</span>
+<span class="w">    </span><span class="k">ON</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">customer_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">customer_id</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">gender_cd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'1'</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">customer_id</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">'Z%'</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">customer_id</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>*  postgresql://padawan:***@db:5432/dsdojo_db
+10 rows affected.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[60]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>avg</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CS004412000425</td>
+<td>0</td>
+</tr>
+<tr>
+<td>CS007512000199</td>
+<td>0</td>
+</tr>
+<tr>
+<td>CS002712000064</td>
+<td>0</td>
+</tr>
+<tr>
+<td>CS039515000243</td>
+<td>0</td>
+</tr>
+<tr>
+<td>CS001615000099</td>
+<td>384.0000000000000000</td>
+</tr>
+<tr>
+<td>CS010515000082</td>
+<td>247.0000000000000000</td>
+</tr>
+<tr>
+<td>CS019315000045</td>
+<td>203.2500000000000000</td>
+</tr>
+<tr>
+<td>CS008513000099</td>
+<td>220.3333333333333333</td>
+</tr>
+<tr>
+<td>CS007615000070</td>
+<td>247.9166666666666667</td>
+</tr>
+<tr>
+<td>CS029511000005</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
