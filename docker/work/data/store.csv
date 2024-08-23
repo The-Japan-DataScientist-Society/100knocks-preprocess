@@ -1,4 +1,4 @@
-store_cd,store_name,prefecture_cd,prefecture,address,address_kana,tel_no,longitude,latitude,floor_area
+﻿store_cd,store_name,prefecture_cd,prefecture,address,address_kana,tel_no,longitude,latitude,floor_area
 S12014,千草台店,12,千葉県,千葉県千葉市稲毛区千草台一丁目,チバケンチバシイナゲクチグサダイイッチョウメ,043-123-4003,140.118,35.63559,1698.0
 S13002,国分寺店,13,東京都,東京都国分寺市本多二丁目,トウキョウトコクブンジシホンダニチョウメ,042-123-4008,139.4802,35.70566,1735.0
 S14010,菊名店,14,神奈川県,神奈川県横浜市港北区菊名一丁目,カナガワケンヨコハマシコウホククキクナイッチョウメ,045-123-4032,139.6326,35.50049,1732.0
