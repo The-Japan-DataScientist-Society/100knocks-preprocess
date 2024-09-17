@@ -32,6 +32,7 @@
 
 ## Install
 ```shell
+git config -global core.autocrlf false
 git clone git@github.com:The-Japan-DataScientist-Society/100knocks-preprocess.git
 cd 100knocks-preprocess
 docker compose up -d --build --wait
