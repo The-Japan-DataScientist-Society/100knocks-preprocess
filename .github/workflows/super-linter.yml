@@ -53,6 +53,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_HTML: false
-
+          VALIDATE_HTML_PRETTIER: false
           FILTER_REGEX_EXCLUDE: docker/.jupyter/jupyter_lab_config.py
           VALIDATE_SQLFLUFF: false
