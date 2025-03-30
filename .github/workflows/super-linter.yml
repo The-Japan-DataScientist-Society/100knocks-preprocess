@@ -6,6 +6,8 @@
 name: Lint Code Base
 
 permissions:
+  contents: read
+  packages: read
   statuses: write
 
 #
