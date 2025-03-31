@@ -1,6 +1,7 @@
 # データサイエンス100本ノック（構造化データ加工編）
 
 ## Overview
+
 - データサイエンス100本ノック（構造化データ加工編）を実践するための演習問題とデータ、および環境構築のためのスクリプト一式
 - 演習問題はSQL、Python、Rで共通
 - 言語によっては向かない設問もあるが、「この言語のときはこう書けば実現できる」という技術習得を目指すことを優先
@@ -11,6 +12,7 @@
 - データサイエンス100本ノック(構造化データ加工編)の利用により生じるいかなる問題についても、当協会は一切の責任を負いかねますのであらかじめご了承ください
 
 ## Description
+
 - Dockerfile(`dockerfiles/notebook/Dockerfile`, `dockerfiles/notebook/Dockerfile`)
 - `docker-compose.yml`
 - スーパーの架空購買データと架空個人情報(csv)
@@ -18,6 +20,7 @@
 - 設問と解答例のノートブックファイルおよびHTMLファイル
 
 ## Requirement
+
 - Local
   - Docker Desktop(Windows 10/11, macOS)
   - Apple M1チップ搭載のMacの場合は Docker Desktop 4.4.2 以降
@@ -31,6 +34,7 @@
     - Python解答: [![Open in Colab Answer](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/The-Japan-DataScientist-Society/100knocks-preprocess/blob/master/docker/work/answer/ans_preprocess_knock_Python.ipynb)
 
 ## Install
+
 ```shell
 git clone git@github.com:The-Japan-DataScientist-Society/100knocks-preprocess.git
 cd 100knocks-preprocess
@@ -48,21 +52,25 @@ docker compose up -d --build --wait
 ※ インストールの説明は `doc` 配下の説明資料も参照してください
 
 ## Usage
+
 - ブラウザで以下のURLにアクセスします
   - [http://localhost:8888](http://localhost:8888)
 
 ## How to contribute
+
 開発に協力していただける場合は本リポジトリをcloneし、 [https://pre-commit.com/](https://pre-commit.com/) の手順に従って `pre-commit` をインストールしてください。
 
 これにより、 [`.pre-commit-config.yaml`](.pre-commit-config.yaml) の設定に基づいて、コミット時にクレデンシャルが含まれていないかの検査が行われるようになります。
 
 ## Document
+
 - `doc` 配下にデータサイエンス100本ノック（構造化データ加工編）の説明資料と設問PDF、設問HTML、解答例HTMLを配置
 - `work` 配下に設問notebookを配置
 - `work/answer` 配下に解答例notebookを配置
 - `work/data` 配下に使用したデータを配置
 
 ## Link
+
 本コンテンツの内容やセットアップ手順について解説いただいているサイト、Dockerについて基本から学べるサイト
 
 - [【データサイエンスを学ぶあなたへ】100本ノック - 構造化データ処理編 - 最速レビュー動画！【データサイエンティスト協会】#062](https://www.youtube.com/watch?v=fAyj0V2iAc4)
@@ -78,8 +86,10 @@ docker compose up -d --build --wait
 - [データサイエンス初学者にむけた、データサイエンス100本ノックを実装する方法（windows10 Home向け）](https://qiita.com/syuki-read/items/714fe66bf5c16b8a7407#comment-394d2f7656bd5b977e11)
 
 ## Author
+
 The Data Scientist Society
 
 ## LICENSE
+
 - `docker/doc/100knocks_guide.pdf` は協会ロゴ等が含まれるため、CC-BY-NDとなります
 - その他ファイルはMITライセンスに従います
