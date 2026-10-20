@@ -17,6 +17,7 @@ services:
       - type: bind
         source: ./docker/db/init
         target: /docker-entrypoint-initdb.d
+        read_only: true
       - type: bind
         source: ./docker/work/data
         target: /tmp/data
