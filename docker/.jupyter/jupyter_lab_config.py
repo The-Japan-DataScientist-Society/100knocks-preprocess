@@ -715,7 +715,7 @@ c = get_config()  #noqa
 #         Local IP addresses (such as 127.0.0.1 and ::1) are allowed as local,
 #         along with hostnames configured in local_hostnames.
 #  Default: False
-# c.ServerApp.allow_remote_access = False
+c.ServerApp.allow_remote_access = False
 
 ## Whether to allow the user to run the server as root.
 #  Default: False
