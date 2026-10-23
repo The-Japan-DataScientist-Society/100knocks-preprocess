@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 jupysql = "==0.7.2"
+prettytable = "==3.10.0"
 psycopg2 = "==2.9.3"
 imbalanced-learn = "==0.12.3"
 SQLAlchemy = "==1.4.46"
