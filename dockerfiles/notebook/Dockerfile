@@ -32,8 +32,11 @@ RUN set -e \
     && ( \
       (pip install --no-cache-dir -r requirements.txt && pipenv install --system) & py_pid=$!; \
       Rscript install.R & r_pid=$!; \
-      wait "$py_pid"; \
-      wait "$r_pid"; \
+      py_status=0; \
+      r_status=0; \
+      wait "$py_pid" || py_status=$?; \
+      wait "$r_pid" || r_status=$?; \
+      test "$py_status" -eq 0 && test "$r_status" -eq 0; \
     ) \
     && rm -rf requirements.txt Pipfile* install.R .cache/R/pkgcache/sysreqs/docker/*/Dockerfile /tmp/* /var/tmp/* .npm/
 
