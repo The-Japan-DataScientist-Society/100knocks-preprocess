@@ -36,8 +36,11 @@ RUN set -e \
     && ( \
       (uv export --frozen --no-emit-project -o requirements.txt && uv pip install --system --no-cache --require-hashes -r requirements.txt) & py_pid=$!; \
       Rscript install.R & r_pid=$!; \
-      wait "$py_pid"; \
-      wait "$r_pid"; \
+      py_status=0; \
+      r_status=0; \
+      wait "$py_pid" || py_status=$?; \
+      wait "$r_pid" || r_status=$?; \
+      test "$py_status" -eq 0 && test "$r_status" -eq 0; \
     ) \
     && rm -rf requirements.txt pyproject.toml uv.lock install.R .cache/R/pkgcache/sysreqs/docker/*/Dockerfile /tmp/* /var/tmp/* .npm/
 
