@@ -1,0 +1,40 @@
+name: rulesync
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - closed
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  rulesync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        if: github.event_name != 'pull_request' || github.event.action != 'closed'
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        if: github.event_name != 'pull_request' || github.event.action != 'closed'
+      - uses: flatt-security/setup-takumi-guard-npm@14f07d0cbc739b42a1b7c70a04c2b84cd1318ddd # v1.4.0
+        if: github.event_name != 'pull_request' || github.event.action != 'closed'
+      # .rulesync/ のルールから、各AIエージェント向けのファイルを生成する
+      - if: github.event_name != 'pull_request' || github.event.action != 'closed'
+        run: npx -y rulesync generate
+      - uses: dev-hato/actions-diff-pr-management@ac5ddb8fbc4e36f31ef0f90ded9488c0305055e6 # v2.3.0
+        if: success() || failure()
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          branch-name-prefix: fix-rulesync
+          pr-title-prefix: AIエージェント向けルール修正

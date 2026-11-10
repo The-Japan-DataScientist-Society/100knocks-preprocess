@@ -58,3 +58,5 @@ jobs:
           FILTER_REGEX_EXCLUDE: docker/.jupyter/jupyter_lab_config.py
           VALIDATE_SQLFLUFF: false
           VALIDATE_BIOME_LINT: false
+          # Prettierと書式が衝突するため無効化する
+          VALIDATE_BIOME_FORMAT: false

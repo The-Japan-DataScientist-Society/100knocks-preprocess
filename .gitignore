@@ -281,3 +281,6 @@ dmypy.json
 cython_debug/
 
 !/.gitignore
+
+# Node.js
+node_modules/
