@@ -21,20 +21,24 @@ RUN apt-get update \
     && find / -type f -perm /u+s -ignore_readdir_race -exec chmod u-s {} \; \
     && find / -type f -perm /g+s -ignore_readdir_race -exec chmod g-s {} \;
 
-USER jovyan
 WORKDIR /home/jovyan
-COPY requirements.txt .
-COPY Pipfile .
-COPY Pipfile.lock .
+COPY pyproject.toml .
+
+# uvのバージョンはpyproject.tomlのtool.uv.required-versionで管理している
+RUN uv_version="$(sed -n -e 's/^required-version = "==\(.*\)"$/\1/p' pyproject.toml)" \
+    && wget -qO- "https://astral.sh/uv/${uv_version}/install.sh" | env UV_UNMANAGED_INSTALL=/usr/local/bin sh
+
+USER jovyan
+COPY uv.lock .
 COPY install.R .
 
 RUN set -e \
     && ( \
-      (pip install --no-cache-dir -r requirements.txt && pipenv install --system) & py_pid=$!; \
+      (uv export --frozen --no-emit-project -o requirements.txt && uv pip install --system --no-cache --require-hashes -r requirements.txt) & py_pid=$!; \
       Rscript install.R & r_pid=$!; \
       wait "$py_pid"; \
       wait "$r_pid"; \
     ) \
-    && rm -rf requirements.txt Pipfile* install.R .cache/R/pkgcache/sysreqs/docker/*/Dockerfile /tmp/* /var/tmp/* .npm/
+    && rm -rf requirements.txt pyproject.toml uv.lock install.R .cache/R/pkgcache/sysreqs/docker/*/Dockerfile /tmp/* /var/tmp/* .npm/
 
 HEALTHCHECK --interval=5s --retries=20 CMD ["curl", "-s", "-S", "-o", "/dev/null", "http://localhost:8888"]
