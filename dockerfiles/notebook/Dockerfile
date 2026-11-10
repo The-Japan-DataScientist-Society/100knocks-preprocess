@@ -32,10 +32,13 @@ USER jovyan
 COPY uv.lock .
 COPY install.R .
 
+# RPostgreSQLのconfigureはlibpqのリンク確認をR CMD config CFLAGSで行うが、
+# condaのリンカーはシステムのlibpqが依存するlibssl等を見つけられず警告が出るため、
+# システムのライブラリディレクトリを依存解決用のパスとして追加する
 RUN set -e \
     && ( \
       (uv export --frozen --no-emit-project -o requirements.txt && uv pip install --system --no-cache --require-hashes -r requirements.txt) & py_pid=$!; \
-      Rscript install.R & r_pid=$!; \
+      (printf 'CFLAGS += -Wl,-rpath-link,%s\n' "$(pg_config --libdir)" > /tmp/Makevars && R_MAKEVARS_USER=/tmp/Makevars Rscript install.R) & r_pid=$!; \
       py_status=0; \
       r_status=0; \
       wait "$py_pid" || py_status=$?; \
