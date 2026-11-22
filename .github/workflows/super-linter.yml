@@ -31,6 +31,7 @@ jobs:
     name: Lint Code Base
     # Set the agent to run on
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     ##################
     # Load all steps #
@@ -60,3 +61,5 @@ jobs:
           VALIDATE_BIOME_LINT: false
           # Prettierと書式が衝突するため無効化する
           VALIDATE_BIOME_FORMAT: false
+          # go.modはghalintをtoolディレクティブで管理するためだけに置いており、Goのソースコードを持たないため無効化する
+          VALIDATE_GO_MODULES: false
