@@ -1,6 +1,6 @@
 module github.com/The-Japan-DataScientist-Society/100knocks-preprocess
 
-go 1.27.3
+go 1.27.4
 
 tool github.com/suzuki-shunsuke/ghalint/cmd/ghalint
 
