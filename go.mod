@@ -25,6 +25,6 @@ require (
 	github.com/urfave/cli/v3 v3.14.0 // indirect
 	github.com/zalando/go-keyring v0.2.8 // indirect
 	golang.org/x/oauth2 v0.37.0 // indirect
-	golang.org/x/sys v0.36.0 // indirect
+	golang.org/x/sys v0.50.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
