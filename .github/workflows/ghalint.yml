@@ -1,0 +1,30 @@
+---
+name: ghalint
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  ghalint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
+      # Goモジュールを取得する前に、Takumi Guard経由で取得するようGOPROXYを設定する
+      - uses: flatt-security/setup-takumi-guard-golang@02545d3425218766aac4dca114dcc3f6eaa0df4a # v1.3.0
+      - name: Lint workflows
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: go tool ghalint --log-color never run
