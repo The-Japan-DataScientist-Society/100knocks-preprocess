@@ -45,3 +45,19 @@ uvx --with pylint nbqa pylint docker/work/preprocess_knock_Python.ipynb docker/w
 ## Dockerfile の注意点
 
 Dockerfile 内の setuid/setgid ビットの除去や不要キャッシュの削除は、dockle の指摘に対応するためのもの。削除しないこと。
+
+## 過去のレビューで指摘された点
+
+同じ指摘を繰り返さないよう、過去の PR のレビューで指摘された点をまとめる。
+
+- 本リポジトリへの PR では、問題ノートブックに解答を書かない。解答は `docker/work/answer/` の解答ノートブックに置く（利用者が手元で問題を解くときに、問題ノートブックへ書き込むのは問題ない）。
+- 解答コードの書き方は、いろいろな書き方を知ってもらうためにあえて統一していない（属性アクセスと `[]` の混在、コメントで説明するために残している `regex=True` など）。書き方を揃えるだけの変更はしない。
+- 正式に対象としていない環境（Azure Notebooks など）向けのファイルや、エディタ・IDE の設定（`.devcontainer`、`.vscode` など）は追加しない。ツールの選択は利用者に任せている。
+- ディレクトリ構成やファイル名を変えない。外部の解説サイトや `docker/doc/` のガイド PDF が、今の構成を前提にしている。
+- notebook コンテナには、`docker/work` と `docker/doc` だけをマウントする。`docker/db/` は環境構築のためだけのものなので、JupyterLab から見せない。
+- 環境構築の手順や構成を変えたら、README とガイド PDF の記述と食い違わないか確認し、食い違う場合は PR の本文に書く。
+- イメージの内容は Dockerfile に、接続情報などの実行時の設定は `docker-compose.yml` に置く。
+- notebook イメージは、amd64 と arm64（Apple Silicon の Mac）の両方でビルドできるようにする。
+- ノートブックは Docker 環境で実行し直してからコミットする。SageMaker Studio Lab などで保存すると kernelspec が書き換わり、CI でカーネルが見つからず失敗する。kernelspec の `name` は Python と SQL が `python3`、R が `ir`。
+- CSV は BOM 付きのため、pandas で読むときは `encoding="utf-8-sig"` を指定する。
+- hadolint や ShellCheck の指摘を無効化するときは、必要な最小の範囲で無効化する。該当箇所だけで済むなら、`# shellcheck disable=SC2016` のようにその箇所だけで無効化する。リポジトリ全体で当てはまらないルールなら、設定ファイルでルールごと無効化してよい。
