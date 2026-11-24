@@ -55,7 +55,7 @@ Dockerfile 内の setuid/setgid ビットの除去や不要キャッシュの削
 - 正式に対象としていない環境（Azure Notebooks など）向けのファイルや、エディタ・IDE の設定（`.devcontainer`、`.vscode` など）は追加しない。ツールの選択は利用者に任せている。
 - ディレクトリ構成やファイル名を変えない。外部の解説サイトや `docker/doc/` のガイド PDF が、今の構成を前提にしている。
 - notebook コンテナには、`docker/work` と `docker/doc` だけをマウントする。`docker/db/` は環境構築のためだけのものなので、JupyterLab から見せない。
-- 環境構築の手順や構成を変えたら、README とガイド PDF の記述と食い違わないか確認し、食い違う場合は PR の本文に書く。
+- 環境構築の手順や構成を変えたら、`README.md` とガイド PDF の記述と食い違わないか確認し、食い違う場合は PR の本文に書く。
 - イメージの内容は Dockerfile に、接続情報などの実行時の設定は `docker-compose.yml` に置く。
 - notebook イメージは、amd64 と arm64（Apple Silicon の Mac）の両方でビルドできるようにする。
 - ノートブックは Docker 環境で実行し直してからコミットする。SageMaker Studio Lab などで保存すると kernelspec が書き換わり、CI でカーネルが見つからず失敗する。kernelspec の `name` は Python と SQL が `python3`、R が `ir`。
