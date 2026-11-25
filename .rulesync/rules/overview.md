@@ -9,12 +9,17 @@ description: 本リポジトリで作業する際のAIエージェント向け�
 
 # 本リポジトリで作業する際のガイド
 
+データサイエンス100本ノック（構造化データ加工編）の教材リポジトリ。同じ100問を SQL / Python / R の3言語で、問題ノートブックと解答ノートブックとして提供している。
+
 `CLAUDE.md`、`AGENTS.md`、`.github/copilot-instructions.md`はrulesyncで生成しています。
 直接編集せず、`.rulesync/rules/`を編集してから`npx rulesync generate`を実行してください。
 
 ## ノートブックの実行（テスト相当）
 
 ```bash
+# 環境を起動する（DB のヘルスチェック完了まで待つ）
+docker compose up -d --build --wait
+
 # ノートブックを1本だけ CI と同じ方法で実行する（docker/work からの相対パスで指定）
 docker compose exec -T notebook bash -c "cd work && jupyter nbconvert --to notebook --execute --NotebookClient.allow_error_names UsageError answer/ans_preprocess_knock_Python.ipynb"
 ```
@@ -42,7 +47,8 @@ CI では、実行結果に `unexpected` という文字列（SQLAlchemy の `Me
 ## DB 接続とデータ投入の注意点
 
 - notebook コンテナからの接続先ホスト名は `db`。接続情報は環境変数 `PG_PORT` / `PG_USER` / `PG_PASSWORD` / `PG_DATABASE` で渡す。
-- `docker/db/init/` の初期化スクリプト（ユーザー作成 → テーブル作成 → CSV の `COPY`）は、DB ボリュームが空のときだけ実行される。CSV やスキーマを変更したら、コンテナを作り直す必要がある。
+- `docker/db/init/` の初期化スクリプト（ユーザー作成 → テーブル作成 → CSV の `COPY`）は、DB ボリュームが空のときだけ実行される。CSV やスキーマを変更したら、`docker compose down -v` でボリュームごと削除してから起動し直す。DB のデータは匿名ボリュームにあるため、`--force-recreate` だけでは再投入されない。
+- データの CSV は `docker/work/data/` にあり、DB コンテナには `/tmp/data` としてマウントされる。Colab 向けのフォールバックも同じ CSV を読むため、変更は両方の経路に影響する。
 
 ## ノートブック
 
@@ -53,7 +59,9 @@ CI では、実行結果に `unexpected` という文字列（SQLAlchemy の `Me
 
 ## 依存関係の管理
 
-Python パッケージを追加する際は、`Pipfile` と `environment.yml` の両方に記載する必要がある。`fix_env.yml` ワークフローは、`Pipfile` にあって `environment.yml` にないパッケージがあるとエラーにする。また、両ファイルのバージョンを自動修正する PR を作成する。
+notebook コンテナには、Python パッケージは `uv.lock` から（`--frozen --require-hashes`）、R パッケージは `install.R` からビルド時にインストールされる。
+
+Python パッケージを追加する際は、`uv add` などで `uv.lock` も更新したうえで、`environment.yml` にも記載する必要がある。`fix_env.yml` ワークフローは、`pyproject.toml` にあって `environment.yml` にないパッケージがあるとエラーにする。また、両ファイルのバージョンを自動修正する PR を作成する。
 
 ## Lint（ローカル実行）
 
