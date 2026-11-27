@@ -24,7 +24,7 @@ workflows:
         - 'actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd'
     '.github/workflows/super-linter.yml':
         - 'actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd'
-        - 'super-linter/super-linter@47984f49b4e87383eed97890fe2dca6063bbd9c3'
+        - 'super-linter/super-linter@2da136927bd4a73596db63044b504547c62cb854'
     '.github/workflows/verify-lockfile.yml':
         - 'actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd'
 dependencies:
@@ -80,8 +80,8 @@ dependencies:
         commit: 'sha1-a01b3b2a6436d3df60d4e29c805ad83a704aadc5'
         owner_id: 88821409
         repo_id: 1185057622
-    'super-linter/super-linter@47984f49b4e87383eed97890fe2dca6063bbd9c3':
-        ref: 'v8.3.1'
-        commit: 'sha1-47984f49b4e87383eed97890fe2dca6063bbd9c3'
+    'super-linter/super-linter@2da136927bd4a73596db63044b504547c62cb854':
+        ref: 'v9.0.0'
+        commit: 'sha1-2da136927bd4a73596db63044b504547c62cb854'
         owner_id: 74564708
         repo_id: 216581567
